@@ -1,0 +1,1673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-VPS - AI & Cloud Infrastructure Navigation | ai-vps.github.io</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --blue: #1a5cad;
+            --blue-light: #e8f0fe;
+            --blue-dark: #0d3b7a;
+            --red: #d63031;
+            --red-light: #ffeaea;
+            --orange: #e67e22;
+            --orange-light: #fef5e7;
+            --green: #27ae60;
+            --green-light: #eafaf1;
+            --purple: #8e44ad;
+            --purple-light: #f5eef8;
+            --gray-bg: #f5f6f7;
+            --gray-border: #d9d9d9;
+            --gray-text: #666;
+            --gray-dark: #333;
+            --text: #222;
+            --link: #1a5cad;
+            --link-hover: #c0392b;
+        }
+        body {
+            font-family: -apple-system, "Microsoft YaHei", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+            font-size: 13px;
+            color: var(--text);
+            background: #fff;
+            line-height: 1.5;
+        }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { color: var(--link-hover); text-decoration: underline; }
+
+        /* TOP BAR */
+        .topbar {
+            background: #f8f8f8;
+            border-bottom: 1px solid #eee;
+            font-size: 12px;
+            color: #999;
+            padding: 5px 0;
+        }
+        .topbar-inner {
+            width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .topbar a { color: #999; font-size: 12px; margin: 0 6px; }
+        .topbar a:hover { color: var(--link); text-decoration: none; }
+        .topbar .top-links a { color: #666; }
+        .topbar .date-display { font-size: 12px; color: #aaa; }
+
+        /* HEADER */
+        .header {
+            width: 1200px;
+            margin: 0 auto;
+            padding: 15px 0 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo-area { display: flex; align-items: center; gap: 10px; }
+        .logo-text {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--red);
+            font-family: 'Merriweather', Georgia, serif;
+            letter-spacing: -1px;
+        }
+        .logo-text span { color: var(--blue); }
+        .logo-sub {
+            font-size: 12px;
+            color: #999;
+            margin-top: 2px;
+        }
+        .search-box {
+            display: flex;
+            align-items: center;
+        }
+        .search-box input {
+            width: 480px;
+            height: 36px;
+            border: 2px solid var(--blue);
+            border-right: none;
+            padding: 0 12px;
+            font-size: 14px;
+            outline: none;
+            border-radius: 4px 0 0 4px;
+        }
+        .search-box button {
+            height: 36px;
+            padding: 0 20px;
+            background: var(--blue);
+            color: #fff;
+            border: 2px solid var(--blue);
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 0 4px 4px 0;
+        }
+        .search-box button:hover { background: var(--blue-dark); border-color: var(--blue-dark); }
+
+        /* MAIN NAV TABS */
+        .main-nav {
+            background: var(--blue);
+            border-bottom: 3px solid var(--blue-dark);
+        }
+        .main-nav-inner {
+            width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+        }
+        .main-nav a {
+            color: #fff;
+            padding: 10px 18px;
+            font-size: 14px;
+            font-weight: 500;
+            display: block;
+            border-right: 1px solid rgba(255,255,255,0.15);
+            white-space: nowrap;
+        }
+        .main-nav a:first-child {
+            background: var(--red);
+            font-weight: 700;
+            padding: 10px 24px;
+        }
+        .main-nav a:hover {
+            background: rgba(255,255,255,0.15);
+            text-decoration: none;
+            color: #fff;
+        }
+        .main-nav a.active {
+            background: var(--blue-dark);
+        }
+
+        /* QUICK LINKS BAR */
+        .quick-links {
+            width: 1200px;
+            margin: 0 auto;
+            padding: 10px 0;
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+        .quick-links .ql-label {
+            font-size: 12px;
+            color: #999;
+            margin-right: 4px;
+            font-weight: 500;
+        }
+        .quick-links a {
+            font-size: 12px;
+            padding: 3px 8px;
+            background: #f5f5f5;
+            border-radius: 3px;
+            color: #555;
+            border: 1px solid #eee;
+        }
+        .quick-links a:hover {
+            background: var(--blue-light);
+            color: var(--blue);
+            border-color: #b3d4fc;
+            text-decoration: none;
+        }
+
+        /* CONTAINER */
+        .container {
+            width: 1200px;
+            margin: 0 auto;
+            padding: 10px 0;
+        }
+
+        /* BANNER / HIGHLIGHTS */
+        .highlight-bar {
+            display: flex;
+            gap: 0;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .highlight-main {
+            flex: 1;
+            background: linear-gradient(135deg, #1a5cad, #0d3b7a);
+            color: #fff;
+            padding: 20px 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .highlight-main h2 {
+            font-size: 22px;
+            margin-bottom: 6px;
+            font-family: 'Merriweather', Georgia, serif;
+        }
+        .highlight-main h2 em { font-style: normal; color: #ffd700; }
+        .highlight-main p { font-size: 13px; opacity: 0.85; line-height: 1.6; }
+        .highlight-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        .stat-block {
+            padding: 10px 20px;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+            min-width: 200px;
+            text-align: center;
+        }
+        .stat-block:last-child { border-bottom: none; }
+        .stat-block .sv { font-size: 22px; font-weight: 700; color: var(--red); font-family: 'Merriweather', serif; }
+        .stat-block .sl { font-size: 11px; color: #999; }
+
+        /* SECTION */
+        .section {
+            margin: 16px 0;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--blue);
+        }
+        .section-header.red { border-bottom-color: var(--red); }
+        .section-header.green { border-bottom-color: var(--green); }
+        .section-header.orange { border-bottom-color: var(--orange); }
+        .section-header.purple { border-bottom-color: var(--purple); }
+        .section-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+            margin-right: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .section-icon svg { width: 14px; height: 14px; }
+        .section-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--gray-dark);
+        }
+        .section-more {
+            margin-left: auto;
+            font-size: 12px;
+            color: #999;
+        }
+        .section-more:hover { color: var(--link); }
+
+        /* SITE GRID */
+        .site-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            border: 1px solid #e8e8e8;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .site-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+        .site-grid.cols-5 { grid-template-columns: repeat(5, 1fr); }
+        .site-grid.cols-6 { grid-template-columns: repeat(6, 1fr); }
+        .site-item {
+            padding: 12px 14px;
+            border-bottom: 1px solid #f0f0f0;
+            border-right: 1px solid #f0f0f0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            background: #fff;
+            transition: background 0.15s;
+        }
+        .site-item:hover { background: #fafbfc; }
+        .site-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+        }
+        .site-info { flex: 1; min-width: 0; }
+        .site-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .site-name a { color: var(--text); }
+        .site-name a:hover { color: var(--link); text-decoration: none; }
+        .site-desc {
+            font-size: 11px;
+            color: #999;
+            margin-top: 2px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .site-tag {
+            display: inline-block;
+            font-size: 10px;
+            padding: 1px 5px;
+            border-radius: 2px;
+            margin-top: 3px;
+            font-weight: 500;
+        }
+        .tag-hot { background: #fff0f0; color: var(--red); border: 1px solid #fce0e0; }
+        .tag-new { background: #e8f5e9; color: var(--green); border: 1px solid #c8e6c9; }
+        .tag-free { background: #fff3e0; color: var(--orange); border: 1px solid #ffe0b2; }
+        .tag-pro { background: #e8eaf6; color: var(--blue); border: 1px solid #c5cae9; }
+        .tag-rec { background: #fce4ec; color: #c62828; border: 1px solid #f8bbd0; }
+
+        /* TABLE STYLES */
+        .data-table-wrap {
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+        .data-table th {
+            background: #f2f6fc;
+            padding: 8px 10px;
+            text-align: left;
+            font-weight: 600;
+            color: #555;
+            border-bottom: 1px solid #ddd;
+            font-size: 12px;
+        }
+        .data-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid #f0f0f0;
+            color: #555;
+        }
+        .data-table tr:hover td { background: #fafbfe; }
+        .data-table .price { color: var(--red); font-weight: 600; }
+        .data-table .provider { color: var(--text); font-weight: 600; }
+        .data-table .yes { color: var(--green); font-weight: 600; }
+        .data-table .no { color: #ccc; }
+
+        /* CATEGORY SIDEBAR LAYOUT */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 0;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .content-sidebar {
+            background: #f7f9fc;
+            border-right: 1px solid #e0e0e0;
+        }
+        .content-sidebar .cs-item {
+            padding: 10px 14px;
+            font-size: 13px;
+            border-bottom: 1px solid #eef0f3;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #555;
+        }
+        .content-sidebar .cs-item:hover { background: #eef3fb; color: var(--blue); }
+        .content-sidebar .cs-item.active {
+            background: #fff;
+            color: var(--blue);
+            font-weight: 600;
+            border-left: 3px solid var(--blue);
+        }
+        .content-sidebar .cs-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .content-main {
+            background: #fff;
+            padding: 16px;
+        }
+
+        /* SMALL INFO BOXES */
+        .info-box {
+            background: #fffbe6;
+            border: 1px solid #ffe58f;
+            border-radius: 4px;
+            padding: 10px 14px;
+            font-size: 12px;
+            color: #8c6e00;
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+        .info-box.blue {
+            background: #e8f4fd;
+            border-color: #91caff;
+            color: #0958d9;
+        }
+        .info-box.red {
+            background: #fff2f0;
+            border-color: #ffccc7;
+            color: #cf1322;
+        }
+        .info-box strong { font-weight: 600; }
+
+        /* TAB SWITCHER */
+        .tab-bar {
+            display: flex;
+            border-bottom: 2px solid #e8e8e8;
+            margin-bottom: 10px;
+        }
+        .tab-btn {
+            padding: 8px 20px;
+            font-size: 13px;
+            color: #666;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            background: none;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            font-weight: 500;
+        }
+        .tab-btn:hover { color: var(--blue); }
+        .tab-btn.active {
+            color: var(--blue);
+            border-bottom-color: var(--blue);
+            font-weight: 600;
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* FEATURED CARDS */
+        .featured-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 10px 0;
+        }
+        .featured-card {
+            border: 1px solid #e8e8e8;
+            border-radius: 4px;
+            padding: 14px;
+            background: #fff;
+            transition: border-color 0.15s;
+        }
+        .featured-card:hover { border-color: var(--blue); }
+        .featured-card .fc-label {
+            display: inline-block;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 2px;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+        .featured-card h4 {
+            font-size: 14px;
+            margin-bottom: 4px;
+            color: var(--text);
+        }
+        .featured-card p {
+            font-size: 12px;
+            color: #888;
+            line-height: 1.5;
+        }
+        .featured-card .fc-stat {
+            margin-top: 8px;
+            display: flex;
+            gap: 16px;
+        }
+        .featured-card .fc-stat span {
+            font-size: 11px;
+            color: #aaa;
+        }
+        .featured-card .fc-stat strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        /* TWO COL LAYOUT */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .three-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+        }
+
+        /* FOOTER */
+        .footer {
+            margin-top: 30px;
+            border-top: 3px solid var(--blue);
+            background: #f8f8f8;
+            padding: 20px 0;
+        }
+        .footer-inner {
+            width: 1200px;
+            margin: 0 auto;
+        }
+        .footer-links {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 12px;
+        }
+        .footer-links h5 {
+            font-size: 13px;
+            color: #333;
+            margin-bottom: 6px;
+        }
+        .footer-links a {
+            font-size: 12px;
+            color: #666;
+            display: block;
+            line-height: 1.8;
+        }
+        .footer-links a:hover { color: var(--blue); }
+        .footer-bottom {
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+            font-size: 11px;
+            color: #aaa;
+            text-align: center;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1220px) {
+            .container, .header, .main-nav-inner, .topbar-inner, .quick-links, .footer-inner {
+                width: 100%;
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+        }
+        @media (max-width: 800px) {
+            .site-grid { grid-template-columns: repeat(2, 1fr) !important; }
+            .highlight-bar { flex-direction: column; }
+            .featured-row { grid-template-columns: 1fr; }
+            .two-col, .three-col { grid-template-columns: 1fr; }
+            .content-grid { grid-template-columns: 1fr; }
+            .content-sidebar { display: flex; overflow-x: auto; border-right: none; border-bottom: 1px solid #e0e0e0; }
+            .content-sidebar .cs-item { white-space: nowrap; border-bottom: none; border-right: 1px solid #eef0f3; }
+            .search-box input { width: 260px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+    <div class="topbar-inner">
+        <div class="top-links">
+            <a href="#">Homepage</a> |
+            <a href="#global-cloud">Global Cloud</a> |
+            <a href="#china-cloud">China Cloud</a> |
+            <a href="#ai-providers">AI Providers</a> |
+            <a href="#vps-compare">VPS Compare</a> |
+            <a href="#pricing">Pricing</a> |
+            <a href="#architecture">Architecture</a>
+        </div>
+        <div class="date-display" id="dateDisplay"></div>
+    </div>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+    <div class="logo-area">
+        <div>
+            <div class="logo-text">AI-<span>VPS</span></div>
+            <div class="logo-sub">AI & Cloud Infrastructure Navigation -- ai-vps.github.io</div>
+        </div>
+    </div>
+    <div class="search-box">
+        <input type="text" placeholder="Search providers, pricing, tutorials...">
+        <button>Search</button>
+    </div>
+</div>
+
+<!-- MAIN NAV -->
+<div class="main-nav">
+    <div class="main-nav-inner">
+        <a href="#">AI-VPS Home</a>
+        <a href="#global-cloud" class="active">Global Cloud</a>
+        <a href="#china-cloud">China Cloud</a>
+        <a href="#ai-providers">AI Providers</a>
+        <a href="#china-ai">China AI</a>
+        <a href="#vps-compare">VPS Providers</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#get-started">Get Started</a>
+    </div>
+</div>
+
+<!-- QUICK LINKS -->
+<div class="quick-links">
+    <span class="ql-label">Hot:</span>
+    <a href="#">AWS EC2</a>
+    <a href="#">Azure OpenAI</a>
+    <a href="#">Google TPU</a>
+    <a href="#">DeepSeek R1</a>
+    <a href="#">Claude 3.5</a>
+    <a href="#">GPT-4o</a>
+    <a href="#">Hetzner VPS</a>
+    <a href="#">Docker Deploy</a>
+    <a href="#">Alibaba PAI</a>
+    <a href="#">Qwen 2.5</a>
+    <a href="#">Llama 3</a>
+    <a href="#">Contabo VPS</a>
+    <a href="#">GPU Cloud</a>
+    <a href="#">NVMe VPS</a>
+</div>
+
+<div class="container">
+
+    <!-- HIGHLIGHT BAR -->
+    <div class="highlight-bar">
+        <div class="highlight-main">
+            <h2>The <em>Definitive</em> Guide to AI Cloud Infrastructure</h2>
+            <p>Covering 20+ global and China cloud providers, 15+ AI model providers, 8+ VPS platforms, pricing comparisons, architecture guides, and real-world deployment strategies for AI workloads in 2026.</p>
+        </div>
+        <div class="highlight-stats">
+            <div class="stat-block">
+                <div class="sv">$690B</div>
+                <div class="sl">Hyperscaler AI Capex 2026</div>
+            </div>
+            <div class="stat-block">
+                <div class="sv">68%</div>
+                <div class="sl">Cloud Market Concentration</div>
+            </div>
+            <div class="stat-block">
+                <div class="sv">19%</div>
+                <div class="sl">Cloud Spend on AI</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- INFO BOX -->
+    <div class="info-box">
+        <strong>Why this matters:</strong> The five largest US cloud and AI infrastructure providers have collectively committed $660B-$690B to capex in 2026, nearly doubling 2025 levels. Amazon alone targets $200B. Cloud computing and AI are deeply interconnected -- understanding both ecosystems is essential for anyone deploying intelligent applications. Data sourced from official reports as of 2026.
+    </div>
+
+    <!-- ==================== GLOBAL CLOUD ==================== -->
+    <div class="section" id="global-cloud">
+        <div class="section-header">
+            <div class="section-icon">
+                <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#1a5cad" stroke-width="1.5"/><path d="M2 7h10M7 1c-2 2.5-2 9.5 0 12M7 1c2 2.5 2 9.5 0 12" stroke="#1a5cad" stroke-width="1"/></svg>
+            </div>
+            <div class="section-title">Global Cloud Providers -- The Hyperscalers</div>
+            <span class="section-more">AWS, Azure, GCP control 68% of global enterprise cloud spending</span>
+        </div>
+        <div class="site-grid">
+            <div class="site-item">
+                <div class="site-icon" style="background:#ff9900;">A</div>
+                <div class="site-info">
+                    <div class="site-name"><a href="https://aws.amazon.com" target="_blank">Amazon Web Services</a></div>
+                    <div class="site-desc">30% market share, 240+ services, 33 regions. Broadest ecosystem. $200B capex in 2026.</div>
+                    <span class="site-tag tag-hot">Market Leader</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-icon" style="background:#0078d4;">Az</div>
+                <div class="site-info">
+                    <div class="site-name"><a href="https://azure.microsoft.com" target="_blank">Microsoft Azure</a></div>
+                    <div class="site-desc">25% share, 40% YoY growth. Deepest OpenAI/Copilot integration. $80B backlog.</div>
+                    <span class="site-tag tag-hot">Fastest Growth</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-icon" style="background:#4285f4;">G</div>
+                <div class="site-info">
+                    <div class="site-name"><a href="https://cloud.google.com" target="_blank">Google Cloud Platform</a></div>
+                    <div class="site-desc">13% share, 63% YoY growth. Custom TPU silicon. $240B backlog. Best price-performance.</div>
+                    <span class="site-tag tag-new">AI Native</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-icon" style="background:#f80000;">O</div>
+                <div class="site-info">
+                    <div class="site-name"><a href="https://cloud.oracle.com" target="_blank">Oracle Cloud (OCI)</a></div>
+                    <div class="site-desc">$50B capex, 136% YoY increase. $523B remaining obligations. Free tier available.</div>
+                    <span class="site-tag tag-pro">Database</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-icon" style="background:#0069ff;">D</div>
+                <div class="site-info">
+                    <div class="site-name"><a href="https://digitalocean.com" target="_blank">DigitalOcean</a></div>
+                    <div class="site-desc">Developer favorite. Per-second billing, $200 free credit, 15+ locations, Droplets.</div>
+                    <span class="site-tag tag-free">Free Credit</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-icon" style="background:#007bfc;">V</div>
+                <div class="site-info">
+                    <div class="site-name"><a href="https://vultr.com" target="_blank">Vultr</a></div>
+                    <div class="site-desc">30+ locations, $2.50/mo starting, instant deploy in 15s. High-frequency compute.</div>
+                    <span class="site-tag tag-rec">Budget</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-icon" style="background:#d32f2f;">L</div>
+                <div class="site-info">
+                    <div class="site-name"><a href="https://linode.com" target="_blank">Linode (Akamai)</a></div>
+                    <div class="site-desc">Enterprise VPS from $5/mo. Akamai CDN integration. 25+ global locations.</div>
+                    <span class="site-tag tag-pro">Enterprise</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-icon" style="background:#00adef;">H</div>
+                <div class="site-info">
+                    <div class="site-name"><a href="https://hetzner.com/cloud" target="_blank">Hetzner Cloud</a></div>
+                    <div class="site-desc">Best price-performance. 4GB/2vCPU from ~$4.20/mo. NVMe standard. 20TB BW. EU focused.</div>
+                    <span class="site-tag tag-hot">Best Value</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== CLOUD COMPARISON TABLE ==================== -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">
+                <svg viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="12" height="12" rx="1" stroke="#e67e22" stroke-width="1.5"/><line x1="1" y1="5" x2="13" y2="5" stroke="#e67e22" stroke-width="1"/><line x1="5" y1="5" x2="5" y2="13" stroke="#e67e22" stroke-width="1"/></svg>
+            </div>
+            <div class="section-title">Global Cloud -- Quick Comparison</div>
+        </div>
+        <div class="data-table-wrap">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Provider</th>
+                        <th>Market Share</th>
+                        <th>YoY Growth</th>
+                        <th>2026 Capex</th>
+                        <th>Key Differentiator</th>
+                        <th>Compute Pricing vs AWS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="provider">AWS</td>
+                        <td>30%</td>
+                        <td>19% (rev 24%)</td>
+                        <td class="price">~$200B</td>
+                        <td>Broadest service catalog, 240+ managed services</td>
+                        <td>Baseline</td>
+                    </tr>
+                    <tr>
+                        <td class="provider">Microsoft Azure</td>
+                        <td>25%</td>
+                        <td>40%</td>
+                        <td class="price">$120B+</td>
+                        <td>Deepest OpenAI/Copilot integration, enterprise AD</td>
+                        <td>Similar</td>
+                    </tr>
+                    <tr>
+                        <td class="provider">Google Cloud</td>
+                        <td>13%</td>
+                        <td class="yes">63%</td>
+                        <td class="price">$185B</td>
+                        <td>Custom TPU silicon, best K8s heritage, Gemini native</td>
+                        <td>10-20% cheaper</td>
+                    </tr>
+                    <tr>
+                        <td class="provider">Oracle Cloud</td>
+                        <td>~3%</td>
+                        <td>26% rev</td>
+                        <td class="price">~$50B</td>
+                        <td>Database-optimized, free tier with credit card</td>
+                        <td>Competitive</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="info-box blue">
+            <strong>Key insight:</strong> Alphabet reported reducing Gemini serving costs by 78% over 2025 through model optimization. Meanwhile, Azure has $80B in unfulfilled orders due to power constraints. These are three different bets: AWS = breadth, Azure = OpenAI/Microsoft integration, GCP = custom silicon and AI-first.
+        </div>
+    </div>
+
+    <!-- ==================== CHINA CLOUD ==================== -->
+    <div class="section" id="china-cloud">
+        <div class="section-header red">
+            <div class="section-icon">
+                <svg viewBox="0 0 14 14" fill="none"><path d="M7 1l2 4h4l-3 3 1 4-4-2-4 2 1-4-3-3h4z" stroke="#d63031" stroke-width="1.2" fill="none"/></svg>
+            </div>
+            <div class="section-title">China Cloud Ecosystem -- Domestic Hyperscalers</div>
+            <span class="section-more">China's cloud market operates as a distinct ecosystem with its own giants</span>
+        </div>
+        <div class="site-grid cols-3">
+            <div class="site-item">
+                <div class="site-icon" style="background:#ff6a00;">Ali</div>
+                <div class="site-info">
+                    <div class="site-name"><a href="https://www.alibabacloud.com" target="_blank">Alibaba Cloud</a></div>
+                    <div class="site-desc">China's largest, APAC leader. ECS, PAI platform, ModelScope, Qwen LLM. 28+ global regions. Integrated with Taobao, DingTalk.</div>
+                    <span class="site-tag tag-hot">China #1</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-icon" style="background:#00c4ff;">TX</div>
+                <div class="site-info">
+                    <div class="site-name"><a href="https://cloud.tencent.com" target="_blank">Tencent Cloud</a></div>
+                    <div class="site-desc">Gaming & social dominance. CVM, TI Matrix AI platform, Hunyuan model. 2800+ CDN edge nodes. Deep WeChat integration.</div>
+                    <span class="site-tag tag-pro">Gaming</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-icon" style="background:#cf0a2c;">HW</div>
+                <div class="site-info">
+                    <div class="site-name"><a href="https://www.huaweicloud.com" target="_blank">Huawei Cloud</a></div>
+                    <div class="site-desc">Enterprise & government leader. Ascend AI chip ecosystem. ModelArts, Pangu model. Domestic chip supply independence.</div>
+                    <span class="site-tag tag-new">Ascend NPU</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-icon" style="background:#2319dc;">BD</div>
+                <div class="site-info">
+                    <div class="site-name"><a href="https://cloud.baidu.com" target="_blank">Baidu AI Cloud</a></div>
+                    <div class="site-desc">AI-native cloud. ERNIE model family, Qianfan LLM platform. Apollo autonomous driving. Deep Baidu Search integration.</div>
+                    <span class="site-tag tag-pro">AI Native</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-icon" style="background:#fe2c55;">VC</div>
+                <div class="site-info">
+                    <div class="site-name"><a href="https://www.volcengine.com" target="_blank">Volcengine (ByteDance)</a></div>
+                    <div class="site-desc">ByteDance cloud. Built for TikTok/Douyin scale. Doubao (Ark) model service. Strong in real-time video, recommendation.</div>
+                    <span class="site-tag tag-new">High Traffic</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-icon" style="background:#005bac;">KS</div>
+                <div class="site-info">
+                    <div class="site-name"><a href="https://www.ksyun.com" target="_blank">Kingsoft Cloud</a></div>
+                    <div class="site-desc">Xiaomi/Kingsoft ecosystem. Gaming & enterprise focus. GPU cloud computing, video transcoding, live streaming infrastructure.</div>
+                    <span class="site-tag tag-free">Xiaomi</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== AI PROVIDERS INTL ==================== -->
+    <div class="section" id="ai-providers">
+        <div class="section-header green">
+            <div class="section-icon">
+                <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="5" r="4" stroke="#27ae60" stroke-width="1.5"/><path d="M3 12c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="#27ae60" stroke-width="1.5"/></svg>
+            </div>
+            <div class="section-title">International AI Model Providers</div>
+            <span class="section-more">43 of 50 CNBC Disruptor 50 companies in 2026 say AI is essential</span>
+        </div>
+
+        <!-- FEATURED TOP 3 -->
+        <div class="featured-row">
+            <div class="featured-card">
+                <div class="fc-label" style="background:#e8f5e9; color:#2e7d32;">DISRUPTOR #2</div>
+                <h4>OpenAI</h4>
+                <p>GPT-4o, o1/o3 reasoning, Whisper, DALL-E. $20B ARR (3x YoY). ChatGPT Enterprise. $200/mo Pro tier.</p>
+                <div class="fc-stat">
+                    <span>ARR: <strong>~$20B</strong></span>
+                    <span>Models: <strong>GPT-4o, o1</strong></span>
+                </div>
+            </div>
+            <div class="featured-card">
+                <div class="fc-label" style="background:#fff3e0; color:#e65100;">DISRUPTOR #1</div>
+                <h4>Anthropic</h4>
+                <p>Claude 3.5 Sonnet/Opus. 200K context. $9B ARR, up from $1B in 14 months. Constitutional AI safety.</p>
+                <div class="fc-stat">
+                    <span>ARR: <strong>~$9B</strong></span>
+                    <span>Models: <strong>Claude 3.5</strong></span>
+                </div>
+            </div>
+            <div class="featured-card">
+                <div class="fc-label" style="background:#e3f2fd; color:#1565c0;">63% YOY GROWTH</div>
+                <h4>Google DeepMind</h4>
+                <p>Gemini Ultra/Pro/Flash/Nano. 1M+ token context. Custom TPU. 78% cost reduction in 2025. Vertex AI.</p>
+                <div class="fc-stat">
+                    <span>Capex: <strong>$185B</strong></span>
+                    <span>Models: <strong>Gemini 1.5</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="site-grid cols-6">
+            <div class="site-item">
+                <div class="site-info">
+                    <div class="site-name"><a href="https://openai.com" target="_blank">OpenAI</a></div>
+                    <div class="site-desc">GPT-4o, o1 reasoning, DALL-E, Whisper, TTS APIs</div>
+                    <span class="site-tag tag-hot">Hot</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-info">
+                    <div class="site-name"><a href="https://anthropic.com" target="_blank">Anthropic</a></div>
+                    <div class="site-desc">Claude 3.5 Sonnet, Opus, Haiku. 200K context.</div>
+                    <span class="site-tag tag-hot">Hot</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-info">
+                    <div class="site-name"><a href="https://deepmind.google" target="_blank">Google DeepMind</a></div>
+                    <div class="site-desc">Gemini family, Gemma open models, TPU infrastructure</div>
+                    <span class="site-tag tag-new">New</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-info">
+                    <div class="site-name"><a href="https://llama.meta.com" target="_blank">Meta AI</a></div>
+                    <div class="site-desc">Llama 3 open-source. $115-135B capex. SAM 2.</div>
+                    <span class="site-tag tag-free">Open</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-info">
+                    <div class="site-name"><a href="https://mistral.ai" target="_blank">Mistral AI</a></div>
+                    <div class="site-desc">Europe's AI champion. Disruptor #7. Open-weight models.</div>
+                    <span class="site-tag tag-pro">EU</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-info">
+                    <div class="site-name"><a href="https://cohere.com" target="_blank">Cohere</a></div>
+                    <div class="site-desc">Enterprise-first. Command R+, Embed, Rerank for RAG.</div>
+                    <span class="site-tag tag-pro">Enterprise</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-info">
+                    <div class="site-name"><a href="https://huggingface.co" target="_blank">Hugging Face</a></div>
+                    <div class="site-desc">Open model hub. 500K+ models. Inference API.</div>
+                    <span class="site-tag tag-free">Free Hub</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-info">
+                    <div class="site-name"><a href="https://replicate.com" target="_blank">Replicate</a></div>
+                    <div class="site-desc">Run open models via API. Pay-per-second GPU.</div>
+                    <span class="site-tag tag-rec">API</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-info">
+                    <div class="site-name"><a href="https://together.ai" target="_blank">Together AI</a></div>
+                    <div class="site-desc">Fast inference for open models. Competitive pricing.</div>
+                    <span class="site-tag tag-new">Fast</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-info">
+                    <div class="site-name"><a href="https://groq.com" target="_blank">Groq</a></div>
+                    <div class="site-desc">Ultra-fast inference on custom LPU chips.</div>
+                    <span class="site-tag tag-hot">Speed</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-info">
+                    <div class="site-name"><a href="https://perplexity.ai" target="_blank">Perplexity</a></div>
+                    <div class="site-desc">AI-powered search and answer engine.</div>
+                    <span class="site-tag tag-new">Search</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-info">
+                    <div class="site-name"><a href="https://stability.ai" target="_blank">Stability AI</a></div>
+                    <div class="site-desc">Stable Diffusion. Open image/video generation.</div>
+                    <span class="site-tag tag-free">Image Gen</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== CHINA AI ==================== -->
+    <div class="section" id="china-ai">
+        <div class="section-header red">
+            <div class="section-icon">
+                <svg viewBox="0 0 14 14" fill="none"><rect x="2" y="2" width="10" height="10" rx="2" stroke="#d63031" stroke-width="1.5"/><circle cx="7" cy="7" r="2" stroke="#d63031" stroke-width="1"/></svg>
+            </div>
+            <div class="section-title">China AI Ecosystem -- Frontier Model Developers</div>
+            <span class="section-more">Models rivaling Western counterparts at a fraction of training cost</span>
+        </div>
+
+        <div class="featured-row">
+            <div class="featured-card">
+                <div class="fc-label" style="background:#e8eaf6; color:#283593;">COST DISRUPTOR</div>
+                <h4>DeepSeek</h4>
+                <p>DeepSeek-R1 rivals OpenAI o1 at dramatically lower cost. 671B MoE architecture. Open-weight MIT license. Shattered the "bigger budget = better AI" assumption.</p>
+                <div class="fc-stat">
+                    <span>Key: <strong>R1, V3</strong></span>
+                    <span>License: <strong>MIT</strong></span>
+                </div>
+            </div>
+            <div class="featured-card">
+                <div class="fc-label" style="background:#fff3e0; color:#e65100;">MOST DOWNLOADED</div>
+                <h4>Qwen (Alibaba)</h4>
+                <p>Qwen2.5 series from 0.5B to 72B. Qwen-VL for vision, Qwen-Audio for speech. State-of-the-art performance. Available on ModelScope & HuggingFace.</p>
+                <div class="fc-stat">
+                    <span>Range: <strong>0.5B-72B</strong></span>
+                    <span>Multi-modal: <strong>Yes</strong></span>
+                </div>
+            </div>
+            <div class="featured-card">
+                <div class="fc-label" style="background:#fce4ec; color:#c62828;">CHINA'S FIRST</div>
+                <h4>Baidu ERNIE</h4>
+                <p>China's earliest large-scale LLM. ERNIE 4.0 Turbo. Deep Baidu Search integration. Qianfan platform for enterprise customization. Strong Chinese-language understanding.</p>
+                <div class="fc-stat">
+                    <span>Flagship: <strong>ERNIE 4.0</strong></span>
+                    <span>Platform: <strong>Qianfan</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="site-grid cols-6">
+            <div class="site-item">
+                <div class="site-info">
+                    <div class="site-name"><a href="https://deepseek.com" target="_blank">DeepSeek</a></div>
+                    <div class="site-desc">R1, V3. Cost-efficient reasoning. Open weights.</div>
+                    <span class="site-tag tag-hot">Hot</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-info">
+                    <div class="site-name"><a href="https://qwen.ai" target="_blank">Qwen</a></div>
+                    <div class="site-desc">Qwen2.5, VL, Audio, Agent. Alibaba's LLM family.</div>
+                    <span class="site-tag tag-hot">Hot</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-info">
+                    <div class="site-name"><a href="https://yiyan.baidu.com" target="_blank">ERNIE (Wenxin)</a></div>
+                    <div class="site-desc">ERNIE 4.0 Turbo. Baidu Search native. Qianfan.</div>
+                    <span class="site-tag tag-pro">Search</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-info">
+                    <div class="site-name"><a href="https://open.bigmodel.cn" target="_blank">Zhipu AI (GLM)</a></div>
+                    <div class="site-desc">GLM-4. Tsinghua origin. ChatGLM, CodeGeeX.</div>
+                    <span class="site-tag tag-pro">Enterprise</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-info">
+                    <div class="site-name"><a href="https://kimi.moonshot.cn" target="_blank">Moonshot (Kimi)</a></div>
+                    <div class="site-desc">200K+ token context specialist. Document analysis.</div>
+                    <span class="site-tag tag-new">Long Ctx</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-info">
+                    <div class="site-name"><a href="https://www.minimaxi.com" target="_blank">MiniMax</a></div>
+                    <div class="site-desc">Voice synthesis, Hailuo video gen. Multi-modal AI.</div>
+                    <span class="site-tag tag-new">Voice</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-info">
+                    <div class="site-name"><a href="https://stepfun.com" target="_blank">StepFun</a></div>
+                    <div class="site-desc">Step-2 model. Multi-modal. Education & entertainment.</div>
+                    <span class="site-tag tag-new">Rising</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-info">
+                    <div class="site-name"><a href="https://www.baichuan-ai.com" target="_blank">Baichuan</a></div>
+                    <div class="site-desc">Search-optimized LLM. Enterprise knowledge base.</div>
+                    <span class="site-tag tag-free">Search</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-info">
+                    <div class="site-name"><a href="https://www.sensetime.com" target="_blank">SenseTime</a></div>
+                    <div class="site-desc">SenseNova platform. Computer vision leader. Auto AI.</div>
+                    <span class="site-tag tag-pro">Vision</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-info">
+                    <div class="site-name"><a href="https://iflytek.com" target="_blank">iFlytek</a></div>
+                    <div class="site-desc">Spark LLM. Speech recognition leader. Education AI.</div>
+                    <span class="site-tag tag-pro">Speech</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-info">
+                    <div class="site-name"><a href="https://www.doubao.com" target="_blank">Doubao (ByteDance)</a></div>
+                    <div class="site-desc">ByteDance's chatbot. Ark model service. Content AI.</div>
+                    <span class="site-tag tag-new">Content</span>
+                </div>
+            </div>
+            <div class="site-item">
+                <div class="site-info">
+                    <div class="site-name"><a href="https://modelscope.cn" target="_blank">ModelScope</a></div>
+                    <div class="site-desc">Alibaba's open model hub. China's HuggingFace.</div>
+                    <span class="site-tag tag-free">Free Hub</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== VPS COMPARISON ==================== -->
+    <div class="section" id="vps-compare">
+        <div class="section-header orange">
+            <div class="section-icon">
+                <svg viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="4" rx="1" stroke="#e67e22" stroke-width="1.5"/><rect x="1" y="8" width="12" height="4" rx="1" stroke="#e67e22" stroke-width="1.5"/><circle cx="3" cy="4" r="1" fill="#e67e22"/><circle cx="3" cy="10" r="1" fill="#e67e22"/></svg>
+            </div>
+            <div class="section-title">VPS Providers for AI -- Full Comparison</div>
+            <span class="section-more">From budget to enterprise, VPS solutions for AI agent hosting and compute</span>
+        </div>
+
+        <div class="data-table-wrap">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Provider</th>
+                        <th>Entry Price</th>
+                        <th>Specs (Entry)</th>
+                        <th>NVMe</th>
+                        <th>DDoS</th>
+                        <th>Locations</th>
+                        <th>Best For</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="provider">LogicWeb</td>
+                        <td class="price">$5/mo</td>
+                        <td>2 vCPU / 2GB / 25GB / 2TB</td>
+                        <td class="yes">Standard</td>
+                        <td class="yes">Free Shield</td>
+                        <td>6 global</td>
+                        <td>Enterprise AI with DDoS protection</td>
+                    </tr>
+                    <tr>
+                        <td class="provider">Hetzner Cloud</td>
+                        <td class="price">~$4.20/mo</td>
+                        <td>2 vCPU / 4GB / 40GB / 20TB</td>
+                        <td class="yes">Standard</td>
+                        <td class="no">Basic</td>
+                        <td>EU/US/SG</td>
+                        <td>EU workloads, best raw value</td>
+                    </tr>
+                    <tr>
+                        <td class="provider">Contabo</td>
+                        <td class="price">~$4/mo</td>
+                        <td>4 vCPU / 8GB / 50GB / 32TB</td>
+                        <td class="yes">Standard</td>
+                        <td class="no">Basic</td>
+                        <td>EU/US/SG/AU</td>
+                        <td>Maximum specs per dollar</td>
+                    </tr>
+                    <tr>
+                        <td class="provider">Vultr</td>
+                        <td class="price">$2.50/mo</td>
+                        <td>1 vCPU / 0.5GB / 10GB / 0.5TB</td>
+                        <td class="no">Optional</td>
+                        <td class="no">Add-on</td>
+                        <td>30+ locations</td>
+                        <td>Budget, largest footprint</td>
+                    </tr>
+                    <tr>
+                        <td class="provider">DigitalOcean</td>
+                        <td class="price">$4/mo</td>
+                        <td>1 vCPU / 0.5GB / 10GB / 0.5TB</td>
+                        <td class="no">Premium</td>
+                        <td class="no">Add-on</td>
+                        <td>15+ locations</td>
+                        <td>Developer experience, API</td>
+                    </tr>
+                    <tr>
+                        <td class="provider">Linode (Akamai)</td>
+                        <td class="price">$5/mo</td>
+                        <td>1 vCPU / 1GB / 25GB / 1TB</td>
+                        <td class="no">Optional</td>
+                        <td class="no">Add-on</td>
+                        <td>25+ locations</td>
+                        <td>Enterprise, Akamai CDN</td>
+                    </tr>
+                    <tr>
+                        <td class="provider">Hostinger</td>
+                        <td class="price">$6.99/mo</td>
+                        <td>2 vCPU / 4GB / 100GB / 4TB</td>
+                        <td class="yes">Standard</td>
+                        <td class="no">Basic</td>
+                        <td>US/EU/Asia/SA</td>
+                        <td>Easy setup, Docker-friendly</td>
+                    </tr>
+                    <tr>
+                        <td class="provider">OVHcloud</td>
+                        <td class="price">~$4/mo</td>
+                        <td>1 vCPU / 2GB / 20GB / Unmetered</td>
+                        <td class="yes">Standard</td>
+                        <td class="yes">Included</td>
+                        <td>EU/US/CA/APAC</td>
+                        <td>EU enterprise, GDPR compliant</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="two-col" style="margin-top:12px;">
+            <div>
+                <div class="info-box">
+                    <strong>VPS is a blank server:</strong> You get an IP, root access, and Linux. That's it. For AI workloads, you must handle Docker setup, Nginx reverse proxy, SSL, firewall rules, SSH keys, API key management, monitoring, and backups yourself. Budget 5-10 hours/month for maintenance.
+                </div>
+            </div>
+            <div>
+                <div class="info-box red">
+                    <strong>Security alert:</strong> Over 42,000 AI agent instances have been found publicly accessible without authentication. Many store API keys in plain text. Always use encrypted secret management, restrict network access, and never expose management ports.
+                </div>
+            </div>
+        </div>
+
+        <!-- FEATURE COMPARISON -->
+        <div class="section" style="margin-top:16px;">
+            <div class="section-header">
+                <div class="section-title" style="font-size:13px;">Feature-by-Feature Comparison</div>
+            </div>
+            <div class="data-table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>LogicWeb</th>
+                            <th>Hetzner</th>
+                            <th>Contabo</th>
+                            <th>Vultr</th>
+                            <th>DO</th>
+                            <th>Linode</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="provider">NVMe Standard</td>
+                            <td class="yes">Yes</td>
+                            <td class="yes">Yes</td>
+                            <td class="yes">Yes</td>
+                            <td class="no">Optional</td>
+                            <td class="no">Premium</td>
+                            <td class="no">Optional</td>
+                        </tr>
+                        <tr>
+                            <td class="provider">DDoS Protection</td>
+                            <td class="yes">Free, unlimited</td>
+                            <td class="no">Basic</td>
+                            <td class="no">Basic</td>
+                            <td class="no">Add-on</td>
+                            <td class="no">Add-on</td>
+                            <td class="no">Add-on</td>
+                        </tr>
+                        <tr>
+                            <td class="provider">Control Panel</td>
+                            <td class="yes">Virtualizor (free)</td>
+                            <td class="no">No</td>
+                            <td class="no">No</td>
+                            <td class="no">No</td>
+                            <td class="no">No</td>
+                            <td class="no">No</td>
+                        </tr>
+                        <tr>
+                            <td class="provider">Money-Back Guarantee</td>
+                            <td class="yes">30 days</td>
+                            <td class="no">No</td>
+                            <td class="no">No</td>
+                            <td class="no">No</td>
+                            <td class="no">No</td>
+                            <td class="no">No</td>
+                        </tr>
+                        <tr>
+                            <td class="provider">Uptime SLA</td>
+                            <td>99.99%</td>
+                            <td>99.9%</td>
+                            <td>99.9%</td>
+                            <td>99.99%</td>
+                            <td>99.99%</td>
+                            <td>99.99%</td>
+                        </tr>
+                        <tr>
+                            <td class="provider">Windows Support</td>
+                            <td class="yes">BYOL</td>
+                            <td class="no">Limited</td>
+                            <td class="yes">Yes</td>
+                            <td class="yes">Yes</td>
+                            <td class="no">Limited</td>
+                            <td class="yes">Yes</td>
+                        </tr>
+                        <tr>
+                            <td class="provider">GPU Instances</td>
+                            <td class="no">No</td>
+                            <td class="yes">Yes (Cloud)</td>
+                            <td class="no">No</td>
+                            <td class="yes">Yes</td>
+                            <td class="yes">Yes</td>
+                            <td class="yes">Yes</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== PRICING ==================== -->
+    <div class="section" id="pricing">
+        <div class="section-header purple">
+            <div class="section-icon">
+                <svg viewBox="0 0 14 14" fill="none"><path d="M7 1v12M4 3h4.5c1.4 0 2.5 1.1 2.5 2.5S9.9 8 8.5 8H4m0 0h5c1.4 0 2.5 1.1 2.5 2.5S10.4 13 9 13H4" stroke="#8e44ad" stroke-width="1.5"/></svg>
+            </div>
+            <div class="section-title">VPS Pricing Tiers -- Entry to Enterprise</div>
+        </div>
+
+        <div class="two-col">
+            <div>
+                <div style="font-weight:600; font-size:13px; color:#333; margin-bottom:8px; padding:4px 0; border-bottom:2px solid var(--green);">Entry-Level Plans</div>
+                <div class="data-table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>Provider / Plan</th><th>Price</th><th>Specs</th><th>Verdict</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="provider">Hetzner CX22</td><td class="price">~$4.20/mo</td><td>2C/4G/40G/20TB</td><td><span class="site-tag tag-hot" style="font-size:10px;">Best Value</span></td></tr>
+                            <tr><td class="provider">Contabo VPS S</td><td class="price">~$4/mo</td><td>4C/8G/50G/32TB</td><td><span class="site-tag tag-rec" style="font-size:10px;">Max Specs</span></td></tr>
+                            <tr><td class="provider">LogicWeb Starter</td><td class="price">$5/mo</td><td>2C/2G/25G/2TB</td><td><span class="site-tag tag-pro" style="font-size:10px;">DDoS</span></td></tr>
+                            <tr><td class="provider">Vultr Cloud</td><td class="price">$2.50/mo</td><td>1C/0.5G/10G/0.5TB</td><td><span class="site-tag tag-free" style="font-size:10px;">Cheapest</span></td></tr>
+                            <tr><td class="provider">DO Basic</td><td class="price">$4/mo</td><td>1C/0.5G/10G/0.5TB</td><td><span class="site-tag tag-pro" style="font-size:10px;">DX</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="font-weight:600; font-size:13px; color:#333; margin:16px 0 8px; padding:4px 0; border-bottom:2px solid var(--blue);">Mid-Tier (Production)</div>
+                <div class="data-table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>Provider / Plan</th><th>Price</th><th>Specs</th><th>Verdict</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="provider">Hetzner CPX31</td><td class="price">~$16/mo</td><td>4C/8G/160G/20TB</td><td><span class="site-tag tag-hot" style="font-size:10px;">EU Value</span></td></tr>
+                            <tr><td class="provider">LogicWeb Pro</td><td class="price">$15/mo</td><td>4C/4G/100G/4TB</td><td><span class="site-tag tag-pro" style="font-size:10px;">Shield</span></td></tr>
+                            <tr><td class="provider">Linode Dedicated 8G</td><td class="price">$48/mo</td><td>4C/8G/160G/5TB</td><td><span class="site-tag tag-pro" style="font-size:10px;">Dedicated</span></td></tr>
+                            <tr><td class="provider">DO Premium</td><td class="price">$63/mo</td><td>4C/8G/160G/5TB</td><td><span class="site-tag tag-free" style="font-size:10px;">NVMe</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div>
+                <div style="font-weight:600; font-size:13px; color:#333; margin-bottom:8px; padding:4px 0; border-bottom:2px solid var(--red);">High-Performance / AI</div>
+                <div class="data-table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>Provider / Plan</th><th>Price</th><th>Specs</th><th>Verdict</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="provider">LogicWeb Enterprise</td><td class="price">$30/mo</td><td>8C/8G/200G/8TB</td><td><span class="site-tag tag-pro" style="font-size:10px;">Pro</span></td></tr>
+                            <tr><td class="provider">LogicWeb Max</td><td class="price">$150/mo</td><td>24C/24G/500G NVMe</td><td><span class="site-tag tag-hot" style="font-size:10px;">Power</span></td></tr>
+                            <tr><td class="provider">Vultr HF 8C</td><td class="price">$96/mo</td><td>8C/16G/320G/6TB</td><td><span class="site-tag tag-pro" style="font-size:10px;">HF</span></td></tr>
+                            <tr><td class="provider">Hetzner CPX51</td><td class="price">~$48/mo</td><td>16C/32G/360G/20TB</td><td><span class="site-tag tag-hot" style="font-size:10px;">Value</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box" style="margin-top:16px;">
+                    <strong>Cost Optimization Tips:</strong>
+                    <br>- Commit to Savings Plans (AWS), CUDs (GCP), or RIs (Azure) for 1-3yr terms: <strong>30-69% off</strong>.
+                    <br>- Platforms like BetterClaw offer Heartbeat scheduling: <strong>60%+ savings</strong> on AI API costs.
+                    <br>- Hetzner dominates EU pricing at roughly <strong>half the cost</strong> of US providers.
+                    <br>- Self-hosting on VPS costs <strong>5-10 hours/month</strong> in maintenance time.
+                </div>
+
+                <div class="info-box blue">
+                    <strong>GPU Cloud Alternatives:</strong> For AI training (not just inference), consider dedicated GPU cloud: Lambda Labs, CoreWeave, RunPod, Vast.ai, or hyperscaler GPU instances (AWS P5, Azure ND H100, GCP A3). Pricing ranges from $1-8/hr per GPU depending on tier.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== ARCHITECTURE ==================== -->
+    <div class="section" id="architecture">
+        <div class="section-header green">
+            <div class="section-icon">
+                <svg viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="5" height="5" rx="1" stroke="#27ae60" stroke-width="1.3"/><rect x="8" y="1" width="5" height="5" rx="1" stroke="#27ae60" stroke-width="1.3"/><rect x="1" y="8" width="5" height="5" rx="1" stroke="#27ae60" stroke-width="1.3"/><rect x="8" y="8" width="5" height="5" rx="1" stroke="#27ae60" stroke-width="1.3"/></svg>
+            </div>
+            <div class="section-title">Architecture Guide -- Deploying AI on VPS</div>
+        </div>
+
+        <div class="two-col">
+            <div>
+                <div style="font-weight:600; font-size:13px; color:#333; margin-bottom:8px; padding:4px 0; border-bottom:2px solid var(--blue);">Recommended Stack</div>
+                <div class="data-table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>Layer</th><th>Component</th><th>Options</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="provider">Reverse Proxy</td><td>SSL termination, routing</td><td>Nginx, Caddy (simpler)</td></tr>
+                            <tr><td class="provider">Container Runtime</td><td>App isolation</td><td>Docker + Docker Compose</td></tr>
+                            <tr><td class="provider">AI Services</td><td>LLM inference, agents</td><td>Open WebUI, LibreChat, vLLM</td></tr>
+                            <tr><td class="provider">Cache</td><td>Session, response cache</td><td>Redis, Dragonfly</td></tr>
+                            <tr><td class="provider">Database</td><td>Persistence</td><td>PostgreSQL, SQLite</td></tr>
+                            <tr><td class="provider">Monitoring</td><td>Health, performance</td><td>UptimeRobot, Grafana</td></tr>
+                            <tr><td class="provider">Secrets</td><td>API key management</td><td>Encrypted env files, Vault</td></tr>
+                            <tr><td class="provider">Networking</td><td>Secure mesh</td><td>Tailscale, WireGuard</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="font-weight:600; font-size:13px; color:#333; margin:16px 0 8px; padding:4px 0; border-bottom:2px solid var(--orange);">Setup Checklist</div>
+                <div class="data-table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>#</th><th>Task</th><th>Priority</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td>Install Docker and Docker Compose</td><td><span class="site-tag tag-hot" style="font-size:10px;">Critical</span></td></tr>
+                            <tr><td>2</td><td>Set up SSH key auth, disable password login</td><td><span class="site-tag tag-hot" style="font-size:10px;">Critical</span></td></tr>
+                            <tr><td>3</td><td>Configure UFW/iptables firewall</td><td><span class="site-tag tag-hot" style="font-size:10px;">Critical</span></td></tr>
+                            <tr><td>4</td><td>Nginx reverse proxy + Let's Encrypt SSL</td><td><span class="site-tag tag-hot" style="font-size:10px;">Critical</span></td></tr>
+                            <tr><td>5</td><td>Pull and configure AI service containers</td><td><span class="site-tag tag-pro" style="font-size:10px;">High</span></td></tr>
+                            <tr><td>6</td><td>Set up monitoring and alerting</td><td><span class="site-tag tag-pro" style="font-size:10px;">High</span></td></tr>
+                            <tr><td>7</td><td>Configure automated backups</td><td><span class="site-tag tag-pro" style="font-size:10px;">High</span></td></tr>
+                            <tr><td>8</td><td>Implement rate limiting</td><td><span class="site-tag tag-new" style="font-size:10px;">Medium</span></td></tr>
+                            <tr><td>9</td><td>Set up log rotation</td><td><span class="site-tag tag-new" style="font-size:10px;">Medium</span></td></tr>
+                            <tr><td>10</td><td>Disk space monitoring and alerts</td><td><span class="site-tag tag-new" style="font-size:10px;">Medium</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div>
+                <div style="font-weight:600; font-size:13px; color:#333; margin-bottom:8px; padding:4px 0; border-bottom:2px solid var(--blue);">Monitoring Metrics</div>
+                <div class="data-table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>Metric</th><th>Why</th><th>Alert Threshold</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="provider">CPU Usage</td><td>Service capacity</td><td>> 85% sustained</td></tr>
+                            <tr><td class="provider">Memory Usage</td><td>OOM crash prevention</td><td>> 90%</td></tr>
+                            <tr><td class="provider">Disk Usage</td><td>Full disk = downtime</td><td>> 80%</td></tr>
+                            <tr><td class="provider">Disk I/O</td><td>NVMe bottleneck</td><td>Consistently high</td></tr>
+                            <tr><td class="provider">API Latency (P95)</td><td>User experience</td><td>> 2s for LLM</td></tr>
+                            <tr><td class="provider">API Cost/Day</td><td>Budget control</td><td>> budget/30</td></tr>
+                            <tr><td class="provider">Error Rate</td><td>Service health</td><td>> 1% of requests</td></tr>
+                            <tr><td class="provider">Bandwidth</td><td>Plan limits</td><td>> 80% of quota</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-box" style="margin-top:16px;">
+                    <strong>Useful tools for self-hosted AI:</strong>
+                    <br>- <strong>Portainer</strong>: Docker management UI (no terminal needed)
+                    <br>- <strong>Caddy</strong>: Simpler alternative to Nginx, auto-SSL
+                    <br>- <strong>Tailscale</strong>: Secure private networking between VPS nodes
+                    <br>- <strong>UptimeRobot</strong>: Free monitoring, 50 monitors
+                    <br>- <strong>Ansible</strong>: Automate server provisioning
+                </div>
+
+                <div class="info-box blue">
+                    <strong>Self-hosted vs Managed:</strong> Self-hosting gives full control and lower costs at scale. Managed platforms give zero maintenance and built-in security. Break-even is typically at 50+ daily active users or $100+/mo in API spend. Below that, managed is usually cheaper when you factor in your time.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== GET STARTED ==================== -->
+    <div class="section" id="get-started">
+        <div class="section-header">
+            <div class="section-icon">
+                <svg viewBox="0 0 14 14" fill="none"><path d="M7 1l4 6H3l4-6zM7 13V7" stroke="#1a5cad" stroke-width="1.5"/></svg>
+            </div>
+            <div class="section-title">Get Started -- Decision Guide</div>
+        </div>
+
+        <div class="three-col">
+            <div class="featured-card">
+                <div class="fc-label" style="background:#e8f5e9; color:#2e7d32;">BROADEST CATALOG</div>
+                <h4>Need everything?</h4>
+                <p>AWS. 240+ managed services. Premium pricing but unmatched breadth. Best Reserved Instance infrastructure for long-term commits. 30% market share for a reason.</p>
+                <div class="fc-stat"><span>Choose: <strong>AWS</strong></span></div>
+            </div>
+            <div class="featured-card">
+                <div class="fc-label" style="background:#e3f2fd; color:#1565c0;">AI + MICROSOFT</div>
+                <h4>Enterprise + OpenAI?</h4>
+                <p>Azure. Deepest OpenAI and Copilot integration. 40% YoY growth. $80B backlog shows massive demand. Best if you're already in the Microsoft ecosystem.</p>
+                <div class="fc-stat"><span>Choose: <strong>Azure</strong></span></div>
+            </div>
+            <div class="featured-card">
+                <div class="fc-label" style="background:#fff3e0; color:#e65100;">AI-FIRST</div>
+                <h4>Custom silicon?</h4>
+                <p>Google Cloud. 63% YoY growth, fastest growing. Custom TPU chips, native Gemini, best K8s heritage. 10-20% cheaper on compute list price than AWS.</p>
+                <div class="fc-stat"><span>Choose: <strong>GCP</strong></span></div>
+            </div>
+        </div>
+
+        <div class="three-col" style="margin-top:12px;">
+            <div class="featured-card">
+                <div class="fc-label" style="background:#fce4ec; color:#c62828;">BUDGET VPS</div>
+                <h4>Best specs per dollar?</h4>
+                <p>Hetzner (EU) or Contabo (global). 4GB RAM + NVMe from ~$4/mo. Hetzner has better reputation and network. Contabo has more raw resources per dollar.</p>
+                <div class="fc-stat"><span>Choose: <strong>Hetzner / Contabo</strong></span></div>
+            </div>
+            <div class="featured-card">
+                <div class="fc-label" style="background:#e8eaf6; color:#283593;">MAX SECURITY</div>
+                <h4>Need DDoS protection?</h4>
+                <p>LogicWeb or OVHcloud. Both include DDoS protection at base price. LogicWeb adds a free control panel and 30-day money-back guarantee.</p>
+                <div class="fc-stat"><span>Choose: <strong>LogicWeb / OVH</strong></span></div>
+            </div>
+            <div class="featured-card">
+                <div class="fc-label" style="background:#f3e5f5; color:#6a1b9a;">ZERO MAINTENANCE</div>
+                <h4>Don't want to manage servers?</h4>
+                <p>Use managed platforms. Self-hosting costs 5-10 hours/month. Below 50 daily users or $100/mo API spend, managed solutions are usually cheaper when you count your time.</p>
+                <div class="fc-stat"><span>Choose: <strong>Managed PaaS</strong></span></div>
+            </div>
+        </div>
+
+        <div class="two-col" style="margin-top:16px;">
+            <div>
+                <div style="font-weight:600; font-size:13px; color:#333; margin-bottom:8px; padding:4px 0; border-bottom:2px solid var(--blue);">AI Model Quick Picks</div>
+                <div class="data-table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>Use Case</th><th>Model</th><th>Why</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Reasoning & coding</td><td class="provider">DeepSeek R1 / Claude 3.5</td><td>Best performance, cost-efficient</td></tr>
+                            <tr><td>Chinese language</td><td class="provider">Qwen 2.5 / ERNIE 4.0</td><td>Native Chinese, cultural understanding</td></tr>
+                            <tr><td>Open-source self-host</td><td class="provider">Llama 3 / Mistral</td><td>Free, customizable, no API costs</td></tr>
+                            <tr><td>Long documents</td><td class="provider">Gemini 1.5 / Kimi</td><td>1M+ and 200K+ token context</td></tr>
+                            <tr><td>Image generation</td><td class="provider">DALL-E 3 / Stable Diffusion</td><td>Quality vs open-source flexibility</td></tr>
+                            <tr><td>Enterprise RAG</td><td class="provider">Cohere Command R+</td><td>Purpose-built for retrieval</td></tr>
+                            <tr><td>Ultra-fast inference</td><td class="provider">Groq (LPU)</td><td>Custom hardware, 10x faster</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div>
+                <div style="font-weight:600; font-size:13px; color:#333; margin-bottom:8px; padding:4px 0; border-bottom:2px solid var(--green);">Essential Resources</div>
+                <div class="data-table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>Category</th><th>Resource</th><th>Link</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="provider">Cloud Docs</td><td>AWS Well-Architected for AI</td><td><a href="#">docs.aws.amazon.com</a></td></tr>
+                            <tr><td class="provider">Cloud Docs</td><td>Google Cloud AI/ML Guide</td><td><a href="#">cloud.google.com/docs</a></td></tr>
+                            <tr><td class="provider">AI Models</td><td>Hugging Face Model Hub</td><td><a href="https://huggingface.co" target="_blank">huggingface.co</a></td></tr>
+                            <tr><td class="provider">AI Models</td><td>ModelScope (China Hub)</td><td><a href="https://modelscope.cn" target="_blank">modelscope.cn</a></td></tr>
+                            <tr><td class="provider">Containers</td><td>Docker Compose Docs</td><td><a href="#">docs.docker.com</a></td></tr>
+                            <tr><td class="provider">Community</td><td>r/selfhosted</td><td><a href="#">reddit.com/r/selfhosted</a></td></tr>
+                            <tr><td class="provider">Tools</td><td>Portainer</td><td><a href="#">portainer.io</a></td></tr>
+                            <tr><td class="provider">Monitoring</td><td>UptimeRobot</td><td><a href="#">uptimerobot.com</a></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <div class="footer-inner">
+        <div class="footer-links">
+            <div>
+                <h5>Global Cloud</h5>
+                <a href="https://aws.amazon.com" target="_blank">Amazon Web Services</a>
+                <a href="https://azure.microsoft.com" target="_blank">Microsoft Azure</a>
+                <a href="https://cloud.google.com" target="_blank">Google Cloud Platform</a>
+                <a href="https://cloud.oracle.com" target="_blank">Oracle Cloud</a>
+                <a href="https://digitalocean.com" target="_blank">DigitalOcean</a>
+                <a href="https://vultr.com" target="_blank">Vultr</a>
+                <a href="https://linode.com" target="_blank">Linode (Akamai)</a>
+                <a href="https://hetzner.com/cloud" target="_blank">Hetzner Cloud</a>
+            </div>
+            <div>
+                <h5>China Cloud</h5>
+                <a href="https://www.alibabacloud.com" target="_blank">Alibaba Cloud</a>
+                <a href="https://cloud.tencent.com" target="_blank">Tencent Cloud</a>
+                <a href="https://www.huaweicloud.com" target="_blank">Huawei Cloud</a>
+                <a href="https://cloud.baidu.com" target="_blank">Baidu AI Cloud</a>
+                <a href="https://www.volcengine.com" target="_blank">Volcengine (ByteDance)</a>
+                <a href="https://www.ksyun.com" target="_blank">Kingsoft Cloud</a>
+            </div>
+            <div>
+                <h5>AI Providers</h5>
+                <a href="https://openai.com" target="_blank">OpenAI</a>
+                <a href="https://anthropic.com" target="_blank">Anthropic</a>
+                <a href="https://deepmind.google" target="_blank">Google DeepMind</a>
+                <a href="https://llama.meta.com" target="_blank">Meta AI (Llama)</a>
+                <a href="https://mistral.ai" target="_blank">Mistral AI</a>
+                <a href="https://cohere.com" target="_blank">Cohere</a>
+                <a href="https://deepseek.com" target="_blank">DeepSeek</a>
+                <a href="https://qwen.ai" target="_blank">Qwen (Alibaba)</a>
+            </div>
+            <div>
+                <h5>Sections</h5>
+                <a href="#global-cloud">Global Cloud Providers</a>
+                <a href="#china-cloud">China Cloud Ecosystem</a>
+                <a href="#ai-providers">International AI Providers</a>
+                <a href="#china-ai">China AI Ecosystem</a>
+                <a href="#vps-compare">VPS Provider Comparison</a>
+                <a href="#pricing">Pricing Tiers</a>
+                <a href="#architecture">Architecture Guide</a>
+                <a href="#get-started">Get Started</a>
+            </div>
+            <div>
+                <h5>Tools & Resources</h5>
+                <a href="https://huggingface.co" target="_blank">Hugging Face</a>
+                <a href="https://modelscope.cn" target="_blank">ModelScope</a>
+                <a href="https://portainer.io" target="_blank">Portainer</a>
+                <a href="https://uptimerobot.com" target="_blank">UptimeRobot</a>
+                <a href="https://tailscale.com" target="_blank">Tailscale</a>
+                <a href="https://caddyserver.com" target="_blank">Caddy Server</a>
+                <a href="https://www.ansible.com" target="_blank">Ansible</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            ai-vps.github.io -- AI & Cloud Infrastructure Navigation -- 2026 Edition -- All data sourced from official provider websites and industry reports.
+        </div>
+    </div>
+</div>
+
+<script>
+    // Date display
+    const now = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('dateDisplay').textContent = now.toLocaleDateString('en-US', options);
+
+    // Tab switching
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const group = btn.dataset.group;
+            document.querySelectorAll(`.tab-btn[data-group="${group}"]`).forEach(b => b.classList.remove('active'));
+            document.querySelectorAll(`.tab-content[data-group="${group}"]`).forEach(c => c.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById(btn.dataset.target).classList.add('active');
+        });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+</script>
+</body>
+</html>
