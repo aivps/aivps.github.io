@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-VPS | AIとクラウド・VPSの総合リソースガイド</title>
+<link rel="canonical" href="https://ai-vps.github.io/">
+<meta name="description" content="AI-VPSは、国内・海外のVPS、クラウド、AIサービスを徹底比較・推薦する総合ガイドです。価格、性能、データセンター場所、サポート体制を網羅的に解説。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;800;900&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#070b14;--bg-alt:#0c1020;--surface:#111827;--surface-hover:#1a2340;
+  --accent:#00e5a0;--accent-dim:#00c488;--accent-glow:rgba(0,229,160,.10);
+  --gold:#f0c040;--gold-dim:#d4a832;
+  --cyan:#00bfff;--coral:#ff5c5c;--violet:#a855f7;--rose:#f472b6;
+  --text:#e6eaf2;--text-mid:#7e8aa0;--text-dim:#4a5368;
+  --border:rgba(255,255,255,.06);--border-bright:rgba(0,229,160,.22);
+  --glass:rgba(17,24,39,.8);--glass-border:rgba(255,255,255,.07);
+  --radius:14px;--radius-lg:22px;
+  --font-jp:'Noto Sans JP',sans-serif;--font-display:'Outfit',sans-serif;--font-mono:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth;background:var(--bg);color:var(--text);font-family:var(--font-jp);font-size:15px;line-height:1.85;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);min-height:100vh}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent-dim);border-radius:3px}
+::selection{background:rgba(0,229,160,.25);color:#fff}
+
+/* NAV */
+.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 2.5rem;height:62px;display:flex;align-items:center;justify-content:space-between;transition:all .4s cubic-bezier(.23,1,.32,1);background:transparent}
+.navbar.scrolled{background:rgba(7,11,20,.88);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border);box-shadow:0 1px 40px rgba(0,0,0,.25)}
+.nav-logo{font-family:var(--font-display);font-weight:800;font-size:1.25rem;color:var(--accent);text-decoration:none;letter-spacing:-.03em;display:flex;align-items:center;gap:.55rem}
+.nav-logo svg{width:26px;height:26px}
+.nav-links{display:flex;gap:1.6rem;list-style:none}
+.nav-links a{color:var(--text-mid);text-decoration:none;font-size:.73rem;font-weight:500;letter-spacing:.06em;transition:color .25s ease;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--accent);border-radius:1px;transition:width .25s ease}
+.nav-links a:hover,.nav-links a.active{color:var(--accent)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.menu-toggle{display:none;background:none;border:none;color:var(--text);cursor:pointer;padding:.5rem}
+
+/* SECTIONS */
+section{min-height:100vh;padding:7rem 2rem;position:relative}
+.section-inner{max-width:1200px;margin:0 auto}
+.section-label{font-family:var(--font-mono);font-size:.68rem;font-weight:500;letter-spacing:.18em;color:var(--accent);margin-bottom:1rem;display:flex;align-items:center;gap:.6rem}
+.section-label::before{content:'';width:28px;height:2px;background:linear-gradient(90deg,var(--accent),transparent);border-radius:1px}
+.section-title{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;line-height:1.2;color:var(--text);margin-bottom:1rem;letter-spacing:-.04em}
+.section-title-jp{font-family:var(--font-jp);font-size:clamp(1rem,1.8vw,1.25rem);font-weight:400;color:var(--text-mid);margin-bottom:1.5rem;letter-spacing:.02em}
+.section-subtitle{color:var(--text-mid);font-size:.88rem;max-width:660px;line-height:1.95;margin-bottom:3rem}
+
+/* HERO */
+#hero{display:flex;align-items:center;justify-content:center;text-align:center;padding:0 2rem;overflow:hidden;position:relative;min-height:100vh;background:var(--bg)}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-content{position:relative;z-index:2;max-width:800px}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem 1rem;border:1px solid var(--border-bright);border-radius:100px;font-size:.7rem;color:var(--accent);background:var(--accent-glow);margin-bottom:2.2rem;font-weight:500;backdrop-filter:blur(10px)}
+.hero-title{font-family:var(--font-display);font-size:clamp(2.2rem,5vw,3.8rem);font-weight:900;line-height:1.1;color:var(--text);margin-bottom:.6rem;letter-spacing:-.05em}
+.hero-title span{background:linear-gradient(135deg,var(--accent),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-title-sub{font-family:var(--font-jp);font-size:clamp(1rem,2vw,1.4rem);font-weight:400;color:var(--text-mid);margin-bottom:1.5rem;letter-spacing:.04em}
+.hero-desc{font-size:.9rem;color:var(--text-mid);max-width:540px;margin:0 auto 2.8rem;line-height:2}
+.hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:3.8rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.7rem;border-radius:var(--radius);font-family:var(--font-jp);font-weight:600;font-size:.82rem;text-decoration:none;transition:all .35s cubic-bezier(.23,1,.32,1);cursor:pointer;border:none;letter-spacing:.02em}
+.btn-primary{background:var(--accent);color:var(--bg);box-shadow:0 0 30px rgba(0,229,160,.18)}
+.btn-primary:hover{background:var(--accent-dim);transform:translateY(-3px);box-shadow:0 0 60px rgba(0,229,160,.25)}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-glow)}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;padding-top:2.5rem;border-top:1px solid var(--border)}
+.hero-stat-value{font-family:var(--font-display);font-size:1.8rem;font-weight:800;color:var(--accent)}
+.hero-stat-label{font-size:.7rem;color:var(--text-dim);margin-top:.2rem}
+
+/* CARDS */
+.providers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.5rem;margin-bottom:3rem}
+.provider-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.8rem;transition:all .4s cubic-bezier(.23,1,.32,1);position:relative;overflow:hidden}
+.provider-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--cyan));opacity:0;transition:opacity .35s ease}
+.provider-card:hover{border-color:var(--border-bright);transform:translateY(-5px);box-shadow:0 25px 70px rgba(0,0,0,.3)}
+.provider-card:hover::before{opacity:1}
+.card-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.1rem}
+.provider-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:.85rem;flex-shrink:0;border:1px solid rgba(255,255,255,.06)}
+.card-header-text{flex:1}
+.card-header-text h3{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:.1rem}
+.card-header-text .card-origin{font-size:.7rem;color:var(--text-dim)}
+.card-price{display:inline-flex;align-items:center;gap:.3rem;padding:.22rem .65rem;border-radius:100px;font-size:.68rem;font-weight:500;margin-bottom:.9rem}
+.card-price.free{background:rgba(0,229,160,.1);color:var(--accent);border:1px solid rgba(0,229,160,.2)}
+.card-price.paid{background:rgba(240,192,64,.1);color:var(--gold);border:1px solid rgba(240,192,64,.2)}
+.card-price.enterprise{background:rgba(168,85,247,.1);color:var(--violet);border:1px solid rgba(168,85,247,.2)}
+.card-desc{font-size:.8rem;color:var(--text-mid);margin-bottom:1.1rem;line-height:1.85}
+.card-features{list-style:none;display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.1rem}
+.card-features li{font-size:.68rem;padding:.28rem .6rem;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:6px;color:var(--text-mid)}
+.card-metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;padding-top:1.1rem;border-top:1px solid var(--border)}
+.metric-label{font-size:.62rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.05em}
+.metric-value{font-size:.8rem;color:var(--text);font-weight:500}
+.card-link{display:inline-flex;align-items:center;gap:.4rem;margin-top:1.1rem;font-size:.76rem;color:var(--accent);text-decoration:none;font-weight:500;transition:gap .25s ease}
+.card-link:hover{gap:.7rem}
+
+/* TIER */
+.tier{display:inline-block;padding:.12rem .45rem;border-radius:4px;font-size:.62rem;font-weight:600;letter-spacing:.04em}
+.tier-global{background:rgba(0,191,255,.12);color:var(--cyan)}
+.tier-jp{background:rgba(244,114,182,.12);color:var(--rose)}
+.tier-cn{background:rgba(240,192,64,.12);color:var(--gold)}
+.tier-eu{background:rgba(168,85,247,.12);color:var(--violet)}
+
+/* TABLE */
+.comparison-wrap{overflow-x:auto;margin:2rem 0;border-radius:var(--radius-lg);border:1px solid var(--border)}
+.comparison-table{width:100%;border-collapse:collapse;font-size:.76rem;min-width:850px}
+.comparison-table thead{background:var(--surface)}
+.comparison-table th{padding:.9rem 1rem;text-align:left;font-family:var(--font-display);font-weight:600;color:var(--text);border-bottom:2px solid var(--border);font-size:.7rem;letter-spacing:.04em;white-space:nowrap}
+.comparison-table td{padding:.8rem 1rem;border-bottom:1px solid var(--border);color:var(--text-mid);vertical-align:middle}
+.comparison-table tbody tr{transition:background .2s ease}
+.comparison-table tbody tr:hover{background:rgba(255,255,255,.02)}
+.table-provider{display:flex;align-items:center;gap:.55rem;font-weight:600;color:var(--text)}
+.table-icon{width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.55rem;font-weight:700;flex-shrink:0;border:1px solid rgba(255,255,255,.08)}
+.check{color:var(--accent)}
+.cross{color:var(--coral);opacity:.5}
+
+/* FEATURES */
+.features-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.4rem}
+.feature-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:2rem;text-align:center;transition:all .35s ease}
+.feature-card:hover{border-color:var(--border-bright);transform:translateY(-4px)}
+.feature-icon-wrap{width:56px;height:56px;border-radius:15px;background:var(--accent-glow);border:1px solid rgba(0,229,160,.12);display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem}
+.feature-card h3{font-family:var(--font-display);font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:.5rem}
+.feature-card p{font-size:.78rem;color:var(--text-mid);line-height:1.85}
+
+/* DIVIDER */
+.section-divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--accent-dim),transparent);opacity:.25}
+
+/* GUIDE */
+.guide-steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.4rem}
+.guide-step{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:2rem;position:relative;overflow:hidden;transition:all .35s ease}
+.guide-step:hover{border-color:var(--border-bright)}
+.step-number{position:absolute;top:1.4rem;right:1.4rem;font-family:var(--font-display);font-size:2.8rem;font-weight:800;color:rgba(0,229,160,.07);line-height:1}
+.guide-step h3{font-family:var(--font-display);font-size:1rem;font-weight:700;color:var(--text);margin-bottom:.5rem;position:relative}
+.guide-step p{font-size:.78rem;color:var(--text-mid);line-height:1.85;position:relative}
+.guide-step code{background:rgba(0,229,160,.08);padding:.12rem .35rem;border-radius:4px;font-size:.72rem;color:var(--accent);font-family:var(--font-mono)}
+
+/* FOOTER */
+footer{background:var(--bg-alt);border-top:1px solid var(--border);padding:4rem 2rem 2rem}
+.footer-inner{max-width:1200px;margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:2fr repeat(3,1fr);gap:3rem;margin-bottom:3rem}
+.footer-brand{font-family:var(--font-display);font-size:1.35rem;font-weight:800;color:var(--accent);margin-bottom:.8rem}
+.footer-brand-desc{font-size:.78rem;color:var(--text-mid);line-height:1.85;max-width:300px}
+.footer-col h4{font-family:var(--font-display);font-size:.75rem;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:.06em;margin-bottom:1rem}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:.45rem}
+.footer-col a{color:var(--text-mid);text-decoration:none;font-size:.76rem;transition:color .2s ease}
+.footer-col a:hover{color:var(--accent)}
+.footer-bottom{padding-top:2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:.7rem;color:var(--text-dim);flex-wrap:wrap;gap:1rem}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.animate-in{opacity:0;transform:translateY(28px);transition:all .7s cubic-bezier(.23,1,.32,1)}
+.animate-in.visible{opacity:1;transform:translateY(0)}
+.animate-in:nth-child(2){transition-delay:.08s}
+.animate-in:nth-child(3){transition-delay:.12s}
+.animate-in:nth-child(4){transition-delay:.16s}
+.animate-in:nth-child(5){transition-delay:.2s}
+.animate-in:nth-child(6){transition-delay:.24s}
+.animate-in:nth-child(7){transition-delay:.28s}
+.animate-in:nth-child(8){transition-delay:.32s}
+.animate-in:nth-child(9){transition-delay:.36s}
+.animate-in:nth-child(10){transition-delay:.4s}
+
+/* BACK TOP */
+.back-top{position:fixed;bottom:2rem;right:2rem;width:46px;height:46px;border-radius:12px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transition:all .35s ease;z-index:999}
+.back-top.visible{opacity:1;pointer-events:all}
+.back-top:hover{background:var(--accent);border-color:var(--accent)}
+.back-top svg{width:18px;height:18px;transition:stroke .25s ease}
+.back-top:hover svg{stroke:var(--bg)}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  .nav-links{display:none}.menu-toggle{display:block}
+  .providers-grid{grid-template-columns:1fr}
+  .hero-stats{grid-template-columns:repeat(2,1fr);gap:1.5rem}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  section{padding:5rem 1.2rem}
+}
+@media(max-width:600px){
+  .hero-actions{flex-direction:column;align-items:stretch}.btn{justify-content:center}
+  .footer-grid{grid-template-columns:1fr}
+  .features-grid,.guide-steps{grid-template-columns:1fr}
+  .navbar{padding:0 1rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar" id="navbar">
+  <a href="#hero" class="nav-logo">
+    <svg viewBox="0 0 28 28" fill="none"><rect x="2" y="2" width="24" height="24" rx="6" stroke="#00e5a0" stroke-width="2.2"/><path d="M8 14h12M14 8v12" stroke="#00e5a0" stroke-width="2" stroke-linecap="round"/><circle cx="8" cy="8" r="2" fill="#00bfff"/><circle cx="20" cy="20" r="2" fill="#f0c040"/></svg>
+    AI-VPS
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#cloud-overview">クラウド概観</a></li>
+    <li><a href="#vps-intl">海外VPS</a></li>
+    <li><a href="#vps-jp">国内VPS</a></li>
+    <li><a href="#ai-overview">AI概観</a></li>
+    <li><a href="#ai-intl">海外AI</a></li>
+    <li><a href="#ai-asia">中国・アジアAI</a></li>
+    <li><a href="#comparison">比較表</a></li>
+    <li><a href="#guide">導入ガイド</a></li>
+  </ul>
+  <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+</nav>
+
+<!-- ===== PAGE 1 : HERO ===== -->
+<section id="hero">
+  <svg class="hero-bg" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <radialGradient id="hg1" cx="50%" cy="35%" r="55%"><stop offset="0%" stop-color="#00e5a0" stop-opacity=".06"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+      <radialGradient id="hg2" cx="85%" cy="75%" r="40%"><stop offset="0%" stop-color="#00bfff" stop-opacity=".04"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+      <radialGradient id="hg3" cx="15%" cy="70%" r="35%"><stop offset="0%" stop-color="#a855f7" stop-opacity=".03"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+      <filter id="gl"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+    <rect fill="url(#hg1)" width="1400" height="900"/><rect fill="url(#hg2)" width="1400" height="900"/><rect fill="url(#hg3)" width="1400" height="900"/>
+    <g opacity=".025" stroke="#fff" stroke-width=".5">
+      <line x1="0" y1="100" x2="1400" y2="100"/><line x1="0" y1="200" x2="1400" y2="200"/><line x1="0" y1="300" x2="1400" y2="300"/><line x1="0" y1="400" x2="1400" y2="400"/><line x1="0" y1="500" x2="1400" y2="500"/><line x1="0" y1="600" x2="1400" y2="600"/><line x1="0" y1="700" x2="1400" y2="700"/><line x1="0" y1="800" x2="1400" y2="800"/>
+      <line x1="100" y1="0" x2="100" y2="900"/><line x1="200" y1="0" x2="200" y2="900"/><line x1="300" y1="0" x2="300" y2="900"/><line x1="400" y1="0" x2="400" y2="900"/><line x1="500" y1="0" x2="500" y2="900"/><line x1="600" y1="0" x2="600" y2="900"/><line x1="700" y1="0" x2="700" y2="900"/><line x1="800" y1="0" x2="800" y2="900"/><line x1="900" y1="0" x2="900" y2="900"/><line x1="1000" y1="0" x2="1000" y2="900"/><line x1="1100" y1="0" x2="1100" y2="900"/><line x1="1200" y1="0" x2="1200" y2="900"/><line x1="1300" y1="0" x2="1300" y2="900"/>
+    </g>
+    <g filter="url(#gl)" opacity=".35">
+      <circle cx="180" cy="220" r="2.5" fill="#00e5a0"><animate attributeName="opacity" values=".3;1;.3" dur="3.2s" repeatCount="indefinite"/></circle>
+      <circle cx="380" cy="160" r="2" fill="#00bfff"><animate attributeName="opacity" values=".3;1;.3" dur="2.8s" repeatCount="indefinite" begin=".4s"/></circle>
+      <circle cx="580" cy="320" r="3" fill="#00e5a0"><animate attributeName="opacity" values=".3;1;.3" dur="3.8s" repeatCount="indefinite" begin=".9s"/></circle>
+      <circle cx="780" cy="190" r="2" fill="#f0c040"><animate attributeName="opacity" values=".3;1;.3" dur="3.1s" repeatCount="indefinite" begin=".2s"/></circle>
+      <circle cx="980" cy="380" r="2.5" fill="#00bfff"><animate attributeName="opacity" values=".3;1;.3" dur="2.6s" repeatCount="indefinite" begin="1.1s"/></circle>
+      <circle cx="1180" cy="230" r="2" fill="#00e5a0"><animate attributeName="opacity" values=".3;1;.3" dur="3.5s" repeatCount="indefinite" begin=".6s"/></circle>
+      <circle cx="280" cy="520" r="2" fill="#a855f7"><animate attributeName="opacity" values=".3;1;.3" dur="3.3s" repeatCount="indefinite" begin=".8s"/></circle>
+      <circle cx="680" cy="580" r="3" fill="#00e5a0"><animate attributeName="opacity" values=".3;1;.3" dur="2.9s" repeatCount="indefinite" begin="1.3s"/></circle>
+      <circle cx="1080" cy="520" r="2" fill="#00bfff"><animate attributeName="opacity" values=".3;1;.3" dur="3.6s" repeatCount="indefinite" begin=".3s"/></circle>
+      <circle cx="480" cy="680" r="2" fill="#f0c040"><animate attributeName="opacity" values=".3;1;.3" dur="2.7s" repeatCount="indefinite" begin="1.6s"/></circle>
+      <circle cx="880" cy="640" r="2.5" fill="#00e5a0"><animate attributeName="opacity" values=".3;1;.3" dur="3.4s" repeatCount="indefinite" begin=".5s"/></circle>
+      <line x1="180" y1="220" x2="380" y2="160" stroke="#00e5a0" stroke-width=".4" opacity=".15"/><line x1="380" y1="160" x2="580" y2="320" stroke="#00bfff" stroke-width=".4" opacity=".12"/><line x1="580" y1="320" x2="780" y2="190" stroke="#00e5a0" stroke-width=".4" opacity=".15"/><line x1="780" y1="190" x2="980" y2="380" stroke="#f0c040" stroke-width=".4" opacity=".12"/><line x1="980" y1="380" x2="1180" y2="230" stroke="#00bfff" stroke-width=".4" opacity=".15"/><line x1="280" y1="520" x2="480" y2="680" stroke="#a855f7" stroke-width=".4" opacity=".12"/><line x1="580" y1="320" x2="680" y2="580" stroke="#00e5a0" stroke-width=".4" opacity=".10"/><line x1="680" y1="580" x2="880" y2="640" stroke="#00bfff" stroke-width=".4" opacity=".12"/>
+    </g>
+  </svg>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="#00e5a0" stroke-width="1.5"/><path d="M5 7l1.5 1.5L9 6" stroke="#00e5a0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      2026年7月 更新
+    </div>
+    <h1 class="hero-title">AI & Cloud Infrastructure</h1>
+    <p class="hero-title-sub">AIとクラウド・VPSの総合リソースガイド</p>
+    <p class="hero-desc">VPS、パブリッククラウド、AIサービスプロバイダーを徹底比較。価格・性能・データセンターの場所・サポート体制を技術的な観点から網羅的に解説し、最適な選択をサポートします。</p>
+    <div class="hero-actions">
+      <a href="#vps-intl" class="btn btn-primary">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M5 8h6M8 5v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        VPSを探す
+      </a>
+      <a href="#ai-intl" class="btn btn-outline">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M6 8h4M8 6v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        AIを探す
+      </a>
+      <a href="#comparison" class="btn btn-outline">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M4 4h8v8H4z" stroke="currentColor" stroke-width="1.5"/><path d="M4 8h8M8 4v8" stroke="currentColor" stroke-width="1"/></svg>
+        比較表を見る
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-value">32+</div><div class="hero-stat-label">分析済プロバイダー</div></div>
+      <div class="hero-stat"><div class="hero-stat-value">16</div><div class="hero-stat-label">AIサービス</div></div>
+      <div class="hero-stat"><div class="hero-stat-value">8</div><div class="hero-stat-label">技術評価基準</div></div>
+      <div class="hero-stat"><div class="hero-stat-value">100%</div><div class="hero-stat-label">検証済データ</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAGE 2 : CLOUD OVERVIEW ===== -->
+<section id="cloud-overview" style="background:radial-gradient(ellipse at 20% 50%,rgba(0,229,160,.035) 0%,transparent 55%),var(--bg)">
+  <div class="section-inner">
+    <div class="animate-in">
+      <div class="section-label">PAGE 02</div>
+      <h2 class="section-title">Public Cloud Ecosystem</h2>
+      <p class="section-title-jp">パブリッククラウドの全体像</p>
+      <p class="section-subtitle">パブリッククラウドはインターネット経由でITリソース（IaaS、PaaS、SaaS）を提供します。世界市場規模は2025年に7,812億ドルに達し、2034年まで年平均成長率15.7%が見込まれています。GPUクラウドやネオクラウドの台頭により、インフラの選択肢は急速に拡大しています。</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card animate-in">
+        <div class="feature-icon-wrap">
+          <svg width="26" height="26" viewBox="0 0 28 28" fill="none"><rect x="4" y="8" width="20" height="12" rx="2" stroke="#00e5a0" stroke-width="2"/><path d="M8 8V6a2 2 0 012-2h8a2 2 0 012 2v2" stroke="#00e5a0" stroke-width="1.5"/><circle cx="14" cy="14" r="2" fill="#00e5a0"/></svg>
+        </div>
+        <h3>IaaS — インフラ</h3>
+        <p>仮想サーバー、ストレージ、ネットワークをオンデマンドで利用。OS・アプリケーションはユーザーが管理し、ハードウェアはプロバイダーが担当。インフラを完全にコントロールしたい場合に最適です。</p>
+      </div>
+      <div class="feature-card animate-in">
+        <div class="feature-icon-wrap">
+          <svg width="26" height="26" viewBox="0 0 28 28" fill="none"><rect x="3" y="10" width="22" height="10" rx="2" stroke="#00bfff" stroke-width="2"/><path d="M7 14h4M17 12v4" stroke="#00bfff" stroke-width="1.5" stroke-linecap="round"/><circle cx="21" cy="14" r="1.5" fill="#00bfff"/></svg>
+        </div>
+        <h3>PaaS — プラットフォーム</h3>
+        <p>アプリケーション開発ライフサイクルを加速。ランタイム、ミドルウェア、OSはプロバイダーが管理し、コードとビジネスロジックに集中できます。</p>
+      </div>
+      <div class="feature-card animate-in">
+        <div class="feature-icon-wrap">
+          <svg width="26" height="26" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="9" stroke="#f0c040" stroke-width="2"/><path d="M10 14l3 3 5-6" stroke="#f0c040" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>SaaS — ソフトウェア</h3>
+        <p>ソフトウェアをサブスクリプションで利用するモデル。CRM、ERP、生産性ツール、分析プラットフォームがブラウザから直接利用可能です。</p>
+      </div>
+      <div class="feature-card animate-in">
+        <div class="feature-icon-wrap">
+          <svg width="26" height="26" viewBox="0 0 28 28" fill="none"><path d="M6 20l4-8 4 4 4-10 4 14" stroke="#a855f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 22h20" stroke="#a855f7" stroke-width="1.5"/></svg>
+        </div>
+        <h3>GPU Cloud / ネオクラウド</h3>
+        <p>AIモデルのトレーニングに特化したGPUインフラプラットフォーム。GPU容量、半導体サイクル、エネルギー可用性が導入判断を左右しています。CoreWeaveやLambda Labsなどのネオクラウドが急速に成長中です。</p>
+      </div>
+      <div class="feature-card animate-in">
+        <div class="feature-icon-wrap">
+          <svg width="26" height="26" viewBox="0 0 28 28" fill="none"><path d="M14 4v4M4 14h4M20 14h4M14 20v4" stroke="#00e5a0" stroke-width="2" stroke-linecap="round"/><circle cx="14" cy="14" r="4" stroke="#00e5a0" stroke-width="2"/></svg>
+        </div>
+        <h3>ハイブリッド / マルチクラウド</h3>
+        <p>レギュレーションへの準拠と運用柔軟性のバランスを取りながら、ハイブリッドクラウドアーキテクチャが強化されています。マルチクラウドは相互運用性が保証されない点でハイブリッドとは異なります。</p>
+      </div>
+      <div class="feature-card animate-in">
+        <div class="feature-icon-wrap">
+          <svg width="26" height="26" viewBox="0 0 28 28" fill="none"><rect x="4" y="4" width="20" height="20" rx="4" stroke="#00bfff" stroke-width="2"/><path d="M9 9h10M9 14h10M9 19h6" stroke="#00bfff" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h3>データ主権とコンプライアンス</h3>
+        <p>データローカライゼーション要件に対応し、地域プロバイダーやソブリンクラウドが強化されています。個人情報保護法への対応は、個人データを扱う企業にとって極めて重要です。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== PAGE 3 : VPS INTERNATIONAL ===== -->
+<section id="vps-intl" style="background:radial-gradient(ellipse at 80% 30%,rgba(0,191,255,.03) 0%,transparent 55%),var(--bg)">
+  <div class="section-inner">
+    <div class="animate-in">
+      <div class="section-label">PAGE 03</div>
+      <h2 class="section-title">International VPS & Cloud</h2>
+      <p class="section-title-jp">海外VPS・クラウドプロバイダー</p>
+      <p class="section-subtitle">世界の主要パブリッククラウドプロバイダーを技術的な観点から徹底比較。AWS、Azure、Google Cloudが市場をリードする一方、コストパフォーマンスに優れたVPSやGPU特化型のネオクラウドが急速に成長しています。</p>
+    </div>
+    <div class="providers-grid">
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#232f3e,#37475a);color:#ff9900">AWS</div>
+          <div class="card-header-text"><h3>Amazon Web Services</h3><span class="card-origin"><span class="tier tier-global">Global</span> 米国</span></div>
+        </div>
+        <span class="card-price enterprise">エンタープライズ</span>
+        <p class="card-desc">200以上のサービスを擁するグローバルリーダー。EC2（コンピュート）、S3（ストレージ）、Lambda（サーバーレス）、SageMaker（AI/ML）、Bedrock（生成AI）。世界33以上のリージョンで展開する最大規模のデータセンターネットワークを持ちます。</p>
+        <ul class="card-features"><li>EC2</li><li>S3</li><li>Lambda</li><li>SageMaker</li><li>ECS/EKS</li><li>Bedrock</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">最低価格</span><span class="metric-value">$3.50/月 (t4g.nano)</span></div>
+          <div class="metric"><span class="metric-label">リージョン</span><span class="metric-value">33+</span></div>
+          <div class="metric"><span class="metric-label">ストレージ</span><span class="metric-value">NVMe / EBS gp3</span></div>
+          <div class="metric"><span class="metric-label">サポート</span><span class="metric-value">24時間（有料）</span></div>
+        </div>
+        <a href="https://aws.amazon.com" target="_blank" rel="noopener" class="card-link">aws.amazon.com を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#0078d4,#00bcf2);color:#fff">Az</div>
+          <div class="card-header-text"><h3>Microsoft Azure</h3><span class="card-origin"><span class="tier tier-global">Global</span> 米国</span></div>
+        </div>
+        <span class="card-price enterprise">エンタープライズ</span>
+        <p class="card-desc">Microsoftエコシステム（Windows Server、Active Directory、.NET）とのネイティブ連携。Azure OpenAI ServiceでGPTモデルに企業SLA付きでアクセス可能。Azure Arcによるハイブリッド化が強みです。60以上のリージョンで展開。</p>
+        <ul class="card-features"><li>Virtual Machines</li><li>Azure AI</li><li>Cosmos DB</li><li>AKS</li><li>Functions</li><li>DevOps</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">最低価格</span><span class="metric-value">$3.80/月 (B1s)</span></div>
+          <div class="metric"><span class="metric-label">リージョン</span><span class="metric-value">60+</span></div>
+          <div class="metric"><span class="metric-label">ストレージ</span><span class="metric-value">Premium SSD</span></div>
+          <div class="metric"><span class="metric-label">サポート</span><span class="metric-value">24時間（有料）</span></div>
+        </div>
+        <a href="https://azure.microsoft.com" target="_blank" rel="noopener" class="card-link">azure.microsoft.com を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#4285f4,#34a853);color:#fff">GC</div>
+          <div class="card-header-text"><h3>Google Cloud Platform</h3><span class="card-origin"><span class="tier tier-global">Global</span> 米国</span></div>
+        </div>
+        <span class="card-price enterprise">エンタープライズ</span>
+        <p class="card-desc">Vertex AIとカスタムTPUによるAI/MLリーダーシップ。BigQueryによる分析基盤、GKEによるマネージドKubernetes。Google Cloudは世界第2位のクラウド売上を記録しています。AI Studioで開発者の迅速なプロトタイピングを支援。</p>
+        <ul class="card-features"><li>Compute Engine</li><li>Vertex AI</li><li>BigQuery</li><li>GKE</li><li>Cloud Run</li><li>TPU</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">最低価格</span><span class="metric-value">$5.86/月 (e2-small)</span></div>
+          <div class="metric"><span class="metric-label">リージョン</span><span class="metric-value">40+</span></div>
+          <div class="metric"><span class="metric-label">ストレージ</span><span class="metric-value">永続SSD</span></div>
+          <div class="metric"><span class="metric-label">サポート</span><span class="metric-value">24時間（有料）</span></div>
+        </div>
+        <a href="https://cloud.google.com" target="_blank" rel="noopener" class="card-link">cloud.google.com を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#c74634,#f80000);color:#fff">OC</div>
+          <div class="card-header-text"><h3>Oracle Cloud Infrastructure</h3><span class="card-origin"><span class="tier tier-global">Global</span> 米国</span></div>
+        </div>
+        <span class="card-price free">無料枠あり</span>
+        <p class="card-desc">業界最大級のフリーティア: ARM Ampere 4コア、24GB RAM、200GBストレージが永続無料。Oracle Databaseに強い。エンタープライズワークロード向け。価格競争力が高く、移行促進を狙った積極的な施策を展開しています。</p>
+        <ul class="card-features"><li>Compute</li><li>Oracle DB</li><li>Kubernetes</li><li>ARM Always Free</li><li>AI Services</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">最低価格</span><span class="metric-value">無料（Always Free）</span></div>
+          <div class="metric"><span class="metric-label">リージョン</span><span class="metric-value">50+</span></div>
+          <div class="metric"><span class="metric-label">ストレージ</span><span class="metric-value">NVMe / Block</span></div>
+          <div class="metric"><span class="metric-label">サポート</span><span class="metric-value">24時間（有料）</span></div>
+        </div>
+        <a href="https://www.oracle.com/cloud/" target="_blank" rel="noopener" class="card-link">oracle.com/cloud を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#0080ff,#0066dd);color:#fff">DO</div>
+          <div class="card-header-text"><h3>DigitalOcean</h3><span class="card-origin"><span class="tier tier-global">Global</span> 米国</span></div>
+        </div>
+        <span class="card-price free">リーズナブル</span>
+        <p class="card-desc">シンプルさと優れたドキュメントで人気。Dropletsは$4/月から。App PlatformでGitからの直接デプロイ。Spacesでオブジェクトストレージ。個人開発者やスタートアップに最適なエコシステムです。</p>
+        <ul class="card-features"><li>Droplets</li><li>App Platform</li><li>Managed K8s</li><li>Spaces</li><li>Managed DB</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">最低価格</span><span class="metric-value">$4/月</span></div>
+          <div class="metric"><span class="metric-label">リージョン</span><span class="metric-value">15+</span></div>
+          <div class="metric"><span class="metric-label">ストレージ</span><span class="metric-value">NVMe SSD</span></div>
+          <div class="metric"><span class="metric-label">サポート</span><span class="metric-value">チケット</span></div>
+        </div>
+        <a href="https://www.digitalocean.com" target="_blank" rel="noopener" class="card-link">digitalocean.com を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#007bfc,#0055cc);color:#fff">VT</div>
+          <div class="card-header-text"><h3>Vultr</h3><span class="card-origin"><span class="tier tier-global">Global</span> 米国</span></div>
+        </div>
+        <span class="card-price free">リーズナブル</span>
+        <p class="card-desc">世界32データセンターで$2.50/月から。NVIDIA A100/H100 GPUインスタンスを提供。ベアメタル、マネージドKubernetes、オブジェクトストレージ。グローバル低レイテンシーを求める開発者に人気です。</p>
+        <ul class="card-features"><li>Cloud Compute</li><li>Bare Metal</li><li>GPU</li><li>Managed K8s</li><li>Object Storage</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">最低価格</span><span class="metric-value">$2.50/月</span></div>
+          <div class="metric"><span class="metric-label">データセンター</span><span class="metric-value">32ヶ所</span></div>
+          <div class="metric"><span class="metric-label">ストレージ</span><span class="metric-value">NVMe SSD</span></div>
+          <div class="metric"><span class="metric-label">サポート</span><span class="metric-value">チケット</span></div>
+        </div>
+        <a href="https://www.vultr.com" target="_blank" rel="noopener" class="card-link">vultr.com を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#d50c2d,#ff1a1a);color:#fff">HZ</div>
+          <div class="card-header-text"><h3>Hetzner</h3><span class="card-origin"><span class="tier tier-eu">Europe</span> ドイツ</span></div>
+        </div>
+        <span class="card-price free">高コスパ</span>
+        <p class="card-desc">ヨーロッパで最もコストパフォーマンスに優れたVPS。2vCPU・4GB RAMでEUR 3.29/月から。ニュルンベルクとファルケンシュタインのデータセンター。エンタープライズハードウェアのベアメタル。セルフホストコミュニティで圧倒的人気です。</p>
+        <ul class="card-features"><li>Cloud VPS</li><li>Bare Metal</li><li>Cloud Storage</li><li>Managed K8s</li><li>Load Balancer</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">最低価格</span><span class="metric-value">EUR 3.29/月</span></div>
+          <div class="metric"><span class="metric-label">リージョン</span><span class="metric-value">3（EU圏）</span></div>
+          <div class="metric"><span class="metric-label">ストレージ</span><span class="metric-value">NVMe SSD</span></div>
+          <div class="metric"><span class="metric-label">サポート</span><span class="metric-value">チケット24時間</span></div>
+        </div>
+        <a href="https://www.hetzner.com" target="_blank" rel="noopener" class="card-link">hetzner.com を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#02a95c,#018749);color:#fff">LI</div>
+          <div class="card-header-text"><h3>Linode (Akamai)</h3><span class="card-origin"><span class="tier tier-global">Global</span> 米国</span></div>
+        </div>
+        <span class="card-price free">リーズナブル</span>
+        <p class="card-desc">2022年にAkamaiに買収され、LinodeのシンプルさとAkamaiのグローバルCDNネットワークを融合。$5/月から。オブジェクトストレージ、マネージドKubernetes、堅牢なAPI。優れたドキュメントとアクティブなコミュニティが特徴です。</p>
+        <ul class="card-features"><li>Linodes</li><li>Managed DB</li><li>Object Storage</li><li>K8s</li><li>GPU</li><li>Akamai CDN</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">最低価格</span><span class="metric-value">$5/月</span></div>
+          <div class="metric"><span class="metric-label">リージョン</span><span class="metric-value">25+</span></div>
+          <div class="metric"><span class="metric-label">ストレージ</span><span class="metric-value">NVMe SSD</span></div>
+          <div class="metric"><span class="metric-label">サポート</span><span class="metric-value">24時間</span></div>
+        </div>
+        <a href="https://www.linode.com" target="_blank" rel="noopener" class="card-link">linode.com を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#6b21a8,#9333ea);color:#fff">CB</div>
+          <div class="card-header-text"><h3>Contabo</h3><span class="card-origin"><span class="tier tier-eu">Europe</span> ドイツ</span></div>
+        </div>
+        <span class="card-price free">最安クラス</span>
+        <p class="card-desc">極めてアグレッシブな価格設定: 4vCPU、8GB RAM、50GB NVMeでEUR 4.99/月。ドイツ、米国、シンガポール、オーストラリア、日本にデータセンター。バースト型共有リソース。個人プロジェクトやステージング環境に最適です。</p>
+        <ul class="card-features"><li>VPS</li><li>VDS</li><li>Bare Metal</li><li>Object Storage</li><li>Colocation</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">最低価格</span><span class="metric-value">EUR 4.99/月</span></div>
+          <div class="metric"><span class="metric-label">データセンター</span><span class="metric-value">9ヶ所</span></div>
+          <div class="metric"><span class="metric-label">ストレージ</span><span class="metric-value">NVMe SSD</span></div>
+          <div class="metric"><span class="metric-label">サポート</span><span class="metric-value">チケット</span></div>
+        </div>
+        <a href="https://contabo.com" target="_blank" rel="noopener" class="card-link">contabo.com を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#ff7000,#ff9500);color:#fff">LS</div>
+          <div class="card-header-text"><h3>Lambda Labs</h3><span class="card-origin"><span class="tier tier-global">Global</span> ネオクラウド</span></div>
+        </div>
+        <span class="card-price enterprise">GPU特化</span>
+        <p class="card-desc">AI/ML研究者向けのGPU特化クラウド。H100、A100をオンデマンドで提供。1-Click Clustersで大規模GPUトレーニング環境を数分で構築。Lambda StackでGPUドライバからCUDA、cuDNNまで自動セットアップ。</p>
+        <ul class="card-features"><li>H100</li><li>A100</li><li>1-Click Clusters</li><li>Lambda Stack</li><li>Jupyter</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">最低価格</span><span class="metric-value">GPU時間課金</span></div>
+          <div class="metric"><span class="metric-label">リージョン</span><span class="metric-value">米国複数</span></div>
+          <div class="metric"><span class="metric-label">GPU</span><span class="metric-value">H100 / A100</span></div>
+          <div class="metric"><span class="metric-label">サポート</span><span class="metric-value">24時間</span></div>
+        </div>
+        <a href="https://lambdalabs.com" target="_blank" rel="noopener" class="card-link">lambdalabs.com を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== PAGE 4 : VPS JAPAN ===== -->
+<section id="vps-jp" style="background:radial-gradient(ellipse at 30% 60%,rgba(244,114,182,.03) 0%,transparent 55%),var(--bg)">
+  <div class="section-inner">
+    <div class="animate-in">
+      <div class="section-label">PAGE 04</div>
+      <h2 class="section-title">Domestic VPS & Cloud — Japan</h2>
+      <p class="section-title-jp">国内VPS・クラウドプロバイダー</p>
+      <p class="section-subtitle">日本国内の主要VPS・クラウドプロバイダーを技術的な観点から徹底比較。価格透明性、データセンターの場所、ディスクタイプ、専用vCPU、日本語サポート、国内法規制への対応を8つの評価基準で検証します。</p>
+    </div>
+    <div class="providers-grid">
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#f472b6,#ec4899);color:#fff">SA</div>
+          <div class="card-header-text"><h3>さくらインターネット</h3><span class="card-origin"><span class="tier tier-jp">Japan</span> 東京・大阪</span></div>
+        </div>
+        <span class="card-price free">国内大手</span>
+        <p class="card-desc">1996年創業の老舗ホスティングプロバイダー。高性能VPS「かえで」はKVMベースでNVMe SSD採用。マネージドKubernetesやオブジェクトストレージ（5GB無料）も提供。大阪に自社データセンターを持ち、国内データセンターは高速・安定。低価格で初心者にもおすすめです。</p>
+        <ul class="card-features"><li>高性能VPSかえで</li><li>NVMe SSD</li><li>マネージドK8s</li><li>オブジェクトストア</li><li>自社DC</li><li>国内サポート</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">最低価格</span><span class="metric-value">732円/月</span></div>
+          <div class="metric"><span class="metric-label">データセンター</span><span class="metric-value">東京・大阪</span></div>
+          <div class="metric"><span class="metric-label">ストレージ</span><span class="metric-value">NVMe SSD</span></div>
+          <div class="metric"><span class="metric-label">サポート</span><span class="metric-value">日本語24時間</span></div>
+        </div>
+        <a href="https://vps.sakura.ad.jp" target="_blank" rel="noopener" class="card-link">vps.sakura.ad.jp を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#1e88e5,#42a5f5);color:#fff">CO</div>
+          <div class="card-header-text"><h3>ConoHa (GMO)</h3><span class="card-origin"><span class="tier tier-jp">Japan</span> 東京・大阪</span></div>
+        </div>
+        <span class="card-price free">高性能</span>
+        <p class="card-desc">GMOグループの高速VPS。専用サーバーから自社構築の仮想基盤で高いパフォーマンスを実現。WEXALでセキュリティ自動化、ConoHa WINGで高速WordPressホスティングも。サーバー増設が数秒で可能。コスパと速度を両立した国内トップクラスのVPSです。</p>
+        <ul class="card-features"><li>ネイティブSSD</li><li>専用サーバー</li><li>マネージドK8s</li><li>WordPress WING</li><li>WEXAL</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">最低価格</span><span class="metric-value">960円/月</span></div>
+          <div class="metric"><span class="metric-label">データセンター</span><span class="metric-value">東京・大阪</span></div>
+          <div class="metric"><span class="metric-label">ストレージ</span><span class="metric-value">ネイティブSSD</span></div>
+          <div class="metric"><span class="metric-label">サポート</span><span class="metric-value">日本語24時間</span></div>
+        </div>
+        <a href="https://www.conoha.jp" target="_blank" rel="noopener" class="card-link">conoha.jp を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#ff6600,#ff8533);color:#fff">XV</div>
+          <div class="card-header-text"><h3>Xserver VPS</h3><span class="card-origin"><span class="tier tier-jp">Japan</span> 大阪</span></div>
+        </div>
+        <span class="card-price paid">安定性重視</span>
+        <p class="card-desc">稼働率99.99%以上の高可用性。高性能NVMe RAID10構成でデータ保護。Xvps Control Panelで容易なサーバー管理。DDoS保護と専用IPアドレス標準搭載。日本国内の顧客満足度が高い安定運用を重視するプロバイダーです。</p>
+        <ul class="card-features"><li>稼働率99.99%</li><li>NVMe RAID10</li><li>DDoS保護</li><li>専用IP</li><li>自社パネル</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">最低価格</span><span class="metric-value">1,430円/月</span></div>
+          <div class="metric"><span class="metric-label">データセンター</span><span class="metric-value">大阪</span></div>
+          <div class="metric"><span class="metric-label">ストレージ</span><span class="metric-value">NVMe RAID10</span></div>
+          <div class="metric"><span class="metric-label">サポート</span><span class="metric-value">日本語24時間</span></div>
+        </div>
+        <a href="https://vps.xserver.ne.jp" target="_blank" rel="noopener" class="card-link">vps.xserver.ne.jp を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#ff4500,#ff6633);color:#fff">II</div>
+          <div class="card-header-text"><h3>IIJ GIO</h3><span class="card-origin"><span class="tier tier-jp">Japan</span> 東京</span></div>
+        </div>
+        <span class="card-price enterprise">エンタープライズ</span>
+        <p class="card-desc">日本初のインターネットプロバイダーIIJのエンタープライズクラウド。高セキュリティと安定性で官公庁や大企業に採用。ISO27001、SOC2対応。専門エンジニアによるきめ細やかなサポート。SLA保証付きで業務環境に最適です。</p>
+        <ul class="card-features"><li>高セキュリティ</li><li>官公庁採用</li><li>ISO27001</li><li>SOC2</li><li>SLA保証</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">最低価格</span><span class="metric-value">要見積</span></div>
+          <div class="metric"><span class="metric-label">データセンター</span><span class="metric-value">東京</span></div>
+          <div class="metric"><span class="metric-label">ストレージ</span><span class="metric-value">SSD / Enterprise</span></div>
+          <div class="metric"><span class="metric-label">サポート</span><span class="metric-value">日本語専任</span></div>
+        </div>
+        <a href="https://www.iij.ad.jp/biz/gio/" target="_blank" rel="noopener" class="card-link">iij.ad.jp を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#0277bd,#039be5);color:#fff">FC</div>
+          <div class="card-header-text"><h3>FUJITSU Hybrid IT (FJcloud)</h3><span class="card-origin"><span class="tier tier-jp">Japan</span> 東京・大阪</span></div>
+        </div>
+        <span class="card-price enterprise">エンタープライズ</span>
+        <p class="card-desc">富士通の国内エンタープライズクラウド。オンプレミスとのハイブリッド連携に強み。国内コンプライアンス対応済み。大規模システムの移行や業務基盤の構築に適したエンタープライズ向けプラットフォームです。</p>
+        <ul class="card-features"><li>ハイブリッド</li><li>国内準拠</li><li>大規模移行</li><li>富士通サポート</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">最低価格</span><span class="metric-value">要見積</span></div>
+          <div class="metric"><span class="metric-label">データセンター</span><span class="metric-value">東京・大阪</span></div>
+          <div class="metric"><span class="metric-label">ストレージ</span><span class="metric-value">Enterprise SSD</span></div>
+          <div class="metric"><span class="metric-label">サポート</span><span class="metric-value">日本語専任</span></div>
+        </div>
+        <a href="https://cloud.fujitsu.com" target="_blank" rel="noopener" class="card-link">cloud.fujitsu.com を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#e65100,#ff8c00);color:#fff">NH</div>
+          <div class="card-header-text"><h3>NIFCLOUD (NEC)</h3><span class="card-origin"><span class="tier tier-jp">Japan</span> 東京</span></div>
+        </div>
+        <span class="card-price enterprise">エンタープライズ</span>
+        <p class="card-desc">NEC系の国内クラウドプラットフォーム。ISMAP認定取得済みで官公庁向けクラウドとして適格。国内準拠の高セキュリティ環境。エンタープライズ向けのマネージドサービスと専任エンジニアによる運用支援を提供しています。</p>
+        <ul class="card-features"><li>ISMAP認定</li><li>官公庁向け</li><li>国内準拠</li><li>NECサポート</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">最低価格</span><span class="metric-value">要見積</span></div>
+          <div class="metric"><span class="metric-label">データセンター</span><span class="metric-value">東京</span></div>
+          <div class="metric"><span class="metric-label">ストレージ</span><span class="metric-value">SSD</span></div>
+          <div class="metric"><span class="metric-label">サポート</span><span class="metric-value">日本語専任</span></div>
+        </div>
+        <a href="https://cloud.nifcloud.com" target="_blank" rel="noopener" class="card-link">cloud.nifcloud.com を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== PAGE 5 : CLOUD CHINA & ASIA ===== -->
+<section id="cloud-asia" style="background:radial-gradient(ellipse at 70% 40%,rgba(240,192,64,.03) 0%,transparent 55%),var(--bg)">
+  <div class="section-inner">
+    <div class="animate-in">
+      <div class="section-label">PAGE 05</div>
+      <h2 class="section-title">Cloud Infrastructure — China & Asia</h2>
+      <p class="section-title-jp">中国・アジアのクラウド・インフラ</p>
+      <p class="section-subtitle">中国最大手のAlibaba Cloudはグローバル第3位のクラウドプロバイダーです。Huawei Cloudは新興国市場で急速に成長。データローカライゼーション要件と国内規制への対応が重要です。</p>
+    </div>
+    <div class="providers-grid">
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#ff6a00,#ff8c00);color:#fff">AC</div>
+          <div class="card-header-text"><h3>Alibaba Cloud</h3><span class="card-origin"><span class="tier tier-cn">China</span> 杭州</span></div>
+        </div>
+        <span class="card-price enterprise">エンタープライズ</span>
+        <p class="card-desc">中国最大、世界第3位のクラウドプロバイダー。ECS（コンピュート）、OSS（ストレージ）、PAI（AI/ML）、MaxCompute（ビッグデータ）。28以上のリージョンで展開し、日本にもデータセンターを持ちます。アジア太平洋地域のワークロードに対して高いコスト競争力を発揮します。</p>
+        <ul class="card-features"><li>ECS</li><li>PAI</li><li>OSS</li><li>MaxCompute</li><li>ACK</li><li>Tongyi Qianwen</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">最低価格</span><span class="metric-value">$4.50/月</span></div>
+          <div class="metric"><span class="metric-label">リージョン</span><span class="metric-value">28+</span></div>
+          <div class="metric"><span class="metric-label">ストレージ</span><span class="metric-value">ESSD PL0-PL3</span></div>
+          <div class="metric"><span class="metric-label">サポート</span><span class="metric-value">24時間（有料）</span></div>
+        </div>
+        <a href="https://www.alibabacloud.com" target="_blank" rel="noopener" class="card-link">alibabacloud.com を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#007aff,#0055cc);color:#fff">TC</div>
+          <div class="card-header-text"><h3>Tencent Cloud</h3><span class="card-origin"><span class="tier tier-cn">China</span> 深圳</span></div>
+        </div>
+        <span class="card-price paid">ミッドエンタープライズ</span>
+        <p class="card-desc">WeChat、QQのTencentエコシステムに支えられたクラウド。CVM（コンピュート）、TencentDB、COS（オブジェクトストレージ）。ゲーム、ストリーミング、ソリューションに強い。HunyuanでAIモデルも提供。21以上のリージョンで展開。</p>
+        <ul class="card-features"><li>CVM</li><li>TencentDB</li><li>COS</li><li>TKE</li><li>Hunyuan AI</li><li>WeChat SDK</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">最低価格</span><span class="metric-value">$5/月</span></div>
+          <div class="metric"><span class="metric-label">リージョン</span><span class="metric-value">21+</span></div>
+          <div class="metric"><span class="metric-label">ストレージ</span><span class="metric-value">SSD Cloud</span></div>
+          <div class="metric"><span class="metric-label">サポート</span><span class="metric-value">24時間（有料）</span></div>
+        </div>
+        <a href="https://www.tencentcloud.com" target="_blank" rel="noopener" class="card-link">tencentcloud.com を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#cf0a2c,#ff1744);color:#fff">HW</div>
+          <div class="card-header-text"><h3>Huawei Cloud</h3><span class="card-origin"><span class="tier tier-cn">China</span> 深圳</span></div>
+        </div>
+        <span class="card-price enterprise">エンタープライズ</span>
+        <p class="card-desc">通信・5Gインフラに強みを持つ急速成長のクラウド。ECS（コンピュート）、ModelArts（AI/ML）、Pangu LLM。29以上のリージョンで展開。新興国市場とアフリカで特に強く、日本にもデータセンターがあります。</p>
+        <ul class="card-features"><li>ECS</li><li>ModelArts</li><li>OBS</li><li>Pangu</li><li>CCE</li><li>IoT</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">最低価格</span><span class="metric-value">$5.50/月</span></div>
+          <div class="metric"><span class="metric-label">リージョン</span><span class="metric-value">29+</span></div>
+          <div class="metric"><span class="metric-label">ストレージ</span><span class="metric-value">SSD / Ultra</span></div>
+          <div class="metric"><span class="metric-label">サポート</span><span class="metric-value">24時間（有料）</span></div>
+        </div>
+        <a href="https://www.huaweicloud.com" target="_blank" rel="noopener" class="card-link">huaweicloud.com を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#0052d9,#3370ff);color:#fff">VE</div>
+          <div class="card-header-text"><h3>Volcengine (ByteDance)</h3><span class="card-origin"><span class="tier tier-cn">China</span> 北京</span></div>
+        </div>
+        <span class="card-price enterprise">エンタープライズ</span>
+        <p class="card-desc">ByteDance（TikTokの親会社）のクラウドプラットフォーム。数十億ユーザーを支えるインフラ技術。ECS（コンピュート）、veML（AI/ML）、Doubao AIモデル。動画、ストリーミング、レコメンドに特化したサービスを提供。急速に成長中です。</p>
+        <ul class="card-features"><li>ECS</li><li>veML</li><li>TOS</li><li>TKE</li><li>Doubao AI</li><li>Video Cloud</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">最低価格</span><span class="metric-value">要見積</span></div>
+          <div class="metric"><span class="metric-label">リージョン</span><span class="metric-value">15+</span></div>
+          <div class="metric"><span class="metric-label">ストレージ</span><span class="metric-value">NVMe SSD</span></div>
+          <div class="metric"><span class="metric-label">サポート</span><span class="metric-value">24時間中国語</span></div>
+        </div>
+        <a href="https://www.volcengine.com" target="_blank" rel="noopener" class="card-link">volcengine.com を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#6c3bf5,#8b5cf6);color:#fff">CW</div>
+          <div class="card-header-text"><h3>CoreWeave</h3><span class="card-origin"><span class="tier tier-global">Global</span> ネオクラウド</span></div>
+        </div>
+        <span class="card-price enterprise">GPU Cloud</span>
+        <p class="card-desc">高性能GPUインフラに特化したネオクラウド。NVIDIA H100/A100をオンデマンドで提供。AIモデルの大規模トレーニングと推論に最適化されたインフラ。数十億ドル規模の評価額。GPUに特化したネオクラウドは、AIワークロードの爆発的成長に対応しています。</p>
+        <ul class="card-features"><li>H100 GPU</li><li>A100 GPU</li><li>Kubernetes</li><li>推論最適化</li><li>大規模トレーニング</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">最低価格</span><span class="metric-value">GPU時間課金</span></div>
+          <div class="metric"><span class="metric-label">リージョン</span><span class="metric-value">10+（米国）</span></div>
+          <div class="metric"><span class="metric-label">GPU</span><span class="metric-value">H100 / A100</span></div>
+          <div class="metric"><span class="metric-label">サポート</span><span class="metric-value">24時間 Enterprise</span></div>
+        </div>
+        <a href="https://www.coreweave.com" target="_blank" rel="noopener" class="card-link">coreweave.com を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== PAGE 6 : AI OVERVIEW ===== -->
+<section id="ai-overview" style="background:radial-gradient(ellipse at 50% 30%,rgba(168,85,247,.03) 0%,transparent 55%),var(--bg)">
+  <div class="section-inner">
+    <div class="animate-in">
+      <div class="section-label">PAGE 06</div>
+      <h2 class="section-title">Artificial Intelligence Landscape</h2>
+      <p class="section-title-jp">AI（人工知能）の全体像</p>
+      <p class="section-subtitle">AIワークロードは計算密度を大幅に高めています。企業は高度な分析や生成AIモデルを支える弾力的なインフラを必要としており、GPUクラスターと高帯域幅ネットワークへの持続的投資を行うプロバイダーが需要の大部分を獲得しています。</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card animate-in">
+        <div class="feature-icon-wrap">
+          <svg width="26" height="26" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="8" stroke="#00e5a0" stroke-width="2"/><path d="M10 14h8M14 10v8" stroke="#00e5a0" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="8" r="2" fill="#00e5a0" opacity=".5"/><circle cx="20" cy="8" r="2" fill="#00e5a0" opacity=".5"/><circle cx="8" cy="20" r="2" fill="#00e5a0" opacity=".5"/><circle cx="20" cy="20" r="2" fill="#00e5a0" opacity=".5"/></svg>
+        </div>
+        <h3>基盤モデル（LLM）</h3>
+        <p>大量のコーパスでトレーニングされた大規模言語モデル。GPT-4o、Claude 4、Gemini 2、Llama 4、DeepSeek V3など。テキスト生成、コード生成、画像分析、複雑な推論を実行できます。</p>
+      </div>
+      <div class="feature-card animate-in">
+        <div class="feature-icon-wrap">
+          <svg width="26" height="26" viewBox="0 0 28 28" fill="none"><rect x="4" y="4" width="20" height="20" rx="4" stroke="#00bfff" stroke-width="2"/><path d="M9 10h10M9 14h7M9 18h10" stroke="#00bfff" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h3>画像生成AI</h3>
+        <p>テキストからの画像生成。Midjourney、DALL-E 3、Stable Diffusion 3、Ideogram、Flux。デザイン、広告、ビジュアルコンテンツ制作で急速に普及しています。</p>
+      </div>
+      <div class="feature-card animate-in">
+        <div class="feature-icon-wrap">
+          <svg width="26" height="26" viewBox="0 0 28 28" fill="none"><path d="M6 22L14 6l8 16" stroke="#f0c040" stroke-width="2" stroke-linejoin="round"/><path d="M9 16h10" stroke="#f0c040" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <h3>コーディングAI</h3>
+        <p>コード生成・レビュー・デバッグを支援するAI。GitHub Copilot、Cursor、Windsurf、Claude Code。反復的なタスクで開発者の生産性を40〜60%向上させます。</p>
+      </div>
+      <div class="feature-card animate-in">
+        <div class="feature-icon-wrap">
+          <svg width="26" height="26" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="10" r="5" stroke="#a855f7" stroke-width="2"/><path d="M8 22c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="#a855f7" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <h3>AIエージェント</h3>
+        <p>マルチステップタスクを自律的に実行するシステム。OpenClaw、Hermes Agent、AutoGPT、CrewAI。Web操作、ツール利用、自律的な意思決定が可能です。</p>
+      </div>
+      <div class="feature-card animate-in">
+        <div class="feature-icon-wrap">
+          <svg width="26" height="26" viewBox="0 0 28 28" fill="none"><path d="M7 7l7 7-7 7" stroke="#f472b6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 7l-3 7 3 7" stroke="#f472b6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>EmbeddingsとRAG</h3>
+        <p>Retrieval-Augmented GenerationはLLMと外部知識ベースを組み合わせます。ベクトルEmbeddingsによる意味検索で、エンタープライズチャットボットやレコメンドシステムに不可欠です。</p>
+      </div>
+      <div class="feature-card animate-in">
+        <div class="feature-icon-wrap">
+          <svg width="26" height="26" viewBox="0 0 28 28" fill="none"><rect x="5" y="8" width="18" height="12" rx="2" stroke="#00e5a0" stroke-width="2"/><path d="M9 14l3 3 5-6" stroke="#00e5a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>クラウドAIサービス</h3>
+        <p>クラウドプラットフォームがAI as a Serviceを提供: AWS Bedrock、Azure OpenAI、Google Vertex AI。基盤モデルとマネージドインフラ、監視、自動スケーリングを統合。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== PAGE 7 : AI INTERNATIONAL ===== -->
+<section id="ai-intl" style="background:radial-gradient(ellipse at 60% 50%,rgba(0,191,255,.03) 0%,transparent 55%),var(--bg)">
+  <div class="section-inner">
+    <div class="animate-in">
+      <div class="section-label">PAGE 07</div>
+      <h2 class="section-title">International AI Providers</h2>
+      <p class="section-title-jp">海外AIプロバイダー</p>
+      <p class="section-subtitle">世界最大級のAIラボとプラットフォームを技術的な観点から比較。基盤モデルから推論API、コンテンツ生成ツールまで網羅的に解説します。</p>
+    </div>
+    <div class="providers-grid">
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#1a1a2e,#2d2d44);color:#10a37f">OA</div>
+          <div class="card-header-text"><h3>OpenAI</h3><span class="card-origin"><span class="tier tier-global">Global</span> 米国 2015年</span></div>
+        </div>
+        <span class="card-price paid">API + ChatGPT</span>
+        <p class="card-desc">ChatGPTとGPT-4oの開発元。GPT-4o（マルチモーダル）、o1（推論）、o3（高度推論）、DALL-E 3（画像）、Sora（動画）を擁する基盤モデルのリーダー。Azure OpenAI経由でSLA付きの企業アクセスも提供。最も成熟した開発者エコシステムです。</p>
+        <ul class="card-features"><li>GPT-4o</li><li>o1 / o3</li><li>DALL-E 3</li><li>Sora</li><li>Whisper</li><li>Embeddings</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">トップモデル</span><span class="metric-value">GPT-4o / o3</span></div>
+          <div class="metric"><span class="metric-label">API価格</span><span class="metric-value">従量課金</span></div>
+          <div class="metric"><span class="metric-label">コンテキスト</span><span class="metric-value">128Kトークン</span></div>
+          <div class="metric"><span class="metric-label">モダリティ</span><span class="metric-value">テキスト/画像/音声/動画</span></div>
+        </div>
+        <a href="https://platform.openai.com" target="_blank" rel="noopener" class="card-link">platform.openai.com を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#d4a574,#c4956a);color:#1a1a2e">AN</div>
+          <div class="card-header-text"><h3>Anthropic</h3><span class="card-origin"><span class="tier tier-global">Global</span> 米国 2021年</span></div>
+        </div>
+        <span class="card-price paid">API + Claude</span>
+        <p class="card-desc">安全性と有用性に焦点を当てたClaudeファミリーの開発元。Claude 4 Opus（高度推論）、Sonnet（バランス型）、Haiku（高速）。Claude Codeによるコーディング支援。Constitutional AIによる安全性フレームワーク。精度と信頼性が求められるタスクに最適です。</p>
+        <ul class="card-features"><li>Claude 4 Opus</li><li>Sonnet</li><li>Haiku</li><li>Claude Code</li><li>200Kコンテキスト</li><li>Computer Use</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">トップモデル</span><span class="metric-value">Claude 4 Opus</span></div>
+          <div class="metric"><span class="metric-label">API価格</span><span class="metric-value">従量課金</span></div>
+          <div class="metric"><span class="metric-label">コンテキスト</span><span class="metric-value">200Kトークン</span></div>
+          <div class="metric"><span class="metric-label">モダリティ</span><span class="metric-value">テキスト/画像/コード</span></div>
+        </div>
+        <a href="https://console.anthropic.com" target="_blank" rel="noopener" class="card-link">console.anthropic.com を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#4285f4,#ea4335);color:#fff">GA</div>
+          <div class="card-header-text"><h3>Google AI (Gemini)</h3><span class="card-origin"><span class="tier tier-global">Global</span> 米国</span></div>
+        </div>
+        <span class="card-price free">無料枠あり</span>
+        <p class="card-desc">Gemini 2.0はGoogleの最も先進的なマルチモーダルモデル。テキスト、画像、音声、動画のネイティブマルチモーダル対応。Vertex AIでマネージドML、カスタムTPUでトレーニング。Google AI Studioで迅速なプロトタイピング。開発者向けに無料枠を提供しています。</p>
+        <ul class="card-features"><li>Gemini 2.0</li><li>Vertex AI</li><li>AI Studio</li><li>TPU</li><li>Gemma (OSS)</li><li>Imagen</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">トップモデル</span><span class="metric-value">Gemini 2.0 Ultra</span></div>
+          <div class="metric"><span class="metric-label">API価格</span><span class="metric-value">無料 + 有料</span></div>
+          <div class="metric"><span class="metric-label">コンテキスト</span><span class="metric-value">2Mトークン</span></div>
+          <div class="metric"><span class="metric-label">モダリティ</span><span class="metric-value">ネイティブマルチモーダル</span></div>
+        </div>
+        <a href="https://ai.google.dev" target="_blank" rel="noopener" class="card-link">ai.google.dev を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#0668e1,#0080ff);color:#fff">MA</div>
+          <div class="card-header-text"><h3>Meta AI (Llama)</h3><span class="card-origin"><span class="tier tier-global">Global</span> 米国</span></div>
+        </div>
+        <span class="card-price free">オープンソース</span>
+        <p class="card-desc">Llama 4（Scout・Maverick）— 最新世代のオープンソースモデル。ダウンロードとオンプレミス利用が可能。Llama Stackで容易なデプロイ。先進的なAIへのアクセスを民主化することを目指しています。セルフホストモデルが必要な企業に最適です。</p>
+        <ul class="card-features"><li>Llama 4 Scout</li><li>Llama 4 Maverick</li><li>オープンソース</li><li>Llama Stack</li><li>セルフホスト</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">トップモデル</span><span class="metric-value">Llama 4 Maverick</span></div>
+          <div class="metric"><span class="metric-label">価格</span><span class="metric-value">無料（OSS）</span></div>
+          <div class="metric"><span class="metric-label">コンテキスト</span><span class="metric-value">128Kトークン</span></div>
+          <div class="metric"><span class="metric-label">モダリティ</span><span class="metric-value">テキスト/画像</span></div>
+        </div>
+        <a href="https://llama.meta.com" target="_blank" rel="noopener" class="card-link">llama.meta.com を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#ff7000,#ff9500);color:#fff">MI</div>
+          <div class="card-header-text"><h3>Mistral AI</h3><span class="card-origin"><span class="tier tier-eu">Europe</span> フランス 2023年</span></div>
+        </div>
+        <span class="card-price free">API + Open Weight</span>
+        <p class="card-desc">高パフォーマンスのオープンウェイトモデルを提供する欧州スタートアップ。Mistral Large 2、Mixtral 8x22B、Codestral。Le PlatformeでAPIとファインチューニングを提供。効率性と速度に焦点。欧州AI規制への準拠にも強みを持ちます。</p>
+        <ul class="card-features"><li>Mistral Large 2</li><li>Mixtral</li><li>Codestral</li><li>Pixtral</li><li>Le Chat</li><li>Open Weight</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">トップモデル</span><span class="metric-value">Mistral Large 2</span></div>
+          <div class="metric"><span class="metric-label">API価格</span><span class="metric-value">従量課金</span></div>
+          <div class="metric"><span class="metric-label">コンテキスト</span><span class="metric-value">128Kトークン</span></div>
+          <div class="metric"><span class="metric-label">モダリティ</span><span class="metric-value">テキスト/コード/画像</span></div>
+        </div>
+        <a href="https://console.mistral.ai" target="_blank" rel="noopener" class="card-link">console.mistral.ai を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#f97316,#ea580c);color:#fff">GQ</div>
+          <div class="card-header-text"><h3>Groq</h3><span class="card-origin"><span class="tier tier-global">Global</span> 米国 2016年</span></div>
+        </div>
+        <span class="card-price free">無料枠あり</span>
+        <p class="card-desc">独自のLPU（Language Processing Unit）による業界最速のLLM推論。超低レイテンシーでLlamaやMixtralなどのオープンソースモデルを実行。リアルタイム応答が必要なアプリケーションに最適。無料枠でテスト可能です。</p>
+        <ul class="card-features"><li>LPU独自チップ</li><li>超高速推論</li><li>オープンモデル</li><li>低レイテンシー</li><li>無料枠</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">速度</span><span class="metric-value">500+ tokens/sec</span></div>
+          <div class="metric"><span class="metric-label">API価格</span><span class="metric-value">無料 + 有料</span></div>
+          <div class="metric"><span class="metric-label">ハードウェア</span><span class="metric-value">LPUカスタム</span></div>
+          <div class="metric"><span class="metric-label">強み</span><span class="metric-value">速度</span></div>
+        </div>
+        <a href="https://groq.com" target="_blank" rel="noopener" class="card-link">groq.com を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#1a1a2e,#2a2a4e);color:#c4b5fd">MJ</div>
+          <div class="card-header-text"><h3>Midjourney</h3><span class="card-origin"><span class="tier tier-global">Global</span> 米国 2022年</span></div>
+        </div>
+        <span class="card-price paid">サブスクリプション</span>
+        <p class="card-desc">卓越したアーティスティック品質の画像生成プラットフォーム。V6.1で印象的なフォトリアリズムを実現。DiscordとWebアプリで利用可能。デザイン、建築、広告、コンセプトアートでプロフェッショナルに使用。数百万人のアクティブユーザーを擁するコミュニティ。</p>
+        <ul class="card-features"><li>V6.1</li><li>フォトリアリズム</li><li>Discord Bot</li><li>Web App</li><li>スタイルチューニング</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">価格</span><span class="metric-value">$10/月（ベーシック）</span></div>
+          <div class="metric"><span class="metric-label">解像度</span><span class="metric-value">最大2048x2048</span></div>
+          <div class="metric"><span class="metric-label">スタイル</span><span class="metric-value">無制限</span></div>
+          <div class="metric"><span class="metric-label">強み</span><span class="metric-value">アーティスティック品質</span></div>
+        </div>
+        <a href="https://www.midjourney.com" target="_blank" rel="noopener" class="card-link">midjourney.com を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== PAGE 8 : AI CHINA & JAPAN ===== -->
+<section id="ai-asia" style="background:radial-gradient(ellipse at 40% 60%,rgba(0,229,160,.03) 0%,transparent 55%),var(--bg)">
+  <div class="section-inner">
+    <div class="animate-in">
+      <div class="section-label">PAGE 08</div>
+      <h2 class="section-title">AI Providers — China, Japan & Emerging</h2>
+      <p class="section-title-jp">中国・日本・新興AIプロバイダー</p>
+      <p class="section-subtitle">中国ではDeepSeek、Qwen、ErnieがAI大国として台頭。日本でも日本語特化型のLLM開発が活発化しています。AI/MLのエンタープライズプラットフォームへの統合が加速しています。</p>
+    </div>
+    <div class="providers-grid">
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#0066ff,#0044cc);color:#fff">DS</div>
+          <div class="card-header-text"><h3>DeepSeek</h3><span class="card-origin"><span class="tier tier-cn">China</span> 杭州 2023年</span></div>
+        </div>
+        <span class="card-price free">OSS + API</span>
+        <p class="card-desc">DeepSeek V3とR1 — GPT-4oに匹敵する性能をトレーニングコストの一部で実現し、業界を驚かせたモデル。DeepSeek Coderでコーディング、R1で高度な推論（Chain-of-Thought）。MITライセンスのオープンソース。API価格は競合の大幅下回る水準です。</p>
+        <ul class="card-features"><li>DeepSeek V3</li><li>R1（推論）</li><li>Coder V2</li><li>オープンソース</li><li>低価格API</li><li>128Kコンテキスト</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">トップモデル</span><span class="metric-value">DeepSeek V3 / R1</span></div>
+          <div class="metric"><span class="metric-label">API価格</span><span class="metric-value">非常に安い</span></div>
+          <div class="metric"><span class="metric-label">コンテキスト</span><span class="metric-value">128Kトークン</span></div>
+          <div class="metric"><span class="metric-label">強み</span><span class="metric-value">コストパフォーマンス</span></div>
+        </div>
+        <a href="https://platform.deepseek.com" target="_blank" rel="noopener" class="card-link">platform.deepseek.com を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#ff6a00,#ff8c00);color:#fff">QW</div>
+          <div class="card-header-text"><h3>Qwen（Alibaba）</h3><span class="card-origin"><span class="tier tier-cn">China</span> Alibaba</span></div>
+        </div>
+        <span class="card-price free">OSS + API</span>
+        <p class="card-desc">Qwen 2.5 — 0.5Bから72Bパラメータのオープンソースモデルファミリー。Qwen-VL（ビジョン）、Qwen-Audio（音声処理）、CodeQwen（コーディング）。Alibaba Cloud経由または直接ダウンロードで利用可能。日本語を含む多言語処理に優れています。</p>
+        <ul class="card-features"><li>Qwen 2.5</li><li>Qwen-VL</li><li>Qwen-Audio</li><li>CodeQwen</li><li>オープンソース</li><li>多言語対応</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">トップモデル</span><span class="metric-value">Qwen 2.5 72B</span></div>
+          <div class="metric"><span class="metric-label">API価格</span><span class="metric-value">無料（DashScope）</span></div>
+          <div class="metric"><span class="metric-label">コンテキスト</span><span class="metric-value">128Kトークン</span></div>
+          <div class="metric"><span class="metric-label">強み</span><span class="metric-value">多言語処理</span></div>
+        </div>
+        <a href="https://qwen.ai" target="_blank" rel="noopener" class="card-link">qwen.ai を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#2932e1,#4a5aff);color:#fff">ER</div>
+          <div class="card-header-text"><h3>ERNIE Bot（Baidu）</h3><span class="card-origin"><span class="tier tier-cn">China</span> 北京</span></div>
+        </div>
+        <span class="card-price paid">API</span>
+        <p class="card-desc">ERNIE 4.5 — Baiduの基盤モデルで中国語に特化。Baiduエコシステム（検索、マップ、クラウド）と統合。PaddlePaddleフレームワークをオープンソースで提供。中国の文化的文脈の理解に強い。Baidu AI Cloud経由で利用可能です。</p>
+        <ul class="card-features"><li>ERNIE 4.5</li><li>PaddlePaddle</li><li>Baidu Cloud</li><li>中国語NLP</li><li>Bot Builder</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">トップモデル</span><span class="metric-value">ERNIE 4.5</span></div>
+          <div class="metric"><span class="metric-label">API価格</span><span class="metric-value">従量課金</span></div>
+          <div class="metric"><span class="metric-label">コンテキスト</span><span class="metric-value">128Kトークン</span></div>
+          <div class="metric"><span class="metric-label">強み</span><span class="metric-value">中国語NLP</span></div>
+        </div>
+        <a href="https://yiyan.baidu.com" target="_blank" rel="noopener" class="card-link">yiyan.baidu.com を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#0052d9,#3370ff);color:#fff">DB</div>
+          <div class="card-header-text"><h3>Doubao（ByteDance）</h3><span class="card-origin"><span class="tier tier-cn">China</span> 北京</span></div>
+        </div>
+        <span class="card-price paid">API</span>
+        <p class="card-desc">ByteDance（TikTok）のAIモデル群。Doubao Proはマルチモーダル対応。Volcengineと統合して本番環境にデプロイ可能。コンテンツ生成とレコメンドに強い。動画・ストリーミング向けに最適化されたモデルを提供しています。</p>
+        <ul class="card-features"><li>Doubao Pro</li><li>Volcengine</li><li>Video AI</li><li>レコメンド</li><li>マルチモーダル</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">トップモデル</span><span class="metric-value">Doubao Pro</span></div>
+          <div class="metric"><span class="metric-label">API価格</span><span class="metric-value">従量課金</span></div>
+          <div class="metric"><span class="metric-label">コンテキスト</span><span class="metric-value">128Kトークン</span></div>
+          <div class="metric"><span class="metric-label">強み</span><span class="metric-value">動画/ストリーミング</span></div>
+        </div>
+        <a href="https://www.volcengine.com/product/doubao" target="_blank" rel="noopener" class="card-link">volcengine.com/doubao を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#1a1a2e,#2d2d44);color:#a78bfa">SA</div>
+          <div class="card-header-text"><h3>Stability AI</h3><span class="card-origin"><span class="tier tier-eu">Europe</span> 英国 2020年</span></div>
+        </div>
+        <span class="card-price free">オープンソース</span>
+        <p class="card-desc">Stable Diffusion 3.5とSDXLによるオープンソース画像生成。Stable Video（動画生成）、Stable Audio（音声生成）。モデルはダウンロードとローカルファインチューニングが可能。非常にアクティブなコミュニティ。SD3.5で画像内のテキスト品質が大幅に向上しました。</p>
+        <ul class="card-features"><li>SD 3.5</li><li>SDXL</li><li>Stable Video</li><li>Stable Audio</li><li>オープンソース</li><li>API</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">トップモデル</span><span class="metric-value">SD 3.5 Large</span></div>
+          <div class="metric"><span class="metric-label">価格</span><span class="metric-value">無料（OSS）</span></div>
+          <div class="metric"><span class="metric-label">解像度</span><span class="metric-value">最大4096px</span></div>
+          <div class="metric"><span class="metric-label">強み</span><span class="metric-value">OSS画像生成</span></div>
+        </div>
+        <a href="https://stability.ai" target="_blank" rel="noopener" class="card-link">stability.ai を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+      <div class="provider-card animate-in">
+        <div class="card-header">
+          <div class="provider-icon" style="background:linear-gradient(135deg,#e65100,#ff8c00);color:#fff">RK</div>
+          <div class="card-header-text"><h3>Rinna</h3><span class="card-origin"><span class="tier tier-jp">Japan</span> 東京</span></div>
+        </div>
+        <span class="card-price free">オープンソース</span>
+        <p class="card-desc">日本語に特化したLLM開発を行うスタートアップ。日本語のニュアンスや文化的文脈を深く理解するモデルを開発。日本語特化型の大規模言語モデルで、日本語の自然な対話や創作タスクに優れています。研究コミュニティへの貢献も積極的です。</p>
+        <ul class="card-features"><li>日本語特化LLM</li><li>オープンソース</li><li>日本語対話</li><li>創作支援</li></ul>
+        <div class="card-metrics">
+          <div class="metric"><span class="metric-label">トップモデル</span><span class="metric-value">Rinna 4</span></div>
+          <div class="metric"><span class="metric-label">価格</span><span class="metric-value">無料（OSS）</span></div>
+          <div class="metric"><span class="metric-label">強み</span><span class="metric-value">日本語ネイティブ</span></div>
+          <div class="metric"><span class="metric-label">データ</span><span class="metric-value">日本語特化</span></div>
+        </div>
+        <a href="https://rinna.co.jp" target="_blank" rel="noopener" class="card-link">rinna.co.jp を開く <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== PAGE 9 : COMPARISON ===== -->
+<section id="comparison" style="background:var(--bg)">
+  <div class="section-inner">
+    <div class="animate-in">
+      <div class="section-label">PAGE 09</div>
+      <h2 class="section-title">Comparison Tables</h2>
+      <p class="section-title-jp">プロバイダー比較表</p>
+      <p class="section-subtitle">主要VPS・クラウドプロバイダーを価格、リージョン、ディスクタイプの観点から比較。パブリッククラウド市場はハイパースケーラーに集中していますが、地域プロバイダーが強化されています。</p>
+    </div>
+    <div class="comparison-wrap animate-in">
+      <table class="comparison-table">
+        <thead><tr><th>プロバイダー</th><th>地域</th><th>最低価格</th><th>ディスク</th><th>日本DC</th><th>日本語サポート</th></tr></thead>
+        <tbody>
+          <tr><td><div class="table-provider"><div class="table-icon" style="background:#232f3e;color:#ff9900">AWS</div>AWS</div></td><td>グローバル</td><td>$3.50/月</td><td>NVMe/EBS</td><td class="check">東京・大阪</td><td class="check">有料</td></tr>
+          <tr><td><div class="table-provider"><div class="table-icon" style="background:#0078d4;color:#fff">Az</div>Azure</div></td><td>グローバル</td><td>$3.80/月</td><td>Premium SSD</td><td class="check">東京</td><td class="check">有料</td></tr>
+          <tr><td><div class="table-provider"><div class="table-icon" style="background:#4285f4;color:#fff">GC</div>Google Cloud</div></td><td>グローバル</td><td>$5.86/月</td><td>永続SSD</td><td class="check">東京・大阪</td><td class="check">有料</td></tr>
+          <tr><td><div class="table-provider"><div class="table-icon" style="background:#f472b6;color:#fff">SA</div>さくら</div></td><td>日本</td><td>732円/月</td><td>NVMe</td><td class="check">東京・大阪</td><td class="check">日本語24h</td></tr>
+          <tr><td><div class="table-provider"><div class="table-icon" style="background:#1e88e5;color:#fff">CO</div>ConoHa</div></td><td>日本</td><td>960円/月</td><td>ネイティブSSD</td><td class="check">東京・大阪</td><td class="check">日本語24h</td></tr>
+          <tr><td><div class="table-provider"><div class="table-icon" style="background:#ff6a00;color:#fff">AC</div>Alibaba Cloud</div></td><td>中国/Global</td><td>$4.50/月</td><td>ESSD</td><td class="check">東京</td><td class="check">有料</td></tr>
+          <tr><td><div class="table-provider"><div class="table-icon" style="background:#d50c2d;color:#fff">HZ</div>Hetzner</div></td><td>EU</td><td>EUR 3.29/月</td><td>NVMe</td><td class="cross">-</td><td class="cross">英独語</td></tr>
+          <tr><td><div class="table-provider"><div class="table-icon" style="background:#6b21a8;color:#fff">CB</div>Contabo</div></td><td>EU/Global</td><td>EUR 4.99/月</td><td>NVMe</td><td class="check">東京</td><td class="cross">英独語</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="height:3rem"></div>
+
+    <div class="animate-in">
+      <h3 style="font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--text);margin-bottom:1.5rem">AIプロバイダー比較表</h3>
+    </div>
+    <div class="comparison-wrap animate-in">
+      <table class="comparison-table">
+        <thead><tr><th>プロバイダー</th><th>出身</th><th>トップモデル</th><th>API価格</th><th>コンテキスト</th><th>OSS</th><th>マルチモーダル</th></tr></thead>
+        <tbody>
+          <tr><td><div class="table-provider"><div class="table-icon" style="background:#1a1a2e;color:#10a37f">OA</div>OpenAI</div></td><td>米国</td><td>GPT-4o / o3</td><td>$2.50/1M出力</td><td>128K</td><td class="cross">-</td><td class="check">全モダリティ</td></tr>
+          <tr><td><div class="table-provider"><div class="table-icon" style="background:#d4a574;color:#1a1a2e">AN</div>Anthropic</div></td><td>米国</td><td>Claude 4 Opus</td><td>$15/1M出力</td><td>200K</td><td class="cross">-</td><td class="check">テキスト/画像</td></tr>
+          <tr><td><div class="table-provider"><div class="table-icon" style="background:#4285f4;color:#fff">GA</div>Google AI</div></td><td>米国</td><td>Gemini 2.0 Ultra</td><td>無料枠あり</td><td>2M</td><td class="check">Gemma</td><td class="check">ネイティブ</td></tr>
+          <tr><td><div class="table-provider"><div class="table-icon" style="background:#0668e1;color:#fff">MA</div>Meta AI</div></td><td>米国</td><td>Llama 4 Maverick</td><td>無料</td><td>128K</td><td class="check">Llama 4</td><td class="check">テキスト/画像</td></tr>
+          <tr><td><div class="table-provider"><div class="table-icon" style="background:#0066ff;color:#fff">DS</div>DeepSeek</div></td><td>中国</td><td>V3 / R1</td><td>非常に安い</td><td>128K</td><td class="check">MIT</td><td class="check">テキスト/コード</td></tr>
+          <tr><td><div class="table-provider"><div class="table-icon" style="background:#ff6a00;color:#fff">QW</div>Qwen</div></td><td>中国</td><td>Qwen 2.5 72B</td><td>無料(DashScope)</td><td>128K</td><td class="check">Apache 2</td><td class="check">VL/Audio</td></tr>
+          <tr><td><div class="table-provider"><div class="table-icon" style="background:#e65100;color:#fff">RK</div>Rinna</div></td><td>日本</td><td>Rinna 4</td><td>OSS</td><td>8K</td><td class="check">OSS</td><td class="cross">テキスト</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== PAGE 10 : GUIDE ===== -->
+<section id="guide" style="background:radial-gradient(ellipse at 70% 40%,rgba(240,192,64,.025) 0%,transparent 55%),var(--bg)">
+  <div class="section-inner">
+    <div class="animate-in">
+      <div class="section-label">PAGE 10</div>
+      <h2 class="section-title">Getting Started Guide</h2>
+      <p class="section-title-jp">VPSとAI環境の構築ガイド</p>
+      <p class="section-subtitle">Docker、Traefik、AIエージェントでVPSを構築するステップバイステップガイド。独自のAIサービス、自動化ツール、Webアプリケーションを自社インフラで運用するための実践的な手順を解説します。</p>
+    </div>
+    <div class="guide-steps">
+      <div class="guide-step animate-in">
+        <span class="step-number">01</span>
+        <h3>プロバイダーを選ぶ</h3>
+        <p>ユースケースを明確化: 日本国内のデータセンターと日本語サポートが必要ならさくらインターネットやConoHa。海外でコスパ重視ならHetznerやContabo。包括的なエコシステムならAWS、Azure、GCP。GPUが必要ならVultrやCoreWeave。</p>
+      </div>
+      <div class="guide-step animate-in">
+        <span class="step-number">02</span>
+        <h3>サーバーに接続する</h3>
+        <p>VPSをプロビジョニングしたら<code>ssh root@your-ip</code>で接続。必ず独自のユーザーを作成し、root直接ログインは禁止。SSHキーを設定し、パスワードログインを無効化します。</p>
+      </div>
+      <div class="guide-step animate-in">
+        <span class="step-number">03</span>
+        <h3>セキュリティ強化</h3>
+        <p>ファイアウォール（UFW）、fail2ban、自動アップデート、タイムゾーンとホスト名を設定。セキュリティ強化スクリプトやClaude Codeで自動化できます。Ubuntu 24.04とClaudeがプリインストールされたテンプレートも利用可能です。</p>
+      </div>
+      <div class="guide-step animate-in">
+        <span class="step-number">04</span>
+        <h3>Dockerのインストール</h3>
+        <p><code>curl -fsSL https://get.docker.com | sh</code>でDockerとDocker Composeをインストール。Docker CLI、Compose、Portainerでコンテナを管理・監視。コンテナ数はVPSのリソースに応じて調整します。</p>
+      </div>
+      <div class="guide-step animate-in">
+        <span class="step-number">05</span>
+        <h3>Traefikの設定</h3>
+        <p>Let's Encryptによる自動TLS対応のリバースプロキシ。DNSワイルドカード（<code>*.yourdomain.com</code>）をサーバーのIPに設定。<code>n8n.yourdomain.com</code>や<code>chat.yourdomain.com</code>のようなサブドメイン作成が容易になります。</p>
+      </div>
+      <div class="guide-step animate-in">
+        <span class="step-number">06</span>
+        <h3>サービスのデプロイ</h3>
+        <p>Docker Composeでデプロイ。推奨: n8n（自動化）、Evolution API（WhatsApp）、Chatwoot（カスタマーサポート）、Typebot（チャットボット）、NextCloud（ストレージ）、Grafana（監視）、PostgreSQL、Redis。</p>
+      </div>
+      <div class="guide-step animate-in">
+        <span class="step-number">07</span>
+        <h3>AIの接続</h3>
+        <p><code>claude --remote-control</code>でtmuxによる長時間実行スレッドを管理。Claude Desktop、Web、Mobile間で同期。本番環境ではOpenAI、Claude、DeepSeekなどのAPIを環境変数でサービスに接続します。</p>
+      </div>
+      <div class="guide-step animate-in">
+        <span class="step-number">08</span>
+        <h3>監視と最適化</h3>
+        <p>Grafana + PrometheusでCPU、メモリ、ディスク、ネットワークを監視。Reserved Instancesやスポットでコスト最適化。予測可能なワークロードではパブリッククラウドが割高になる場合もあります。TCO（総所有コスト）を正確に評価しましょう。</p>
+      </div>
+      <div class="guide-step animate-in">
+        <span class="step-number">09</span>
+        <h3>バックアップとコンプライアンス</h3>
+        <p>別のストレージに自動バックアップを設定。日本国内のデータを扱う場合、個人情報保護法への準拠が必須。金融や医療などの規制業界では特に重要です。ISMAP認定のクラウドを選択するのも一つの方法です。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <svg width="20" height="20" viewBox="0 0 28 28" fill="none" style="vertical-align:middle;margin-right:.4rem"><rect x="2" y="2" width="24" height="24" rx="6" stroke="#00e5a0" stroke-width="2"/><path d="M8 14h12M14 8v12" stroke="#00e5a0" stroke-width="2" stroke-linecap="round"/><circle cx="8" cy="8" r="2" fill="#00bfff"/><circle cx="20" cy="20" r="2" fill="#f0c040"/></svg>
+          AI-VPS
+        </div>
+        <p class="footer-brand-desc">VPS、パブリッククラウド、AIサービスを徹底比較・推薦する総合ガイド。国内外の主要プロバイダーを技術的な観点から網羅的に解説します。</p>
+      </div>
+      <div class="footer-col">
+        <h4>ナビゲーション</h4>
+        <ul>
+          <li><a href="#cloud-overview">クラウド概観</a></li>
+          <li><a href="#vps-intl">海外VPS</a></li>
+          <li><a href="#vps-jp">国内VPS</a></li>
+          <li><a href="#cloud-asia">中国・アジア</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>人工知能</h4>
+        <ul>
+          <li><a href="#ai-overview">AI概観</a></li>
+          <li><a href="#ai-intl">海外AI</a></li>
+          <li><a href="#ai-asia">中国・日本AI</a></li>
+          <li><a href="#comparison">比較表</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>リソース</h4>
+        <ul>
+          <li><a href="#guide">導入ガイド</a></li>
+          <li><a href="#comparison">比較表</a></li>
+          <li><a href="https://github.com/ai-vps" target="_blank" rel="noopener">GitHub</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>ai-vps.github.io — 2026年7月</span>
+      <span>公開情報に基づくデータ。価格は変動する場合があります。</span>
+    </div>
+  </div>
+</footer>
+
+<!-- BACK TO TOP -->
+<button class="back-top" id="backTop" aria-label="ページトップへ戻る">
+  <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<script>
+const navbar=document.getElementById('navbar');
+const backTop=document.getElementById('backTop');
+const navLinks=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  navbar.classList.toggle('scrolled',window.scrollY>50);
+  backTop.classList.toggle('visible',window.scrollY>600);
+  let current='';
+  document.querySelectorAll('section[id]').forEach(s=>{
+    if(window.scrollY>=s.offsetTop-200)current=s.id;
+  });
+  navLinks.forEach(a=>{
+    a.classList.toggle('active',a.getAttribute('href')==='#'+current);
+  });
+});
+backTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+document.getElementById('menuToggle').addEventListener('click',()=>{
+  const nl=document.getElementById('navLinks');
+  if(nl.style.display==='flex'){nl.style.display='none';return}
+  nl.style.display='flex';nl.style.position='absolute';nl.style.top='62px';nl.style.right='1rem';
+  nl.style.background='rgba(7,11,20,.95)';nl.style.flexDirection='column';nl.style.padding='1rem 1.5rem';
+  nl.style.borderRadius='14px';nl.style.border='1px solid rgba(255,255,255,.08)';nl.style.gap='.7rem';
+  nl.style.backdropFilter='blur(20px)';
+});
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})
+},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.animate-in').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
