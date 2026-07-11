@@ -1,0 +1,1280 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-VPS - Portail de Ressources IA et VPS | ai-vps.github.io</title>
+<meta name="description" content="Guide complet des ressources d'infrastructure IA et VPS pour les developpeurs et entreprises.">
+<link rel="canonical" href="https://ai-vps.github.io/">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Microsoft YaHei","Helvetica Neue",Arial,sans-serif;background:#f5f6f7;color:#333;font-size:14px;line-height:1.5}
+a{color:#1a0dab;text-decoration:none}
+a:hover{color:#d4380d;text-decoration:underline}
+img{border:0}
+ul,ol{list-style:none}
+
+/* ========== TOP BAR ========== */
+.topbar{background:#f8f8f8;border-bottom:1px solid #e0e0e0;font-size:12px;color:#666}
+.topbar-inner{max-width:1200px;margin:0 auto;padding:4px 10px;display:flex;justify-content:space-between;align-items:center}
+.topbar a{color:#666;font-size:12px;margin:0 6px}
+.topbar a:hover{color:#d4380d}
+.topbar .topbar-right{display:flex;align-items:center;gap:6px}
+.topbar .sep{color:#ccc;margin:0 2px}
+
+/* ========== HEADER / SEARCH ========== */
+.header{background:#fff;border-bottom:2px solid #2b6cb0}
+.header-inner{max-width:1200px;margin:0 auto;padding:12px 10px;display:flex;align-items:center;gap:30px}
+.logo{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.logo-icon{width:42px;height:42px;background:#2b6cb0;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;font-weight:700}
+.logo-text{font-size:22px;font-weight:700;color:#2b6cb0;letter-spacing:-1px}
+.logo-sub{font-size:11px;color:#888;display:block}
+.search-box{flex:1;max-width:560px;display:flex;height:36px}
+.search-box input{flex:1;border:2px solid #2b6cb0;border-right:none;padding:0 12px;font-size:14px;outline:none;border-radius:4px 0 0 4px}
+.search-box input:focus{border-color:#d4380d}
+.search-box button{background:#2b6cb0;color:#fff;border:none;padding:0 20px;font-size:14px;cursor:pointer;border-radius:0 4px 4px 0;font-weight:700}
+.search-box button:hover{background:#1a4f8b}
+.header-links{display:flex;gap:12px;font-size:12px;flex-shrink:0}
+.header-links a{color:#333;padding:3px 8px;border-radius:3px}
+.header-links a:hover{background:#eee;text-decoration:none}
+
+/* ========== NAV BAR ========== */
+.main-nav{background:#2b6cb0}
+.main-nav-inner{max-width:1200px;margin:0 auto;display:flex}
+.main-nav a{color:#fff;padding:8px 18px;font-size:14px;display:block;font-weight:500}
+.main-nav a:hover{background:#1a4f8b;text-decoration:none}
+.main-nav a.active{background:#1a4f8b}
+
+/* ========== QUICK ICONS ========== */
+.quick-section{max-width:1200px;margin:12px auto;padding:0 10px}
+.quick-grid{display:flex;flex-wrap:wrap;gap:2px}
+.quick-item{display:flex;flex-direction:column;align-items:center;justify-content:center;width:90px;height:72px;border:1px solid #e8e8e8;background:#fff;border-radius:4px;cursor:pointer;transition:all .15s}
+.quick-item:hover{border-color:#2b6cb0;box-shadow:0 1px 4px rgba(0,0,0,.08);text-decoration:none}
+.quick-icon{width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;margin-bottom:4px;font-size:16px;font-weight:700;color:#fff}
+.quick-label{font-size:11px;color:#333;text-align:center;line-height:1.2;max-width:80px}
+
+/* ========== CONTENT WRAPPER ========== */
+.content{max-width:1200px;margin:0 auto;padding:0 10px}
+.two-col{display:flex;gap:10px}
+.col-main{flex:1;min-width:0}
+.col-side{width:280px;flex-shrink:0}
+
+/* ========== SECTION BOX ========== */
+.box{background:#fff;border:1px solid #ddd;margin-bottom:10px}
+.box-head{display:flex;align-items:center;border-bottom:1px solid #eee;padding:8px 12px;background:#fafafa}
+.box-head-icon{width:4px;height:16px;background:#2b6cb0;border-radius:2px;margin-right:8px;flex-shrink:0}
+.box-head h2{font-size:15px;font-weight:700;color:#333;flex:1}
+.box-head .box-more{font-size:12px;color:#999}
+.box-head .box-more:hover{color:#d4380d}
+.box-body{padding:10px 12px}
+
+/* ========== TABS ========== */
+.tabs{display:flex;border-bottom:2px solid #2b6cb0;margin-bottom:0}
+.tab{padding:6px 16px;font-size:13px;cursor:pointer;color:#666;border:1px solid transparent;border-bottom:none;margin-bottom:-2px;background:#f0f0f0;border-radius:4px 4px 0 0}
+.tab.active{background:#fff;color:#2b6cb0;font-weight:700;border-color:#ddd}
+.tab:hover{color:#2b6cb0}
+.tab-content{display:none;padding:10px 12px}
+.tab-content.active{display:block}
+
+/* ========== LINK LISTS (hao123 style columns) ========== */
+.link-columns{display:flex;flex-wrap:wrap}
+.link-col{width:25%;padding:0 8px 8px 0;min-width:200px}
+.link-col-title{font-size:13px;font-weight:700;color:#333;padding:4px 0;border-bottom:1px solid #eee;margin-bottom:6px;display:flex;align-items:center;gap:4px}
+.link-col-title .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.link-col ul li{padding:2px 0}
+.link-col ul li a{font-size:12px;color:#1a0dab;line-height:1.8}
+.link-col ul li a:hover{color:#d4380d}
+
+/* ========== PROVIDER CARDS (compact) ========== */
+.provider-list{display:flex;flex-direction:column;gap:0}
+.provider-row{display:flex;padding:10px 0;border-bottom:1px solid #f0f0f0;align-items:flex-start;gap:10px}
+.provider-row:last-child{border-bottom:none}
+.provider-badge{width:40px;height:40px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;flex-shrink:0}
+.provider-info{flex:1;min-width:0}
+.provider-info .name{font-size:14px;font-weight:700;color:#333}
+.provider-info .name a{color:#333}
+.provider-info .name a:hover{color:#d4380d}
+.provider-info .desc{font-size:12px;color:#666;margin-top:2px;line-height:1.6}
+.provider-info .meta{font-size:11px;color:#999;margin-top:3px;display:flex;gap:8px;flex-wrap:wrap}
+.provider-info .meta span{background:#f0f5ff;color:#2b6cb0;padding:1px 6px;border-radius:2px;font-size:11px}
+.provider-info .meta .tag-cn{background:#fff1f0;color:#cf1322}
+.provider-info .meta .tag-price{background:#f6ffed;color:#389e0d}
+.provider-info .meta .tag-os{background:#f9f0ff;color:#722ed1}
+
+/* ========== COMPARISON TABLE ========== */
+.compare{width:100%;border-collapse:collapse;font-size:12px}
+.compare th{background:#f0f5ff;color:#2b6cb0;font-weight:700;padding:6px 8px;text-align:left;border:1px solid #ddd;white-space:nowrap}
+.compare td{padding:5px 8px;border:1px solid #eee;color:#333;vertical-align:top}
+.compare tr:nth-child(even){background:#fafafa}
+.compare tr:hover{background:#e6f7ff}
+.compare .c-name{font-weight:700;white-space:nowrap}
+.compare .c-green{color:#389e0d}
+.compare .c-red{color:#cf1322}
+
+/* ========== DENSE LINK GRID (hao123 style) ========== */
+.dense-grid{display:flex;flex-wrap:wrap;gap:0}
+.dense-item{width:33.33%;padding:3px 6px;border-bottom:1px solid #f5f5f5;display:flex;align-items:center;gap:4px;font-size:12px;line-height:1.8}
+.dense-item .bullet{width:3px;height:3px;background:#2b6cb0;border-radius:50%;flex-shrink:0}
+.dense-item a{color:#1a0dab}
+.dense-item a:hover{color:#d4380d}
+
+/* ========== SIDE WIDGET ========== */
+.side-box{background:#fff;border:1px solid #ddd;margin-bottom:10px}
+.side-box .side-head{padding:8px 10px;border-bottom:1px solid #eee;font-size:14px;font-weight:700;color:#333;display:flex;align-items:center;gap:6px;background:#fafafa}
+.side-box .side-head .side-dot{width:4px;height:12px;background:#2b6cb0;border-radius:2px}
+.side-box .side-body{padding:8px 10px}
+.side-link{display:block;padding:3px 0;font-size:12px;color:#1a0dab;border-bottom:1px dashed #f0f0f0;line-height:1.8}
+.side-link:hover{color:#d4380d}
+.side-link:last-child{border-bottom:none}
+
+/* ========== FORMULA / GUIDE ========== */
+.guide-steps{counter-reset:step}
+.guide-step{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #f5f5f5}
+.guide-step:last-child{border-bottom:none}
+.guide-num{width:28px;height:28px;background:#2b6cb0;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;border-radius:4px;flex-shrink:0}
+.guide-content .guide-title{font-size:13px;font-weight:700;color:#333}
+.guide-content .guide-text{font-size:12px;color:#666;margin-top:2px}
+
+/* ========== COST CARDS ========== */
+.cost-row{display:flex;gap:10px}
+.cost-item{flex:1;border:1px solid #ddd;background:#fff;padding:10px}
+.cost-item .cost-label{font-size:12px;color:#666}
+.cost-item .cost-val{font-size:20px;font-weight:700;color:#2b6cb0;margin:4px 0}
+.cost-item .cost-note{font-size:11px;color:#999}
+
+/* ========== NEWS STYLE ========== */
+.news-item{padding:6px 0;border-bottom:1px solid #f5f5f5}
+.news-item:last-child{border-bottom:none}
+.news-item .news-title{font-size:13px;color:#333;font-weight:500}
+.news-item .news-title a{color:#333}
+.news-item .news-title a:hover{color:#d4380d}
+.news-item .news-summary{font-size:12px;color:#888;margin-top:2px}
+.news-item .news-tag{display:inline-block;font-size:10px;padding:1px 5px;border-radius:2px;margin-right:4px}
+
+/* ========== GLOSSARY ========== */
+.glossary-dt{font-size:13px;font-weight:700;color:#2b6cb0;padding:6px 0 2px}
+.glossary-dd{font-size:12px;color:#666;padding:0 0 6px;border-bottom:1px dashed #eee;line-height:1.6}
+.glossary-dd:last-child{border-bottom:none}
+
+/* ========== CODE ========== */
+.code{background:#f8f8f8;border:1px solid #e0e0e0;padding:10px;font-family:Consolas,"Courier New",monospace;font-size:12px;line-height:1.8;overflow-x:auto;color:#333}
+.code .cm{color:#998}
+.code .kw{color:#a52a2a;font-weight:700}
+.code .str{color:#008080}
+
+/* ========== ARCHITECTURE ========== */
+.arch-flow{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;padding:10px 0}
+.arch-box{border:1px solid #2b6cb0;border-radius:4px;padding:8px 14px;text-align:center;background:#f0f5ff;font-size:12px;font-weight:700;color:#2b6cb0;min-width:100px}
+.arch-arrow{color:#2b6cb0;font-size:18px;font-weight:700}
+
+/* ========== CTA BANNER ========== */
+.cta-bar{background:#2b6cb0;color:#fff;padding:20px;text-align:center;margin:10px 0}
+.cta-bar h3{font-size:18px;margin-bottom:6px}
+.cta-bar p{font-size:13px;opacity:.85;margin-bottom:10px}
+.cta-btn{display:inline-block;background:#fff;color:#2b6cb0;padding:6px 24px;font-size:14px;font-weight:700;border-radius:3px}
+.cta-btn:hover{background:#f0f0f0;text-decoration:none}
+
+/* ========== FOOTER ========== */
+.footer{background:#f5f5f5;border-top:1px solid #ddd;margin-top:10px;padding:20px 0 30px}
+.footer-inner{max-width:1200px;margin:0 auto;padding:0 10px}
+.footer-links{display:flex;flex-wrap:wrap;gap:0;margin-bottom:12px}
+.footer-links a{font-size:12px;color:#666;padding:0 10px;border-right:1px solid #ddd;line-height:1.6}
+.footer-links a:last-child{border-right:none}
+.footer-links a:hover{color:#d4380d}
+.footer-copy{font-size:11px;color:#999;text-align:center;padding-top:10px;border-top:1px solid #eee}
+
+/* ========== DIVIDER ========== */
+.divider{height:1px;background:#eee;margin:4px 0}
+
+/* ========== MARKET PILLS ========== */
+.pill-grid{display:flex;flex-wrap:wrap;gap:4px}
+.pill{display:inline-block;padding:3px 8px;border:1px solid #ddd;background:#fff;font-size:11px;color:#333;border-radius:3px}
+.pill:hover{border-color:#2b6cb0;background:#f0f5ff;text-decoration:none}
+.pill .p-dot{display:inline-block;width:5px;height:5px;border-radius:50%;margin-right:3px}
+
+/* ========== TIMELINE (simple) ========== */
+.tl-item{padding:6px 0 6px 16px;border-left:2px solid #2b6cb0;margin-left:8px;position:relative}
+.tl-item::before{content:'';position:absolute;left:-5px;top:10px;width:8px;height:8px;background:#2b6cb0;border-radius:50%}
+.tl-item .tl-date{font-size:11px;color:#2b6cb0;font-weight:700}
+.tl-item .tl-title{font-size:13px;font-weight:700;color:#333;margin-top:2px}
+.tl-item .tl-text{font-size:12px;color:#666;margin-top:2px}
+
+/* responsive */
+@media(max-width:900px){
+  .two-col{flex-direction:column}
+  .col-side{width:100%}
+  .link-col{width:50%}
+  .dense-item{width:50%}
+  .cost-row{flex-direction:column}
+  .quick-item{width:72px;height:62px}
+}
+@media(max-width:600px){
+  .header-inner{flex-direction:column;gap:10px}
+  .search-box{max-width:100%}
+  .link-col{width:100%}
+  .dense-item{width:100%}
+  .main-nav{overflow-x:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== TOP BAR ==================== -->
+<div class="topbar">
+<div class="topbar-inner">
+  <div>
+    <span style="color:#333">Bienvenue sur AI-VPS.github.io</span>
+    <span class="sep">|</span>
+    <span id="date-display">Chargement...</span>
+  </div>
+  <div class="topbar-right">
+    <a href="#cloud">Cloud</a>
+    <span class="sep">|</span>
+    <a href="#ia">IA</a>
+    <span class="sep">|</span>
+    <a href="#vps">VPS</a>
+    <span class="sep">|</span>
+    <a href="#guide">Guide</a>
+    <span class="sep">|</span>
+    <a href="#ressources">Ressources</a>
+  </div>
+</div>
+</div>
+
+<!-- ==================== HEADER ==================== -->
+<div class="header">
+<div class="header-inner">
+  <a href="#" class="logo">
+    <div class="logo-icon">AI</div>
+    <div>
+      <div class="logo-text">AI-VPS</div>
+      <span class="logo-sub">Ressources IA &amp; Infrastructure VPS</span>
+    </div>
+  </a>
+  <div class="search-box">
+    <input type="text" placeholder="Rechercher un fournisseur, un modele, un service...">
+    <button>Rechercher</button>
+  </div>
+  <div class="header-links">
+    <a href="#pourquoi">Pourquoi AI+VPS</a>
+    <a href="#comparaison">Comparatif</a>
+    <a href="#couts">Couts</a>
+    <a href="#avenir">Tendances</a>
+  </div>
+</div>
+</div>
+
+<!-- ==================== NAV ==================== -->
+<div class="main-nav">
+<div class="main-nav-inner">
+  <a href="#accueil" class="active">Accueil</a>
+  <a href="#cloud">Cloud Public</a>
+  <a href="#ia">Modeles IA</a>
+  <a href="#vps">VPS IA</a>
+  <a href="#guide">Guide</a>
+  <a href="#comparaison">Comparatif</a>
+  <a href="#couts">Optimisation</a>
+  <a href="#avenir">Tendances</a>
+  <a href="#ressources">Ressources</a>
+</div>
+</div>
+
+<!-- ==================== QUICK ICONS ==================== -->
+<div class="quick-section" id="accueil">
+<div class="box" style="margin-bottom:10px">
+  <div class="box-head">
+    <div class="box-head-icon"></div>
+    <h2>Acces Rapide - Fournisseurs Populaires</h2>
+  </div>
+  <div class="box-body">
+    <div class="quick-grid">
+      <a href="#cloud" class="quick-item"><div class="quick-icon" style="background:#ff9900">AWS</div><div class="quick-label">Amazon Web Services</div></a>
+      <a href="#cloud" class="quick-item"><div class="quick-icon" style="background:#0078d7">Az</div><div class="quick-label">Microsoft Azure</div></a>
+      <a href="#cloud" class="quick-item"><div class="quick-icon" style="background:#4285f4">G</div><div class="quick-label">Google Cloud</div></a>
+      <a href="#cloud" class="quick-item"><div class="quick-icon" style="background:#ff6a00">Al</div><div class="quick-label">Alibaba Cloud</div></a>
+      <a href="#cloud" class="quick-item"><div class="quick-icon" style="background:#008cd2">Tx</div><div class="quick-label">Tencent Cloud</div></a>
+      <a href="#cloud" class="quick-item"><div class="quick-icon" style="background:#cf000f">Hw</div><div class="quick-label">Huawei Cloud</div></a>
+      <a href="#cloud" class="quick-item"><div class="quick-icon" style="background:#2453a3">Bd</div><div class="quick-label">Baidu Cloud</div></a>
+      <a href="#cloud" class="quick-item"><div class="quick-icon" style="background:#4e7dff">Vo</div><div class="quick-label">Volcengine</div></a>
+      <a href="#ia" class="quick-item"><div class="quick-icon" style="background:#10a37f">OA</div><div class="quick-label">OpenAI</div></a>
+      <a href="#ia" class="quick-item"><div class="quick-icon" style="background:#cc8800">Cl</div><div class="quick-label">Anthropic Claude</div></a>
+      <a href="#ia" class="quick-item"><div class="quick-icon" style="background:#4285f4">Ge</div><div class="quick-label">Google Gemini</div></a>
+      <a href="#ia" class="quick-item"><div class="quick-icon" style="background:#0064d1">La</div><div class="quick-label">Meta Llama</div></a>
+      <a href="#ia" class="quick-item"><div class="quick-icon" style="background:#ff6b00">Mi</div><div class="quick-label">Mistral AI</div></a>
+      <a href="#ia" class="quick-item"><div class="quick-icon" style="background:#0052ff">DS</div><div class="quick-label">DeepSeek</div></a>
+      <a href="#ia" class="quick-item"><div class="quick-icon" style="background:#ff6a00">Qw</div><div class="quick-label">Qwen</div></a>
+      <a href="#ia" class="quick-item"><div class="quick-icon" style="background:#8b5cf6">Ki</div><div class="quick-label">Kimi / Moonshot</div></a>
+      <a href="#vps" class="quick-item"><div class="quick-icon" style="background:#7c3aed">La</div><div class="quick-label">Lambda Cloud</div></a>
+      <a href="#vps" class="quick-item"><div class="quick-icon" style="background:#22d3ee">RP</div><div class="quick-label">RunPod</div></a>
+      <a href="#vps" class="quick-item"><div class="quick-icon" style="background:#eab308">VA</div><div class="quick-label">Vast.ai</div></a>
+      <a href="#vps" class="quick-item"><div class="quick-icon" style="background:#dc2626">CW</div><div class="quick-label">CoreWeave</div></a>
+      <a href="#vps" class="quick-item"><div class="quick-icon" style="background:#c80000">Hz</div><div class="quick-label">Hetzner</div></a>
+      <a href="#vps" class="quick-item"><div class="quick-icon" style="background:#4f46e5">Sc</div><div class="quick-label">Scaleway</div></a>
+      <a href="#vps" class="quick-item"><div class="quick-icon" style="background:#6366f1">To</div><div class="quick-label">Together AI</div></a>
+      <a href="#vps" class="quick-item"><div class="quick-icon" style="background:#0064d1">OC</div><div class="quick-label">Oracle Cloud</div></a>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== MAIN CONTENT ==================== -->
+<div class="content">
+<div class="two-col">
+
+<!-- ======== LEFT: MAIN COLUMN ======== -->
+<div class="col-main">
+
+  <!-- POURQUOI AI + VPS -->
+  <div class="box" id="pourquoi">
+    <div class="box-head">
+      <div class="box-head-icon" style="background:#389e0d"></div>
+      <h2>Pourquoi combiner IA et Infrastructure VPS ?</h2>
+    </div>
+    <div class="box-body">
+      <div class="link-columns" style="margin-bottom:10px">
+        <div class="link-col" style="width:50%">
+          <ul>
+            <li><b style="color:#333">1. Souverainete des donnees</b> - Heberger vos modeles IA sur des VPS vous donne un controle total. RGPD europeen et lois chinoises exigent des mesures strictes de localisation des donnees.</li>
+            <li><b style="color:#333">2. Performance &amp; latence</b> - L'inference en temps reel necessite des GPU dedies (A100, H100). Les temps de reponse constants sont essentiels en production.</li>
+            <li><b style="color:#333">3. Flexibilite architecturale</b> - Personnalisez votre pile : PyTorch, vLLM, TensorRT-LLM. Quantization GGUF, GPTQ, AWQ selon vos besoins.</li>
+          </ul>
+        </div>
+        <div class="link-col" style="width:50%">
+          <ul>
+            <li><b style="color:#333">4. Controle des couts</b> - Les API facturent au token. Auto-heberger des modeles open-source (Llama, Qwen, DeepSeek) reduit les couts de 60 a 90%.</li>
+            <li><b style="color:#333">5. Independance fournisseur</b> - Pas de lock-in technologique. Basculez entre fournisseurs, optimisez les couts regionaux.</li>
+            <li><b style="color:#333">6. Innovation acceleree</b> - Deployez les nouveaux modeles open-source en heures, pas en semaines.</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Architecture -->
+      <div style="background:#fafafa;border:1px solid #eee;padding:12px;margin-top:6px">
+        <div style="font-size:13px;font-weight:700;color:#333;text-align:center;margin-bottom:8px">Architecture typique : IA + VPS</div>
+        <div class="arch-flow">
+          <div class="arch-box">Utilisateur<br><span style="font-size:10px;font-weight:400;color:#666">Requete API / Web</span></div>
+          <div class="arch-arrow">&rarr;</div>
+          <div class="arch-box">API Gateway<br><span style="font-size:10px;font-weight:400;color:#666">Nginx / Traefik</span></div>
+          <div class="arch-arrow">&rarr;</div>
+          <div class="arch-box" style="border-color:#d4380d;color:#d4380d">Serveur GPU<br><span style="font-size:10px;font-weight:400;color:#666">vLLM / TensorRT</span></div>
+          <div class="arch-arrow">&rarr;</div>
+          <div class="arch-box" style="border-color:#389e0d;color:#389e0d">Base de donnees<br><span style="font-size:10px;font-weight:400;color:#666">PostgreSQL / Redis</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLOUD PUBLIC -->
+  <div class="box" id="cloud">
+    <div class="box-head">
+      <div class="box-head-icon" style="background:#d4380d"></div>
+      <h2>Fournisseurs de Cloud Public</h2>
+      <a href="#" class="box-more">Voir tout &raquo;</a>
+    </div>
+    <div class="tabs">
+      <div class="tab active" data-tab="intl">International</div>
+      <div class="tab" data-tab="cn">Chine Continentale</div>
+      <div class="tab" data-tab="eu">Europe</div>
+    </div>
+    <div class="tab-content active" id="tab-intl">
+      <div class="provider-list">
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#ff9900">AWS</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">Amazon Web Services (AWS)</a></div>
+            <div class="desc">Leader mondial du cloud. Amazon SageMaker pour l'IA, instances EC2 GPU (P5 H100, P4d A100), Bedrock pour l'acces aux modeles fondamentaux. 33 regions, 100+ zones.</div>
+            <div class="meta">
+              <span>GPU</span><span>IA Manager</span><span>Mondial</span>
+              <span class="tag-price">0.36 USD/h (g4dn)</span>
+            </div>
+          </div>
+        </div>
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#0078d7">Az</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">Microsoft Azure</a></div>
+            <div class="desc">Deuxieme cloud mondial. Azure OpenAI Service exclusif (GPT-4o, DALL-E). Instances ND H100 v5. Integration GitHub Copilot, Microsoft 365. 60+ regions.</div>
+            <div class="meta">
+              <span>GPU</span><span>OpenAI Exclusif</span><span>Mondial</span>
+              <span class="tag-price">0.40 USD/h (NC4as)</span>
+            </div>
+          </div>
+        </div>
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#4285f4">G</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">Google Cloud Platform (GCP)</a></div>
+            <div class="desc">Excellence IA via Google DeepMind. Vertex AI avec Gemini Pro. TPU v5e/v5p comme alternative aux GPU NVIDIA. GKE avec support GPU. 40+ regions.</div>
+            <div class="meta">
+              <span>TPU/GPU</span><span>Vertex AI</span><span>Gemini</span>
+              <span class="tag-price">0.35 USD/h (T4)</span>
+            </div>
+          </div>
+        </div>
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#f80000">OC</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">Oracle Cloud Infrastructure (OCI)</a></div>
+            <div class="desc">Option la plus economique pour GPU haute perf. Bare-metal A100, H100 a prix agressif. Tarifs bande passante sortante parmi les plus bas. Oracle Database 23ai IA native.</div>
+            <div class="meta">
+              <span>Bare-Metal</span><span>Prix Bas</span>
+              <span class="tag-price">2.25 USD/h (A100)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-content" id="tab-cn">
+      <div class="provider-list">
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#ff6a00">Al</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">Alibaba Cloud (Aliyun)</a></div>
+            <div class="desc">Premier cloud d'Asie (30%+ parts de marche Chine). PAI-Platform pour l'IA. Instances ecs.gn7 (A100), ecs.gn8 (H800). Tongyi Qwen via DashScope. Puces Yitian 710. 89 zones, 30 regions.</div>
+            <div class="meta">
+              <span class="tag-cn">Chine</span><span>GPU</span><span>Qwen</span><span>PAI</span>
+              <span class="tag-price">0.15 CNY/h</span>
+            </div>
+          </div>
+        </div>
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#008cd2">Tx</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">Tencent Cloud</a></div>
+            <div class="desc">Integration WeChat, Jeux, Entreprise. Hunyuan LLM natif. Instances GN10Xp (V100), GN10X (A100). TI-ONE ML Platform. Integration WeCom.</div>
+            <div class="meta">
+              <span class="tag-cn">Chine</span><span>Hunyuan</span><span>WeChat</span>
+              <span class="tag-price">0.12 CNY/h</span>
+            </div>
+          </div>
+        </div>
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#cf000f">Hw</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">Huawei Cloud</a></div>
+            <div class="desc">Puces Ascend 910B (alternative locale aux GPU NVIDIA). ModelArts pour l'IA bout-en-bout. Pangu LLM specialise industrie. MindSpore framework proprietaire.</div>
+            <div class="meta">
+              <span class="tag-cn">Chine</span><span>Ascend</span><span>Pangu</span><span>ModelArts</span>
+              <span class="tag-price">0.10 CNY/h</span>
+            </div>
+          </div>
+        </div>
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#2453a3">Bd</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">Baidu Cloud (AI Cloud)</a></div>
+            <div class="desc">Pionnier IA chinoise. ERNIE (Wenxin) modele de reference. Qianfan Platform. Puces Kunlun 2e gen. Framework PaddlePaddle natif.</div>
+            <div class="meta">
+              <span class="tag-cn">Chine</span><span>ERNIE</span><span>Kunlun</span>
+              <span class="tag-price">0.08 CNY/h</span>
+            </div>
+          </div>
+        </div>
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#4e7dff">Vo</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">Volcengine (ByteDance)</a></div>
+            <div class="desc">Cloud de ByteDance (TikTok/Douyin). Doubao LLM. Coze pour creation d'agents IA. Traitement video haute perf. ML Platform distribuee.</div>
+            <div class="meta">
+              <span class="tag-cn">Chine</span><span>Doubao</span><span>Coze</span>
+              <span class="tag-price">0.10 CNY/h</span>
+            </div>
+          </div>
+        </div>
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#1677ff">UC</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">UCloud (USystems)</a></div>
+            <div class="desc">Fournisseur neutre et independant. GPU V100/A100 location courte duree. UAI-Train distribue. Populaire aupres des PME/startups chinoises.</div>
+            <div class="meta">
+              <span class="tag-cn">Chine</span><span>GPU</span><span>Economique</span>
+              <span class="tag-price">0.09 CNY/h</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-content" id="tab-eu">
+      <div class="provider-list">
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#c80000">Hz</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">Hetzner Cloud</a></div>
+            <div class="desc">Fournisseur europeen favori, rapport qualite/prix inegalable. RTX 4090 (24GB VRAM) a prix fractionnes. Datacenters Allemagne, Finlande, US. Reseau prive gratuit.</div>
+            <div class="meta">
+              <span>Europe</span><span>GPU</span><span>Economique</span>
+              <span class="tag-price">0.006 EUR/h (CX22)</span>
+            </div>
+          </div>
+        </div>
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#4f46e5">Sc</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">Scaleway</a></div>
+            <div class="desc">Cloud souverain parisien. GPU H100/L40S. 100% donnees en France. Generative API pour modeles open-source manages. ISO 27001, HDS.</div>
+            <div class="meta">
+              <span>Souverain</span><span>France</span><span>H100</span>
+              <span class="tag-price">0.01 EUR/h (DEV1-S)</span>
+            </div>
+          </div>
+        </div>
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#0064d1">OV</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">OVHcloud AI</a></div>
+            <div class="desc">Cloud francais historique. Instances GPU, AI Training, notebooks Jupyter. Datacenters Europe, Nord-Amerique. Conformite RGPD native.</div>
+            <div class="meta">
+              <span>Europe</span><span>France</span><span>RGPD</span>
+              <span class="tag-price">Sur devis</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODELES IA -->
+  <div class="box" id="ia">
+    <div class="box-head">
+      <div class="box-head-icon" style="background:#722ed1"></div>
+      <h2>Fournisseurs de Modeles IA</h2>
+      <a href="#" class="box-more">Voir tout &raquo;</a>
+    </div>
+    <div class="tabs">
+      <div class="tab active" data-tab="ia-intl">International</div>
+      <div class="tab" data-tab="ia-cn">Chine</div>
+      <div class="tab" data-tab="ia-os">Open Source</div>
+    </div>
+    <div class="tab-content active" id="tab-ia-intl">
+      <div class="provider-list">
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#10a37f">OA</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">OpenAI</a></div>
+            <div class="desc">Pionnier de l'IA generative. GPT-4o multimodal (texte, image, audio, video). GPT-4o mini optimise. o3/o4-mini raisonnement avance. DALL-E 3, Whisper, TTS, Assistants API.</div>
+            <div class="meta">
+              <span>API</span><span>GPT-4o</span><span>Multimodal</span>
+              <span class="tag-price">2.50 USD/1M tokens</span>
+            </div>
+          </div>
+        </div>
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#cc8800">Cl</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">Anthropic (Claude)</a></div>
+            <div class="desc">Claude Opus 4 (le plus puissant), Sonnet 4 (equilibre), Haiku 3.5 (rapide). 200K tokens de contexte. Constitutional AI pour la securite. Analyse de documents longs.</div>
+            <div class="meta">
+              <span>API</span><span>200K Context</span><span>Securise</span>
+              <span class="tag-price">3.00 USD/1M tokens</span>
+            </div>
+          </div>
+        </div>
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#4285f4">Ge</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">Google DeepMind (Gemini)</a></div>
+            <div class="desc">Gemini 2.5 Pro : 1M tokens contexte, raisonnement avance. Gemini 2.5 Flash : rapidite optimisee. Google AI Studio gratuit. Integration Android, Chrome, Workspace.</div>
+            <div class="meta">
+              <span>API</span><span>1M Context</span><span>Multimodal</span>
+              <span class="tag-price">1.25 USD/1M tokens</span>
+            </div>
+          </div>
+        </div>
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#333">xA</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">xAI (Grok)</a></div>
+            <div class="desc">Grok-3 entraine sur 100K GPU H100 (Colossus). Acces donnees temps reel X/Twitter. Grok-3 mini rapide. Mode Deep Research.</div>
+            <div class="meta">
+              <span>API</span><span>Temps Reel</span><span>Grok</span>
+              <span class="tag-price">3.00 USD/1M tokens</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-content" id="tab-ia-cn">
+      <div class="provider-list">
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#0052ff">DS</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">DeepSeek</a></div>
+            <div class="desc">Revelation 2025. DeepSeek-V3 (671B MoE, 37B actifs). R1 : raisonnement niveau o1, ouvert. Cout entrainement record 5.576M USD. API ultra-economique.</div>
+            <div class="meta">
+              <span class="tag-cn">Chine</span><span class="tag-os">Open Source</span><span>R1</span>
+              <span class="tag-price">0.27 USD/1M tokens</span>
+            </div>
+          </div>
+        </div>
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#ff6a00">Qw</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">Alibaba Qwen (Tongyi Qianwen)</a></div>
+            <div class="desc">Qwen 2.5 : 0.5B a 72B parametres. Variantes Coder, Math, VL (vision). DashScope API. Parmi les meilleurs modeles open-source en chinois et anglais.</div>
+            <div class="meta">
+              <span class="tag-cn">Chine</span><span class="tag-os">Open Source</span><span>Multimodal</span>
+              <span class="tag-price">0.02 CNY/1K tokens</span>
+            </div>
+          </div>
+        </div>
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#4c6fff">GL</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">Zhipu AI (ChatGLM)</a></div>
+            <div class="desc">Spin-off Universite Tsinghua. GLM-4 multimodal. BigModel API. AutoGLM agent d'automatisation. Serie ChatGLM mature et stable.</div>
+            <div class="meta">
+              <span class="tag-cn">Chine</span><span>GLM-4</span><span>Multimodal</span>
+              <span class="tag-price">0.10 CNY/1M tokens</span>
+            </div>
+          </div>
+        </div>
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#8b5cf6">Ki</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">Moonshot AI (Kimi)</a></div>
+            <div class="desc">Kimi assistant populaire en Chine. Moonshot-v1 : 128K contexte. Specialise documents longs et recherche. API via platform.moonshot.cn.</div>
+            <div class="meta">
+              <span class="tag-cn">Chine</span><span>128K Context</span><span>Recherche</span>
+              <span class="tag-price">0.012 CNY/1K tokens</span>
+            </div>
+          </div>
+        </div>
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#0064b4">iF</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">iFlytek (Spark / Xinghuo)</a></div>
+            <div class="desc">Leader reconnaissance vocale Asie. Spark optimise chinois. Synthese vocale, traduction, education, sante. Multimodal texte, voix, image.</div>
+            <div class="meta">
+              <span class="tag-cn">Chine</span><span>Spark</span><span>Vocal</span>
+              <span class="tag-price">0.18 CNY/10K tokens</span>
+            </div>
+          </div>
+        </div>
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#22c55e">BC</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">Baichuan Intelligence</a></div>
+            <div class="desc">Fondee par ancien CEO de Sogou. Baichuan 4 avance. Baichuan 3 Turbo optimise. Specialise comprehension culturelle chinoise.</div>
+            <div class="meta">
+              <span class="tag-cn">Chine</span><span>Baichuan 4</span>
+              <span class="tag-price">0.01 CNY/1K tokens</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-content" id="tab-ia-os">
+      <div class="provider-list">
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#0064d1">La</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">Meta AI (Llama)</a></div>
+            <div class="desc">Llama 4 Scout (109B, 16 experts, 10M contexte) et Maverick (17B actifs, 128 experts, multimodal). Licence ouverte. Support HuggingFace, Ollama, vLLM, llama.cpp.</div>
+            <div class="meta">
+              <span class="tag-os">Open Source</span><span>Llama 4</span><span>Auto-Hebergement</span>
+              <span class="tag-price">Gratuit</span>
+            </div>
+          </div>
+        </div>
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#ff6b00">Mi</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">Mistral AI</a></div>
+            <div class="desc">Champion europeen (Paris). Mistral Large 2 (123B, 128K). Mixtral 8x22B MoE open-source. Mistral Small 3.1 efficace. Le Chat interface europeenne.</div>
+            <div class="meta">
+              <span class="tag-os">Open Source</span><span>Europe</span><span>MoE</span>
+              <span class="tag-price">2 EUR/1M tokens (API)</span>
+            </div>
+          </div>
+        </div>
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#0052ff">DS</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">DeepSeek (Open Source)</a></div>
+            <div class="desc">DeepSeek-V3 (671B) et R1 entierement ouverts. Disponibles sur HuggingFace. Formats GGUF pour llama.cpp. Performance GPT-4 a fraction du cout.</div>
+            <div class="meta">
+              <span class="tag-os">Open Source</span><span>Efficace</span>
+              <span class="tag-price">Gratuit (hebergement a votre charge)</span>
+            </div>
+          </div>
+        </div>
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#ff6a00">Qw</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">Qwen 2.5 (Alibaba, Open Source)</a></div>
+            <div class="desc">Qwen 2.5 : 0.5B a 72B, toutes tailles ouvertes. Qwen2.5-VL (vision), Qwen2.5-Coder (code). Support complet ecosysteme open-source.</div>
+            <div class="meta">
+              <span class="tag-os">Open Source</span><span>Multimodal</span><span>Code</span>
+              <span class="tag-price">Gratuit</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VPS IA -->
+  <div class="box" id="vps">
+    <div class="box-head">
+      <div class="box-head-icon" style="background:#d4b106"></div>
+      <h2>VPS Optimises pour l'IA</h2>
+      <a href="#" class="box-more">Voir tout &raquo;</a>
+    </div>
+    <div class="box-body">
+      <div class="provider-list">
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#7c3aed">La</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">Lambda Cloud</a></div>
+            <div class="desc">Reference GPU cloud pour chercheurs. A100 (40/80GB), H100 (80GB). PyTorch, TensorFlow, CUDA pre-installes. Lambda Stack gestion automatique. Clusters multi-GPU.</div>
+            <div class="meta">
+              <span>H100</span><span>Pre-Configure</span><span>Recherche</span>
+              <span class="tag-price">A100 80GB : 1.10 USD/h</span>
+            </div>
+          </div>
+        </div>
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#22d3ee">RP</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">RunPod</a></div>
+            <div class="desc">Pods serverless et endpoints inference. A100, H100, RTX 4090, L40S. Templates : Stable Diffusion, LLM, Whisper. API REST auto-skable. Facturation temps reel.</div>
+            <div class="meta">
+              <span>Serverless</span><span>Templates</span><span>API</span>
+              <span class="tag-price">A100 80GB : 1.19 USD/h</span>
+            </div>
+          </div>
+        </div>
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#eab308;color:#333">VA</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">Vast.ai</a></div>
+            <div class="desc">Marche peer-to-peer GPU. Prix les plus bas (A100 ~0.60-1.20 USD/h). Recherche et filtrage avance. Docker personnalise. Ideal budgets limites.</div>
+            <div class="meta">
+              <span>Economique</span><span>Peer-to-Peer</span><span>Docker</span>
+              <span class="tag-price">A100 80GB : ~0.60 USD/h</span>
+            </div>
+          </div>
+        </div>
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#dc2626">CW</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">CoreWeave</a></div>
+            <div class="desc">Cloud GPU enterprise. Plus grands clusters H100/H200. Reseau InfiniBand 3.2Tbps. Kubernetes natif. SLA enterprise et support dedie.</div>
+            <div class="meta">
+              <span>Enterprise</span><span>H200</span><span>InfiniBand</span>
+              <span class="tag-price">Sur devis (enterprise)</span>
+            </div>
+          </div>
+        </div>
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#6366f1">To</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">Together AI</a></div>
+            <div class="desc">Inference optimise pour modeles open-source (Llama, Mixtral, DeepSeek, Qwen). Fine-tuning serverless. Deploiement custom. Benchmarks transparents.</div>
+            <div class="meta">
+              <span>Open Source</span><span>Inference</span><span>Fine-tuning</span>
+              <span class="tag-price">Llama 405B : 0.88 USD/1M tokens</span>
+            </div>
+          </div>
+        </div>
+        <div class="provider-row">
+          <div class="provider-badge" style="background:#10b981">Pa</div>
+          <div class="provider-info">
+            <div class="name"><a href="#">Paperspace (DigitalOcean)</a></div>
+            <div class="desc">Notebooks Jupyter avec GPU. Gradient ML Platform. Instances M4000, P5000, A100. Templates ML courants. Integration stockage DigitalOcean.</div>
+            <div class="meta">
+              <span>Notebooks</span><span>Gradient</span><span>DigitalOcean</span>
+              <span class="tag-price">A100 80GB : 2.42 USD/h</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Additional providers -->
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid #eee">
+        <div style="font-size:13px;font-weight:700;color:#333;margin-bottom:8px">Autres fournisseurs GPU :</div>
+        <div class="pill-grid">
+          <a href="#" class="pill"><span class="p-dot" style="background:#2b6cb0"></span>FluidStack</a>
+          <a href="#" class="pill"><span class="p-dot" style="background:#389e0d"></span>Crusoe Energy</a>
+          <a href="#" class="pill"><span class="p-dot" style="background:#d4380d"></span>Voltage Park</a>
+          <a href="#" class="pill"><span class="p-dot" style="background:#eab308"></span>Thunder Compute</a>
+          <a href="#" class="pill"><span class="p-dot" style="background:#722ed1"></span>OVHcloud AI</a>
+          <a href="#" class="pill"><span class="p-dot" style="background:#2b6cb0"></span>GMI Cloud</a>
+          <a href="#" class="pill"><span class="p-dot" style="background:#d4380d"></span>Tensor Dock</a>
+          <a href="#" class="pill"><span class="p-dot" style="background:#389e0d"></span>Sakura AI (Japon)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GUIDE -->
+  <div class="box" id="guide">
+    <div class="box-head">
+      <div class="box-head-icon" style="background:#096dd9"></div>
+      <h2>Guide : Choisir la bonne infrastructure</h2>
+    </div>
+    <div class="box-body">
+      <div class="guide-steps">
+        <div class="guide-step">
+          <div class="guide-num">1</div>
+          <div class="guide-content">
+            <div class="guide-title">Definir le besoin</div>
+            <div class="guide-text">Entrainement, inference, fine-tuning ou developpement ? Chaque cas a des exigences de GPU, memoire et reseau distinctes.</div>
+          </div>
+        </div>
+        <div class="guide-step">
+          <div class="guide-num">2</div>
+          <div class="guide-content">
+            <div class="guide-title">Evaluer le volume</div>
+            <div class="guide-text">Combien de tokens/jour ? Quelle taille de modele ? Le volume determine si l'auto-hebergement ou l'API est plus economique.</div>
+          </div>
+        </div>
+        <div class="guide-step">
+          <div class="guide-num">3</div>
+          <div class="guide-content">
+            <div class="guide-title">Verifier la conformite</div>
+            <div class="guide-text">RGPD, lois chinoises, HIPAA ? La localisation des donnees et la juridiction du fournisseur sont fondamentales.</div>
+          </div>
+        </div>
+        <div class="guide-step">
+          <div class="guide-num">4</div>
+          <div class="guide-content">
+            <div class="guide-title">Comparer les prix</div>
+            <div class="guide-text">TCO incluant stockage, bande passante, support et main-d'oeuvre technique. Les tarifs spot offrent des reductions de 60-90%.</div>
+          </div>
+        </div>
+        <div class="guide-step">
+          <div class="guide-num">5</div>
+          <div class="guide-content">
+            <div class="guide-title">Tester et iterer</div>
+            <div class="guide-text">Pilotes sur 2-3 fournisseurs avant engagement. Mesurer latence, stabilite, cout reel.</div>
+          </div>
+        </div>
+      </div>
+      <!-- Recommendations by profile -->
+      <div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee">
+        <div style="font-size:13px;font-weight:700;color:#333;margin-bottom:8px">Recommandations par profil :</div>
+        <table class="compare">
+          <tr><th>Profil</th><th>Strategie recommandee</th><th>Fournisseurs cles</th></tr>
+          <tr><td class="c-name">Startup / Dev Solo</td><td>API d'abord, migration VPS quand volume justifie. Modeles open-source (Llama, Qwen, DeepSeek)</td><td>DeepSeek API, Vast.ai, Hetzner, Lambda</td></tr>
+          <tr><td class="c-name">PME / Entreprise</td><td>Cloud souverain + API modeles fondamentaux. Auto-hebergement charges recurrentes</td><td>Scaleway, Azure OpenAI, AWS Bedrock</td></tr>
+          <tr><td class="c-name">Grande Entreprise</td><td>Multi-cloud backbone. Clusters GPU dedies. SLA enterprise</td><td>AWS, Azure, GCP, CoreWeave, OCI</td></tr>
+          <tr><td class="c-name">Chercheur / Universite</td><td>GPU prix bas, credits academiques. Notebooks manages</td><td>Lambda, Vast.ai, Paperspace, GCP credits</td></tr>
+          <tr><td class="c-name">Entreprise chinoise</td><td>Cloud local + modeles IA chinois. Conformite locale</td><td>Alibaba, Huawei, DeepSeek, Qwen</td></tr>
+        </table>
+      </div>
+      <!-- API vs Self-hosting -->
+      <div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee">
+        <div style="font-size:13px;font-weight:700;color:#333;margin-bottom:8px">API vs Auto-Hebergement :</div>
+        <table class="compare">
+          <tr><th>Critere</th><th>API (Fournisseur IA)</th><th>Auto-Hebergement (VPS GPU)</th></tr>
+          <tr><td>Cout initial</td><td>Aucun</td><td>Configuration requise</td></tr>
+          <tr><td>Cout grande echelle</td><td>Eleve (facturation/token)</td><td class="c-green">Reduit de 60-90%</td></tr>
+          <tr><td>Souverainete</td><td>Limitee</td><td class="c-green">Complete</td></tr>
+          <tr><td>Maintenance</td><td class="c-green">Zero</td><td>Administration requise</td></tr>
+          <tr><td>Flexibilite</td><td>Liee au fournisseur</td><td class="c-green">Tous modeles open-source</td></tr>
+          <tr><td>Latence</td><td>Variable (reseau)</td><td class="c-green">Optimisable</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPARATIF -->
+  <div class="box" id="comparaison">
+    <div class="box-head">
+      <div class="box-head-icon" style="background:#cf1322"></div>
+      <h2>Tableau Comparatif des Fournisseurs</h2>
+    </div>
+    <div class="box-body" style="overflow-x:auto">
+      <table class="compare">
+        <tr>
+          <th>Fournisseur</th><th>Type</th><th>GPU</th><th>Region</th><th>Prix A100/h</th><th>IA Manager</th><th>Open Source</th>
+        </tr>
+        <tr><td class="c-name">AWS</td><td>Hyperscaler</td><td>A100, H100, Trainium</td><td>Mondial</td><td>~3.67 USD</td><td class="c-green">SageMaker, Bedrock</td><td class="c-red">--</td></tr>
+        <tr><td class="c-name">Azure</td><td>Hyperscaler</td><td>A100, H100</td><td>Mondial</td><td>~3.40 USD</td><td class="c-green">OpenAI, ML Studio</td><td class="c-red">--</td></tr>
+        <tr><td class="c-name">Google Cloud</td><td>Hyperscaler</td><td>A100, H100, TPU v5</td><td>Mondial</td><td>~3.22 USD</td><td class="c-green">Vertex AI</td><td class="c-red">--</td></tr>
+        <tr><td class="c-name">Alibaba Cloud</td><td>Hyperscaler</td><td>A100, H800, Yitian</td><td>Chine/Asie</td><td>~2.50 USD</td><td class="c-green">PAI, DashScope</td><td class="c-red">--</td></tr>
+        <tr><td class="c-name">Oracle Cloud</td><td>Hyperscaler</td><td>A100, H100 bare-metal</td><td>Mondial</td><td>~2.25 USD</td><td class="c-green">OCI Data Sci</td><td class="c-red">--</td></tr>
+        <tr><td class="c-name">Hetzner</td><td>Europeen</td><td>RTX 4090</td><td>EU/US</td><td>N/A</td><td class="c-red">--</td><td class="c-red">--</td></tr>
+        <tr><td class="c-name">Scaleway</td><td>Europeen</td><td>H100, L40S</td><td>France</td><td>~2.00 EUR</td><td class="c-green">Generative API</td><td class="c-red">--</td></tr>
+        <tr><td class="c-name">Lambda Cloud</td><td>Spec. IA</td><td>A100, H100</td><td>US</td><td class="c-green">1.10 USD</td><td class="c-red">--</td><td class="c-red">--</td></tr>
+        <tr><td class="c-name">RunPod</td><td>Spec. IA</td><td>A100, H100, RTX 4090</td><td>US/EU</td><td class="c-green">1.19 USD</td><td class="c-red">--</td><td class="c-red">--</td></tr>
+        <tr><td class="c-name">Vast.ai</td><td>Marche P2P</td><td>A100, H100, RTX 4090</td><td>Mondial</td><td class="c-green">~0.80 USD</td><td class="c-red">--</td><td class="c-red">--</td></tr>
+        <tr><td class="c-name">Together AI</td><td>Inference API</td><td>H100 (inference)</td><td>US</td><td>N/A (API)</td><td class="c-green">Inference API</td><td class="c-green">Oui</td></tr>
+      </table>
+      <div style="font-size:11px;color:#999;margin-top:6px;font-style:italic">Note : Prix indicatifs bases sur tarifs publics. Spot/reserved instances offrent reductions significatives.</div>
+    </div>
+  </div>
+
+  <!-- COUTS -->
+  <div class="box" id="couts">
+    <div class="box-head">
+      <div class="box-head-icon" style="background:#389e0d"></div>
+      <h2>Optimisation des Couts</h2>
+    </div>
+    <div class="box-body">
+      <div class="link-columns">
+        <div class="link-col" style="width:50%">
+          <ul>
+            <li><b style="color:#333">Quantization</b> - GGUF Q4_K_M, GPTQ, AWQ reduisent la memoire de 50-75%. Un 70B quantifie tourne sur 1 seul A100 au lieu de 2.</li>
+            <li><b style="color:#333">Instances spot</b> - AWS, GCP spot coutent 60-90% moins cher. Ideal pour entrainement avec checkpoints reguliers.</li>
+            <li><b style="color:#333">Auto-scaling</b> - Serverless (RunPod, Lambda) pour pics, instances reservees pour charge base. Combinez les deux.</li>
+          </ul>
+        </div>
+        <div class="link-col" style="width:50%">
+          <ul>
+            <li><b style="color:#333">Choisir le bon modele</b> - Un petit modele bien entraine surpasse un grand generique. DeepSeek 7B peut surpasser GPT-3.5.</li>
+            <li><b style="color:#333">Cache &amp; batching</b> - Prompt Cache + requetes batches. DeepSeek offre 0.14 USD/1M (cache) vs 0.27 (standard), -48%.</li>
+            <li><b style="color:#333">Multi-cloud</b> - Comparez tarifs regulierement. Migrez charges non critiques vers fournisseurs moins chers.</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Cost example -->
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid #eee">
+        <div style="font-size:13px;font-weight:700;color:#333;margin-bottom:8px">Exemple : Cout mensuel hebergement LLM 70B (inference 24/7)</div>
+        <div class="cost-row">
+          <div class="cost-item" style="border-color:#cf1322">
+            <div class="cost-label">Solution API (GPT-4o) - 100M tokens/mois</div>
+            <div class="cost-val" style="color:#cf1322">500 - 2 000 USD</div>
+            <div class="cost-note">Facturation au token. Zero maintenance. Donnees chez le fournisseur.</div>
+          </div>
+          <div class="cost-item" style="border-color:#389e0d">
+            <div class="cost-label">Solution VPS + Open Source (Lambda A100 + Llama 70B Q4)</div>
+            <div class="cost-val" style="color:#389e0d">~792 USD</div>
+            <div class="cost-note">1.10 USD/h x 720h. Modele gratuit. vLLM gratuit. Maintenance requise.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TENDANCES -->
+  <div class="box" id="avenir">
+    <div class="box-head">
+      <div class="box-head-icon" style="background:#722ed1"></div>
+      <h2>Tendances et Avenir de l'Infrastructure IA</h2>
+    </div>
+    <div class="box-body">
+      <div class="tl-item">
+        <div class="tl-date">2025-2026 -- Actuel</div>
+        <div class="tl-title">Democratisation des modeles open-source</div>
+        <div class="tl-text">Llama 4, Qwen 2.5, DeepSeek-V3 atteignent la parite avec les modeles proprietaires. L'auto-hebergement devient la norme.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2026-2027 -- Court terme</div>
+        <div class="tl-title">Puces IA specialisees et neuromorphiques</div>
+        <div class="tl-text">TPU (Google), Trainium (AWS), Ascend (Huawei) s'ameliorant. Cerebras, Groq, SambaNova : gains 10-100x pour cas specifiques.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2026-2028 -- Moyen terme</div>
+        <div class="tl-title">Edge AI et inference de proximite</div>
+        <div class="tl-text">Inference migre vers l'edge : Apple Neural Engine, Qualcomm Hexagon, Intel Meteor Lake. Modeles compacts 1-7B suffisants pour la majorite des taches.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2027-2029 -- Horizon</div>
+        <div class="tl-title">Agents IA autonomes et infrastructure adaptee</div>
+        <div class="tl-text">Agents autonomes necessitant sandbox securisees, execution longue duree. Infrastructure IA devient service d'execution d'agents, pas simple inference.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESSOURCES -->
+  <div class="box" id="ressources">
+    <div class="box-head">
+      <div class="box-head-icon" style="background:#096dd9"></div>
+      <h2>Ressources et Glossaire</h2>
+    </div>
+    <div class="box-body">
+      <div style="font-size:13px;font-weight:700;color:#333;margin-bottom:6px">Glossaire Technique</div>
+      <dl>
+        <dt class="glossary-dt">GPU (Graphics Processing Unit)</dt>
+        <dd class="glossary-dd">Processeur massivement parallele, pilier de l'IA. Modeles courants : NVIDIA A100 (80GB), H100 (80GB), H200 (141GB).</dd>
+        <dt class="glossary-dt">TPU (Tensor Processing Unit)</dt>
+        <dd class="glossary-dd">Circuit integre Google pour deep learning. TPU v5e/v5p : alternative aux GPU NVIDIA sur Google Cloud.</dd>
+        <dt class="glossary-dt">VPS (Virtual Private Server)</dt>
+        <dd class="glossary-dd">Serveur virtuel dedie. Un VPS GPU offre acces exclusif aux ressources GPU pour entrainement et inference.</dd>
+        <dt class="glossary-dt">Inference</dt>
+        <dd class="glossary-dd">Utilisation d'un modele entraine pour generer des predictions/reponses. Phase "production" de l'IA, opposee a l'entrainement.</dd>
+        <dt class="glossary-dt">Fine-tuning</dt>
+        <dd class="glossary-dd">Adaptation d'un modele pre-entraine a une tache specifique avec des donnees ciblees. Moins de ressources que l'entrainement complet.</dd>
+        <dt class="glossary-dt">MoE (Mixture of Experts)</dt>
+        <dd class="glossary-dd">Architecture n'activant qu'une fraction des parametres (ex: 37B actifs / 671B total DeepSeek-V3). Performances de grand modele, calcul de petit modele.</dd>
+        <dt class="glossary-dt">Quantization</dt>
+        <dd class="glossary-dd">Compression reduisant la precision numerique (16-bit a 4-bit). Memoire reduite, inference acceleree, perte minimale de qualite.</dd>
+        <dt class="glossary-dt">vLLM / TensorRT-LLM</dt>
+        <dd class="glossary-dd">Moteurs d'inference optimises pour LLM. vLLM utilise PagedAttention. TensorRT-LLM compile et fusionne kernels pour GPU NVIDIA.</dd>
+      </dl>
+      <!-- Resources links -->
+      <div style="margin-top:12px;padding-top:10px;border-top:1px solid #eee">
+        <div style="font-size:13px;font-weight:700;color:#333;margin-bottom:6px">Liens utiles</div>
+        <div class="dense-grid">
+          <div class="dense-item"><span class="bullet"></span><a href="#">Hugging Face Documentation</a></div>
+          <div class="dense-item"><span class="bullet"></span><a href="#">vLLM Documentation</a></div>
+          <div class="dense-item"><span class="bullet"></span><a href="#">Ollama - Modeles locaux</a></div>
+          <div class="dense-item"><span class="bullet"></span><a href="#">LangChain Framework</a></div>
+          <div class="dense-item"><span class="bullet"></span><a href="#">LlamaIndex Framework</a></div>
+          <div class="dense-item"><span class="bullet"></span><a href="#">OpenRouter (multi-API)</a></div>
+        </div>
+      </div>
+      <!-- Code example -->
+      <div style="margin-top:12px;padding-top:10px;border-top:1px solid #eee">
+        <div style="font-size:13px;font-weight:700;color:#333;margin-bottom:6px">Commandes de base pour demarrer</div>
+        <div class="code">
+<span class="cm"># Installer Ollama et lancer un modele</span>
+<span class="kw">curl</span> -fsSL https://ollama.ai/install.sh | sh
+<span class="kw">ollama</span> run llama3.1:70b
+
+<span class="cm"># Demarrer vLLM pour l'inference serveur</span>
+<span class="kw">pip</span> install vllm
+<span class="kw">python</span> -m vllm.entrypoints.openai.api_server \
+  --model meta-llama/Llama-3.1-70B-Instruct \
+  --quantization awq \
+  --gpu-memory-utilization <span style="color:#d4380d;font-weight:700">0.9</span>
+
+<span class="cm"># Tester l'API OpenAI-compatible</span>
+<span class="kw">curl</span> http://localhost:<span style="color:#d4380d;font-weight:700">8000</span>/v1/chat/completions \
+  -H <span class="str">"Content-Type: application/json"</span> \
+  -d '{"model":"Llama-3.1-70B","messages":[{"role":"user","content":"Bonjour!"}]}'
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-bar">
+    <h3>Pret a construire votre infrastructure IA ?</h3>
+    <p>Explorez, comparez et selectionnez les meilleures ressources pour vos projets.</p>
+    <a href="#guide" class="cta-btn">Consulter le guide &raquo;</a>
+  </div>
+
+</div><!-- /col-main -->
+
+<!-- ======== RIGHT: SIDEBAR ======== -->
+<div class="col-side">
+
+  <!-- NEWS / UPDATES -->
+  <div class="side-box">
+    <div class="side-head"><span class="side-dot"></span>Mises a jour</div>
+    <div class="side-body">
+      <div class="news-item">
+        <div class="news-title"><a href="#">DeepSeek R1 : modele open-source de raisonnement</a></div>
+        <div class="news-summary">Performance niveau o1, entierement ouvert. API a 0.27 USD/1M tokens.</div>
+      </div>
+      <div class="news-item">
+        <div class="news-title"><a href="#">Llama 4 Scout et Maverick disponibles</a></div>
+        <div class="news-summary">109B parametres MoE, 10M tokens de contexte. Licence ouverte.</div>
+      </div>
+      <div class="news-item">
+        <div class="news-title"><a href="#">Qwen 2.5 : 0.5B a 72B en open source</a></div>
+        <div class="news-summary">Variantes Coder, Math, VL. Parmi les meilleurs modeles ouverts.</div>
+      </div>
+      <div class="news-item">
+        <div class="news-title"><a href="#">Gemini 2.5 Pro : 1M tokens de contexte</a></div>
+        <div class="news-summary">Raisonnement avance, multimodal natif.</div>
+      </div>
+      <div class="news-item">
+        <div class="news-title"><a href="#">Hetzner : serveurs RTX 4090 en Europe</a></div>
+        <div class="news-summary">Prix fractionnes des hyperscalers. Conformite RGPD.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK GUIDE: API vs VPS -->
+  <div class="side-box">
+    <div class="side-head"><span class="side-dot" style="background:#389e0d"></span>API ou VPS ?</div>
+    <div class="side-body" style="font-size:12px;color:#666;line-height:1.8">
+      <p style="margin-bottom:6px"><b style="color:#333">Choisir l'API si :</b></p>
+      <p>Volume &lt; 10M tokens/jour. Pas d'equipe technique. Delai de mise en marche court. Conformite fournisseur acceptee.</p>
+      <p style="margin:8px 0 6px"><b style="color:#333">Choisir le VPS si :</b></p>
+      <p>Volume &gt; 10M tokens/jour. Souverainete requise. Modele open-source disponible. Equipe technique presente. Budget optimisable.</p>
+    </div>
+  </div>
+
+  <!-- GPU SPECS -->
+  <div class="side-box">
+    <div class="side-head"><span class="side-dot" style="background:#d4380d"></span>GPU Reference rapide</div>
+    <div class="side-body" style="padding:0">
+      <table class="compare" style="font-size:11px">
+        <tr><th>GPU</th><th>VRAM</th><th>Prix/h ref.</th></tr>
+        <tr><td>H200</td><td>141 GB</td><td>~3.50 USD</td></tr>
+        <tr><td>H100</td><td>80 GB</td><td>~2.50 USD</td></tr>
+        <tr><td>A100 80G</td><td>80 GB</td><td>~1.10 USD</td></tr>
+        <tr><td>A100 40G</td><td>40 GB</td><td>~0.80 USD</td></tr>
+        <tr><td>L40S</td><td>48 GB</td><td>~1.00 USD</td></tr>
+        <tr><td>RTX 4090</td><td>24 GB</td><td>~0.40 USD</td></tr>
+        <tr><td>T4</td><td>16 GB</td><td>~0.35 USD</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- MODEL SIZES -->
+  <div class="side-box">
+    <div class="side-head"><span class="side-dot" style="background:#722ed1"></span>Tailles de modeles</div>
+    <div class="side-body" style="font-size:12px;color:#666;line-height:2">
+      <p><b>1-3B</b> : Mobile, edge, taches simples</p>
+      <p><b>7-8B</b> : Un GPU T4/A10. Usage general</p>
+      <p><b>13-14B</b> : Un GPU A100 40GB. Bon equilibre</p>
+      <p><b>32-34B</b> : 1-2 GPU A100. Haute qualite</p>
+      <p><b>70-72B</b> : 1-2 GPU A100 80GB (quantifie)</p>
+      <p><b>405B</b> : 4-8 GPU A100. Niveau GPT-4</p>
+      <p><b>671B MoE</b> : 2-4 GPU A100 (actifs 37B)</p>
+    </div>
+  </div>
+
+  <!-- QUICK LINKS -->
+  <div class="side-box">
+    <div class="side-head"><span class="side-dot" style="background:#096dd9"></span>Liens rapides fournisseurs</div>
+    <div class="side-body">
+      <a href="#" class="side-link">AWS - Instances GPU EC2</a>
+      <a href="#" class="side-link">Azure - Machine Learning</a>
+      <a href="#" class="side-link">Google Cloud - Vertex AI</a>
+      <a href="#" class="side-link">Alibaba Cloud - PAI</a>
+      <a href="#" class="side-link">Tencent Cloud - IA</a>
+      <a href="#" class="side-link">Huawei Cloud - ModelArts</a>
+      <a href="#" class="side-link">Lambda Cloud - GPU</a>
+      <a href="#" class="side-link">RunPod - Serverless</a>
+      <a href="#" class="side-link">Vast.ai - Marche P2P</a>
+      <a href="#" class="side-link">Hetzner - Serveurs GPU</a>
+      <a href="#" class="side-link">Scaleway - Cloud souverain</a>
+      <a href="#" class="side-link">Together AI - Inference</a>
+      <a href="#" class="side-link">OpenAI - API GPT-4o</a>
+      <a href="#" class="side-link">Anthropic - API Claude</a>
+      <a href="#" class="side-link">DeepSeek - API / Open Source</a>
+      <a href="#" class="side-link">Qwen - DashScope API</a>
+      <a href="#" class="side-link">Hugging Face - Modeles</a>
+      <a href="#" class="side-link">Ollama - Modeles locaux</a>
+    </div>
+  </div>
+
+  <!-- HOT MODELS -->
+  <div class="side-box">
+    <div class="side-head"><span class="side-dot" style="background:#cf1322"></span>Modeles populaires</div>
+    <div class="side-body" style="font-size:12px;line-height:2">
+      <a href="#" style="color:#1a0dab;display:block">GPT-4o <span style="color:#999">(OpenAI)</span></a>
+      <a href="#" style="color:#1a0dab;display:block">Claude Sonnet 4 <span style="color:#999">(Anthropic)</span></a>
+      <a href="#" style="color:#1a0dab;display:block">Gemini 2.5 Pro <span style="color:#999">(Google)</span></a>
+      <a href="#" style="color:#1a0dab;display:block">DeepSeek-R1 <span style="color:#999">(DeepSeek)</span></a>
+      <a href="#" style="color:#1a0dab;display:block">Llama 4 Scout <span style="color:#999">(Meta)</span></a>
+      <a href="#" style="color:#1a0dab;display:block">Qwen 2.5 72B <span style="color:#999">(Alibaba)</span></a>
+      <a href="#" style="color:#1a0dab;display:block">Mistral Large 2 <span style="color:#999">(Mistral)</span></a>
+      <a href="#" style="color:#1a0dab;display:block">GLM-4 <span style="color:#999">(Zhipu)</span></a>
+      <a href="#" style="color:#1a0dab;display:block">Grok-3 <span style="color:#999">(xAI)</span></a>
+      <a href="#" style="color:#1a0dab;display:block">Kimi <span style="color:#999">(Moonshot)</span></a>
+    </div>
+  </div>
+
+</div><!-- /col-side -->
+
+</div><!-- /two-col -->
+</div><!-- /content -->
+
+<!-- ==================== FOOTER ==================== -->
+<div class="footer">
+<div class="footer-inner">
+  <div class="footer-links">
+    <a href="#accueil">Accueil</a>
+    <a href="#pourquoi">Pourquoi AI+VPS</a>
+    <a href="#cloud">Cloud Public</a>
+    <a href="#ia">Modeles IA</a>
+    <a href="#vps">VPS IA</a>
+    <a href="#guide">Guide</a>
+    <a href="#comparaison">Comparatif</a>
+    <a href="#couts">Optimisation Couts</a>
+    <a href="#avenir">Tendances</a>
+    <a href="#ressources">Ressources</a>
+  </div>
+  <div class="footer-links" style="border-top:1px solid #eee;padding-top:8px">
+    <a href="#">AWS</a>
+    <a href="#">Azure</a>
+    <a href="#">Google Cloud</a>
+    <a href="#">Alibaba Cloud</a>
+    <a href="#">Tencent Cloud</a>
+    <a href="#">Huawei Cloud</a>
+    <a href="#">Baidu Cloud</a>
+    <a href="#">Volcengine</a>
+    <a href="#">Hetzner</a>
+    <a href="#">Scaleway</a>
+    <a href="#">Oracle Cloud</a>
+    <a href="#">Lambda Cloud</a>
+    <a href="#">RunPod</a>
+    <a href="#">Vast.ai</a>
+    <a href="#">CoreWeave</a>
+    <a href="#">Together AI</a>
+    <a href="#">OpenAI</a>
+    <a href="#">Anthropic</a>
+    <a href="#">Google AI</a>
+    <a href="#">Meta AI</a>
+    <a href="#">Mistral AI</a>
+    <a href="#">xAI</a>
+    <a href="#">DeepSeek</a>
+    <a href="#">Qwen</a>
+    <a href="#">Zhipu AI</a>
+    <a href="#">Moonshot</a>
+    <a href="#">iFlytek</a>
+    <a href="#">Baichuan</a>
+  </div>
+  <div class="footer-copy">
+    AI-VPS.github.io - Portail de ressources IA et infrastructure VPS - Guide de reference 2026<br>
+    Tous les prix sont indicatifs et bases sur les tarifs publics. Consultez les sites officiels pour les donnees actualisees.
+  </div>
+</div>
+</div>
+
+<!-- ==================== JAVASCRIPT ==================== -->
+<script>
+(function(){
+  // Date
+  var d=new Date();
+  var jours=['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+  var mois=['janvier','fevrier','mars','avril','mai','juin','juillet','aout','septembre','octobre','novembre','decembre'];
+  document.getElementById('date-display').textContent=jours[d.getDay()]+' '+d.getDate()+' '+mois[d.getMonth()]+' '+d.getFullYear();
+
+  // Tabs
+  var tabGroups={};
+  document.querySelectorAll('.tab').forEach(function(tab){
+    var parent=tab.parentElement;
+    var key=parent.getAttribute('data-tab-group')||'default';
+    if(!tabGroups[key])tabGroups[key]=[];
+    // find sibling tabs and contents
+    tab.addEventListener('click',function(){
+      var tabId=this.getAttribute('data-tab');
+      // deactivate siblings
+      this.parentElement.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active')});
+      this.classList.add('active');
+      // find contents
+      var container=this.parentElement.parentElement;
+      container.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active')});
+      var target=document.getElementById('tab-'+tabId);
+      if(target)target.classList.add('active');
+    });
+  });
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var t=document.querySelector(this.getAttribute('href'));
+      if(t){
+        e.preventDefault();
+        var y=t.getBoundingClientRect().top+window.pageYOffset-4;
+        window.scrollTo({top:y,behavior:'smooth'});
+      }
+    });
+  });
+
+  // Nav active
+  var navLinks=document.querySelectorAll('.main-nav a');
+  var sectionEls=document.querySelectorAll('.box[id],.quick-section[id]');
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        var id=e.target.getAttribute('id');
+        navLinks.forEach(function(l){
+          l.classList.toggle('active',l.getAttribute('href')==='#'+id);
+        });
+      }
+    });
+  },{rootMargin:'-20% 0px -60% 0px'});
+  sectionEls.forEach(function(s){obs.observe(s)});
+})();
+</script>
+</body>
+</html>
