@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-VPS - KI-Infrastruktur & Cloud-Ressourcen Navigation</title>
+<meta name="description" content="KI-Infrastruktur, Cloud-Services und GPU-Ressourcen Vergleich.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font:12px/1.6 "Microsoft YaHei","Helvetica Neue",Arial,sans-serif;background:#f5f5f5;color:#333}
+a{color:#1a0dab;text-decoration:none}
+a:hover{text-decoration:underline;color:#d00}
+a:visited{color:#681da8}
+.wrap{max-width:1100px;margin:0 auto;background:#fff}
+.topbar{background:#f0f0f0;border-bottom:1px solid #ddd;padding:4px 0;font-size:12px}
+.topbar .inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;padding:0 10px}
+.topbar a{color:#555;font-size:12px;margin:0 6px}
+.topbar a:hover{color:#d00}
+.header{background:#fff;padding:10px 0;border-bottom:2px solid #2b6cb0}
+.header .inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;padding:0 10px;gap:20px}
+.logo{font-size:32px;font-weight:bold;color:#2b6cb0;font-family:Arial,sans-serif;white-space:nowrap}
+.logo span{color:#d00}
+.search-box{flex:1;max-width:500px}
+.search-box input[type="text"]{width:calc(100% - 70px);height:30px;border:2px solid #2b6cb0;border-right:none;padding:0 8px;font-size:14px;outline:none}
+.search-box button{width:70px;height:30px;background:#2b6cb0;color:#fff;border:2px solid #2b6cb0;font-size:14px;cursor:pointer}
+.search-box button:hover{background:#1a4f8a}
+.header-links a{font-size:13px;color:#333;margin:0 8px}
+
+/* Navigation bar */
+.navbar{background:#2b6cb0;padding:0 10px}
+.navbar .inner{max-width:1100px;margin:0 auto;display:flex}
+.navbar a{color:#fff;font-size:14px;padding:8px 14px;display:inline-block;text-decoration:none}
+.navbar a:hover{background:#1a4f8a;text-decoration:none}
+.navbar a.active{background:#d00}
+
+/* Main content */
+.main{max-width:1100px;margin:0 auto;background:#fff;padding:0 10px}
+.section{border-bottom:1px solid #e8e8e8;padding:12px 0}
+.section:last-child{border-bottom:none}
+.sec-title{font-size:16px;font-weight:bold;color:#333;border-left:4px solid #2b6cb0;padding-left:8px;margin-bottom:10px;line-height:1}
+.sec-title a{color:#333;font-size:16px}
+.sec-title a:hover{color:#d00}
+.sec-title .more{float:right;font-size:12px;font-weight:normal;color:#999;border:none;padding:0;margin:0}
+.sec-title .more a{color:#999;font-size:12px}
+.sec-title .more a:hover{color:#d00}
+
+/* Link columns */
+.link-cols{display:flex;flex-wrap:wrap}
+.link-col{width:25%;padding:4px 8px 4px 0;vertical-align:top}
+.link-col.wide{width:33.33%}
+.link-col.full{width:100%}
+.link-col h4{font-size:13px;font-weight:bold;color:#2b6cb0;margin-bottom:4px;padding-bottom:3px;border-bottom:1px dashed #ddd}
+.link-col ul{list-style:none;padding:0}
+.link-col li{padding:2px 0;line-height:1.8}
+.link-col li a{font-size:12px;color:#1a0dab}
+.link-col li a.vip{color:#d00;font-weight:bold}
+.link-col li span.info{color:#999;font-size:11px;margin-left:4px}
+.link-col li span.tag{display:inline-block;background:#eef4fb;color:#2b6cb0;font-size:10px;padding:0 4px;border-radius:2px;margin-left:4px}
+.link-col li span.tag-hot{background:#fff0f0;color:#d00}
+.link-col li span.tag-new{background:#f0fff0;color:#090}
+
+/* Table style */
+.data-table{width:100%;border-collapse:collapse;font-size:12px;margin:8px 0}
+.data-table th{background:#f0f5fb;color:#333;font-weight:bold;padding:6px 8px;border:1px solid #ddd;text-align:left}
+.data-table td{padding:5px 8px;border:1px solid #ddd}
+.data-table tr:nth-child(even){background:#fafafa}
+.data-table tr:hover{background:#f5f8fc}
+.data-table .hl{color:#d00;font-weight:bold}
+.data-table .blue{color:#2b6cb0}
+
+/* Info box */
+.info-box{background:#f7faff;border:1px solid #d6e4f0;padding:10px 12px;margin:8px 0;font-size:12px;line-height:1.8}
+.info-box.red{background:#fff7f7;border-color:#f0d0d0}
+.info-box strong{color:#2b6cb0}
+.info-box.red strong{color:#d00}
+
+/* Card grid - flat style */
+.card-grid{display:flex;flex-wrap:wrap;gap:0}
+.card-item{width:25%;padding:8px;vertical-align:top}
+.card-item .card{border:1px solid #e8e8e8;padding:10px;height:100%;background:#fff}
+.card-item .card:hover{border-color:#2b6cb0;background:#f9fcff}
+.card-item .card h5{font-size:14px;color:#2b6cb0;margin-bottom:4px}
+.card-item .card h5 span{font-size:11px;color:#999;font-weight:normal;margin-left:4px}
+.card-item .card p{font-size:12px;color:#555;line-height:1.7;margin-bottom:4px}
+.card-item .card .stats{font-size:11px;color:#999;border-top:1px dashed #eee;padding-top:4px;margin-top:4px}
+.card-item .card .stats b{color:#2b6cb0}
+
+/* Wide card */
+.card-item.wide{width:50%}
+.card-item.third{width:33.33%}
+
+/* Bar chart - simple */
+.bar-list{margin:8px 0}
+.bar-row{display:flex;align-items:center;margin:3px 0}
+.bar-label{width:80px;text-align:right;padding-right:8px;font-size:12px;color:#555}
+.bar-track{flex:1;height:20px;background:#f0f0f0;position:relative}
+.bar-fill{height:100%;background:#2b6cb0;font-size:11px;color:#fff;line-height:20px;padding-left:6px}
+.bar-fill.orange{background:#e67e22}
+.bar-fill.red{background:#c0392b}
+.bar-fill.green{background:#27ae60}
+.bar-fill.purple{background:#8e44ad}
+.bar-fill.gray{background:#95a5a6}
+
+/* Footer */
+.footer{background:#f5f5f5;border-top:1px solid #ddd;padding:15px 0;text-align:center;font-size:12px;color:#999}
+.footer a{color:#555;margin:0 6px;font-size:12px}
+.footer a:hover{color:#d00}
+.footer .links{margin-bottom:8px}
+.footer p{line-height:2}
+
+/* Quick nav sidebar-like boxes */
+.side-box{border:1px solid #ddd;margin:8px 0;background:#fff}
+.side-box .side-title{background:#2b6cb0;color:#fff;font-size:13px;font-weight:bold;padding:6px 10px}
+.side-box .side-body{padding:8px 10px;font-size:12px;line-height:2}
+
+/* Tab style */
+.tab-row{display:flex;border-bottom:2px solid #2b6cb0;margin-bottom:10px}
+.tab-row a{padding:6px 16px;font-size:13px;color:#333;background:#f0f0f0;border:1px solid #ddd;border-bottom:none;margin-right:2px;text-decoration:none;position:relative;top:2px}
+.tab-row a.on{background:#fff;color:#2b6cb0;font-weight:bold;border-color:#2b6cb0}
+.tab-row a:hover{text-decoration:none;background:#e8f0fb}
+
+/* Divider text */
+.divider{font-size:12px;color:#999;text-align:center;padding:6px 0;background:#fafafa;border-top:1px dashed #ddd;border-bottom:1px dashed #ddd;margin:6px 0}
+
+/* News ticker style */
+.news-list{padding:0;list-style:none}
+.news-list li{padding:3px 0;border-bottom:1px dashed #eee}
+.news-list li:last-child{border-bottom:none}
+.news-list li a{font-size:12px;color:#1a0dab}
+.news-list li span.date{color:#999;font-size:11px;margin-right:8px}
+.news-list li b.hot{color:#d00;font-size:10px;font-weight:normal;background:#fff0f0;padding:0 3px;margin-left:4px}
+
+@media(max-width:800px){
+  .link-col{width:50%}
+  .link-col.wide{width:100%}
+  .card-item,.card-item.wide,.card-item.third{width:100%}
+  .header .inner{flex-wrap:wrap}
+  .search-box{max-width:100%;order:3;margin-top:8px}
+  .navbar .inner{flex-wrap:wrap}
+}
+@media(max-width:500px){
+  .link-col{width:100%}
+}
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="topbar">
+  <div class="inner">
+    <div>
+      <a href="#">AI-VPS首頁</a> |
+      <a href="#">設為主頁</a> |
+      <a href="#">收藏本站</a>
+    </div>
+    <div>
+      <a href="#">2026年7月11日</a> |
+      <a href="#">Deutsch</a> |
+      <a href="#kontakt">Newsletter</a>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<div class="header">
+  <div class="inner">
+    <div class="logo">AI-<span>VPS</span></div>
+    <div class="search-box">
+      <input type="text" placeholder="Cloud-Anbieter, KI-Modelle, GPU-Ressourcen suchen...">
+      <button>Suchen</button>
+    </div>
+    <div class="header-links">
+      <a href="#markt">Marktdaten</a>
+      <a href="#cloud-int">Cloud</a>
+      <a href="#gpu">GPU</a>
+    </div>
+  </div>
+</div>
+
+<!-- Navbar -->
+<div class="navbar">
+  <div class="inner">
+    <a href="#markt">Marktueberblick</a>
+    <a href="#cloud-int">Internationale Cloud</a>
+    <a href="#cloud-cn">Chinesische Cloud</a>
+    <a href="#ki-global">KI Global</a>
+    <a href="#ki-cn">KI China</a>
+    <a href="#gpu">GPU & VPS</a>
+    <a href="#hybrid">Hybrid-Cloud</a>
+    <a href="#zukunft">Zukunftstrends</a>
+    <a href="#kontakt">Kontakt</a>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div class="main">
+
+  <!-- ===================== SECTION 1: MARKTUEBERBLICK ===================== -->
+  <div class="section" id="markt">
+    <div class="sec-title">
+      <a href="#">Marktueberblick 2026</a>
+      <span class="more"><a href="#">mehr &raquo;</a></span>
+    </div>
+
+    <div class="info-box">
+      <strong>[Wichtig]</strong> Die globalen Ausgaben fuer Cloud-Infrastrukturdienste beliefen sich im Q1 2026 auf <b>129 Mrd. USD</b>, was einem Wachstum von <b>35%</b> im Jahresvergleich entspricht. Fuer das Gesamtjahr 2026 wird erwartet, dass die Umsaetze erstmals die Marke von <b>500 Mrd. USD</b> uebersteigen. Das Wachstum beschleunigt sich bereits seit 10 aufeinanderfolgenden Quartalen, angetrieben vor allem durch den KI-Boom und die damit verbundenen Rechenanforderungen. KI-bezogener Cloud-Anteil stieg von 8% (2023) auf <b>19%</b> (2026).
+    </div>
+
+    <table class="data-table">
+      <tr><th>Kennzahl</th><th>Wert</th><th>Quelle / Anmerkung</th></tr>
+      <tr><td>Cloud-Infrastrukturausgaben Q1 2026</td><td class="hl">129 Mrd. USD</td><td>Synergy Research Group</td></tr>
+      <tr><td>Prognose Jahresumsatz 2026</td><td class="hl">&gt;500 Mrd. USD</td><td>Synergy Research Group</td></tr>
+      <tr><td>Jaehrliches Wachstum</td><td class="blue">+35%</td><td>10. Quartal in Folge steigend</td></tr>
+      <tr><td>Marktanteil Top 3 (AWS+Azure+GCP)</td><td class="blue">68%</td><td>Synergy Research Group</td></tr>
+      <tr><td>KI-Anteil am Cloud-Markt</td><td class="hl">19%</td><td>Gegenueber 8% im Jahr 2023</td></tr>
+      <tr><td>Groesster regionaler Markt</td><td>USA</td><td>Gefolgt von China, APAC, Europa</td></tr>
+      <tr><td>Chinas Anteil am APAC-Markt</td><td>ca. 1/3</td><td>Synergy Research Group</td></tr>
+      <tr><td>IT-Ausgabenquote China</td><td>2% des Umsatzes</td><td>vs. 4% globaler Durchschnitt</td></tr>
+      <tr><td>US-Anteil an globaler DC-Kapazitaet</td><td>51%</td><td>China: 16%</td></tr>
+      <tr><td>Investitionswachstum agente KI</td><td class="hl">&gt;60% jaehrlich</td><td>Seit 2023</td></tr>
+    </table>
+
+    <div class="info-box">
+      <strong>[Marktanteile Q1 2026]</strong> AWS fuehrt mit ca. 30%, gefolgt von Azure mit 25% und Google Cloud mit 13%. Kein anderer Anbieter uebersteigt die 4%-Marke. Oracle und Alibaba folgen mit jeweils ca. 3-4%.
+    </div>
+
+    <div class="bar-list">
+      <div class="bar-row"><div class="bar-label">AWS</div><div class="bar-track"><div class="bar-fill" style="width:90%">30%</div></div></div>
+      <div class="bar-row"><div class="bar-label">Azure</div><div class="bar-track"><div class="bar-fill" style="width:75%">25%</div></div></div>
+      <div class="bar-row"><div class="bar-label">Google Cloud</div><div class="bar-track"><div class="bar-fill orange" style="width:39%">13%</div></div></div>
+      <div class="bar-row"><div class="bar-label">Alibaba</div><div class="bar-track"><div class="bar-fill red" style="width:12%">4%</div></div></div>
+      <div class="bar-row"><div class="bar-label">Oracle</div><div class="bar-track"><div class="bar-fill purple" style="width:9%">3%</div></div></div>
+      <div class="bar-row"><div class="bar-label">Sonstige</div><div class="bar-track"><div class="bar-fill gray" style="width:75%">25%</div></div></div>
+    </div>
+  </div>
+
+  <!-- ===================== SECTION 2: INTERNATIONALE CLOUD ===================== -->
+  <div class="section" id="cloud-int">
+    <div class="sec-title">
+      <a href="#">Internationale Cloud-Anbieter</a>
+      <span class="more"><a href="#">mehr &raquo;</a></span>
+    </div>
+
+    <div class="card-grid">
+      <!-- AWS -->
+      <div class="card-item wide">
+        <div class="card">
+          <h5>Amazon Web Services (AWS) <span>[Marktfuehrer | 30% Marktanteil]</span></h5>
+          <p>AWS hielt im Q1 2026 rund 30% des globalen Cloud-Infrastrukturmarktes und bleibt der unangefochtene Marktfuehrer. Mit ueber 240 verwalteten Diensten in 33 Regionen und 105 Availability Zones bietet AWS die breiteste Palette an Cloud-Diensten weltweit. AWS ist typischerweise 10-20% teurer als Google Cloud fuer vergleichbare Rechenleistungen. Die Reserved-Instance-Infrastruktur bietet Rabatte von bis zu 69% bei dreijaehrigen Laufzeiten.</p>
+          <p><b>Dienste:</b> EC2, S3, Lambda, SageMaker, Bedrock, EKS, RDS, CloudFront &nbsp; | &nbsp; <b>KI:</b> Amazon Bedrock (Claude, Llama, Titan), SageMaker, Trainium/Inferentia</p>
+          <div class="stats"><b>240+</b> Dienste &nbsp;|&nbsp; <b>33</b> Regionen &nbsp;|&nbsp; <b>105</b> AZs &nbsp;|&nbsp; Wachstum: <b>19% YoY</b></div>
+        </div>
+      </div>
+
+      <!-- Azure -->
+      <div class="card-item wide">
+        <div class="card">
+          <h5>Microsoft Azure <span>[Platz 2 | 25% Marktanteil | schnellstes Absatzwachstum]</span></h5>
+          <p>Azure erreichte im Q1 2026 einen Marktanteil von 25% und verzeichnete das schnellste absolute Umsatzwachstum aller drei grossen Anbieter. Die tiefe Integration in Microsoft-Oekosysteme (Office 365, Dynamics, Power Platform) macht Azure zur bevorzugten Wahl fuer grosse Unternehmen. Azure verzeichnete ein Umsatzwachstum von 40% YoY, angetrieben durch die exklusive Partnerschaft mit OpenAI.</p>
+          <p><b>Dienste:</b> Virtual Machines, Blob Storage, Azure Functions, AKS, Cosmos DB, Cognitive Services &nbsp; | &nbsp; <b>KI:</b> Azure OpenAI Service (GPT-4o, o3), Copilot, Azure ML</p>
+          <div class="stats"><b>200+</b> Dienste &nbsp;|&nbsp; <b>60+</b> Regionen &nbsp;|&nbsp; Wachstum: <b>+40% YoY</b></div>
+        </div>
+      </div>
+
+      <!-- Google Cloud -->
+      <div class="card-item wide">
+        <div class="card">
+          <h5>Google Cloud Platform (GCP) <span>[Platz 3 | 13% Marktanteil | +63% YoY]</span></h5>
+          <p>Google Cloud hielt im Q1 2026 einen Marktanteil von 13% und verzeichnete mit 63% das schnellste prozentuale Wachstum aller drei grossen Anbieter. Als KI-native Plattform profitiert Google Cloud von seiner fuehrenden Position in der KI-Forschung. Googles TPUs (Tensor Processing Units) bieten eine einzigartige, fuer KI-Workloads optimierte Hardware-Infrastruktur. Die BigQuery-Datenplattform und fuehrende Kubernetes-Position (GKE) machen GCP besonders attraktiv fuer KI- und Datenanwendungen.</p>
+          <p><b>Dienste:</b> Compute Engine, Cloud Storage, Cloud Functions, GKE, BigQuery, Vertex AI &nbsp; | &nbsp; <b>KI:</b> Gemini Ultra/Pro, Vertex AI, TPUs v5/v6</p>
+          <div class="stats"><b>150+</b> Dienste &nbsp;|&nbsp; <b>40+</b> Regionen &nbsp;|&nbsp; Wachstum: <b>+63% YoY</b> (schnellstes)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider">--- Weitere internationale Anbieter ---</div>
+
+    <div class="card-grid">
+      <div class="card-item third">
+        <div class="card">
+          <h5>Oracle Cloud (OCI) <span>[3%]</span></h5>
+          <p>Positioniert sich als kosteneffiziente Alternative fuer rechenintensive Workloads. Starke Datenbanktechnologie, isolierte Netzwerk- und Rechenbereiche, attraktiv fuer bestehende Oracle-Kunden.</p>
+          <div class="stats">Enterprise-DB-Fuehrer &nbsp;|&nbsp; Autonomous Database</div>
+        </div>
+      </div>
+      <div class="card-item third">
+        <div class="card">
+          <h5>IBM Cloud <span>[Hybrid-Experte]</span></h5>
+          <p>Fokus auf Hybrid-Cloud-Loesungen und KI fuer Unternehmen. Red Hat-Integration als fuehrende Open-Source-Hybrid-Cloud-Plattform. Watson fuer regulierte Branchen (Finanzen, Gesundheit).</p>
+          <div class="stats">Red Hat OpenShift &nbsp;|&nbsp; Watson KI &nbsp;|&nbsp; Compliance</div>
+        </div>
+      </div>
+      <div class="card-item third">
+        <div class="card">
+          <h5>Hetzner <span>[Preis-Leistungs-Sieger]</span></h5>
+          <p>Deutscher Anbieter mit extrem wettbewerbsfaehigen Preisen. Hervorragend fuer VPS und Dedicated Server. Cloud-VPS ab ca. 3 EUR/Monat. Europaeischer Datenschutzstandort.</p>
+          <div class="stats">VPS ab ~3 EUR/Mon. &nbsp;|&nbsp; DE/FI/US-Standorte</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <strong>[Direktvergleich]</strong>
+      AWS: Marktfuehrer, breitestes Oekosystem, 10-20% teurer als GCP, max. RI-Rabatt 69% &nbsp;|&nbsp;
+      Azure: Stark bei Enterprise + OpenAI, 60+ Regionen, Wachstum +40% &nbsp;|&nbsp;
+      GCP: KI-nativ, TPUs, guenstigster Hyperskaler, Wachstum +63% &nbsp;|&nbsp;
+      Oracle: Starke DB, gut fuer rechenintensive Workloads &nbsp;|&nbsp;
+      Hetzner/Contabo: Budget-VPS in Europa
+    </div>
+  </div>
+
+  <!-- ===================== SECTION 3: CHINESISCHE CLOUD ===================== -->
+  <div class="section" id="cloud-cn">
+    <div class="sec-title">
+      <a href="#">Chinesische Cloud-Anbieter</a>
+      <span class="more"><a href="#">mehr &raquo;</a></span>
+    </div>
+
+    <div class="info-box red">
+      <strong>[Hintergrund]</strong> China ist der zweitgroesste Cloud-Markt der Welt und wird ausschliesslich von einheimischen Anbietern dominiert. Die gesamte Top 10 besteht aus chinesischen Firmen. Westliche Anbieter sind durch geopolitische Faktoren und regulatorische Anforderungen stark eingeschraenkt. Trotz enormen Wachstums: Allein AWS generiert mehr Umsatz als der gesamte chinesische Cloud-Sektor zusammen. China-Rechenzentren: 16% der globalen Kapazitaet vs. 51% USA.
+    </div>
+
+    <div class="card-grid">
+      <div class="card-item">
+        <div class="card">
+          <h5>Alibaba Cloud <span>[#1 China]</span></h5>
+          <p>Fuehrt den chinesischen Markt und ist groesster Anbieter in APAC. Investition von <b>53 Mrd. USD</b> in KI- und Cloud-Infrastruktur -- mehr als die gesamten Ausgaben des letzten Jahrzehnts zusammen.</p>
+          <p><b>KI:</b> Tongyi Qianwen (Qwen 2.5), Open Source</p>
+          <div class="stats"><b>#1</b> China &nbsp;|&nbsp; <b>#2</b> APAC &nbsp;|&nbsp; <b>$53B</b> Investition</div>
+        </div>
+      </div>
+      <div class="card-item">
+        <div class="card">
+          <h5>Tencent Cloud <span>[#2 China]</span></h5>
+          <p>Profitiert von WeChat (1,3 Mrd. Nutzer) und Gaming-Diensten. Top-5 in APAC. Starke Position bei sozialen Plattformen und Gaming-Anwendungen. Eigene Hunyuan-LLMs.</p>
+          <p><b>KI:</b> Hunyuan, WeChat-Integration</p>
+          <div class="stats"><b>#2</b> China &nbsp;|&nbsp; <b>1.3B</b> WeChat-Nutzer &nbsp;|&nbsp; <b>Top 5</b> APAC</div>
+        </div>
+      </div>
+      <div class="card-item">
+        <div class="card">
+          <h5>Huawei Cloud <span>[#3 China]</span></h5>
+          <p>Wachst schnell, unterstuetzt durch Telekommunikationserfahrung. Ascend-KI-Chips als NVIDIA-Alternative. Starke Position bei Regierungs- und Enterprise-Projekten.</p>
+          <p><b>KI:</b> Ascend 910B/910C, Pangu-Modelle</p>
+          <div class="stats"><b>Top 3</b> China &nbsp;|&nbsp; <b>Ascend</b> KI-Chips &nbsp;|&nbsp; Gov+</div>
+        </div>
+      </div>
+      <div class="card-item">
+        <div class="card">
+          <h5>China Telecom <span>[#4 | Telecom-Riese]</span></h5>
+          <p>Staatliches Unternehmen mit umfangreicher Netzwerkinfrastruktur. Besonderer Zugang zu Regierungsprojekten. Fokus auf Edge-Computing und Rechenzentrum-Infrastruktur.</p>
+          <div class="stats"><b>Top 4</b> China &nbsp;|&nbsp; Staatseigentum &nbsp;|&nbsp; Edge-Fokus</div>
+        </div>
+      </div>
+      <div class="card-item">
+        <div class="card">
+          <h5>Baidu Cloud <span>[KI-Pionier]</span></h5>
+          <p>Chinas fuehrendes KI-Unternehmen mit Ernie/Wenxin-Modellen. Tief integriert in Baidu-Suche, autonomes Fahren (Apollo) und Cloud-KI-Dienste.</p>
+          <p><b>KI:</b> Ernie 4.5, Wenxin, Apollo</p>
+          <div class="stats">KI-Pionier &nbsp;|&nbsp; Autonomes Fahren</div>
+        </div>
+      </div>
+      <div class="card-item">
+        <div class="card">
+          <h5>China Mobile / Unicom <span>[Telecom]</span></h5>
+          <p>Beide Unternehmen haben massiv in Cloud-Computing investiert und ihre Netzwerkinfrastruktur genutzt. Ergaenzen die Top-5-Anbieter als Infrastrukturlieferanten mit Fokus auf IaaS.</p>
+          <div class="stats">Netzwerk-basiert &nbsp;|&nbsp; IaaS-Fokus</div>
+        </div>
+      </div>
+      <div class="card-item">
+        <div class="card">
+          <h5>Volcengine (ByteDance) <span>[Schnell wachsend]</span></h5>
+          <p>ByteDances Cloud- und KI-Plattform. Einer der groessten GPU-Kunden weltweit. Bietet KI-Dienste fuer Empfehlungsalgorithmen und generative KI an.</p>
+          <p><b>KI:</b> Doubao, Coze-Plattform</p>
+          <div class="stats">Mass GPU-Nutzer &nbsp;|&nbsp; KI-Agenten</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box red">
+      <strong>[Herausforderung]</strong> Chinesische Cloud-Anbieter sind ueberproportional auf niedrigmaergige IaaS-Dienste angewiesen. PaaS-Umsaetze liegen deutlich hinter westlichen Anbietern zurueck. IT-Ausgaben chinesischer Unternehmen: nur 2% des Umsatzes vs. 4% global. Huawei Ascend-Chips dienen als Ersatz fuer eingeschraenkte NVIDIA-Exporte.
+    </div>
+  </div>
+
+  <!-- ===================== SECTION 4: KI GLOBAL ===================== -->
+  <div class="section" id="ki-global">
+    <div class="sec-title">
+      <a href="#">Globale KI-Anbieter & Modelle</a>
+      <span class="more"><a href="#">mehr &raquo;</a></span>
+    </div>
+
+    <div class="info-box">
+      <strong>[Trend]</strong> Agente KI-Systeme -- autonome mehrstufige Reasoning- und Ausfuehrungsprozesse -- erweitern rasch die Grenzen der Automatisierung. Investitionen in agile KI wuchsen seit 2023 um &gt;60% jaehrlich. 55% der Investitionen in Agentic-Plattformen, 40% in horizontale Anwendungen. Potentieller Netto-Wert: <b>bis zu $200 Mrd.</b> in 5 Jahren. Verizon: +40% Produktivitaet. Nubank: bis zu 12x Effizienzsteigerung.
+    </div>
+
+    <table class="data-table">
+      <tr>
+        <th>Anbieter</th>
+        <th>Modelle</th>
+        <th>Hauptsitz</th>
+        <th>Schwerpunkt</th>
+        <th>Besonderheiten</th>
+        <th>Verfuegbarkeit</th>
+      </tr>
+      <tr>
+        <td class="hl">OpenAI</td>
+        <td>GPT-4o, o3, DALL-E, Codex</td>
+        <td>USA (2015)</td>
+        <td>LLM, Multimodal, Code</td>
+        <td>ChatGPT als Katalysator; Partnerschaft mit Microsoft/Azure</td>
+        <td>Azure OpenAI, API, ChatGPT</td>
+      </tr>
+      <tr>
+        <td class="hl">Anthropic</td>
+        <td>Claude 4, Sonnet, Haiku</td>
+        <td>USA (2021)</td>
+        <td>Sicherheit, lange Kontexte</td>
+        <td>Constitutional AI; Fokus auf Vertrauenswuerdigkeit</td>
+        <td>AWS Bedrock, API</td>
+      </tr>
+      <tr>
+        <td class="hl">Google DeepMind</td>
+        <td>Gemini Ultra/Pro, Nano</td>
+        <td>USA (2023 Fusion)</td>
+        <td>Multimodal, TPU</td>
+        <td>Google Brain + DeepMind Fusion; TPU v5/v6</td>
+        <td>Vertex AI, Google Cloud</td>
+      </tr>
+      <tr>
+        <td class="hl">Meta AI</td>
+        <td>Llama 4 (Maverick, Scout)</td>
+        <td>USA</td>
+        <td>Open Source LLM</td>
+        <td>Frei deploybar; staerkstes Open-Source-Oekosystem</td>
+        <td>Open Source, alle Clouds</td>
+      </tr>
+      <tr>
+        <td class="hl">Mistral AI</td>
+        <td>Mistral Large, Mixtral, Codestral</td>
+        <td>Frankreich (2023)</td>
+        <td>Effiziente LLM, Europa</td>
+        <td>Souveraene KI aus Europa; kleinere, effiziente Modelle</td>
+        <td>Alle grossen Clouds</td>
+      </tr>
+      <tr>
+        <td class="hl">xAI</td>
+        <td>Grok-3</td>
+        <td>USA (2023)</td>
+        <td>Echtzeit, Wahrhaftigkeit</td>
+        <td>Colossus-Cluster; X/Twitter-Integration</td>
+        <td>X-Plattform, API</td>
+      </tr>
+      <tr>
+        <td class="blue">Cohere</td>
+        <td>Command R+, Embed, Rerank</td>
+        <td>Kanada</td>
+        <td>Enterprise RAG</td>
+        <td>Fokus auf Retrieval-Augmented Generation</td>
+        <td>Alle grossen Clouds</td>
+      </tr>
+      <tr>
+        <td class="blue">Stability AI</td>
+        <td>Stable Diffusion, SDXL</td>
+        <td>UK</td>
+        <td>Bildgenerierung</td>
+        <td>Open-Source-Bildgenerierung; Community-Modell</td>
+        <td>Open Source, API</td>
+      </tr>
+      <tr>
+        <td class="blue">Perplexity</td>
+        <td>Proprietary Search-LLM</td>
+        <td>USA</td>
+        <td>KI-Suche</td>
+        <td>KI-gestuetzte Suchmaschine mit Echtzeit-Quellenangaben</td>
+        <td>Eigene Plattform</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ===================== SECTION 5: KI CHINA ===================== -->
+  <div class="section" id="ki-cn">
+    <div class="sec-title">
+      <a href="#">Chinesische KI-Anbieter & Modelle</a>
+      <span class="more"><a href="#">mehr &raquo;</a></span>
+    </div>
+
+    <div class="info-box red">
+      <strong>[Hintergrund]</strong> Trotz Exportkontrollen fuer fortschrittliche KI-Chips hat China ein blühendes KI-Modell-Oekosystem entwickelt. Alibaba investiert 53 Mrd. USD in KI-Infrastruktur. Modelle wie DeepSeek erreichen mit deutlich weniger Rechenleistung westliche Spitzenniveaus -- die Diskussion ueber KI-Effizienz hat sich grundlegend veraendert.
+    </div>
+
+    <table class="data-table">
+      <tr>
+        <th>Anbieter</th>
+        <th>Modelle</th>
+        <th>Schwerpunkt</th>
+        <th>Besonderheiten</th>
+      </tr>
+      <tr>
+        <td class="hl">DeepSeek</td>
+        <td>DeepSeek-V3, DeepSeek-R1</td>
+        <td>Effiziente LLM, Reasoning</td>
+        <td>Erschuetterte globale KI-Landschaft; erreicht mit weniger Hardware westliche Spitzenniveaus; Open Source</td>
+      </tr>
+      <tr>
+        <td class="hl">Baidu</td>
+        <td>Ernie 4.5 (Wenxin)</td>
+        <td>Chinesische LLM, Suche, autonomes Fahren</td>
+        <td>Chinas KI-Pionier; tief in Baidu-Suche und Apollo integriert</td>
+      </tr>
+      <tr>
+        <td class="hl">Alibaba / Qwen</td>
+        <td>Qwen 2.5 (Tongyi Qianwen)</td>
+        <td>Open-Source-LLM, Cloud-nativ</td>
+        <td>Starke Open-Source-Serie; in Alibaba Cloud integriert; 53B USD Investition</td>
+      </tr>
+      <tr>
+        <td class="hl">Tencent</td>
+        <td>Hunyuan</td>
+        <td>Gaming, soziale Medien</td>
+        <td>Tief in WeChat (1,3 Mrd. Nutzer) und Gaming integriert</td>
+      </tr>
+      <tr>
+        <td class="hl">ByteDance</td>
+        <td>Doubao</td>
+        <td>KI-Agenten, Empfehlungen</td>
+        <td>Coze-Plattform fuer KI-Bots; einer der groessten GPU-Kunden weltweit</td>
+      </tr>
+      <tr>
+        <td class="hl">Zhipu AI</td>
+        <td>GLM-4 (ChatGLM)</td>
+        <td>Wissensmanagement, Forschung</td>
+        <td>Tsinghua-Universitaet Spin-off; stark in chinesischer und englischer Sprache</td>
+      </tr>
+      <tr>
+        <td class="blue">Moonshot AI</td>
+        <td>Kimi</td>
+        <td>Lange Kontexte</td>
+        <td>Bis zu 200K Token Kontextfenster; stark bei langen Dokumenten</td>
+      </tr>
+      <tr>
+        <td class="blue">01.AI (Kai-Fu Lee)</td>
+        <td>Yi-1.5</td>
+        <td>Mehrsprachig, effizient</td>
+        <td>Open-Source-Modelle; Fokus auf Kosten-Effizienz</td>
+      </tr>
+      <tr>
+        <td class="blue">iFlytek</td>
+        <td>Spark</td>
+        <td>Sprache, Bildung</td>
+        <td>Fuehrend in Spracherkennung und KI fuer Bildung in China</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ===================== SECTION 6: GPU & VPS ===================== -->
+  <div class="section" id="gpu">
+    <div class="sec-title">
+      <a href="#">GPU-Beschleuniger & VPS-Ressourcen</a>
+      <span class="more"><a href="#">mehr &raquo;</a></span>
+    </div>
+
+    <div class="tab-row">
+      <a href="#" class="on" onclick="return false;">GPU-Beschleuniger</a>
+      <a href="#vps-tab">VPS-Vergleich</a>
+      <a href="#pricing-tab">Ausstattungsstufen</a>
+    </div>
+
+    <table class="data-table">
+      <tr>
+        <th>GPU</th>
+        <th>Architektur</th>
+        <th>Speicher</th>
+        <th>Bandbreite</th>
+        <th>Leistung</th>
+        <th>TDP</th>
+        <th>Cloud-Preis/h</th>
+        <th>Verfuegbarkeit</th>
+      </tr>
+      <tr>
+        <td class="hl">NVIDIA H100</td>
+        <td>Hopper</td>
+        <td>80 GB HBM3</td>
+        <td>3.35 TB/s</td>
+        <td>FP8: 3.958 TFLOPS</td>
+        <td>700W</td>
+        <td>$2.50-3.50</td>
+        <td>AWS, Azure, GCP</td>
+      </tr>
+      <tr>
+        <td class="hl">NVIDIA H200</td>
+        <td>Hopper+</td>
+        <td>141 GB HBM3e</td>
+        <td>4.8 TB/s</td>
+        <td>FP8: 3.958 TFLOPS</td>
+        <td>700W</td>
+        <td>$3.50-5.00</td>
+        <td>AWS, Azure, GCP</td>
+      </tr>
+      <tr>
+        <td class="hl">NVIDIA B200</td>
+        <td>Blackwell</td>
+        <td>192 GB HBM3e</td>
+        <td>8.0 TB/s</td>
+        <td>FP8: 9.000 TFLOPS</td>
+        <td>1000W</td>
+        <td>$5.00-8.00</td>
+        <td>Begrenzt 2026</td>
+      </tr>
+      <tr>
+        <td class="hl">NVIDIA B300</td>
+        <td>Blackwell Ultra</td>
+        <td>288 GB HBM3e</td>
+        <td>12.0 TB/s</td>
+        <td>FP4: 14.000+ TFLOPS</td>
+        <td>1200W</td>
+        <td>Prognose: $8-15</td>
+        <td>2026/27 erwartet</td>
+      </tr>
+      <tr>
+        <td class="hl">NVIDIA GB200 NVL72</td>
+        <td>Blackwell Rack</td>
+        <td>72 GPUs kombiniert</td>
+        <td>NVLink 5.0</td>
+        <td>Exaflop AI-Leistung</td>
+        <td>120kW/Rack</td>
+        <td>Custom/Reserved</td>
+        <td>Cloud-Hyperskaler</td>
+      </tr>
+      <tr>
+        <td class="blue">Google TPU v5e</td>
+        <td>Custom</td>
+        <td>HBM je Chip</td>
+        <td>ICI-Netzwerk</td>
+        <td>INT8: 393 TOPS</td>
+        <td>--</td>
+        <td>$1.20-2.00</td>
+        <td>Nur Google Cloud</td>
+      </tr>
+      <tr>
+        <td class="blue">Google TPU v6 (Trillium)</td>
+        <td>Custom</td>
+        <td>32 GB HBM</td>
+        <td>ICI</td>
+        <td>4.7x Leistung/v5e</td>
+        <td>--</td>
+        <td>Preise offen</td>
+        <td>Google Cloud</td>
+      </tr>
+      <tr>
+        <td class="blue">AMD MI300X</td>
+        <td>CDNA 3</td>
+        <td>192 GB HBM3</td>
+        <td>5.3 TB/s</td>
+        <td>FP16: 1.307 TFLOPS</td>
+        <td>750W</td>
+        <td>$2.00-3.00</td>
+        <td>Azure, OCI</td>
+      </tr>
+      <tr>
+        <td class="blue">AMD MI350</td>
+        <td>CDNA 4</td>
+        <td>288 GB HBM3e</td>
+        <td>Prognose: 8+ TB/s</td>
+        <td>35x AI-Leistung/MI300</td>
+        <td>--</td>
+        <td>Prognose</td>
+        <td>2026 erwartet</td>
+      </tr>
+      <tr>
+        <td>Intel Gaudi 3</td>
+        <td>Gaudi</td>
+        <td>128 GB HBM2e</td>
+        <td>3.7 TB/s</td>
+        <td>BF16: 1.835 TFLOPS</td>
+        <td>900W</td>
+        <td>$1.50-2.50</td>
+        <td>AWS, Dell</td>
+      </tr>
+      <tr>
+        <td>Huawei Ascend 910B</td>
+        <td>Da Vinci</td>
+        <td>64 GB HBM2e</td>
+        <td>--</td>
+        <td>FP16: 320 TFLOPS</td>
+        <td>400W</td>
+        <td>Regional</td>
+        <td>Huawei Cloud</td>
+      </tr>
+    </table>
+
+    <div id="vps-tab" class="divider">--- Cloud-VPS Vergleich (Basis-Konfiguration ca. 2 vCPU / 8 GB RAM) ---</div>
+
+    <table class="data-table">
+      <tr>
+        <th>Anbieter</th>
+        <th>Typisches Produkt</th>
+        <th>vCPU</th>
+        <th>RAM</th>
+        <th>Speicher</th>
+        <th>Preis/Monat</th>
+        <th>Besonderheit</th>
+      </tr>
+      <tr>
+        <td class="hl">AWS</td><td>t3.large</td><td>2</td><td>8 GB</td><td>Variable EBS</td><td>~$60</td><td>Breitestes Oekosystem</td>
+      </tr>
+      <tr>
+        <td class="hl">Azure</td><td>D2s v5</td><td>2</td><td>8 GB</td><td>Managed Disk</td><td>~$56</td><td>Hybrid-Integration</td>
+      </tr>
+      <tr>
+        <td class="hl">Google Cloud</td><td>e2-standard-2</td><td>2</td><td>8 GB</td><td>PD-SSD</td><td>~$49</td><td>Sustained-Use-Rabatt</td>
+      </tr>
+      <tr>
+        <td class="hl">Alibaba Cloud</td><td>ecs.g7.large</td><td>2</td><td>8 GB</td><td>Cloud SSD</td><td>~$40</td><td>China-optimiert</td>
+      </tr>
+      <tr>
+        <td>DigitalOcean</td><td>Basic 8 GB</td><td>4</td><td>8 GB</td><td>160 GB SSD</td><td>~$48</td><td>Entwickler-freundlich</td>
+      </tr>
+      <tr>
+        <td>Vultr</td><td>High Freq.</td><td>3</td><td>8 GB</td><td>256 GB SSD</td><td>~$48</td><td>Hochfrequenz-CPU</td>
+      </tr>
+      <tr>
+        <td>Hetzner</td><td>CPX21</td><td>3</td><td>4 GB</td><td>40 GB SSD</td><td class="hl">~$10</td><td>Preis-Leistungs-Sieger</td>
+      </tr>
+      <tr>
+        <td>Contabo</td><td>VPS M</td><td>4</td><td>8 GB</td><td>200 GB SSD</td><td class="hl">~$12</td><td>Max. Ressourcen/Preis</td>
+      </tr>
+      <tr>
+        <td>Linode (Akamai)</td><td>Shared 8 GB</td><td>4</td><td>8 GB</td><td>160 GB</td><td>~$48</td><td>Globale Edge-Netzwerke</td>
+      </tr>
+      <tr>
+        <td>OVHcloud</td><td>B2-15</td><td>4</td><td>15 GB</td><td>200 GB SSD</td><td>~$25</td><td>EU-Hosting, GDPR</td>
+      </tr>
+    </table>
+
+    <div id="pricing-tab" class="divider">--- Empfohlene Ausstattungsstufen ---</div>
+
+    <table class="data-table">
+      <tr><th>Stufe</th><th>Preis/Monat</th><th>Konfiguration</th><th>Einsatzzweck</th></tr>
+      <tr><td class="blue">Einstieg</td><td>$5-15</td><td>1-2 vCPU, 1-4 GB RAM, 25-50 GB SSD</td><td>Prototyping, Tests, persoenliche Projekte, kleine Bots</td></tr>
+      <tr><td class="hl">Professional</td><td>$40-80</td><td>4-8 vCPU, 16-32 GB RAM, 100-500 GB SSD</td><td>Produktions-Workloads, kleine KI-Inferenz, CI/CD</td></tr>
+      <tr><td class="hl">Enterprise</td><td>$200+</td><td>16+ vCPU, 64+ GB RAM, GPU-Beschleunigung</td><td>KI-Training, Hochverfuegbarkeit, 24/7 Support</td></tr>
+      <tr><td>GPU-Instanz</td><td>$1-8/h</td><td>1-8x GPU (H100/B200), 80-1500 GB VRAM</td><td>KI-Training, grosse Modelle, Fine-Tuning</td></tr>
+    </table>
+  </div>
+
+  <!-- ===================== SECTION 7: HYBRID CLOUD ===================== -->
+  <div class="section" id="hybrid">
+    <div class="sec-title">
+      <a href="#">Hybrid-Cloud-Strategien</a>
+      <span class="more"><a href="#">mehr &raquo;</a></span>
+    </div>
+
+    <div class="link-cols">
+      <div class="link-col wide">
+        <h4>Was ist Hybrid-Cloud?</h4>
+        <ul>
+          <li>Eine Kombination aus Public Cloud, Private Cloud und lokaler Infrastruktur, verbunden zu einer flexiblen Gesamtloesung</li>
+          <li>77% der Unternehmen haben bereits einen Hybrid-Cloud-Ansatz adoptiert</li>
+          <li>Einheitliches Management durch "Single Pane of Glass"-Tools</li>
+          <li>Cloud-Bursting: Elastische Skalierung in die Public Cloud bei Traffic-Spitzen</li>
+          <li>Streaming-Dienste nutzen Cloud-Bursting, um Spitzen bei neuen Releases zu bewaeltigen</li>
+        </ul>
+      </div>
+      <div class="link-col wide">
+        <h4>Wichtige Hybrid-Cloud-Plattformen</h4>
+        <ul>
+          <li><a href="#">AWS Outposts</a> -- AWS-Hardware im eigenen Rechenzentrum</li>
+          <li><a href="#">Azure Arc</a> -- Verwaltung ueber Azure, On-Premises und Multi-Cloud</li>
+          <li><a href="#">Google Anthos</a> -- Kubernetes-basierte Multi-Cloud-Plattform</li>
+          <li><a href="#">Red Hat OpenShift</a> -- Open-Source-Hybrid-Cloud (IBM)</li>
+          <li><a href="#">VMware Cloud Foundation</a> -- Virtualisierung fuer Hybrid</li>
+          <li><a href="#">Huawei FusionCloud</a> -- Hybrid-Cloud fuer chinesische Maerkte</li>
+        </ul>
+      </div>
+      <div class="link-col wide">
+        <h4>6 Kernvorteile</h4>
+        <ul>
+          <li><b>Flexibilitaet:</b> Workloads zwischen Clouds verschiehen nach Kosten/Compliance</li>
+          <li><b>Skalierbarkeit:</b> Elastisch bei Spitzenlasten, ohne lokale Hardware-Investitionen</li>
+          <li><b>Sicherheit:</b> Sensible Daten in Private Cloud, weniger kritische in Public Cloud</li>
+          <li><b>Kosteneffizienz:</b> Jeder Workload auf die guenstigste Umgebung ausrichten</li>
+          <li><b>Kein Vendor Lock-in:</b> Verteilung auf mehrere Anbieter staerkt Verhandlungsposition</li>
+          <li><b>Agilitaet:</b> Schneller Zugang zu neuesten Cloud-Diensten und KI-Funktionen</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <strong>[Praxis-Tipp]</strong> DevOps-Teams koennen Webanwendungen in der Public Cloud entwickeln/testen und nach Fertigstellung basierend auf Sicherheitsanforderungen in eine Private-Cloud-Umgebung verschieben. Das befreit von lokaler Hardware fuer Tests und bietet schnellere Markteinfuehrung.
+    </div>
+  </div>
+
+  <!-- ===================== SECTION 8: ZUKUNFT ===================== -->
+  <div class="section" id="zukunft">
+    <div class="sec-title">
+      <a href="#">Zukunft der KI-Infrastruktur</a>
+      <span class="more"><a href="#">mehr &raquo;</a></span>
+    </div>
+
+    <div class="link-cols">
+      <div class="link-col">
+        <h4>2023 -- Wendepunkt</h4>
+        <ul>
+          <li>ChatGPT als Katalysator fuer den gesamten Cloud-Markt</li>
+          <li>GPU-Nachfrage explodiert</li>
+          <li>KI-Anteil: 8% des Cloud-Marktes</li>
+          <li>Alle grossen Anbieter bauen KI-Dienste aus</li>
+        </ul>
+      </div>
+      <div class="link-col">
+        <h4>2024-25 -- Beschleunigung</h4>
+        <ul>
+          <li>Agente KI: &gt;60% jaehrliches Investitionswachstum</li>
+          <li>55% der Investments in Agentic-Plattformen</li>
+          <li>Multi-Cloud-Strategien werden Standard</li>
+          <li>Open-Source-LLMs schliessen die Luecke</li>
+        </ul>
+      </div>
+      <div class="link-col">
+        <h4>2026 -- KI-Zeitalter</h4>
+        <ul>
+          <li>Cloud-Markt: &gt;$500 Mrd. (erstmals)</li>
+          <li>KI-Anteil: 19% des Cloud-Aufkommens</li>
+          <li>10. Quartal in Folge Wachstumsbeschleunigung</li>
+          <li>Agente KI: bis zu $200 Mrd. Netto-Wert</li>
+        </ul>
+      </div>
+      <div class="link-col">
+        <h4>2027+ -- Souveraenitaet</h4>
+        <ul>
+          <li>EU und China bauen eigene KI-Infrastruktur auf</li>
+          <li>EU-KI-Verordnung treibt lokale Clouds</li>
+          <li>Effizientere Modelle (DeepSeek-Effekt)</li>
+          <li>Wettlauf um KI-Chips und Energie</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="divider">--- Wichtige Zukunfts-Trends ---</div>
+
+    <div class="link-cols">
+      <div class="link-col wide">
+        <h4>Technologie-Trends</h4>
+        <ul>
+          <li><b>Agente KI-Systeme:</b> Autonome mehrstufige Planung und Ausfuehrung -- grundlegende Veraenderung der Unternehmensautomatisierung</li>
+          <li><b>KI-optimierte Hardware:</b> Blackwell (NVIDIA), TPU v6 (Google), CDNA 4 (AMD) -- exponentielle Leistungssteigerung</li>
+          <li><b>Souveraene Clouds:</b> Regionale Infrastruktur in EU, China, Indien durch regulatorische Anforderungen getrieben</li>
+          <li><b>Energie &amp; Nachhaltigkeit:</b> Exponentiell wachsender Energiebedarf von KI-Rechenzentren -- nachhaltige Designs werden Wettbewerbsfaktor</li>
+          <li><b>Edge-KI:</b> KI-Inferenz auf Geraeten und am Netzwerkrand, reduziert Latenz und Bandbreitenbedarf</li>
+          <li><b>Modell-Effizienz:</b> DeepSeek zeigt, dass algorithmische Effizienz massive Hardware ersetzen kann -- weniger GPUs, gleiche Leistung</li>
+        </ul>
+      </div>
+      <div class="link-col wide">
+        <h4>Auswirkungen auf Tech-Dienstleister</h4>
+        <ul>
+          <li>Agente KI: Bis zu <b>$200 Mrd.</b> neuer Netto-Wert in 5 Jahren</li>
+          <li>Ein Drittel der Unternehmen setzt bereits agile KI ein</li>
+          <li>Zwei Drittel erwarten von Anbietern prioritäre Anwendungsfaelle</li>
+          <li>Effizienzgewinne reduzieren einige traditionelle Dienste -- aber erweitern den Gesamtmarkt</li>
+          <li>Neue Rollen: KI-Agent-Orchestrierung, Prompt-Engineering, KI-Governance</li>
+          <li>Traditionelle IT-Dienstleister muessen sich zu KI-Dienstleistern transformieren</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== SECTION 9: KONTAKT ===================== -->
+  <div class="section" id="kontakt">
+    <div class="sec-title">
+      <a href="#">Newsletter & Kontakt</a>
+      <span class="more"><a href="#">mehr &raquo;</a></span>
+    </div>
+
+    <div class="link-cols">
+      <div class="link-col wide">
+        <h4>Newsletter abonnieren</h4>
+        <ul>
+          <li>Woechentlich die wichtigsten Nachrichten zu Cloud-Markt und KI-Infrastruktur</li>
+          <li>Fuer CTOs, DevOps-Ingenieure, KI-Entwickler und IT-Entscheider</li>
+          <li>Exklusive Analysen, Preisvergleiche und GPU-Verfuegbarkeit</li>
+          <li>Kostenlos, jederzeit abbestellbar</li>
+          <li style="list-style:none;padding-top:6px">
+            <form style="display:flex;gap:4px" onsubmit="event.preventDefault();this.querySelector('button').textContent='Abonniert!';this.querySelector('button').style.background='#27ae60'">
+              <input type="email" placeholder="ihre@email.de" required style="padding:4px 8px;border:1px solid #ccc;font-size:12px;width:200px">
+              <button type="submit" style="background:#2b6cb0;color:#fff;border:1px solid #2b6cb0;padding:4px 12px;font-size:12px;cursor:pointer">Abonnieren</button>
+            </form>
+          </li>
+        </ul>
+      </div>
+      <div class="link-col wide">
+        <h4>Ueber AI-VPS</h4>
+        <ul>
+          <li>Unabhaengiges Informationsportal fuer Cloud-Services, KI-Plattformen und GPU-Ressourcen</li>
+          <li>Detaillierte Analysen, Preisvergleiche und Empfehlungen weltweit</li>
+          <li>Daten von Synergy Research Group, ISG Provider Lens, BCG Research</li>
+          <li>Regelmaessig aktualisiert fuer die schnelllebige Cloud- und KI-Landschaft</li>
+          <li>Domain: <b>ai-vps.github.io</b></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="divider">--- Regionale Maerkte im Detail ---</div>
+
+    <table class="data-table">
+      <tr><th>Region</th><th>Marktvolumen</th><th>Besonderheiten</th></tr>
+      <tr><td class="hl">Nordamerika</td><td>~$30.6 Mrd.</td><td>Groesster Markt, AWS/Azure/GCP dominiert</td></tr>
+      <tr><td class="hl">Europa</td><td>~$25.5 Mrd.</td><td>Stark reguliert, GDPR, souveraene Clouds</td></tr>
+      <tr><td class="hl">Asien-Pazifik</td><td>~$12.6 Mrd.</td><td>Schnellstes Wachstum, China dominiert regional</td></tr>
+      <tr><td class="hl">China</td><td>16% der globalen DC</td><td>Lokale Anbieter, 53B Alibaba-Investition</td></tr>
+      <tr><td>Rest der Welt</td><td>&lt;10%</td><td>Wachsend in Nahost, Afrika, Lateinamerika</td></tr>
+    </table>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <div class="links">
+    <a href="#markt">Marktueberblick</a>
+    <a href="#cloud-int">AWS</a>
+    <a href="#cloud-int">Azure</a>
+    <a href="#cloud-int">Google Cloud</a>
+    <a href="#cloud-cn">Alibaba Cloud</a>
+    <a href="#cloud-cn">Tencent Cloud</a>
+    <a href="#cloud-cn">Huawei Cloud</a>
+    <a href="#ki-global">OpenAI</a>
+    <a href="#ki-global">Anthropic</a>
+    <a href="#ki-cn">DeepSeek</a>
+    <a href="#ki-cn">Baidu</a>
+    <a href="#gpu">GPU-Vergleich</a>
+    <a href="#hybrid">Hybrid-Cloud</a>
+    <a href="#zukunft">Zukunft</a>
+    <a href="#kontakt">Newsletter</a>
+  </div>
+  <p>AI-VPS -- Ihr unabhaengiger Ratgeber fuer KI-Infrastruktur, Cloud-Services und GPU-Ressourcen</p>
+  <p>2026 ai-vps.github.io | Alle Angaben ohne Gewaehr | Daten: Synergy Research Group, ISG Provider Lens, BCG Research</p>
+  <p style="margin-top:8px">
+    <a href="#">Impressum</a> |
+    <a href="#">Datenschutz</a> |
+    <a href="#">Kontakt</a> |
+    <a href="#">Sitemap</a>
+  </p>
+</div>
+
+</body>
+</html>
