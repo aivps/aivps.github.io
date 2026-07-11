@@ -1,0 +1,1725 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-VPS - Guida Risorse Cloud e Intelligenza Artificiale | ai-vps.github.io</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --blue:#2b6cb0;
+  --blue-light:#ebf2ff;
+  --blue-dark:#1a4a7a;
+  --red:#d9453d;
+  --green:#38a169;
+  --orange:#dd6b20;
+  --purple:#805ad5;
+  --bg:#f5f6f8;
+  --white:#fff;
+  --border:#e2e5ea;
+  --text:#333;
+  --text-light:#666;
+  --text-muted:#999;
+  --link:#2b6cb0;
+  --link-hover:#d9453d;
+}
+body{font-family:'Noto Sans','Microsoft YaHei','PingFang SC',sans-serif;background:var(--bg);color:var(--text);font-size:13px;line-height:1.6;min-width:1000px}
+a{color:var(--link);text-decoration:none}
+a:hover{color:var(--link-hover);text-decoration:underline}
+
+/* HEADER */
+.site-header{
+  background:linear-gradient(180deg,#4a8fe7 0%,#3a7bd5 100%);
+  padding:0;
+}
+.header-top{
+  max-width:1100px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 10px 8px;
+}
+.logo-area{display:flex;align-items:center;gap:8px}
+.logo-text{font-size:28px;font-weight:700;color:#fff;letter-spacing:-1px}
+.logo-text span{color:#ffe066}
+.logo-sub{font-size:11px;color:rgba(255,255,255,0.8);margin-top:2px}
+.header-right{display:flex;align-items:center;gap:12px;font-size:12px;color:rgba(255,255,255,0.85)}
+.header-right a{color:#fff;font-size:12px}
+.header-right a:hover{text-decoration:underline}
+.search-bar{
+  max-width:1100px;margin:0 auto;padding:0 10px 12px;
+  display:flex;align-items:center;gap:0;
+}
+.search-bar input{
+  flex:1;height:36px;
+  border:2px solid #f0c040;border-right:none;
+  border-radius:4px 0 0 4px;
+  padding:0 12px;font-size:14px;
+  outline:none;
+}
+.search-bar button{
+  height:36px;padding:0 20px;
+  background:#f0c040;border:2px solid #f0c040;
+  border-radius:0 4px 4px 0;
+  font-size:14px;font-weight:600;
+  cursor:pointer;color:#333;
+}
+.search-bar button:hover{background:#e6b630}
+
+/* NAV TABS */
+.nav-tabs{
+  background:var(--white);
+  border-bottom:2px solid #4a8fe7;
+  box-shadow:0 1px 3px rgba(0,0,0,0.08);
+}
+.nav-tabs-inner{
+  max-width:1100px;margin:0 auto;
+  display:flex;align-items:stretch;gap:0;
+  padding:0 10px;
+}
+.nav-tabs a{
+  display:block;padding:8px 16px;
+  font-size:14px;font-weight:500;
+  color:var(--text);text-decoration:none;
+  border-bottom:2px solid transparent;
+  margin-bottom:-2px;
+  transition:all 0.15s;
+}
+.nav-tabs a:hover,.nav-tabs a.active{
+  color:var(--blue);
+  border-bottom-color:var(--blue);
+  background:var(--blue-light);
+  text-decoration:none;
+}
+
+/* MAIN LAYOUT */
+.container{max-width:1100px;margin:0 auto;padding:10px}
+
+/* SECTION BLOCKS */
+.section-block{
+  background:var(--white);
+  border:1px solid var(--border);
+  margin-bottom:10px;
+  border-radius:4px;
+}
+.section-header{
+  display:flex;align-items:center;
+  padding:10px 16px;
+  border-bottom:1px solid var(--border);
+  background:#fafbfc;
+}
+.section-header .dot{
+  width:4px;height:18px;border-radius:2px;
+  margin-right:8px;flex-shrink:0;
+}
+.section-header h2{font-size:15px;font-weight:600;color:var(--text)}
+.section-header .more-link{margin-left:auto;font-size:12px;color:var(--link)}
+.section-body{padding:12px 16px}
+
+/* PROVIDER GRID - hao123 style link blocks */
+.link-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:0;
+}
+.link-grid.col-3{grid-template-columns:repeat(3,1fr)}
+.link-grid.col-5{grid-template-columns:repeat(5,1fr)}
+.link-grid.col-6{grid-template-columns:repeat(6,1fr)}
+
+.link-item{
+  padding:6px 8px;
+  border-bottom:1px dashed #eee;
+  display:flex;align-items:flex-start;gap:6px;
+}
+.link-item:last-child{border-bottom:none}
+.link-icon{
+  width:16px;height:16px;border-radius:3px;
+  flex-shrink:0;margin-top:2px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:9px;font-weight:700;color:#fff;
+}
+.link-info{flex:1;min-width:0}
+.link-name{font-size:13px;font-weight:500}
+.link-name a{color:var(--link)}
+.link-name a:hover{color:var(--link-hover)}
+.link-desc{font-size:11px;color:var(--text-muted);line-height:1.4;margin-top:1px;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.link-tag{
+  display:inline-block;font-size:10px;padding:0 4px;
+  border-radius:2px;margin-left:4px;vertical-align:middle;
+  line-height:16px;
+}
+.tag-intl{background:#ebf5ff;color:#2b6cb0;border:1px solid #bee3f8}
+.tag-cn{background:#fff5f5;color:#d9453d;border:1px solid #fed7d7}
+.tag-hot{background:#fff5f0;color:#dd6b20;border:1px solid #feebc8}
+.tag-new{background:#f0fff4;color:#38a169;border:1px solid #c6f6d5}
+.tag-free{background:#faf5ff;color:#805ad5;border:1px solid:#e9d8fd}
+
+/* CATEGORY TABS inside sections */
+.cat-tabs{
+  display:flex;gap:0;border-bottom:1px solid var(--border);background:#fafbfc;
+  padding:0 16px;
+}
+.cat-tab{
+  padding:8px 14px;font-size:12px;font-weight:500;
+  color:var(--text-light);cursor:pointer;
+  border-bottom:2px solid transparent;margin-bottom:-1px;
+}
+.cat-tab:hover,.cat-tab.active{color:var(--blue);border-bottom-color:var(--blue)}
+
+/* TABLE STYLE */
+.data-table{width:100%;border-collapse:collapse;font-size:12px}
+.data-table th{
+  background:#f0f4f8;padding:8px 10px;text-align:left;
+  font-weight:600;font-size:12px;color:var(--text);
+  border:1px solid var(--border);
+}
+.data-table td{
+  padding:7px 10px;border:1px solid var(--border);
+  color:var(--text);
+}
+.data-table tr:hover td{background:#f7faff}
+.data-table .hl{color:var(--red);font-weight:600}
+.data-table .green{color:var(--green);font-weight:600}
+.data-table .price{color:var(--orange);font-weight:600}
+
+/* BANNER CARDS */
+.banner-row{display:flex;gap:10px;margin-bottom:10px}
+.banner-card{
+  flex:1;background:var(--white);border:1px solid var(--border);
+  border-radius:4px;padding:14px 16px;
+  display:flex;align-items:center;gap:12px;
+}
+.banner-icon{
+  width:42px;height:42px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.banner-text h3{font-size:14px;font-weight:600;margin-bottom:2px}
+.banner-text p{font-size:11px;color:var(--text-muted);line-height:1.4}
+
+/* RANKING LIST */
+.rank-list{list-style:none}
+.rank-item{
+  padding:6px 0;
+  border-bottom:1px dashed #eee;
+  display:flex;align-items:center;gap:8px;
+}
+.rank-item:last-child{border-bottom:none}
+.rank-num{
+  width:20px;height:20px;border-radius:3px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;color:#fff;
+  flex-shrink:0;
+}
+.rank-num.top1{background:var(--red)}
+.rank-num.top2{background:var(--orange)}
+.rank-num.top3{background:#ecc94b}
+.rank-num.other{background:#cbd5e0}
+.rank-info{flex:1}
+.rank-name{font-size:13px}
+.rank-name a{font-weight:500}
+.rank-meta{font-size:11px;color:var(--text-muted)}
+
+/* FOOTER */
+.site-footer{
+  background:#fff;border-top:1px solid var(--border);
+  padding:20px 0;margin-top:10px;
+}
+.footer-inner{
+  max-width:1100px;margin:0 auto;padding:0 10px;
+  text-align:center;
+}
+.footer-links{margin-bottom:10px}
+.footer-links a{
+  font-size:12px;color:var(--text-light);
+  margin:0 8px;
+}
+.footer-links a:hover{color:var(--link)}
+.footer-copy{font-size:11px;color:var(--text-muted)}
+
+/* HOT LIST SIDEBAR STYLE */
+.two-col{display:grid;grid-template-columns:1fr 320px;gap:10px}
+.side-box{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:4px;
+}
+.side-box .section-header{padding:8px 12px}
+.side-box .section-body{padding:8px 12px}
+
+/* FEATURE ROW */
+.feature-row{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:8px;margin-bottom:10px;
+}
+.feature-item{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:4px;padding:12px;text-align:center;
+}
+.feature-item .fi-icon{
+  width:36px;height:36px;margin:0 auto 6px;
+  border-radius:8px;display:flex;align-items:center;justify-content:center;
+}
+.feature-item .fi-title{font-size:13px;font-weight:600;margin-bottom:3px}
+.feature-item .fi-desc{font-size:11px;color:var(--text-muted)}
+
+/* GUIDE STEPS */
+.step-list{counter-reset:step}
+.step-item{
+  padding:10px 0;
+  border-bottom:1px dashed #eee;
+  display:flex;gap:12px;align-items:flex-start;
+}
+.step-item:last-child{border-bottom:none}
+.step-num{
+  width:28px;height:28px;border-radius:50%;
+  background:var(--blue);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;flex-shrink:0;
+}
+.step-body h4{font-size:13px;font-weight:600;margin-bottom:3px}
+.step-body p{font-size:12px;color:var(--text-light);line-height:1.5}
+
+/* NEWS STYLE */
+.news-list li{
+  padding:5px 0;border-bottom:1px dashed #eee;
+  font-size:12px;
+  display:flex;align-items:center;gap:6px;
+}
+.news-list li:last-child{border-bottom:none}
+.news-list .new-tag{
+  background:var(--red);color:#fff;
+  font-size:10px;padding:0 4px;border-radius:2px;
+  flex-shrink:0;
+}
+.news-list a{color:var(--text);font-size:12px}
+.news-list a:hover{color:var(--link)}
+.news-date{color:var(--text-muted);font-size:11px;margin-left:auto;flex-shrink:0}
+
+/* QUICK LINKS BAR */
+.quick-links{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:4px;margin-bottom:10px;padding:10px 16px;
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+}
+.quick-links .ql-title{font-size:13px;font-weight:600;color:var(--text);flex-shrink:0}
+.quick-links a{font-size:12px;color:var(--link);white-space:nowrap}
+.quick-links a:hover{color:var(--link-hover)}
+
+/* ANCHOR NAV */
+.anchor-nav{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:4px;margin-bottom:10px;
+  padding:8px 16px;
+  display:flex;align-items:center;gap:4px;flex-wrap:wrap;
+  position:sticky;top:0;z-index:100;
+}
+.anchor-nav span{font-size:12px;color:var(--text-muted);margin-right:4px}
+.anchor-nav a{
+  font-size:12px;padding:3px 10px;
+  background:#f0f4f8;border-radius:3px;
+  color:var(--text-light);
+}
+.anchor-nav a:hover{background:var(--blue-light);color:var(--blue);text-decoration:none}
+
+/* RESPONSIVE NOTE */
+@media(max-width:1100px){
+  body{min-width:auto}
+  .link-grid{grid-template-columns:repeat(3,1fr)}
+  .link-grid.col-5{grid-template-columns:repeat(3,1fr)}
+  .link-grid.col-6{grid-template-columns:repeat(4,1fr)}
+  .two-col{grid-template-columns:1fr}
+  .feature-row{grid-template-columns:repeat(3,1fr)}
+  .banner-row{flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="site-header">
+  <div class="header-top">
+    <div class="logo-area">
+      <div>
+        <div class="logo-text">AI-<span>VPS</span></div>
+        <div class="logo-sub">Guida Risorse Cloud e Intelligenza Artificiale</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <a href="#home">ai-vps.github.io</a>
+      <span>|</span>
+      <a href="#guide">Guida Scelta</a>
+      <span>|</span>
+      <a href="#contact">Contatti</a>
+      <span>|</span>
+      <span>Aggiornato: Luglio 2026</span>
+    </div>
+  </div>
+  <div class="search-bar">
+    <input type="text" placeholder="Cerca provider AI, VPS, cloud...">
+    <button>Cerca</button>
+  </div>
+</div>
+
+<!-- NAV TABS -->
+<div class="nav-tabs">
+  <div class="nav-tabs-inner">
+    <a href="#home" class="active">Home</a>
+    <a href="#ai-intl">AI Internazionale</a>
+    <a href="#ai-cn">AI Cinese</a>
+    <a href="#cloud-intl">Cloud Globale</a>
+    <a href="#cloud-cn">Cloud Cinese</a>
+    <a href="#vps">VPS Confronto</a>
+    <a href="#pricing">Prezzi API</a>
+    <a href="#guide">Guida</a>
+    <a href="#insights">Tendenze</a>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ANCHOR NAV -->
+<div class="anchor-nav" id="home">
+  <span>Vai a:</span>
+  <a href="#ai-intl">AI Internazionale</a>
+  <a href="#ai-cn">AI Cinese</a>
+  <a href="#cloud-intl">Cloud Internazionale</a>
+  <a href="#cloud-cn">Cloud Cinese</a>
+  <a href="#vps">Confronto VPS</a>
+  <a href="#pricing">Prezzi API</a>
+  <a href="#guide">Come Scegliere</a>
+  <a href="#infra">Infrastruttura</a>
+  <a href="#insights">Tendenze</a>
+  <a href="#contact">Contatti</a>
+</div>
+
+<!-- BANNER ROW -->
+<div class="banner-row">
+  <div class="banner-card">
+    <div class="banner-icon" style="background:#ebf5ff">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="#2b6cb0"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    </div>
+    <div class="banner-text">
+      <h3>42+ Provider Analizzati</h3>
+      <p>Confronto completo di servizi AI e cloud pubblici a livello mondiale con dati aggiornati</p>
+    </div>
+  </div>
+  <div class="banner-card">
+    <div class="banner-icon" style="background:#f0fff4">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="#38a169"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
+    </div>
+    <div class="banner-text">
+      <h3>150+ Modelli AI Testati</h3>
+      <p>Benchmark indipendenti su qualita', velocita', costo e capacita' di ogni modello</p>
+    </div>
+  </div>
+  <div class="banner-card">
+    <div class="banner-icon" style="background:#fff5f0">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="#dd6b20"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+    </div>
+    <div class="banner-text">
+      <h3>Prezzi in Tempo Reale</h3>
+      <p>Tabella aggiornata costantemente con le tariffe API e VPS di tutti i principali servizi</p>
+    </div>
+  </div>
+  <div class="banner-card">
+    <div class="banner-icon" style="background:#faf5ff">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="#805ad5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    </div>
+    <div class="banner-text">
+      <h3>Guida Indipendente</h3>
+      <p>Analisi oggettiva senza sponsorizzazioni. Dati verificabili e confronti equi per tutti</p>
+    </div>
+  </div>
+</div>
+
+<!-- QUICK LINKS -->
+<div class="quick-links">
+  <div class="ql-title">Accesso Rapido:</div>
+  <a href="https://openai.com" target="_blank">OpenAI API</a>
+  <a href="https://anthropic.com" target="_blank">Anthropic Claude</a>
+  <a href="https://deepmind.google" target="_blank">Google Gemini</a>
+  <a href="https://deepseek.com" target="_blank">DeepSeek</a>
+  <a href="https://aws.amazon.com" target="_blank">AWS Console</a>
+  <a href="https://console.cloud.google.com" target="_blank">Google Cloud</a>
+  <a href="https://portal.azure.com" target="_blank">Azure Portal</a>
+  <a href="https://cloud.digitalocean.com" target="_blank">DigitalOcean</a>
+  <a href="https://console.hetzner.cloud" target="_blank">Hetzner Cloud</a>
+  <a href="https://www.vultr.com" target="_blank">Vultr</a>
+  <a href="https://www.alibabacloud.com" target="_blank">Alibaba Cloud</a>
+  <a href="https://cloud.tencent.com" target="_blank">Tencent Cloud</a>
+</div>
+
+<!-- ============= SECTION: AI INTERNATIONAL ============= -->
+<div class="two-col">
+<div>
+<div class="section-block" id="ai-intl">
+  <div class="section-header">
+    <div class="dot" style="background:var(--blue)"></div>
+    <h2>Provider AI Internazionali</h2>
+    <a href="#" class="more-link">Vedi tutti &raquo;</a>
+  </div>
+  <div class="link-grid">
+    <div class="link-item">
+      <div class="link-icon" style="background:#10a37f">O</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://openai.com" target="_blank">OpenAI</a> <span class="link-tag tag-hot">TOP</span></div>
+        <div class="link-desc">GPT-4o, o1, o3, DALL-E 3, Whisper. Leader mondiale IA generativa. 128K contesto.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#b8860b">A</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://anthropic.com" target="_blank">Anthropic</a> <span class="link-tag tag-hot">TOP</span></div>
+        <div class="link-desc">Claude 3.5 Sonnet, Claude 3 Opus. 200K contesto. Focus su sicurezza e allineamento.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#4285f4">G</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://deepmind.google" target="_blank">Google DeepMind</a> <span class="link-tag tag-hot">TOP</span></div>
+        <div class="link-desc">Gemini Ultra/Pro/Nano. Fino a 1M token di contesto. Vertex AI integration.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#0668e1">M</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://ai.meta.com" target="_blank">Meta AI</a> <span class="link-tag tag-free">GRATIS</span></div>
+        <div class="link-desc">Llama 3.1, Llama 3.2. Open source. 128K contesto. Ideale per fine-tuning custom.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#ff6b35">Mi</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://mistral.ai" target="_blank">Mistral AI</a> <span class="link-tag tag-new">NUOVO</span></div>
+        <div class="link-desc">Mistral Large, Mixtral 8x22B, Codestral. Europeo. GDPR compliant. Open source.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#39d353">C</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://cohere.com" target="_blank">Cohere</a></div>
+        <div class="link-desc">Command R+, Rerank, Embed. Enterprise AI per RAG e ricerca semantica.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#8b5cf6">Pe</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://perplexity.ai" target="_blank">Perplexity AI</a> <span class="link-tag tag-new">NUOVO</span></div>
+        <div class="link-desc">Motore di ricerca AI conversazionale. Sonar API per integrazione developer.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#000">x</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://x.ai" target="_blank">xAI (Grok)</a> <span class="link-tag tag-new">NUOVO</span></div>
+        <div class="link-desc">Grok-2 di Elon Musk. Accesso a dati real-time da X (Twitter). 128K contesto.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#e11d48">St</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://stability.ai" target="_blank">Stability AI</a></div>
+        <div class="link-desc">Stable Diffusion 3, Stable Audio. Leader open source per generazione immagini.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#0ea5e9">In</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://huggingface.co" target="_blank">Hugging Face</a></div>
+        <div class="link-desc">Hub di modelli open source. Inference API. Oltre 500.000 modelli disponibili.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#6366f1">AI</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://ai21.com" target="_blank">AI21 Labs</a></div>
+        <div class="link-desc">Jurassic-2, Jamba. Modelli ibridi SSM-Transformer. Efficienza superiore.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#16a34a">To</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://together.ai" target="_blank">Together AI</a></div>
+        <div class="link-desc">Piattaforma inference GPU. Hosting modelli open source ad alte prestazioni.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============= SECTION: AI CHINESE ============= -->
+<div class="section-block" id="ai-cn">
+  <div class="section-header">
+    <div class="dot" style="background:var(--red)"></div>
+    <h2>Provider AI Cinesi</h2>
+    <a href="#" class="more-link">Vedi tutti &raquo;</a>
+  </div>
+  <div class="link-grid">
+    <div class="link-item">
+      <div class="link-icon" style="background:#4d6bfe">DS</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://deepseek.com" target="_blank">DeepSeek</a> <span class="link-tag tag-hot">HOT</span></div>
+        <div class="link-desc">DeepSeek-V3, R1. Prestazioni GPT-4 a costo inferiore. Open source. MoE architettura.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#ff6a00">QW</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://tongyi.aliyun.com" target="_blank">Alibaba Qwen</a> <span class="link-tag tag-hot">HOT</span></div>
+        <div class="link-desc">Qwen2.5, Qwen-VL. 0.5B-100B+ parametri. Open source. Integrazione Alibaba Cloud.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#2932e1">BD</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://yiyan.baidu.com" target="_blank">Baidu ERNIE</a></div>
+        <div class="link-desc">ERNIE 4.0, Wenxin Yiyan. Leader enterprise cinese. Integrazione ecosistema Baidu.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#36b37e">ZP</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://zhipuai.cn" target="_blank">Zhipu AI (GLM)</a></div>
+        <div class="link-desc">GLM-4, ChatGLM, CodeGeeX, CogView. Universita' Tsinghua. Multimodale.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#000">MK</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://kimi.moonshot.cn" target="_blank">Moonshot (Kimi)</a></div>
+        <div class="link-desc">Kimi con 200K caratteri cinesi di contesto. Eccellente per documenti lunghi.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#fe2c55">BD</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://www.volcengine.com" target="_blank">ByteDance Doubao</a> <span class="link-tag tag-new">NUOVO</span></div>
+        <div class="link-desc">Doubao, Skylark. Volcano Engine. Dietro TikTok. Ottimizzato per multimedia.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#0052d9">TX</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://hunyuan.tencent.com" target="_blank">Tencent Hunyuan</a></div>
+        <div class="link-desc">Hunyuan LLM. Integrazione WeChat e gaming. Ottimizzato per social e entertainment.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#c7000b">HW</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://pangu.huaweicloud.com" target="_blank">Huawei Pangu</a></div>
+        <div class="link-desc">Pangu Model. Chip Ascend. Enterprise focus. Smart city, telecomunicazioni, governo.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#7c3aed">Yi</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://www.01.ai" target="_blank">01.AI (Yi)</a></div>
+        <div class="link-desc">Yi-1.5, Yi-VL. Fondatore Kai-Fu Lee. Modelli bilingue cinese-inglese open source.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#2563eb">Mi</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://modelscope.cn" target="_blank">ModelScope</a></div>
+        <div class="link-desc">Hub modelli Alibaba. Oltre 4000 modelli open source. Hugging Face cinese.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#0891b2">Se</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://www.sensetime.com" target="_blank">SenseTime</a></div>
+        <div class="link-desc">SenseNova. Leader computer vision. Auto autonoma, healthcare, smart city.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#9333ea">iF</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://www.iflytek.com" target="_blank">iFlytek</a></div>
+        <div class="link-desc">Spark LLM. Leader nel riconoscimento vocale cinese. Educazione e sanità.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SIDEBAR -->
+<div>
+  <div class="side-box">
+    <div class="section-header">
+      <div class="dot" style="background:var(--orange)"></div>
+      <h2>Classifica AI</h2>
+    </div>
+    <div class="section-body">
+      <ul class="rank-list">
+        <li class="rank-item">
+          <div class="rank-num top1">1</div>
+          <div class="rank-info">
+            <div class="rank-name"><a href="https://openai.com" target="_blank">OpenAI GPT-4o</a></div>
+            <div class="rank-meta">Qualita' complessiva eccellente</div>
+          </div>
+        </li>
+        <li class="rank-item">
+          <div class="rank-num top2">2</div>
+          <div class="rank-info">
+            <div class="rank-name"><a href="https://anthropic.com" target="_blank">Claude 3.5 Sonnet</a></div>
+            <div class="rank-meta">Migliore per codice e analisi</div>
+          </div>
+        </li>
+        <li class="rank-item">
+          <div class="rank-num top3">3</div>
+          <div class="rank-info">
+            <div class="rank-name"><a href="https://deepmind.google" target="_blank">Gemini 1.5 Pro</a></div>
+            <div class="rank-meta">1M token di contesto</div>
+          </div>
+        </li>
+        <li class="rank-item">
+          <div class="rank-num other">4</div>
+          <div class="rank-info">
+            <div class="rank-name"><a href="https://deepseek.com" target="_blank">DeepSeek-V3</a></div>
+            <div class="rank-meta">Miglior rapporto prezzo/qualita'</div>
+          </div>
+        </li>
+        <li class="rank-item">
+          <div class="rank-num other">5</div>
+          <div class="rank-info">
+            <div class="rank-name"><a href="https://mistral.ai" target="_blank">Mistral Large</a></div>
+            <div class="rank-meta">Leader europeo, GDPR nativo</div>
+          </div>
+        </li>
+        <li class="rank-item">
+          <div class="rank-num other">6</div>
+          <div class="rank-info">
+            <div class="rank-name"><a href="https://tongyi.aliyun.com" target="_blank">Qwen 2.5 Max</a></div>
+            <div class="rank-meta">Top nel mercato cinese</div>
+          </div>
+        </li>
+        <li class="rank-item">
+          <div class="rank-num other">7</div>
+          <div class="rank-info">
+            <div class="rank-name"><a href="https://ai.meta.com" target="_blank">Llama 3.1 405B</a></div>
+            <div class="rank-meta">Miglior modello open source</div>
+          </div>
+        </li>
+        <li class="rank-item">
+          <div class="rank-num other">8</div>
+          <div class="rank-info">
+            <div class="rank-name"><a href="https://cohere.com" target="_blank">Command R+</a></div>
+            <div class="rank-meta">Ottimo per RAG enterprise</div>
+          </div>
+        </li>
+        <li class="rank-item">
+          <div class="rank-num other">9</div>
+          <div class="rank-info">
+            <div class="rank-name"><a href="https://zhipuai.cn" target="_blank">GLM-4</a></div>
+            <div class="rank-meta">Multimodale, forte in cinese</div>
+          </div>
+        </li>
+        <li class="rank-item">
+          <div class="rank-num other">10</div>
+          <div class="rank-info">
+            <div class="rank-name"><a href="https://x.ai" target="_blank">Grok-2</a></div>
+            <div class="rank-meta">Dati real-time da X</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="side-box" style="margin-top:10px">
+    <div class="section-header">
+      <div class="dot" style="background:var(--green)"></div>
+      <h2>Miglior Valore</h2>
+    </div>
+    <div class="section-body">
+      <p style="font-size:11px;color:var(--text-muted);margin-bottom:6px">Rapporto prezzo/qualita' (per 1M token output)</p>
+      <ul class="rank-list">
+        <li class="rank-item">
+          <div class="rank-num" style="background:var(--green)">1</div>
+          <div class="rank-info">
+            <div class="rank-name">DeepSeek-V3</div>
+            <div class="rank-meta">1.10 USD/1M - Qualita' GPT-4</div>
+          </div>
+        </li>
+        <li class="rank-item">
+          <div class="rank-num" style="background:var(--green)">2</div>
+          <div class="rank-info">
+            <div class="rank-name">Gemini 1.5 Flash</div>
+            <div class="rank-meta">0.30 USD/1M - Veloce</div>
+          </div>
+        </li>
+        <li class="rank-item">
+          <div class="rank-num" style="background:var(--green)">3</div>
+          <div class="rank-info">
+            <div class="rank-name">Qwen-Turbo</div>
+            <div class="rank-meta">0.20 USD/1M - Ottimo cinese</div>
+          </div>
+        </li>
+        <li class="rank-item">
+          <div class="rank-num" style="background:#cbd5e0">4</div>
+          <div class="rank-info">
+            <div class="rank-name">GPT-4o mini</div>
+            <div class="rank-meta">0.60 USD/1M - Veloce</div>
+          </div>
+        </li>
+        <li class="rank-item">
+          <div class="rank-num" style="background:#cbd5e0">5</div>
+          <div class="rank-info">
+            <div class="rank-name">Claude 3 Haiku</div>
+            <div class="rank-meta">1.25 USD/1M - Sicuro</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ============= SECTION: CLOUD INTERNATIONAL ============= -->
+<div class="section-block" id="cloud-intl">
+  <div class="section-header">
+    <div class="dot" style="background:var(--blue)"></div>
+    <h2>Cloud Pubblici Internazionali - Servizi VPS e Infrastruttura</h2>
+    <a href="#" class="more-link">Vedi tutti &raquo;</a>
+  </div>
+  <div class="link-grid col-5">
+    <div class="link-item">
+      <div class="link-icon" style="background:#ff9900;color:#333">A</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://aws.amazon.com" target="_blank">Amazon AWS</a> <span class="link-tag tag-hot">TOP</span></div>
+        <div class="link-desc">EC2, Lightsail, Lambda. 39 regioni. Leader mondiale cloud computing.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#0078d4">Az</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://azure.microsoft.com" target="_blank">Microsoft Azure</a> <span class="link-tag tag-hot">TOP</span></div>
+        <div class="link-desc">VM, Azure OpenAI. 60+ regioni. Integrazione Microsoft 365. Hybrid cloud.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#4285f4">GC</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://cloud.google.com" target="_blank">Google Cloud</a> <span class="link-tag tag-hot">TOP</span></div>
+        <div class="link-desc">Compute Engine, GKE, Vertex AI. 40+ regioni. Rete globale premium.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#007bfc">DO</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://www.digitalocean.com" target="_blank">DigitalOcean</a></div>
+        <div class="link-desc">Droplets, App Platform, K8s. Da 4$/mese. 15 localita'. Ideale startup.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#007bfc">VU</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://www.vultr.com" target="_blank">Vultr</a></div>
+        <div class="link-desc">Cloud Compute, Bare Metal, GPU. 32 localita'. Da 2.50$/mese.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#d50c2d">H</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://www.hetzner.com/cloud" target="_blank">Hetzner</a> <span class="link-tag tag-new">BEST</span></div>
+        <div class="link-desc">Cloud Server, Bare Metal. Germania/Finlandia. Da 3.29 EUR/mese. GDPR.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#0080ff">Li</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://www.linode.com" target="_blank">Linode (Akamai)</a></div>
+        <div class="link-desc">Nanode, GPU. 24 localita'. Da 5$/mese. Acquisita da Akamai. Rete globale.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#1428a0">OV</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://www.ovhcloud.com" target="_blank">OVHcloud</a></div>
+        <div class="link-desc">VPS, Dedicated. Francia/Europa. Da 3.50 EUR/mese. GDPR nativo.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#4f46e5">SC</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://www.scaleway.com" target="_blank">Scaleway</a></div>
+        <div class="link-desc">Instance, Kapsule. Francia/Olanda. Da 7.99 EUR/mese. Europeo sovrano.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#0098ff">IB</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://www.ibm.com/cloud" target="_blank">IBM Cloud</a></div>
+        <div class="link-desc">Virtual Server, Watson AI. Enterprise focus. Hybrid multicloud. 60+ regioni.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#f04e23">OR</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://www.oracle.com/cloud" target="_blank">Oracle Cloud</a></div>
+        <div class="link-desc">Always Free tier generoso. Ampere ARM. 45+ regioni. Database leader.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#22c55e">La</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://lambdalabs.com" target="_blank">Lambda Labs</a> <span class="link-tag tag-new">GPU</span></div>
+        <div class="link-desc">GPU Cloud H100/A100. Specializzato AI/ML training. Ottimo prezzo GPU.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#333">CW</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://www.coreweave.com" target="_blank">CoreWeave</a> <span class="link-tag tag-new">GPU</span></div>
+        <div class="link-desc">GPU Cloud per AI. H100, A100, A40. Infrastruttura specializzata ML.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#f59e0b;color:#333">RP</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://www.runpod.io" target="_blank">RunPod</a></div>
+        <div class="link-desc">Serverless GPU. A100, H100 da 0.79$/hr. Spot instance. Ideale ML.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#dc2626">CF</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://www.cloudflare.com" target="_blank">Cloudflare</a></div>
+        <div class="link-desc">Workers, R2, CDN, D1. Piano gratuito generoso. Edge computing globale.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============= SECTION: CLOUD CHINESE ============= -->
+<div class="section-block" id="cloud-cn">
+  <div class="section-header">
+    <div class="dot" style="background:var(--red)"></div>
+    <h2>Cloud Pubblici Cinesi - Servizi VPS e Infrastruttura</h2>
+    <a href="#" class="more-link">Vedi tutti &raquo;</a>
+  </div>
+  <div class="link-grid col-3">
+    <div class="link-item">
+      <div class="link-icon" style="background:#ff6a00">AL</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://www.alibabacloud.com" target="_blank">Alibaba Cloud (Aliyun)</a> <span class="link-tag tag-hot">TOP</span></div>
+        <div class="link-desc">ECS, Function Compute, PAI. 30+ regioni. Leader Asia-Pacifico. Terzo cloud mondiale. CDN globale, e-commerce, big data. Datacenter anche in Europa e Medio Oriente.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#0052d9">TC</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://cloud.tencent.com" target="_blank">Tencent Cloud</a></div>
+        <div class="link-desc">CVM, Hunyuan AI. 26+ regioni. Integrazione WeChat. Gaming, streaming, social. Leader entertainment digitale e servizi WeChat Mini Program.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#c7000b">HC</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://www.huaweicloud.com" target="_blank">Huawei Cloud</a></div>
+        <div class="link-desc">ECS, ModelArts, Pangu. 29+ regioni. Chip Ascend AI. 5G, IoT, smart city. Leader telecomunicazioni. Datacenter globali con forte espansione.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#2932e1">BC</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://cloud.baidu.com" target="_blank">Baidu AI Cloud</a></div>
+        <div class="link-desc">BCC, Qianfan, ERNIE. Machine learning, NLP avanzato, guida autonoma, healthcare AI. Piattaforma Qianfan per modelli custom.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#c40000">JD</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://www.jdcloud.com" target="_blank">JD Cloud</a></div>
+        <div class="link-desc">Cloud Server, AI. E-commerce, logistica intelligente, supply chain digitale. Retail tech leader. Infrastruttura mission-critical.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#0099ff">UC</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://www.ucloud.cn" target="_blank">UCloud</a></div>
+        <div class="link-desc">UHost, UAI. 30+ localita' globali. Forte nel Sud-est asiatico. Accelerazione cross-border. Prezzi competitivi.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#0091ff">KS</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://www.kuaishou.com" target="_blank">Kuaishou AI</a></div>
+        <div class="link-desc">Kling Video AI. Generazione video AI leader. Social commerce, live streaming. Secondo short video platform cinese.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#e53935">XF</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://www.volcengine.com" target="_blank">Volcano Engine</a></div>
+        <div class="link-desc">Piattaforma cloud ByteDance. Doubao AI. Servizi per developer. CDN globale, video processing, AR/VR.</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-icon" style="background:#1565c0">QI</div>
+      <div class="link-info">
+        <div class="link-name"><a href="https://www.qingcloud.com" target="_blank">QingCloud</a></div>
+        <div class="link-desc">Cloud Server, KubeSphere. Cloud nativo, Kubernetes leader. Enterprise e IoT. Prezzi flessibili.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============= SECTION: VPS COMPARISON ============= -->
+<div class="section-block" id="vps">
+  <div class="section-header">
+    <div class="dot" style="background:var(--green)"></div>
+    <h2>Confronto VPS Entry-Level Globale</h2>
+  </div>
+  <div class="section-body" style="overflow-x:auto">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Provider</th>
+          <th>Piano</th>
+          <th>vCPU</th>
+          <th>RAM</th>
+          <th>Storage</th>
+          <th>Banda</th>
+          <th>Prezzo/Mese</th>
+          <th>Localita'</th>
+          <th>Note</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="hl">Hetzner</td>
+          <td>CPX11</td>
+          <td>2</td>
+          <td>2 GB</td>
+          <td>40 GB SSD</td>
+          <td>20 TB</td>
+          <td class="price">3.29 EUR</td>
+          <td>DE / FI</td>
+          <td class="green">Miglior prezzo</td>
+        </tr>
+        <tr>
+          <td class="hl">Vultr</td>
+          <td>Cloud Compute</td>
+          <td>1</td>
+          <td>1 GB</td>
+          <td>25 GB SSD</td>
+          <td>2 TB</td>
+          <td class="price">5.00 USD</td>
+          <td>32 localita'</td>
+          <td>Piu' localita'</td>
+        </tr>
+        <tr>
+          <td>DigitalOcean</td>
+          <td>Basic Droplet</td>
+          <td>1</td>
+          <td>1 GB</td>
+          <td>25 GB SSD</td>
+          <td>1 TB</td>
+          <td class="price">6.00 USD</td>
+          <td>15 localita'</td>
+          <td>Facile da usare</td>
+        </tr>
+        <tr>
+          <td>Linode</td>
+          <td>Nano 1GB</td>
+          <td>1</td>
+          <td>1 GB</td>
+          <td>25 GB SSD</td>
+          <td>1 TB</td>
+          <td class="price">5.00 USD</td>
+          <td>24 localita'</td>
+          <td>Akamai rete</td>
+        </tr>
+        <tr>
+          <td>AWS</td>
+          <td>Lightsail</td>
+          <td>2</td>
+          <td>512 MB</td>
+          <td>20 GB SSD</td>
+          <td>1 TB</td>
+          <td class="price">3.50 USD</td>
+          <td>31 regioni</td>
+          <td>Ecosistema AWS</td>
+        </tr>
+        <tr>
+          <td>Azure</td>
+          <td>B1s</td>
+          <td>1</td>
+          <td>1 GB</td>
+          <td>4 GB Temp</td>
+          <td>Limitata</td>
+          <td class="price">~8.00 USD</td>
+          <td>60+ regioni</td>
+          <td>Enterprise</td>
+        </tr>
+        <tr>
+          <td>GCP</td>
+          <td>e2-micro</td>
+          <td>0.25-2</td>
+          <td>1 GB</td>
+          <td>10 GB SSD</td>
+          <td>Limitata</td>
+          <td class="price">~6.88 USD</td>
+          <td>40+ regioni</td>
+          <td>AI integrato</td>
+        </tr>
+        <tr>
+          <td>Oracle Cloud</td>
+          <td>A1.Flex</td>
+          <td>4</td>
+          <td>24 GB</td>
+          <td>200 GB</td>
+          <td>10 TB</td>
+          <td class="green">SEMPRE GRATIS</td>
+          <td>45+ regioni</td>
+          <td class="green">Free tier eccezionale</td>
+        </tr>
+        <tr>
+          <td>Alibaba Cloud</td>
+          <td>ECS t6</td>
+          <td>1</td>
+          <td>1 GB</td>
+          <td>40 GB ESSD</td>
+          <td>Limitata</td>
+          <td class="price">~4.50 USD</td>
+          <td>30+ regioni</td>
+          <td>Leader Asia</td>
+        </tr>
+        <tr>
+          <td>Tencent Cloud</td>
+          <td>S5</td>
+          <td>1</td>
+          <td>1 GB</td>
+          <td>50 GB SSD</td>
+          <td>Limitata</td>
+          <td class="price">~5.00 USD</td>
+          <td>26+ regioni</td>
+          <td>WeChat ecosystem</td>
+        </tr>
+        <tr>
+          <td>Huawei Cloud</td>
+          <td>s6.small</td>
+          <td>1</td>
+          <td>1 GB</td>
+          <td>40 GB ESSD</td>
+          <td>Limitata</td>
+          <td class="price">~5.30 USD</td>
+          <td>29+ regioni</td>
+          <td>5G/IoT</td>
+        </tr>
+        <tr>
+          <td>OVHcloud</td>
+          <td>Starter</td>
+          <td>1</td>
+          <td>2 GB</td>
+          <td>20 GB SSD</td>
+          <td>Limitata</td>
+          <td class="price">3.50 EUR</td>
+          <td>EU/CA</td>
+          <td>GDPR nativo</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:11px;color:var(--text-muted);margin-top:8px;font-style:italic">* Prezzi indicativi, possono variare. Provider cinesi richiedono documenti identita' e ICP per registrazione. Aggiornato 2025-2026.</p>
+  </div>
+</div>
+
+<!-- ============= SECTION: API PRICING ============= -->
+<div class="section-block" id="pricing">
+  <div class="section-header">
+    <div class="dot" style="background:var(--orange)"></div>
+    <h2>Confronto Prezzi API AI (per 1 Milione di Token)</h2>
+  </div>
+  <div class="section-body" style="overflow-x:auto">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Provider</th>
+          <th>Modello</th>
+          <th>Input/1M</th>
+          <th>Output/1M</th>
+          <th>Contesto Max</th>
+          <th>Multimodale</th>
+          <th>Categoria</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="hl">OpenAI</td>
+          <td>GPT-4o</td>
+          <td>2.50 USD</td>
+          <td>10.00 USD</td>
+          <td>128K</td>
+          <td>Testo+Img+Audio+Video</td>
+          <td>Premium</td>
+        </tr>
+        <tr>
+          <td>OpenAI</td>
+          <td>GPT-4o mini</td>
+          <td class="green">0.15 USD</td>
+          <td class="green">0.60 USD</td>
+          <td>128K</td>
+          <td>Testo+Img</td>
+          <td class="green">Economico</td>
+        </tr>
+        <tr>
+          <td class="hl">Anthropic</td>
+          <td>Claude 3.5 Sonnet</td>
+          <td>3.00 USD</td>
+          <td>15.00 USD</td>
+          <td>200K</td>
+          <td>Testo+Img</td>
+          <td>Premium</td>
+        </tr>
+        <tr>
+          <td>Anthropic</td>
+          <td>Claude 3 Haiku</td>
+          <td class="green">0.25 USD</td>
+          <td class="green">1.25 USD</td>
+          <td>200K</td>
+          <td>Testo+Img</td>
+          <td class="green">Economico</td>
+        </tr>
+        <tr>
+          <td class="hl">Google</td>
+          <td>Gemini 1.5 Pro</td>
+          <td>3.50 USD</td>
+          <td>10.50 USD</td>
+          <td>1M</td>
+          <td>Testo+Img+Audio+Video</td>
+          <td>Premium</td>
+        </tr>
+        <tr>
+          <td>Google</td>
+          <td>Gemini 1.5 Flash</td>
+          <td class="green">0.075 USD</td>
+          <td class="green">0.30 USD</td>
+          <td>1M</td>
+          <td>Testo+Img+Audio+Video</td>
+          <td class="green">Economico</td>
+        </tr>
+        <tr>
+          <td class="hl">DeepSeek</td>
+          <td>DeepSeek-V3</td>
+          <td class="green">0.27 USD</td>
+          <td class="green">1.10 USD</td>
+          <td>128K</td>
+          <td>Solo testo</td>
+          <td class="green">Economico</td>
+        </tr>
+        <tr>
+          <td>DeepSeek</td>
+          <td>DeepSeek-R1</td>
+          <td>0.55 USD</td>
+          <td>2.19 USD</td>
+          <td>128K</td>
+          <td>Solo testo</td>
+          <td>Mid-range</td>
+        </tr>
+        <tr>
+          <td class="hl">Mistral</td>
+          <td>Mistral Large</td>
+          <td>2.00 USD</td>
+          <td>6.00 USD</td>
+          <td>128K</td>
+          <td>Solo testo</td>
+          <td>Mid-range</td>
+        </tr>
+        <tr>
+          <td>Mistral</td>
+          <td>Mixtral 8x22B</td>
+          <td class="green">0.90 USD</td>
+          <td class="green">0.90 USD</td>
+          <td>64K</td>
+          <td>Solo testo</td>
+          <td class="green">Economico</td>
+        </tr>
+        <tr>
+          <td class="hl">Alibaba</td>
+          <td>Qwen-Max</td>
+          <td>1.60 USD</td>
+          <td>6.40 USD</td>
+          <td>128K</td>
+          <td>Testo+Img</td>
+          <td>Mid-range</td>
+        </tr>
+        <tr>
+          <td>Alibaba</td>
+          <td>Qwen-Turbo</td>
+          <td class="green">0.05 USD</td>
+          <td class="green">0.20 USD</td>
+          <td>128K</td>
+          <td>Solo testo</td>
+          <td class="green">Economico</td>
+        </tr>
+        <tr>
+          <td class="hl">xAI</td>
+          <td>Grok-2</td>
+          <td>2.00 USD</td>
+          <td>10.00 USD</td>
+          <td>128K</td>
+          <td>Testo+Img</td>
+          <td>Premium</td>
+        </tr>
+        <tr>
+          <td>Cohere</td>
+          <td>Command R+</td>
+          <td>2.50 USD</td>
+          <td>10.00 USD</td>
+          <td>128K</td>
+          <td>Solo testo</td>
+          <td>Enterprise</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:11px;color:var(--text-muted);margin-top:8px;font-style:italic">* Prezzi indicativi aggiornati a 2025-2026. I provider potrebbero offrire sconti per volumi elevati o crediti per nuovi clienti.</p>
+  </div>
+</div>
+
+<!-- ============= SECTION: INFRASTRUCTURE ============= -->
+<div class="section-block" id="infra">
+  <div class="section-header">
+    <div class="dot" style="background:var(--purple)"></div>
+    <h2>Copertura Geografica Datacenter</h2>
+  </div>
+  <div class="section-body">
+    <div class="link-grid col-4">
+      <div class="link-item" style="flex-direction:column;align-items:stretch;border:1px solid #eee;border-radius:4px;padding:10px;margin:4px">
+        <div style="font-weight:600;font-size:13px;margin-bottom:6px;color:var(--blue)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg>
+          Nord America
+        </div>
+        <div style="font-size:11px;color:var(--text-light);margin-bottom:6px">9 regioni AWS, 6 Azure, 7 GCP. Hub principale per AI e cloud.</div>
+        <div style="display:flex;flex-wrap:wrap;gap:3px">
+          <span style="font-size:10px;background:#f0f4f8;padding:1px 5px;border-radius:2px">AWS</span>
+          <span style="font-size:10px;background:#f0f4f8;padding:1px 5px;border-radius:2px">Azure</span>
+          <span style="font-size:10px;background:#f0f4f8;padding:1px 5px;border-radius:2px">GCP</span>
+          <span style="font-size:10px;background:#f0f4f8;padding:1px 5px;border-radius:2px">DigitalOcean</span>
+          <span style="font-size:10px;background:#f0f4f8;padding:1px 5px;border-radius:2px">Vultr</span>
+          <span style="font-size:10px;background:#f0f4f8;padding:1px 5px;border-radius:2px">Linode</span>
+        </div>
+      </div>
+      <div class="link-item" style="flex-direction:column;align-items:stretch;border:1px solid #eee;border-radius:4px;padding:10px;margin:4px">
+        <div style="font-weight:600;font-size:13px;margin-bottom:6px;color:var(--blue)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg>
+          Europa
+        </div>
+        <div style="font-size:11px;color:var(--text-light);margin-bottom:6px">DE, IE, FR, UK, NL, Nordics. Conformita' GDPR nativa. Cloud sovrano europeo.</div>
+        <div style="display:flex;flex-wrap:wrap;gap:3px">
+          <span style="font-size:10px;background:#f0f4f8;padding:1px 5px;border-radius:2px">Hetzner</span>
+          <span style="font-size:10px;background:#f0f4f8;padding:1px 5px;border-radius:2px">OVHcloud</span>
+          <span style="font-size:10px;background:#f0f4f8;padding:1px 5px;border-radius:2px">Scaleway</span>
+          <span style="font-size:10px;background:#f0f4f8;padding:1px 5px;border-radius:2px">AWS</span>
+          <span style="font-size:10px;background:#f0f4f8;padding:1px 5px;border-radius:2px">Azure</span>
+          <span style="font-size:10px;background:#f0f4f8;padding:1px 5px;border-radius:2px">GCP</span>
+        </div>
+      </div>
+      <div class="link-item" style="flex-direction:column;align-items:stretch;border:1px solid #eee;border-radius:4px;padding:10px;margin:4px">
+        <div style="font-weight:600;font-size:13px;margin-bottom:6px;color:var(--red)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg>
+          Asia-Pacifico
+        </div>
+        <div style="font-size:11px;color:var(--text-light);margin-bottom:6px">JP, SG, AU, IN, KR + Cina mainland (separata). Mercato in rapida crescita.</div>
+        <div style="display:flex;flex-wrap:wrap;gap:3px">
+          <span style="font-size:10px;background:#fff5f5;padding:1px 5px;border-radius:2px;color:var(--red)">Alibaba Cloud</span>
+          <span style="font-size:10px;background:#fff5f5;padding:1px 5px;border-radius:2px;color:var(--red)">Tencent Cloud</span>
+          <span style="font-size:10px;background:#fff5f5;padding:1px 5px;border-radius:2px;color:var(--red)">Huawei Cloud</span>
+          <span style="font-size:10px;background:#f0f4f8;padding:1px 5px;border-radius:2px">AWS</span>
+          <span style="font-size:10px;background:#f0f4f8;padding:1px 5px;border-radius:2px">GCP</span>
+        </div>
+      </div>
+      <div class="link-item" style="flex-direction:column;align-items:stretch;border:1px solid #eee;border-radius:4px;padding:10px;margin:4px">
+        <div style="font-weight:600;font-size:13px;margin-bottom:6px;color:var(--orange)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg>
+          Medio Oriente / Africa
+        </div>
+        <div style="font-size:11px;color:var(--text-light);margin-bottom:6px">SA, UAE, BH. Nuove regioni in espansione. Smart city e digitalizzazione.</div>
+        <div style="display:flex;flex-wrap:wrap;gap:3px">
+          <span style="font-size:10px;background:#f0f4f8;padding:1px 5px;border-radius:2px">AWS</span>
+          <span style="font-size:10px;background:#f0f4f8;padding:1px 5px;border-radius:2px">Azure</span>
+          <span style="font-size:10px;background:#f0f4f8;padding:1px 5px;border-radius:2px">GCP</span>
+          <span style="font-size:10px;background:#fff5f5;padding:1px 5px;border-radius:2px;color:var(--red)">Huawei</span>
+          <span style="font-size:10px;background:#fff5f5;padding:1px 5px;border-radius:2px;color:var(--red)">Alibaba</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============= SECTION: GPU CLOUD ============= -->
+<div class="section-block">
+  <div class="section-header">
+    <div class="dot" style="background:#e11d48"></div>
+    <h2>Provider GPU Cloud per AI/ML Training</h2>
+  </div>
+  <div class="section-body">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Provider</th>
+          <th>GPU Disponibili</th>
+          <th>Prezzo H100/hr</th>
+          <th>Prezzo A100/hr</th>
+          <th>Note</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="hl">Lambda Labs</td>
+          <td>H100, A100, A6000</td>
+          <td class="price">~1.10 USD</td>
+          <td class="price">~1.10 USD</td>
+          <td>Semplice, veloce, popolare tra ricercatori</td>
+        </tr>
+        <tr>
+          <td class="hl">CoreWeave</td>
+          <td>H100, A100, A40</td>
+          <td class="price">~2.06 USD</td>
+          <td class="price">~1.60 USD</td>
+          <td>Infra dedicata AI, networking NVLink</td>
+        </tr>
+        <tr>
+          <td>RunPod</td>
+          <td>H100, A100, A4000</td>
+          <td class="price">~0.79 USD</td>
+          <td class="price">~1.19 USD</td>
+          <td>Serverless, spot instance, community cloud</td>
+        </tr>
+        <tr>
+          <td>Together AI</td>
+          <td>H100, A100</td>
+          <td>-</td>
+          <td>-</td>
+          <td>API inference, training gestito</td>
+        </tr>
+        <tr>
+          <td>AWS</td>
+          <td>P5 (H100), P4d (A100)</td>
+          <td class="price">~32.77 USD*</td>
+          <td class="price">~19.22 USD*</td>
+          <td>*Istanza p5.48xlarge/8GPU, prezzo per GPU ~4.10</td>
+        </tr>
+        <tr>
+          <td>GCP</td>
+          <td>A3 (H100), A2 (A100)</td>
+          <td>-</td>
+          <td>-</td>
+          <td>TPU v5e come alternativa proprietaria</td>
+        </tr>
+        <tr>
+          <td>Azure</td>
+          <td>NC H100, ND A100</td>
+          <td>-</td>
+          <td>-</td>
+          <td>Accesso prioritario tramite Azure OpenAI</td>
+        </tr>
+        <tr>
+          <td>Vultr</td>
+          <td>A100, A40, RTX A6000</td>
+          <td>-</td>
+          <td class="price">~1.41 USD</td>
+          <td>Buon prezzo, facile integrazione</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ============= SECTION: GUIDE ============= -->
+<div class="two-col" id="guide">
+<div>
+<div class="section-block">
+  <div class="section-header">
+    <div class="dot" style="background:var(--blue)"></div>
+    <h2>Guida: Come Scegliere il Provider Giusto</h2>
+  </div>
+  <div class="section-body">
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Definisci i Tuoi Requisiti</h4>
+          <p>Identifica le esigenze specifiche: inferenza AI, training modelli, hosting web, o un mix? Determina volume richieste, latenza, compliance (GDPR, ICP per la Cina) e budget. Una startup SaaS ha esigenze diverse da un'azienda enterprise con dati sensibili. Considera anche la crescita futura.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Valuta la Qualita' del Modello AI</h4>
+          <p>Confronta le prestazioni sui tuoi use case: per codice, Claude e GPT-4o eccellono; per documenti lunghi, Gemini (1M token) e Kimi (200K caratteri); per costo-efficacia su alto volume, DeepSeek e Qwen Turbo. Testa sempre con i tuoi dati reali prima di impegnarti.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Confronta l'Infrastruttura VPS</h4>
+          <p>Considera: localizzazione (vicino agli utenti = bassa latenza), hardware (AMD EPYC per rapporto core/prezzo), banda, backup automatici, snapshot e firewall. Hetzner e Vultr dominano per prezzo-prestazioni; AWS e GCP per servizi integrati.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h4>Analizza i Costi Totali (TCO)</h4>
+          <p>Non solo prezzo orario: considera trasferimento dati (spesso la voce nascosta piu' costosa), storage, supporto tecnico, migrazione e tempo del team. Provider cinesi offrono crediti generosi; AWS/Azure/GCP hanno programmi startup con migliaia di dollari in crediti.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h4>Verifica Compliance e Sicurezza</h4>
+          <p>Europa: GDPR obbligatorio, scegli datacenter EU (Hetzner, Scaleway, AWS eu-central-1). Cina: licenze ICP, provider locali (Alibaba, Tencent, Huawei). Settori regolamentati: SOC 2, ISO 27001, HIPAA. Le API AI devono rispettare normative di ogni giurisdizione.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <h4>Testa Prima di Impegnarti</h4>
+          <p>Sfrutta periodi di prova: AWS (12 mesi free tier), GCP (300 USD crediti), Azure (200 USD), DigitalOcean (200 USD), Oracle (always free generoso). Testa con volumi piccoli. Misura latenza, qualita' output, stabilita' e supporto tecnico.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SIDEBAR: RECOMMENDATIONS -->
+<div>
+  <div class="side-box">
+    <div class="section-header">
+      <div class="dot" style="background:var(--green)"></div>
+      <h2>Raccomandazioni</h2>
+    </div>
+    <div class="section-body">
+      <div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px dashed #eee">
+        <div style="font-weight:600;font-size:13px;color:var(--green);margin-bottom:4px">Per Startup</div>
+        <div style="font-size:12px;color:var(--text-light);line-height:1.5">
+          <b>VPS:</b> Hetzner o Vultr<br>
+          <b>AI:</b> DeepSeek o Gemini Flash<br>
+          <b>Cloud:</b> GCP (300$ crediti)<br>
+          <b>DB:</b> Supabase (gratuito)<br>
+          <b>CDN:</b> Cloudflare (gratuito)
+        </div>
+      </div>
+      <div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px dashed #eee">
+        <div style="font-weight:600;font-size:13px;color:var(--blue);margin-bottom:4px">Per Azienda Media</div>
+        <div style="font-size:12px;color:var(--text-light);line-height:1.5">
+          <b>VPS:</b> AWS o Azure<br>
+          <b>AI:</b> GPT-4o o Claude Sonnet<br>
+          <b>Cloud:</b> AWS o Azure (managed)<br>
+          <b>DB:</b> RDS / Cloud SQL<br>
+          <b>CDN:</b> CloudFront / Akamai
+        </div>
+      </div>
+      <div>
+        <div style="font-weight:600;font-size:13px;color:var(--orange);margin-bottom:4px">Per Enterprise</div>
+        <div style="font-size:12px;color:var(--text-light);line-height:1.5">
+          <b>VPS:</b> Azure o GCP (hybrid)<br>
+          <b>AI:</b> Azure OpenAI (compliance)<br>
+          <b>Cloud:</b> Multi-cloud<br>
+          <b>DB:</b> Aurora / Spanner<br>
+          <b>Supporto:</b> SLA 24/7 dedicato
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="side-box" style="margin-top:10px">
+    <div class="section-header">
+      <div class="dot" style="background:var(--orange)"></div>
+      <h2>Funzionalita' Confronto</h2>
+    </div>
+    <div class="section-body">
+      <table class="data-table" style="font-size:11px">
+        <thead><tr><th>Funzionalita'</th><th>Premium</th><th>Economico</th></tr></thead>
+        <tbody>
+          <tr><td>Qualita' Output</td><td class="hl">Alta</td><td>Media-Alta</td></tr>
+          <tr><td>Velocita'</td><td>Media</td><td class="green">Alta</td></tr>
+          <tr><td>Contesto Max</td><td>128K-1M</td><td>64K-128K</td></tr>
+          <tr><td>Multimodale</td><td class="hl">Si</td><td>Parziale</td></tr>
+          <tr><td>Costo</td><td>Alto</td><td class="green">Basso</td></tr>
+          <tr><td>Rate Limit</td><td>Alto</td><td>Medio</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ============= SECTION: TRENDS ============= -->
+<div class="section-block" id="insights">
+  <div class="section-header">
+    <div class="dot" style="background:var(--orange)"></div>
+    <h2>Tendenze del Mercato Cloud e AI (2025-2026)</h2>
+  </div>
+  <div class="cat-tabs">
+    <div class="cat-tab active">Tutte</div>
+    <div class="cat-tab">AI Generativa</div>
+    <div class="cat-tab">Cloud</div>
+    <div class="cat-tab">Hardware</div>
+    <div class="cat-tab">Regolamentazione</div>
+  </div>
+  <div class="section-body">
+    <div class="link-grid col-3">
+      <div class="link-item" style="flex-direction:column;align-items:stretch;border:1px solid #eee;border-radius:4px;padding:10px;margin:3px">
+        <div style="font-weight:600;font-size:13px;margin-bottom:4px">Convergenza AI-Cloud</div>
+        <div style="font-size:12px;color:var(--text-light)">I provider cloud integrano nativamente servizi AI: AWS Bedrock, Azure OpenAI, Vertex AI. L'AI diventa un servizio cloud nativo, eliminando infrastrutture separate.</div>
+      </div>
+      <div class="link-item" style="flex-direction:column;align-items:stretch;border:1px solid #eee;border-radius:4px;padding:10px;margin:3px">
+        <div style="font-weight:600;font-size:13px;margin-bottom:4px">Open Source in Ascesa</div>
+        <div style="font-size:12px;color:var(--text-light)">Llama, Mistral, Qwen, DeepSeek raggiungono qualita' modelli proprietari. Deployment on-premise con costi inferiori e controllo totale sui dati aziendali.</div>
+      </div>
+      <div class="link-item" style="flex-direction:column;align-items:stretch;border:1px solid #eee;border-radius:4px;padding:10px;margin:3px">
+        <div style="font-weight:600;font-size:13px;margin-bottom:4px">Edge AI e Modelli Locali</div>
+        <div style="font-size:12px;color:var(--text-light)">Gemini Nano, modelli GGUF quantizzati, Cloudflare Workers AI portano inferenza al edge. Latenza minima, privacy garantita, funzionamento offline.</div>
+      </div>
+      <div class="link-item" style="flex-direction:column;align-items:stretch;border:1px solid #eee;border-radius:4px;padding:10px;margin:3px">
+        <div style="font-weight:600;font-size:13px;margin-bottom:4px">GPU Cloud Specializzato</div>
+        <div style="font-size:12px;color:var(--text-light)">Lambda, CoreWeave, RunPod offrono H100/A100 a prezzi competitivi. Mercato dedicato AI superiore ai cloud generalisti per workload specifici.</div>
+      </div>
+      <div class="link-item" style="flex-direction:column;align-items:stretch;border:1px solid #eee;border-radius:4px;padding:10px;margin:3px">
+        <div style="font-weight:600;font-size:13px;margin-bottom:4px">Multi-Cloud e Sovranita' Dati</div>
+        <div style="font-size:12px;color:var(--text-light)">Strategie multi-cloud per evitare lock-in. Normativa europea e geopolitica accelerano richiesta cloud regionali e sovranita' dati.</div>
+      </div>
+      <div class="link-item" style="flex-direction:column;align-items:stretch;border:1px solid #eee;border-radius:4px;padding:10px;margin:3px">
+        <div style="font-weight:600;font-size:13px;margin-bottom:4px">Agenti AI Autonomi</div>
+        <div style="font-size:12px;color:var(--text-light)">Framework come LangChain, CrewAI e function calling trasformano modelli da generatori testo ad esecutori azioni. Automazione task complessi.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============= SECTION: CONTACT ============= -->
+<div class="section-block" id="contact">
+  <div class="section-header">
+    <div class="dot" style="background:var(--purple)"></div>
+    <h2>Contatti e Community</h2>
+  </div>
+  <div class="section-body">
+    <div class="link-grid col-4">
+      <div class="link-item" style="flex-direction:column;align-items:stretch;border:1px solid #eee;border-radius:4px;padding:12px;margin:3px">
+        <div style="font-weight:600;font-size:13px;margin-bottom:6px">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#333" style="vertical-align:-2px"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </div>
+        <div style="font-size:12px;color:var(--text-light)">Codice sorgente del progetto. Contribuzioni benvenute tramite pull request.</div>
+        <a href="https://github.com/ai-vps" target="_blank" style="font-size:12px;margin-top:4px">github.com/ai-vps</a>
+      </div>
+      <div class="link-item" style="flex-direction:column;align-items:stretch;border:1px solid #eee;border-radius:4px;padding:12px;margin:3px">
+        <div style="font-weight:600;font-size:13px;margin-bottom:6px">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#1da1f2" style="vertical-align:-2px"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+          X (Twitter)
+        </div>
+        <div style="font-size:12px;color:var(--text-light)">Aggiornamenti rapidi su novita' provider, offerte e benchmark.</div>
+        <a href="#" style="font-size:12px;margin-top:4px">@ai_vps_guide</a>
+      </div>
+      <div class="link-item" style="flex-direction:column;align-items:stretch;border:1px solid #eee;border-radius:4px;padding:12px;margin:3px">
+        <div style="font-weight:600;font-size:13px;margin-bottom:6px">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#5865f2" style="vertical-align:-2px"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/></svg>
+          Discord
+        </div>
+        <div style="font-size:12px;color:var(--text-light)">Community attiva per discussioni, domande e confronti tra utenti.</div>
+        <a href="#" style="font-size:12px;margin-top:4px">AI-VPS Community</a>
+      </div>
+      <div class="link-item" style="flex-direction:column;align-items:stretch;border:1px solid #eee;border-radius:4px;padding:12px;margin:3px">
+        <div style="font-weight:600;font-size:13px;margin-bottom:6px">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#e53e3e" style="vertical-align:-2px"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          Newsletter
+        </div>
+        <div style="font-size:12px;color:var(--text-light)">Aggiunti settimanali su novita' AI, offerte cloud e guide tecniche.</div>
+        <a href="#" style="font-size:12px;margin-top:4px">Iscriviti gratis</a>
+      </div>
+    </div>
+    <div style="margin-top:12px;padding:12px;background:#f7faff;border:1px solid #e8eff8;border-radius:4px">
+      <div style="font-weight:600;font-size:13px;margin-bottom:6px">Modi per Contribuire al Progetto Open Source</div>
+      <div class="link-grid col-5" style="gap:0">
+        <div style="font-size:12px;color:var(--text-light);padding:3px 6px">
+          <span style="color:var(--green)">&#10003;</span> Segnala nuovi provider
+        </div>
+        <div style="font-size:12px;color:var(--text-light);padding:3px 6px">
+          <span style="color:var(--green)">&#10003;</span> Condividi benchmark
+        </div>
+        <div style="font-size:12px;color:var(--text-light);padding:3px 6px">
+          <span style="color:var(--green)">&#10003;</span> Scrivi guide
+        </div>
+        <div style="font-size:12px;color:var(--text-light);padding:3px 6px">
+          <span style="color:var(--green)">&#10003;</span> Traduci contenuti
+        </div>
+        <div style="font-size:12px;color:var(--text-light);padding:3px 6px">
+          <span style="color:var(--green)">&#10003;</span> Segnala errori
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<!-- FOOTER -->
+<div class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="#ai-intl">AI Internazionale</a>
+      <a href="#ai-cn">AI Cinese</a>
+      <a href="#cloud-intl">Cloud Internazionale</a>
+      <a href="#cloud-cn">Cloud Cinese</a>
+      <a href="#vps">Confronto VPS</a>
+      <a href="#pricing">Prezzi API</a>
+      <a href="#guide">Guida Scelta</a>
+      <a href="#infra">Infrastruttura</a>
+      <a href="#insights">Tendenze</a>
+      <a href="#contact">Contatti</a>
+    </div>
+    <div class="footer-links" style="margin-bottom:14px">
+      <a href="https://openai.com" target="_blank">OpenAI</a>
+      <a href="https://anthropic.com" target="_blank">Anthropic</a>
+      <a href="https://deepmind.google" target="_blank">Google DeepMind</a>
+      <a href="https://deepseek.com" target="_blank">DeepSeek</a>
+      <a href="https://mistral.ai" target="_blank">Mistral</a>
+      <a href="https://aws.amazon.com" target="_blank">AWS</a>
+      <a href="https://azure.microsoft.com" target="_blank">Azure</a>
+      <a href="https://cloud.google.com" target="_blank">Google Cloud</a>
+      <a href="https://www.alibabacloud.com" target="_blank">Alibaba Cloud</a>
+      <a href="https://www.hetzner.com" target="_blank">Hetzner</a>
+      <a href="https://www.vultr.com" target="_blank">Vultr</a>
+      <a href="https://www.digitalocean.com" target="_blank">DigitalOcean</a>
+    </div>
+    <div class="footer-copy">
+      2025-2026 AI-VPS | Progetto Open Source | ai-vps.github.io | Tutti i marchi citati appartengono ai rispettivi proprietari.
+    </div>
+  </div>
+</div>
+
+<script>
+// Tab switching
+document.querySelectorAll('.cat-tab').forEach(tab => {
+  tab.addEventListener('click', function() {
+    this.parentElement.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// Active tab highlight
+const sections = document.querySelectorAll('.section-block[id], .two-col[id]');
+const tabs = document.querySelectorAll('.nav-tabs a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (pageYOffset >= s.offsetTop - 120) current = s.id || s.querySelector('.section-block')?.id;
+  });
+  tabs.forEach(t => {
+    t.classList.remove('active');
+    if (t.getAttribute('href') === '#' + current) t.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
