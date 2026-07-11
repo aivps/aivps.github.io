@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-VPS网址导航 - AI算力与云资源推荐平台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#f5f5f5;--white:#fff;--border:#e0e0e0;--border-light:#eee;
+  --blue:#1a56db;--blue-light:#e8f0fe;--blue-dark:#0d3b8a;
+  --red:#d63031;--green:#00a854;--orange:#e67e22;--purple:#7c3aed;
+  --text:#222;--text-2:#555;--text-3:#999;--text-link:#1a0dab;
+  --header-bg:#3b5998;--header-bg2:#4a6fa5;
+  --sec-blue:#2979ff;--sec-green:#00a854;--sec-orange:#ff7043;--sec-red:#e53935;--sec-purple:#7e57c2;
+}
+body{font-family:'Noto Sans SC','Microsoft YaHei','PingFang SC',sans-serif;font-size:14px;color:var(--text);background:var(--bg);line-height:1.6}
+a{color:var(--text-link);text-decoration:none}
+a:hover{color:var(--red);text-decoration:underline}
+img{border:0;vertical-align:middle}
+ul{list-style:none}
+.container{width:1000px;margin:0 auto}
+
+/* ===== TOP BAR ===== */
+.topbar{background:#f9f9f9;border-bottom:1px solid var(--border);font-size:12px;color:var(--text-3);line-height:32px}
+.topbar-inner{display:flex;justify-content:space-between;align-items:center}
+.topbar-left{display:flex;gap:16px}
+.topbar-left a{color:var(--text-3);font-size:12px}
+.topbar-left a:hover{color:var(--blue)}
+.topbar-right{display:flex;gap:12px;align-items:center}
+.topbar-right a{color:var(--text-3);font-size:12px}
+.lang-switch{cursor:pointer;color:var(--blue);font-weight:500;font-size:12px;background:none;border:1px solid var(--border);padding:2px 10px;border-radius:3px;line-height:20px}
+.lang-switch:hover{background:var(--blue-light);text-decoration:none}
+
+/* ===== HEADER ===== */
+.header{background:var(--white);padding:12px 0;border-bottom:2px solid var(--blue)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo-area{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.logo-area h1{font-size:28px;font-weight:700;color:var(--blue);letter-spacing:-1px}
+.logo-area .logo-sub{font-size:11px;color:var(--text-3);margin-top:4px}
+.search-box{flex:1;max-width:480px}
+.search-form{display:flex;border:2px solid var(--blue);border-radius:3px;overflow:hidden;height:36px}
+.search-form input{flex:1;border:none;outline:none;padding:0 12px;font-size:14px;font-family:inherit}
+.search-form button{background:var(--blue);color:#fff;border:none;padding:0 20px;font-size:14px;cursor:pointer;font-family:inherit;font-weight:500}
+.search-form button:hover{background:var(--blue-dark)}
+.hot-words{margin-top:4px;font-size:12px;color:var(--text-3)}
+.hot-words a{color:var(--text-3);margin-right:8px}
+.hot-words a.hot{color:var(--red)}
+
+/* ===== NAV ===== */
+.main-nav{background:var(--white);border-bottom:1px solid var(--border)}
+.nav-list{display:flex;gap:0}
+.nav-list a{display:block;padding:0 18px;line-height:36px;font-size:14px;font-weight:500;color:var(--text);border-bottom:2px solid transparent}
+.nav-list a:hover,.nav-list a.active{color:var(--blue);border-bottom-color:var(--blue);text-decoration:none;background:var(--blue-light)}
+
+/* ===== QUICK ICONS ===== */
+.quick-icons{background:var(--white);padding:16px 0;margin-top:8px;border-radius:4px;border:1px solid var(--border)}
+.icon-grid{display:flex;flex-wrap:wrap;gap:4px 0}
+.icon-item{width:100px;text-align:center;padding:8px 4px;border-radius:3px;cursor:pointer;transition:background .15s}
+.icon-item:hover{background:var(--blue-light);text-decoration:none}
+.icon-item .icon-box{width:36px;height:36px;border-radius:8px;margin:0 auto 4px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff}
+.icon-item span{display:block;font-size:12px;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ===== SECTIONS ===== */
+.section{background:var(--white);margin-top:8px;border-radius:4px;border:1px solid var(--border);overflow:hidden}
+.sec-head{display:flex;align-items:center;padding:0 16px;height:38px;border-bottom:1px solid var(--border-light);background:#fafafa}
+.sec-head .sec-tag{display:inline-block;padding:2px 8px;color:#fff;font-size:12px;font-weight:700;border-radius:2px;margin-right:12px;line-height:20px}
+.sec-head h2{font-size:15px;font-weight:700;color:var(--text)}
+.sec-head .sec-more{margin-left:auto;font-size:12px;color:var(--text-3)}
+.sec-body{padding:12px 16px}
+
+/* Link lists - hao123 style */
+.link-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2px 0}
+.link-grid.col-4{grid-template-columns:repeat(4,1fr)}
+.link-grid.col-6{grid-template-columns:repeat(6,1fr)}
+.link-row{padding:5px 8px;line-height:22px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-radius:2px}
+.link-row:hover{background:#f0f4ff}
+.link-row a{font-size:13px;color:var(--text)}
+.link-row a:hover{color:var(--blue);text-decoration:none}
+.link-row .tag{display:inline-block;font-size:10px;padding:0 4px;border-radius:2px;margin-left:4px;vertical-align:middle;line-height:16px;position:relative;top:-1px}
+.tag-hot{background:var(--red);color:#fff}
+.tag-new{background:var(--green);color:#fff}
+.tag-rec{background:var(--orange);color:#fff}
+.tag-free{background:var(--purple);color:#fff}
+
+/* ===== CARDS ROW ===== */
+.card-row{display:grid;gap:8px;margin-top:8px}
+.card-row.cols-2{grid-template-columns:1fr 1fr}
+.card-row.cols-3{grid-template-columns:1fr 1fr 1fr}
+.card-row.cols-4{grid-template-columns:1fr 1fr 1fr 1fr}
+
+/* Provider cards */
+.prov-card{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:12px 16px;transition:border-color .15s}
+.prov-card:hover{border-color:var(--blue)}
+.prov-top{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.prov-icon{width:28px;height:28px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
+.prov-name{font-size:14px;font-weight:700;color:var(--text)}
+.prov-tag{font-size:10px;padding:1px 6px;border-radius:2px;margin-left:auto;flex-shrink:0}
+.prov-desc{font-size:12px;color:var(--text-2);line-height:1.7;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.prov-specs{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}
+.prov-spec{font-size:11px;color:var(--text-3);background:#f5f5f5;padding:1px 6px;border-radius:2px;border:1px solid var(--border-light)}
+.prov-price{font-size:12px;color:var(--green);font-weight:500}
+
+/* ===== COMPARE TABLE ===== */
+.cmp-table{width:100%;border-collapse:collapse;font-size:13px}
+.cmp-table th{background:#f0f4ff;color:var(--blue);font-weight:700;text-align:left;padding:8px 10px;border:1px solid var(--border);font-size:12px;white-space:nowrap}
+.cmp-table td{padding:7px 10px;border:1px solid var(--border);color:var(--text);vertical-align:top}
+.cmp-table tr:nth-child(even) td{background:#fafafa}
+.cmp-table tr:hover td{background:#f0f4ff}
+.cmp-table .pname{font-weight:700;color:var(--blue)}
+
+/* ===== TABS ===== */
+.tabs{display:flex;gap:0;border-bottom:2px solid var(--blue);margin-bottom:12px}
+.tab-btn{padding:6px 16px;font-size:13px;font-weight:500;color:var(--text-2);cursor:pointer;border:1px solid var(--border);border-bottom:none;background:#fafafa;border-radius:4px 4px 0 0;margin-right:2px;position:relative;top:2px}
+.tab-btn.active{background:var(--white);color:var(--blue);border-color:var(--blue);font-weight:700}
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* ===== SCENE BOXES ===== */
+.scene-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.scene-box{border:1px solid var(--border);border-radius:4px;padding:12px;transition:border-color .15s}
+.scene-box:hover{border-color:var(--blue)}
+.scene-box h4{font-size:14px;font-weight:700;margin-bottom:4px;color:var(--text)}
+.scene-box .scene-icon{font-size:18px;margin-bottom:4px}
+.scene-box p{font-size:12px;color:var(--text-2);line-height:1.6}
+
+/* ===== FOOTER ===== */
+.footer{margin-top:12px;padding:16px 0;text-align:center;border-top:2px solid var(--blue);background:var(--white)}
+.footer-links{margin-bottom:8px}
+.footer-links a{font-size:12px;color:var(--text-3);margin:0 8px}
+.footer-links a:hover{color:var(--blue)}
+.footer p{font-size:12px;color:var(--text-3)}
+
+/* ===== ANIMATED MARQUEE ===== */
+.notice-bar{background:#fffbe6;border:1px solid #ffe58f;padding:6px 16px;font-size:12px;color:var(--text-2);border-radius:3px;margin-top:8px;display:flex;align-items:center;gap:8px}
+.notice-bar .notice-label{background:var(--orange);color:#fff;padding:1px 6px;border-radius:2px;font-weight:700;font-size:11px;flex-shrink:0}
+
+/* ===== BACK TO TOP ===== */
+.back-top{position:fixed;right:20px;bottom:40px;width:36px;height:36px;background:var(--blue);color:#fff;border:none;border-radius:3px;cursor:pointer;font-size:18px;display:none;z-index:100;line-height:36px;text-align:center}
+.back-top:hover{background:var(--blue-dark);text-decoration:none;color:#fff}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1020px){
+  .container{width:auto;padding:0 12px}
+  .link-grid{grid-template-columns:repeat(3,1fr)}
+  .link-grid.col-4{grid-template-columns:repeat(3,1fr)}
+  .link-grid.col-6{grid-template-columns:repeat(3,1fr)}
+  .card-row.cols-2,.card-row.cols-3,.card-row.cols-4{grid-template-columns:1fr 1fr}
+  .scene-grid{grid-template-columns:1fr 1fr}
+  .header-inner{flex-wrap:wrap}
+  .search-box{max-width:100%;order:3;flex-basis:100%}
+}
+@media(max-width:640px){
+  .link-grid,.link-grid.col-4,.link-grid.col-6{grid-template-columns:1fr 1fr}
+  .card-row.cols-2,.card-row.cols-3,.card-row.cols-4{grid-template-columns:1fr}
+  .scene-grid{grid-template-columns:1fr}
+  .nav-list{flex-wrap:wrap}
+  .nav-list a{padding:0 10px;font-size:13px}
+  .icon-grid{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+<div class="container topbar-inner">
+  <div class="topbar-left">
+    <span id="todayDate"></span>
+    <a href="#home" data-zh="设为首页" data-en="Set as Home">设为首页</a>
+    <a href="https://github.com/ai-vps/ai-vps.github.io" target="_blank" data-zh="GitHub" data-en="GitHub">GitHub</a>
+  </div>
+  <div class="topbar-right">
+    <a href="#global-gpu" data-zh="海外GPU" data-en="Global GPU">海外GPU</a>
+    <a href="#china-cloud" data-zh="国内云" data-en="CN Cloud">国内云</a>
+    <a href="#global-ai" data-zh="海外AI" data-en="Global AI">海外AI</a>
+    <a href="#china-ai" data-zh="国内AI" data-en="CN AI">国内AI</a>
+    <button class="lang-switch" onclick="toggleLang()" id="langBtn">EN</button>
+  </div>
+</div>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+<div class="container header-inner">
+  <div class="logo-area">
+    <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="2" y="2" width="36" height="36" rx="6" fill="#3b5998"/><text x="8" y="18" font-size="10" font-weight="bold" fill="#fff" font-family="sans-serif">AI</text><text x="6" y="31" font-size="9" font-weight="bold" fill="#8cc" font-family="sans-serif">VPS</text><rect x="20" y="14" width="14" height="14" rx="3" fill="none" stroke="#fff" stroke-width="1.5"/><path d="M24 21h6M27 18v6" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <div>
+      <h1>AI-VPS</h1>
+      <div class="logo-sub" data-zh="AI算力与云资源导航" data-en="AI Computing & Cloud Resource Navigator">AI算力与云资源导航</div>
+    </div>
+  </div>
+  <div class="search-box">
+    <form class="search-form" onsubmit="return false">
+      <input type="text" data-placeholder="搜索云服务商、AI模型、GPU平台..." data-placeholder-en="Search cloud providers, AI models, GPU platforms..." placeholder="搜索云服务商、AI模型、GPU平台...">
+      <button type="submit" data-zh="搜索" data-en="Search">搜索</button>
+    </form>
+    <div class="hot-words">
+      <span data-zh="热搜：" data-en="Trending:">热搜：</span>
+      <a href="#global-gpu" class="hot" data-zh="H100算力" data-en="H100 GPU">H100算力</a>
+      <a href="#china-ai" data-zh="DeepSeek" data-en="DeepSeek">DeepSeek</a>
+      <a href="#global-ai" data-zh="GPT-5" data-en="GPT-5">GPT-5</a>
+      <a href="#china-cloud" data-zh="阿里云" data-en="Alibaba Cloud">阿里云</a>
+      <a href="#global-cloud" data-zh="AWS" data-en="AWS">AWS</a>
+      <a href="#china-ai" data-zh="豆包" data-en="Doubao">豆包</a>
+      <a href="#compare" data-zh="价格对比" data-en="Price Compare">价格对比</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- NAV -->
+<div class="main-nav">
+<div class="container">
+  <div class="nav-list">
+    <a href="#home" class="active" data-zh="首页" data-en="Home">首页</a>
+    <a href="#global-gpu" data-zh="海外GPU云" data-en="Global GPU">海外GPU云</a>
+    <a href="#china-gpu" data-zh="国内GPU云" data-en="CN GPU">国内GPU云</a>
+    <a href="#global-cloud" data-zh="海外公有云" data-en="Global Cloud">海外公有云</a>
+    <a href="#china-cloud" data-zh="国内公有云" data-en="CN Cloud">国内公有云</a>
+    <a href="#global-ai" data-zh="海外AI" data-en="Global AI">海外AI</a>
+    <a href="#china-ai" data-zh="国内AI" data-en="CN AI">国内AI</a>
+    <a href="#compare" data-zh="对比排行" data-en="Compare">对比排行</a>
+    <a href="#scenes" data-zh="场景推荐" data-en="Use Cases">场景推荐</a>
+  </div>
+</div>
+</div>
+
+<!-- NOTICE -->
+<div class="container">
+<div class="notice-bar">
+  <span class="notice-label" data-zh="公告" data-en="News">公告</span>
+  <span data-zh="数据持续更新中 | 价格信息以各平台官网为准 | 最后更新：2026年7月" data-en="Data continuously updated | Prices based on official websites | Last update: July 2026">数据持续更新中 | 价格信息以各平台官网为准 | 最后更新：2026年7月</span>
+</div>
+</div>
+
+<!-- QUICK ICONS -->
+<div class="container">
+<div class="quick-icons" id="home">
+<div class="icon-grid" style="justify-content:center">
+  <a class="icon-item" href="https://aws.amazon.com" target="_blank"><div class="icon-box" style="background:#ff9900">AW</div><span>AWS</span></a>
+  <a class="icon-item" href="https://cloud.google.com" target="_blank"><div class="icon-box" style="background:#4285f4">GC</div><span>Google Cloud</span></a>
+  <a class="icon-item" href="https://azure.microsoft.com" target="_blank"><div class="icon-box" style="background:#0078d4">Az</div><span>Azure</span></a>
+  <a class="icon-item" href="https://www.aliyun.com" target="_blank"><div class="icon-box" style="background:#ff6a00">Ali</div><span data-zh="阿里云" data-en="Alibaba">阿里云</span></a>
+  <a class="icon-item" href="https://cloud.tencent.com" target="_blank"><div class="icon-box" style="background:#0052d9">TX</div><span data-zh="腾讯云" data-en="Tencent">腾讯云</span></a>
+  <a class="icon-item" href="https://www.huaweicloud.com" target="_blank"><div class="icon-box" style="background:#cf0a2c">HW</div><span data-zh="华为云" data-en="Huawei">华为云</span></a>
+  <a class="icon-item" href="https://platform.openai.com" target="_blank"><div class="icon-box" style="background:#10a37f">OA</div><span>OpenAI</span></a>
+  <a class="icon-item" href="https://www.anthropic.com" target="_blank"><div class="icon-box" style="background:#d4a574">An</div><span>Anthropic</span></a>
+  <a class="icon-item" href="https://deepseek.com" target="_blank"><div class="icon-box" style="background:#4a90d9">DS</div><span>DeepSeek</span></a>
+  <a class="icon-item" href="https://www.volcengine.com" target="_blank"><div class="icon-box" style="background:#3370ff">Vo</div><span data-zh="火山引擎" data-en="Volcengine">火山引擎</span></a>
+</div>
+</div>
+</div>
+
+<!-- =============== SECTION: 海外GPU云 =============== -->
+<div class="container" id="global-gpu">
+<div class="section">
+  <div class="sec-head">
+    <span class="sec-tag" style="background:var(--sec-blue)" data-zh="海外GPU" data-en="GPU">海外GPU</span>
+    <h2 data-zh="海外 GPU 云算力平台" data-en="Global GPU Cloud Platforms">海外 GPU 云算力平台</h2>
+    <span class="sec-more" data-zh="面向AI训练与推理，按秒/按小时计费" data-en="For AI training & inference, per-second/hour billing">面向AI训练与推理，按秒/按小时计费</span>
+  </div>
+  <div class="sec-body">
+    <div class="card-row cols-4">
+      <!-- RunPod -->
+      <div class="prov-card">
+        <div class="prov-top">
+          <div class="prov-icon" style="background:#3b82f6">RP</div>
+          <span class="prov-name">RunPod</span>
+          <span class="prov-tag tag-hot" data-zh="热门" data-en="Hot">热门</span>
+        </div>
+        <p class="prov-desc" data-zh="专为AI构建，FlashBoot亚200ms冷启动。Secure Cloud+Community Cloud双模式，A100/H100/H200/MI300X全系，按秒计费。" data-en="AI-native platform, FlashBoot sub-200ms cold start. Secure+Community Cloud dual mode, A100/H100/H200/MI300X, per-second billing.">专为AI构建，FlashBoot亚200ms冷启动。Secure Cloud+Community Cloud双模式，A100/H100/H200/MI300X全系，按秒计费。</p>
+        <div class="prov-specs"><span class="prov-spec">H200</span><span class="prov-spec">MI300X</span><span class="prov-spec">Serverless</span></div>
+        <div class="prov-price" data-zh="起步 $0.39/hr (A4000)" data-en="From $0.39/hr (A4000)">起步 $0.39/hr (A4000)</div>
+      </div>
+      <!-- CoreWeave -->
+      <div class="prov-card">
+        <div class="prov-top">
+          <div class="prov-icon" style="background:#6366f1">CW</div>
+          <span class="prov-name">CoreWeave</span>
+          <span class="prov-tag tag-rec" data-zh="推荐" data-en="Rec">推荐</span>
+        </div>
+        <p class="prov-desc" data-zh="HPC优化GPU云，InfiniBand高速互联，低延迟。A100/H100/A5000/A6000可选，Spot+按需实例，企业级可扩展。" data-en="HPC-optimized GPU cloud, InfiniBand networking. A100/H100/A5000/A6000, spot+on-demand, enterprise scalable.">HPC优化GPU云，InfiniBand高速互联，低延迟。A100/H100/A5000/A6000可选，Spot+按需实例，企业级可扩展。</p>
+        <div class="prov-specs"><span class="prov-spec">InfiniBand</span><span class="prov-spec">H100</span><span class="prov-spec">K8s</span></div>
+        <div class="prov-price" data-zh="起步 $0.50/hr (A100 40G)" data-en="From $0.50/hr (A100 40G)">起步 $0.50/hr (A100 40G)</div>
+      </div>
+      <!-- Lambda -->
+      <div class="prov-card">
+        <div class="prov-top">
+          <div class="prov-icon" style="background:#7c3aed">LM</div>
+          <span class="prov-name">Lambda Labs</span>
+          <span class="prov-tag tag-new" data-zh="新" data-en="New">新</span>
+        </div>
+        <p class="prov-desc" data-zh="混合云+托管方案，预配置ML环境开箱即用。A100/H100，按需+预留实例，深度学习研究团队首选。" data-en="Hybrid cloud+colocation, pre-configured ML. A100/H100, on-demand+reserved, ideal for DL research teams.">混合云+托管方案，预配置ML环境开箱即用。A100/H100，按需+预留实例，深度学习研究团队首选。</p>
+        <div class="prov-specs"><span class="prov-spec">ML Stack</span><span class="prov-spec">Hybrid</span><span class="prov-spec">Reserved</span></div>
+        <div class="prov-price" data-zh="起步 $1.10/hr (A100 80G)" data-en="From $1.10/hr (A100 80G)">起步 $1.10/hr (A100 80G)</div>
+      </div>
+      <!-- Vast.ai -->
+      <div class="prov-card">
+        <div class="prov-top">
+          <div class="prov-icon" style="background:#059669">VA</div>
+          <span class="prov-name">Vast.ai</span>
+          <span class="prov-tag tag-hot" data-zh="低价" data-en="Cheap">低价</span>
+        </div>
+        <p class="prov-desc" data-zh="GPU市场模式，全球闲置算力聚合，价格极具竞争力。多GPU型号可选，Docker容器化部署，预算敏感场景首选。" data-en="GPU marketplace, aggregated idle compute, highly competitive pricing. Multi-GPU, Docker deployment, best for budget.">GPU市场模式，全球闲置算力聚合，价格极具竞争力。多GPU型号可选，Docker容器化部署，预算敏感场景首选。</p>
+        <div class="prov-specs"><span class="prov-spec">Marketplace</span><span class="prov-spec">Docker</span><span class="prov-spec">Spot</span></div>
+        <div class="prov-price" data-zh="起步 $0.20/hr (RTX 3090)" data-en="From $0.20/hr (RTX 3090)">起步 $0.20/hr (RTX 3090)</div>
+      </div>
+    </div>
+    <!-- Link list below -->
+    <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border-light)">
+      <div class="link-grid col-6">
+        <div class="link-row"><a href="https://www.tensorstack.com" target="_blank" data-zh="TensorDock - 众包GPU市集 -60%成本" data-en="TensorDock - Crowdsourced GPU -60% cost">TensorDock - 众包GPU市集 -60%成本</a></div>
+        <div class="link-row"><a href="https://www.hyperstack.cloud" target="_blank" data-zh="Hyperstack - 欧洲绿色GPU云" data-en="Hyperstack - EU Green GPU Cloud">Hyperstack - 欧洲绿色GPU云</a></div>
+        <div class="link-row"><a href="https://www.nvidia.com/en-us/data-center/dgx-cloud/" target="_blank" data-zh="NVIDIA DGX Cloud - 官方方案" data-en="NVIDIA DGX Cloud - Official">NVIDIA DGX Cloud - 官方方案</a></div>
+        <div class="link-row"><a href="https://www.thundercompute.com" target="_blank" data-zh="Thunder Compute - 超低价GPU" data-en="Thunder Compute - Ultra-low GPU">Thunder Compute - 超低价GPU</a></div>
+        <div class="link-row"><a href="https://lambdalabs.com" target="_blank" data-zh="Lambda - H100/A100 集群" data-en="Lambda - H100/A100 Clusters">Lambda - H100/A100 集群</a></div>
+        <div class="link-row"><a href="https://fluidstack.io" target="_blank" data-zh="FluidStack - 分布式GPU网络" data-en="FluidStack - Distributed GPU">FluidStack - 分布式GPU网络</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- =============== SECTION: 国内GPU云 =============== -->
+<div class="container" id="china-gpu">
+<div class="section">
+  <div class="sec-head">
+    <span class="sec-tag" style="background:var(--sec-red)" data-zh="国内GPU" data-en="CN GPU">国内GPU</span>
+    <h2 data-zh="国内 GPU 算力平台" data-en="China GPU Compute Platforms">国内 GPU 算力平台</h2>
+    <span class="sec-more" data-zh="数据合规，延迟低，支持国产+NVIDIA全系" data-en="Data compliant, low latency, domestic+NVIDIA GPUs">数据合规，延迟低，支持国产+NVIDIA全系</span>
+  </div>
+  <div class="sec-body">
+    <div class="link-grid col-4">
+      <div class="link-row"><a href="https://pai.console.aliyun.com" target="_blank" data-zh="阿里云PAI - 灵骏智算集群 万卡训练" data-en="Alibaba PAI - 10K GPU Training">阿里云PAI - 灵骏智算集群 万卡训练</a> <span class="tag tag-hot">Top</span></div>
+      <div class="link-row"><a href="https://cloud.baidu.com/product/acc" target="_blank" data-zh="百度百舸 - 昆仑芯+NVIDIA混合" data-en="Baidu百舸 - Kunlun+NVIDIA Hybrid">百度百舸 - 昆仑芯+NVIDIA混合</a></div>
+      <div class="link-row"><a href="https://www.volcengine.com/product/ml-space" target="_blank" data-zh="火山引擎ML Space - 豆包优化" data-en="Volcengine ML Space - Doubao">火山引擎ML Space - 豆包优化</a> <span class="tag tag-new">New</span></div>
+      <div class="link-row"><a href="https://www.sensetime.com" target="_blank" data-zh="商汤大装置 - CV与多模态优化" data-en="SenseTime AI - CV & Multimodal">商汤大装置 - CV与多模态优化</a></div>
+      <div class="link-row"><a href="https://cloud.tencent.com/product/hai" target="_blank" data-zh="腾讯云HAI - 一键AI部署" data-en="Tencent HAI - One-click AI">腾讯云HAI - 一键AI部署</a></div>
+      <div class="link-row"><a href="https://www.huaweicloud.com/product/modelarts.html" target="_blank" data-zh="华为ModelArts - 昇腾生态" data-en="Huawei ModelArts - Ascend">华为ModelArts - 昇腾生态</a></div>
+      <div class="link-row"><a href="https://cloud.siliconflow.cn" target="_blank" data-zh="硅基流动 - 推理加速平台" data-en="SiliconFlow - Inference Accel">硅基流动 - 推理加速平台</a> <span class="tag tag-rec">荐</span></div>
+      <div class="link-row"><a href="https://cloud.baidu.com/product/qianfan" target="_blank" data-zh="千帆平台 - 100+大模型MaaS" data-en="Qianfan - 100+ Model MaaS">千帆平台 - 100+大模型MaaS</a></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- =============== SECTION: 海外公有云 =============== -->
+<div class="container" id="global-cloud">
+<div class="section">
+  <div class="sec-head">
+    <span class="sec-tag" style="background:var(--sec-green)" data-zh="海外云" data-en="Global Cloud">海外云</span>
+    <h2 data-zh="海外主流公有云" data-en="Global Public Clouds">海外主流公有云</h2>
+    <span class="sec-more" data-zh="全面覆盖计算/存储/网络/AI服务" data-en="Full compute/storage/network/AI services">全面覆盖计算/存储/网络/AI服务</span>
+  </div>
+  <div class="sec-body">
+    <div class="card-row cols-4">
+      <div class="prov-card">
+        <div class="prov-top">
+          <div class="prov-icon" style="background:#ff9900">AW</div>
+          <span class="prov-name">AWS</span>
+          <span class="prov-tag tag-hot">#1</span>
+        </div>
+        <p class="prov-desc" data-zh="全球份额第一，200+服务。EC2 P4/P5 GPU实例，Spot最高省90%，SageMaker ML平台，33个区域。" data-en="#1 global share, 200+ services. EC2 P4/P5 GPU, Spot saves 90%, SageMaker ML, 33 regions.">全球份额第一，200+服务。EC2 P4/P5 GPU实例，Spot最高省90%，SageMaker ML平台，33个区域。</p>
+        <div class="prov-specs"><span class="prov-spec">EC2 P5</span><span class="prov-spec">Spot -90%</span><span class="prov-spec">SageMaker</span></div>
+        <div class="prov-price" data-zh="P4d起 $3.40/hr" data-en="P4d from $3.40/hr">P4d起 $3.40/hr</div>
+      </div>
+      <div class="prov-card">
+        <div class="prov-top">
+          <div class="prov-icon" style="background:#0078d4">Az</div>
+          <span class="prov-name">Azure</span>
+          <span class="prov-tag tag-rec">OpenAI</span>
+        </div>
+        <p class="prov-desc" data-zh="深度整合OpenAI，Azure OpenAI独家托管GPT-5系列。Foundry Models全系AI模型，混合云+企业合规。" data-en="Deep OpenAI integration, exclusive GPT-5 hosting. Foundry Models, hybrid cloud+enterprise compliance.">深度整合OpenAI，Azure OpenAI独家托管GPT-5系列。Foundry Models全系AI模型，混合云+企业合规。</p>
+        <div class="prov-specs"><span class="prov-spec">Azure OpenAI</span><span class="prov-spec">GPT-5.6</span><span class="prov-spec">Hybrid</span></div>
+        <div class="prov-price" data-zh="按需+预留" data-en="Pay-go+Reserved">按需+预留</div>
+      </div>
+      <div class="prov-card">
+        <div class="prov-top">
+          <div class="prov-icon" style="background:#4285f4">GC</div>
+          <span class="prov-name">Google Cloud</span>
+          <span class="prov-tag tag-new">TPU</span>
+        </div>
+        <p class="prov-desc" data-zh="独家TPU v5张量处理单元，Vertex AI+Gemini生态。A100/H100/L4 GPU全球可用，40+区域。" data-en="Exclusive TPU v5, Vertex AI+Gemini. A100/H100/L4 GPU globally, 40+ regions.">独家TPU v5张量处理单元，Vertex AI+Gemini生态。A100/H100/L4 GPU全球可用，40+区域。</p>
+        <div class="prov-specs"><span class="prov-spec">TPU v5</span><span class="prov-spec">Vertex AI</span><span class="prov-spec">Gemini</span></div>
+        <div class="prov-price" data-zh="A100起 $1.24/hr" data-en="A100 from $1.24/hr">A100起 $1.24/hr</div>
+      </div>
+      <div class="prov-card">
+        <div class="prov-top">
+          <div class="prov-icon" style="background:#002855">DO</div>
+          <span class="prov-name">DigitalOcean</span>
+          <span class="prov-tag" style="background:var(--sec-green);color:#fff">Simple</span>
+        </div>
+        <p class="prov-desc" data-zh="面向开发者和初创团队，简洁UX，透明定价。GPU Droplet轻松上手，H100/A100/RTX A6000可选。" data-en="Developer-friendly for startups. Simple UX, transparent pricing. GPU Droplets, H100/A100/RTX A6000.">面向开发者和初创团队，简洁UX，透明定价。GPU Droplet轻松上手，H100/A100/RTX A6000可选。</p>
+        <div class="prov-specs"><span class="prov-spec">Simple UX</span><span class="prov-spec">H100</span><span class="prov-spec">Transparent</span></div>
+        <div class="prov-price" data-zh="A100起 $1.50/hr" data-en="A100 from $1.50/hr">A100起 $1.50/hr</div>
+      </div>
+    </div>
+    <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border-light)">
+      <div class="link-grid col-6">
+        <div class="link-row"><a href="https://www.ovhcloud.com" target="_blank">OVHcloud - 欧洲GDPR合规 低价30%</a></div>
+        <div class="link-row"><a href="https://www.linode.com" target="_blank">Linode(Akamai) - 边缘AI+CDN</a></div>
+        <div class="link-row"><a href="https://www.oracle.com/cloud/" target="_blank" data-zh="Oracle Cloud - 永久免费套餐" data-en="Oracle Cloud - Always Free Tier">Oracle Cloud - 永久免费套餐</a> <span class="tag tag-free">Free</span></div>
+        <div class="link-row"><a href="https://www.ibm.com/cloud" target="_blank">IBM Cloud - 企业混合云</a></div>
+        <div class="link-row"><a href="https://www.hetzner.com/cloud" target="_blank">Hetzner - 德国低价VPS</a></div>
+        <div class="link-row"><a href="https://www.vultr.com" target="_blank">Vultr - 全球32节点VPS</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- =============== SECTION: 国内公有云 =============== -->
+<div class="container" id="china-cloud">
+<div class="section">
+  <div class="sec-head">
+    <span class="sec-tag" style="background:var(--sec-orange)" data-zh="国内云" data-en="CN Cloud">国内云</span>
+    <h2 data-zh="国内主流公有云" data-en="China Public Clouds">国内主流公有云</h2>
+    <span class="sec-more" data-zh="计算/存储/网络/AI全栈，数据合规" data-en="Full-stack compute/storage/AI, data compliant">计算/存储/网络/AI全栈，数据合规</span>
+  </div>
+  <div class="sec-body">
+    <div class="link-grid col-4">
+      <div class="link-row"><a href="https://www.aliyun.com" target="_blank" data-zh="阿里云 - 国内IaaS份额第一 ECS 9代" data-en="Alibaba Cloud - #1 China IaaS, 9th Gen ECS">阿里云 - 国内IaaS份额第一 ECS 9代</a> <span class="tag tag-hot">Top1</span></div>
+      <div class="link-row"><a href="https://cloud.tencent.com" target="_blank" data-zh="腾讯云 - 社交游戏生态 CVM全系列" data-en="Tencent Cloud - Social+Gaming, CVM">腾讯云 - 社交游戏生态 CVM全系列</a></div>
+      <div class="link-row"><a href="https://www.huaweicloud.com" target="_blank" data-zh="华为云 - 昇腾910B+鲲鹏 盘古大模型" data-en="Huawei Cloud - Ascend 910B, Pangu LLM">华为云 - 昇腾910B+鲲鹏 盘古大模型</a> <span class="tag tag-rec">Ascend</span></div>
+      <div class="link-row"><a href="https://cloud.baidu.com" target="_blank" data-zh="百度智能云 - 文心一言核心 千帆平台" data-en="Baidu AI Cloud - ERNIE Core, Qianfan">百度智能云 - 文心一言核心 千帆平台</a></div>
+      <div class="link-row"><a href="https://www.volcengine.com" target="_blank" data-zh="火山引擎 - 字节ToB 豆包深度整合" data-en="Volcengine - ByteDance ToB, Doubao">火山引擎 - 字节ToB 豆包深度整合</a> <span class="tag tag-new">New</span></div>
+      <div class="link-row"><a href="https://www.ucloud.cn" target="_blank" data-zh="UCloud - 中立云 出海30+数据中心" data-en="UCloud - Neutral, 30+ DC for Global">UCloud - 中立云 出海30+数据中心</a></div>
+      <div class="link-row"><a href="https://www.jdcloud.com" target="_blank" data-zh="京东云 - 零售+物流AI场景" data-en="JD Cloud - Retail+Logistics AI">京东云 - 零售+物流AI场景</a></div>
+      <div class="link-row"><a href="https://www.qingcloud.com" target="_blank" data-zh="青云QingCloud - 混合云+容器" data-en="QingCloud - Hybrid Cloud+Containers">青云QingCloud - 混合云+容器</a></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- =============== SECTION: 海外AI服务商 =============== -->
+<div class="container" id="global-ai">
+<div class="section">
+  <div class="sec-head">
+    <span class="sec-tag" style="background:var(--sec-purple)" data-zh="海外AI" data-en="Global AI">海外AI</span>
+    <h2 data-zh="海外主流 AI 服务商" data-en="Global AI Providers">海外主流 AI 服务商</h2>
+    <span class="sec-more" data-zh="闭源前沿+开源生态" data-en="Frontier closed-source + open-source">闭源前沿+开源生态</span>
+  </div>
+  <div class="sec-body">
+    <div class="card-row cols-4">
+      <div class="prov-card">
+        <div class="prov-top">
+          <div class="prov-icon" style="background:#10a37f">OA</div>
+          <span class="prov-name">OpenAI</span>
+          <span class="prov-tag tag-hot">Frontier</span>
+        </div>
+        <p class="prov-desc" data-zh="GPT-5.6 Turbo多模态旗舰，Codex 2代码，Sora-2视频。API全系列，企业ChatGPT定制部署，开发者生态最成熟。" data-en="GPT-5.6 Turbo multimodal, Codex 2 code, Sora-2 video. Full API, enterprise ChatGPT. Most mature dev ecosystem.">GPT-5.6 Turbo多模态旗舰，Codex 2代码，Sora-2视频。API全系列，企业ChatGPT定制部署，开发者生态最成熟。</p>
+        <div class="prov-specs"><span class="prov-spec">GPT-5.6</span><span class="prov-spec">Codex 2</span><span class="prov-spec">Sora-2</span></div>
+        <div class="prov-price" data-zh="$8/$24 per 1M tokens" data-en="$8/$24 per 1M tokens">$8/$24 per 1M tokens</div>
+      </div>
+      <div class="prov-card">
+        <div class="prov-top">
+          <div class="prov-icon" style="background:#d4a574">AN</div>
+          <span class="prov-name">Anthropic</span>
+          <span class="prov-tag tag-rec">Safe</span>
+        </div>
+        <p class="prov-desc" data-zh="Claude 4.5 Opus长上下文王者，1M token窗口。宪法AI安全框架，企业数据处理卓越，代码写作并肩GPT-5。" data-en="Claude 4.5 Opus long-context king, 1M window. Constitutional AI, enterprise data, code+writing rivals GPT-5.">Claude 4.5 Opus长上下文王者，1M token窗口。宪法AI安全框架，企业数据处理卓越，代码写作并肩GPT-5。</p>
+        <div class="prov-specs"><span class="prov-spec">Claude 4.5</span><span class="prov-spec">1M Context</span><span class="prov-spec">Safe</span></div>
+        <div class="prov-price" data-zh="Opus: $12/$60 per 1M" data-en="Opus: $12/$60 per 1M">Opus: $12/$60 per 1M</div>
+      </div>
+      <div class="prov-card">
+        <div class="prov-top">
+          <div class="prov-icon" style="background:#4285f4">GE</div>
+          <span class="prov-name">Google Gemini</span>
+          <span class="prov-tag tag-new">Reasoning</span>
+        </div>
+        <p class="prov-desc" data-zh="Gemini 3.0 Ultra推理领先，原生多模态，深度整合搜索+Workspace。Code Assist代码助手，AI Studio免费。" data-en="Gemini 3.0 Ultra leading reasoning, native multimodal, Search+Workspace. Code Assist, free AI Studio.">Gemini 3.0 Ultra推理领先，原生多模态，深度整合搜索+Workspace。Code Assist代码助手，AI Studio免费。</p>
+        <div class="prov-specs"><span class="prov-spec">Gemini 3.0</span><span class="prov-spec">Multimodal</span><span class="prov-spec">Free</span></div>
+        <div class="prov-price" data-zh="Ultra: $7/$21 per 1M" data-en="Ultra: $7/$21 per 1M">Ultra: $7/$21 per 1M</div>
+      </div>
+      <div class="prov-card">
+        <div class="prov-top">
+          <div class="prov-icon" style="background:#1d1d1f">xA</div>
+          <span class="prov-name">xAI (Grok)</span>
+          <span class="prov-tag" style="background:#1d1d1f;color:#fff">X</span>
+        </div>
+        <p class="prov-desc" data-zh="Grok-3推理强大，X实时数据整合。Colossus超算10万H100集群，开放API。" data-en="Grok-3 powerful reasoning, X real-time data. Colossus 100K H100 supercomputer, open API.">Grok-3推理强大，X实时数据整合。Colossus超算10万H100集群，开放API。</p>
+        <div class="prov-specs"><span class="prov-spec">Grok-3</span><span class="prov-spec">X Data</span><span class="prov-spec">100K H100</span></div>
+        <div class="prov-price" data-zh="$5/$15 per 1M tokens" data-en="$5/$15 per 1M tokens">$5/$15 per 1M tokens</div>
+      </div>
+    </div>
+    <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border-light)">
+      <div class="link-grid col-6">
+        <div class="link-row"><a href="https://mistral.ai" target="_blank">Mistral - 欧洲AI旗舰 开源+商业</a></div>
+        <div class="link-row"><a href="https://cohere.com" target="_blank">Cohere - 企业RAG+向量检索</a></div>
+        <div class="link-row"><a href="https://perplexity.ai" target="_blank">Perplexity - AI搜索引擎</a></div>
+        <div class="link-row"><a href="https://replicate.com" target="_blank">Replicate - 开源模型API</a></div>
+        <div class="link-row"><a href="https://together.ai" target="_blank">Together AI - 开源推理云</a></div>
+        <div class="link-row"><a href="https://fireworks.ai" target="_blank">Fireworks AI - 快速推理</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- =============== SECTION: 国内AI服务商 =============== -->
+<div class="container" id="china-ai">
+<div class="section">
+  <div class="sec-head">
+    <span class="sec-tag" style="background:var(--sec-red)" data-zh="国内AI" data-en="CN AI">国内AI</span>
+    <h2 data-zh="国内主流 AI 服务商" data-en="China AI Providers">国内主流 AI 服务商</h2>
+    <span class="sec-more" data-zh="中文理解强，本地化场景优化" data-en="Strong Chinese NLP, localized scenarios">中文理解强，本地化场景优化</span>
+  </div>
+  <div class="sec-body">
+    <div class="card-row cols-4">
+      <div class="prov-card">
+        <div class="prov-top">
+          <div class="prov-icon" style="background:#4a90d9">DS</div>
+          <span class="prov-name">DeepSeek</span>
+          <span class="prov-tag tag-hot">推理王</span>
+        </div>
+        <p class="prov-desc" data-zh="R1推理对标o3，V3通用顶级。MIT开源，API极低价，MoE架构训练成本极低，搅动全球AI市场。" data-en="R1 matches o3, V3 top-tier. MIT open-source, ultra-low API, MoE ultra-low cost, disrupting global AI.">R1推理对标o3，V3通用顶级。MIT开源，API极低价，MoE架构训练成本极低，搅动全球AI市场。</p>
+        <div class="prov-specs"><span class="prov-spec">R1</span><span class="prov-spec">V3</span><span class="prov-spec">MIT</span></div>
+        <div class="prov-price" data-zh="R1: ￥4/￥16 per 1M" data-en="R1: ¥4/¥16 per 1M">R1: ￥4/￥16 per 1M</div>
+      </div>
+      <div class="prov-card">
+        <div class="prov-top">
+          <div class="prov-icon" style="background:#ff6a00">QW</div>
+          <span class="prov-name" data-zh="通义千问Qwen" data-en="Qwen">通义千问Qwen</span>
+          <span class="prov-tag tag-hot">开源</span>
+        </div>
+        <p class="prov-desc" data-zh="Qwen3系列0.6B-235B全覆盖，MoE旗舰对标GPT-5。中文开源生态最完善，深度整合阿里云PAI。" data-en="Qwen3 0.6B-235B full range, MoE flagship rivals GPT-5. Best Chinese open-source, Alibaba PAI integrated.">Qwen3系列0.6B-235B全覆盖，MoE旗舰对标GPT-5。中文开源生态最完善，深度整合阿里云PAI。</p>
+        <div class="prov-specs"><span class="prov-spec">Qwen3</span><span class="prov-spec">235B MoE</span><span class="prov-spec">Open</span></div>
+        <div class="prov-price" data-zh="Max: ￥2/￥6 per 1M" data-en="Max: ¥2/¥6 per 1M">Max: ￥2/￥6 per 1M</div>
+      </div>
+      <div class="prov-card">
+        <div class="prov-top">
+          <div class="prov-icon" style="background:#2932e1">BD</div>
+          <span class="prov-name" data-zh="文心一言ERNIE" data-en="ERNIE">文心一言ERNIE</span>
+          <span class="prov-tag tag-rec">搜索</span>
+        </div>
+        <p class="prov-desc" data-zh="ERNIE 5.0深度整合百度搜索+知识图谱。中文理解与知识问答突出，千帆平台100+模型，MaaS成熟。" data-en="ERNIE 5.0 with Baidu Search+Knowledge Graph. Strong Chinese Q&A, Qianfan 100+ models, mature MaaS.">ERNIE 5.0深度整合百度搜索+知识图谱。中文理解与知识问答突出，千帆平台100+模型，MaaS成熟。</p>
+        <div class="prov-specs"><span class="prov-spec">ERNIE 5.0</span><span class="prov-spec">百度搜索</span><span class="prov-spec">MaaS</span></div>
+        <div class="prov-price" data-zh="5.0: ￥4/￥12 per 1M" data-en="5.0: ¥4/¥12 per 1M">5.0: ￥4/￥12 per 1M</div>
+      </div>
+      <div class="prov-card">
+        <div class="prov-top">
+          <div class="prov-icon" style="background:#3370ff">DB</div>
+          <span class="prov-name" data-zh="豆包大模型" data-en="Doubao">豆包大模型</span>
+          <span class="prov-tag tag-hot">1.6亿MAU</span>
+        </div>
+        <p class="prov-desc" data-zh="字节旗舰，豆包App月活1.6亿国内C端第一。Doubao-1.5-pro能力全面，API定价极低￥0.8/百万token。" data-en="ByteDance flagship, 160M MAU #1 in China. Doubao-1.5-pro comprehensive, ultra-low API ¥0.8/1M tokens.">字节旗舰，豆包App月活1.6亿国内C端第一。Doubao-1.5-pro能力全面，API定价极低￥0.8/百万token。</p>
+        <div class="prov-specs"><span class="prov-spec">Doubao-1.5</span><span class="prov-spec">低价API</span><span class="prov-spec">火山</span></div>
+        <div class="prov-price" data-zh="Pro: ￥0.8/￥2 per 1M" data-en="Pro: ¥0.8/¥2 per 1M">Pro: ￥0.8/￥2 per 1M</div>
+      </div>
+    </div>
+    <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border-light)">
+      <div class="link-grid col-4">
+        <div class="link-row"><a href="https://open.bigmodel.cn" target="_blank" data-zh="智谱GLM - 清华系 GLM-4 CogVideoX" data-en="Zhipu GLM - Tsinghua, GLM-4, CogVideoX">智谱GLM - 清华系 GLM-4 CogVideoX</a> <span class="tag tag-new">New</span></div>
+        <div class="link-row"><a href="https://kimi.moonshot.cn" target="_blank" data-zh="Kimi月之暗面 - 20万字长上下文" data-en="Kimi Moonshot - 200K Long Context">Kimi月之暗面 - 20万字长上下文</a> <span class="tag tag-hot">Hot</span></div>
+        <div class="link-row"><a href="https://xinghuo.xfyun.cn" target="_blank" data-zh="科大讯飞星火 - 语音AI领先" data-en="iFlytek Spark - Voice AI Leader">科大讯飞星火 - 语音AI领先</a></div>
+        <div class="link-row"><a href="https://www.minimaxi.com" target="_blank" data-zh="MiniMax海螺 - 音乐+TTS+多模态" data-en="MiniMax Hailuo - Music+TTS+Multimodal">MiniMax海螺 - 音乐+TTS+多模态</a></div>
+        <div class="link-row"><a href="https://yiyan.baidu.com" target="_blank" data-zh="百川智能 - Baichuan系列 开源" data-en="Baichuan - Baichuan Series Open Source">百川智能 - Baichuan系列 开源</a></div>
+        <div class="link-row"><a href="https://www.stepfun.com" target="_blank" data-zh="阶跃星辰 - Step系列多模态" data-en="StepFun - Step Series Multimodal">阶跃星辰 - Step系列多模态</a></div>
+        <div class="link-row"><a href="https://www.sensetime.com" target="_blank" data-zh="商汤日日新 - 视觉AI+多模态" data-en="SenseTime SenseNova - Vision+Multimodal">商汤日日新 - 视觉AI+多模态</a></div>
+        <div class="link-row"><a href="https://cloud.tencent.com/product/hunyuan" target="_blank" data-zh="腾讯混元 - 微信生态整合" data-en="Tencent Hunyuan - WeChat Integration">腾讯混元 - 微信生态整合</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- =============== SECTION: 对比表格 =============== -->
+<div class="container" id="compare">
+<div class="section">
+  <div class="sec-head">
+    <span class="sec-tag" style="background:var(--blue)" data-zh="对比" data-en="Compare">对比</span>
+    <h2 data-zh="GPU算力平台 & AI模型 价格对比" data-en="GPU Cloud & AI Model Pricing Comparison">GPU算力平台 & AI模型 价格对比</h2>
+  </div>
+  <div class="sec-body">
+    <!-- Tabs -->
+    <div class="tabs">
+      <div class="tab-btn active" onclick="switchTab(this,'tab-gpu')" data-zh="GPU算力对比" data-en="GPU Comparison">GPU算力对比</div>
+      <div class="tab-btn" onclick="switchTab(this,'tab-ai')" data-zh="AI模型API定价" data-en="AI API Pricing">AI模型API定价</div>
+      <div class="tab-btn" onclick="switchTab(this,'tab-vps')" data-zh="VPS主机对比" data-en="VPS Comparison">VPS主机对比</div>
+    </div>
+    <!-- GPU Table -->
+    <div class="tab-content active" id="tab-gpu">
+      <table class="cmp-table">
+        <thead>
+          <tr>
+            <th data-zh="平台" data-en="Platform">平台</th>
+            <th data-zh="GPU型号" data-en="GPU Models">GPU型号</th>
+            <th data-zh="起步价" data-en="From">起步价</th>
+            <th data-zh="计费" data-en="Billing">计费</th>
+            <th data-zh="冷启动" data-en="Cold Start">冷启动</th>
+            <th data-zh="亮点" data-en="Highlight">亮点</th>
+            <th data-zh="适合" data-en="Best For">适合</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="pname">RunPod</td><td>A4000/A100/H100/H200/MI300X</td><td>$0.39/hr</td><td data-zh="按秒" data-en="Per-sec">按秒</td><td>&lt;200ms</td><td data-zh="FlashBoot" data-en="FlashBoot">FlashBoot</td><td data-zh="灵活实验" data-en="Flexible R&D">灵活实验</td></tr>
+          <tr><td class="pname">CoreWeave</td><td>A100/H100/A5000/A6000</td><td>$0.50/hr</td><td data-zh="按小时" data-en="Hourly">按小时</td><td data-zh="即时" data-en="Instant">即时</td><td data-zh="InfiniBand" data-en="InfiniBand">InfiniBand</td><td data-zh="大规模训练" data-en="Large Training">大规模训练</td></tr>
+          <tr><td class="pname">Vast.ai</td><td>3090/4090/A100/H100</td><td>$0.20/hr</td><td data-zh="按小时" data-en="Hourly">按小时</td><td>1-3min</td><td data-zh="最低价" data-en="Lowest">最低价</td><td data-zh="预算敏感" data-en="Budget">预算敏感</td></tr>
+          <tr><td class="pname">TensorDock</td><td>RTX 4090/L40/H100</td><td>$0.18/hr</td><td data-zh="按小时" data-en="Hourly">按小时</td><td data-zh="即时" data-en="Instant">即时</td><td data-zh="众包-60%" data-en="Crowd -60%">众包-60%</td><td data-zh="批量训练" data-en="Batch Train">批量训练</td></tr>
+          <tr><td class="pname">NVIDIA DGX</td><td>H100 80GB</td><td>$36,999/mo</td><td data-zh="月付" data-en="Monthly">月付</td><td data-zh="即时" data-en="Instant">即时</td><td data-zh="NGC全栈" data-en="NGC Stack">NGC全栈</td><td data-zh="企业订阅" data-en="Enterprise">企业订阅</td></tr>
+          <tr><td class="pname" data-zh="阿里云PAI" data-en="Alibaba PAI">阿里云PAI</td><td>A100/H800/灵骏集群</td><td>￥28/hr</td><td data-zh="按小时" data-en="Hourly">按小时</td><td data-zh="即时" data-en="Instant">即时</td><td data-zh="万卡集群" data-en="10K GPU">万卡集群</td><td data-zh="国内大厂" data-en="China Enterprise">国内大厂</td></tr>
+          <tr><td class="pname" data-zh="火山引擎" data-en="Volcengine">火山引擎</td><td>A100/ML Space</td><td>￥30/hr</td><td data-zh="按小时" data-en="Hourly">按小时</td><td data-zh="即时" data-en="Instant">即时</td><td data-zh="豆包优化" data-en="Doubao">豆包优化</td><td data-zh="推理部署" data-en="Inference">推理部署</td></tr>
+          <tr><td class="pname" data-zh="腾讯云HAI" data-en="Tencent HAI">腾讯云HAI</td><td>A100/H800</td><td>￥25/hr</td><td data-zh="按小时" data-en="Hourly">按小时</td><td data-zh="即时" data-en="Instant">即时</td><td data-zh="一键部署" data-en="One-click">一键部署</td><td data-zh="快速上手" data-en="Quick Start">快速上手</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- AI Table -->
+    <div class="tab-content" id="tab-ai">
+      <table class="cmp-table">
+        <thead>
+          <tr>
+            <th data-zh="模型" data-en="Model">模型</th>
+            <th data-zh="提供商" data-en="Provider">提供商</th>
+            <th data-zh="输入/1M" data-en="Input/1M">输入/1M</th>
+            <th data-zh="输出/1M" data-en="Output/1M">输出/1M</th>
+            <th data-zh="上下文" data-en="Context">上下文</th>
+            <th data-zh="特色" data-en="Specialty">特色</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="pname">GPT-5.6 Turbo</td><td>OpenAI</td><td>$8</td><td>$24</td><td>256K</td><td data-zh="多模态旗舰" data-en="Multimodal Flagship">多模态旗舰</td></tr>
+          <tr><td class="pname">Claude 4.5 Opus</td><td>Anthropic</td><td>$12</td><td>$60</td><td>1M</td><td data-zh="长上下文王者" data-en="Long Context King">长上下文王者</td></tr>
+          <tr><td class="pname">Gemini 3.0 Ultra</td><td>Google</td><td>$7</td><td>$21</td><td>2M</td><td data-zh="推理领先" data-en="Leading Reasoning">推理领先</td></tr>
+          <tr><td class="pname">Grok-3</td><td>xAI</td><td>$5</td><td>$15</td><td>128K</td><td data-zh="X实时数据" data-en="X Real-time">X实时数据</td></tr>
+          <tr><td class="pname">Mistral Large 2</td><td>Mistral</td><td>$3</td><td>$9</td><td>128K</td><td data-zh="欧洲合规" data-en="EU Compliant">欧洲合规</td></tr>
+          <tr><td class="pname">DeepSeek R1</td><td data-zh="深度求索" data-en="DeepSeek">深度求索</td><td>￥4</td><td>￥16</td><td>128K</td><td data-zh="极致性价比推理" data-en="Best Value Reasoning">极致性价比推理</td></tr>
+          <tr><td class="pname">Qwen3-235B</td><td data-zh="阿里" data-en="Alibaba">阿里</td><td>￥2</td><td>￥6</td><td>128K</td><td data-zh="开源最强中文" data-en="Best Open Chinese">开源最强中文</td></tr>
+          <tr><td class="pname">Doubao-1.5-pro</td><td data-zh="字节" data-en="ByteDance">字节</td><td>￥0.8</td><td>￥2</td><td>128K</td><td data-zh="最低价旗舰" data-en="Cheapest Flagship">最低价旗舰</td></tr>
+          <tr><td class="pname">Kimi k2</td><td data-zh="月之暗面" data-en="Moonshot">月之暗面</td><td>￥3</td><td>￥12</td><td>200K</td><td data-zh="长文档分析" data-en="Long Doc Analysis">长文档分析</td></tr>
+          <tr><td class="pname">GLM-4</td><td data-zh="智谱" data-en="Zhipu">智谱</td><td>￥5</td><td>￥10</td><td>128K</td><td data-zh="视频+Agent" data-en="Video+Agent">视频+Agent</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- VPS Table -->
+    <div class="tab-content" id="tab-vps">
+      <table class="cmp-table">
+        <thead>
+          <tr>
+            <th data-zh="服务商" data-en="Provider">服务商</th>
+            <th data-zh="最低价" data-en="Lowest">最低价</th>
+            <th data-zh="地区" data-en="Region">地区</th>
+            <th data-zh="特点" data-en="Feature">特点</th>
+            <th data-zh="适合" data-en="Best For">适合</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="pname">Vultr</td><td>$2.50/mo</td><td data-zh="全球32地" data-en="32 Locations">全球32地</td><td data-zh="按小时计费，灵活" data-en="Hourly, flexible">按小时计费，灵活</td><td data-zh="出海业务" data-en="Global">出海业务</td></tr>
+          <tr><td class="pname">DigitalOcean</td><td>$4/mo</td><td data-zh="全球15地" data-en="15 Locations">全球15地</td><td data-zh="UX极佳，文档好" data-en="Great UX+Docs">UX极佳，文档好</td><td data-zh="开发者" data-en="Developers">开发者</td></tr>
+          <tr><td class="pname">Hetzner</td><td>€3.29/mo</td><td data-zh="德国/芬兰/美国" data-en="DE/FI/US">德国/芬兰/美国</td><td data-zh="性价比之王" data-en="Best Value">性价比之王</td><td data-zh="预算敏感" data-en="Budget">预算敏感</td></tr>
+          <tr><td class="pname">Linode</td><td>$5/mo</td><td data-zh="全球" data-en="Global">全球</td><td data-zh="边缘CDN+云" data-en="Edge CDN+Cloud">边缘CDN+云</td><td data-zh="边缘部署" data-en="Edge">边缘部署</td></tr>
+          <tr><td class="pname">Oracle Cloud</td><td data-zh="免费" data-en="Free">免费</td><td data-zh="全球" data-en="Global">全球</td><td data-zh="永久免费A1 Arm" data-en="Always Free A1 Arm">永久免费A1 Arm</td><td data-zh="零成本起步" data-en="Zero Cost">零成本起步</td></tr>
+          <tr><td class="pname" data-zh="阿里云" data-en="Alibaba Cloud">阿里云</td><td>￥50/yr</td><td data-zh="国内+海外" data-en="CN+Global">国内+海外</td><td data-zh="生态最全" data-en="Fullest Ecosystem">生态最全</td><td data-zh="国内业务" data-en="CN Business">国内业务</td></tr>
+          <tr><td class="pname" data-zh="腾讯云" data-en="Tencent Cloud">腾讯云</td><td>￥40/yr</td><td data-zh="国内+海外" data-en="CN+Global">国内+海外</td><td data-zh="微信生态" data-en="WeChat Ecosystem">微信生态</td><td data-zh="小程序后端" data-en="Mini Program">小程序后端</td></tr>
+          <tr><td class="pname" data-zh="华为云" data-en="Huawei Cloud">华为云</td><td>￥60/yr</td><td data-zh="国内" data-en="China">国内</td><td data-zh="政企合规" data-en="Gov+Enterprise">政企合规</td><td data-zh="政企项目" data-en="Government">政企项目</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- =============== SECTION: 场景推荐 =============== -->
+<div class="container" id="scenes">
+<div class="section">
+  <div class="sec-head">
+    <span class="sec-tag" style="background:#795548" data-zh="场景" data-en="Scenes">场景</span>
+    <h2 data-zh="按场景推荐方案" data-en="Recommendations by Use Case">按场景推荐方案</h2>
+    <span class="sec-more" data-zh="选择你的场景，查看推荐组合" data-en="Choose your scenario for recommended stack">选择你的场景，查看推荐组合</span>
+  </div>
+  <div class="sec-body">
+    <div class="scene-grid">
+      <div class="scene-box">
+        <div class="scene-icon" style="color:var(--blue)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h5"/></svg>
+        </div>
+        <h4 data-zh="大模型训练" data-en="LLM Training">大模型训练</h4>
+        <p data-zh="推荐: CoreWeave / 阿里云PAI灵骏 / NVIDIA DGX Cloud。重点: InfiniBand网络、存储IO、弹性扩展。" data-en="Recommended: CoreWeave / Alibaba PAI / NVIDIA DGX Cloud. Focus: InfiniBand, storage IO, elastic scaling.">推荐: CoreWeave / 阿里云PAI灵骏 / NVIDIA DGX Cloud。重点: InfiniBand网络、存储IO、弹性扩展。</p>
+      </div>
+      <div class="scene-box">
+        <div class="scene-icon" style="color:var(--green)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <h4 data-zh="模型推理部署" data-en="Model Inference">模型推理部署</h4>
+        <p data-zh="推荐: RunPod Serverless / 火山引擎 / AWS SageMaker。重点: 冷启动、自动扩缩、GPU利用率。" data-en="Recommended: RunPod Serverless / Volcengine / AWS SageMaker. Focus: cold start, auto-scale, GPU util.">推荐: RunPod Serverless / 火山引擎 / AWS SageMaker。重点: 冷启动、自动扩缩、GPU利用率。</p>
+      </div>
+      <div class="scene-box">
+        <div class="scene-icon" style="color:var(--orange)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h4 data-zh="个人学习实验" data-en="Personal Learning">个人学习实验</h4>
+        <p data-zh="推荐: Vast.ai / TensorDock / Oracle免费 / Colab Pro。预算: $5-20/月起。" data-en="Recommended: Vast.ai / TensorDock / Oracle Free / Colab Pro. Budget: from $5-20/mo.">推荐: Vast.ai / TensorDock / Oracle免费 / Colab Pro。预算: $5-20/月起。</p>
+      </div>
+      <div class="scene-box">
+        <div class="scene-icon" style="color:var(--red)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h4 data-zh="企业合规部署" data-en="Enterprise Compliance">企业合规部署</h4>
+        <p data-zh="国内: 阿里云/华为云/腾讯云。海外: AWS/Azure/GCP。关注: ISO27001/SOC2/GDPR。" data-en="China: Alibaba/Huawei/Tencent. Global: AWS/Azure/GCP. Focus: ISO27001/SOC2/GDPR.">国内: 阿里云/华为云/腾讯云。海外: AWS/Azure/GCP。关注: ISO27001/SOC2/GDPR。</p>
+      </div>
+      <div class="scene-box">
+        <div class="scene-icon" style="color:var(--purple)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m9 9a9 9 0 0 1-9-9m9 9c1.66 0 3-4 3-9s-1.34-9-3-9m0 18c-1.66 0-3-4-3-9s1.34-9 3-9"/></svg>
+        </div>
+        <h4 data-zh="API集成开发" data-en="API Integration">API集成开发</h4>
+        <p data-zh="性价比: DeepSeek/豆包。能力上限: OpenAI/Anthropic。可私有化: Qwen/GLM。注意限流+费用控制。" data-en="Value: DeepSeek/Doubao. Max capability: OpenAI/Anthropic. Self-host: Qwen/GLM. Watch rate limits+costs.">性价比: DeepSeek/豆包。能力上限: OpenAI/Anthropic。可私有化: Qwen/GLM。注意限流+费用控制。</p>
+      </div>
+      <div class="scene-box">
+        <div class="scene-icon" style="color:#795548">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></svg>
+        </div>
+        <h4 data-zh="出海与全球化" data-en="Global Expansion">出海与全球化</h4>
+        <p data-zh="全球节点: AWS/Cloudflare/Vultr。前端集成: Vercel AI SDK。国内出海: UCloud/阿里云海外。" data-en="Global: AWS/Cloudflare/Vultr. Frontend: Vercel AI SDK. CN outbound: UCloud/Alibaba Intl.">全球节点: AWS/Cloudflare/Vultr。前端集成: Vercel AI SDK。国内出海: UCloud/阿里云海外。</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- =============== FOOTER =============== -->
+<div class="footer">
+<div class="container">
+  <div class="footer-links">
+    <a href="#global-gpu" data-zh="海外GPU" data-en="Global GPU">海外GPU</a>
+    <a href="#china-gpu" data-zh="国内GPU" data-en="CN GPU">国内GPU</a>
+    <a href="#global-cloud" data-zh="海外云" data-en="Global Cloud">海外云</a>
+    <a href="#china-cloud" data-zh="国内云" data-en="CN Cloud">国内云</a>
+    <a href="#global-ai" data-zh="海外AI" data-en="Global AI">海外AI</a>
+    <a href="#china-ai" data-zh="国内AI" data-en="CN AI">国内AI</a>
+    <a href="#compare" data-zh="对比" data-en="Compare">对比</a>
+    <a href="#scenes" data-zh="场景" data-en="Scenes">场景</a>
+    <a href="https://github.com/ai-vps/ai-vps.github.io" target="_blank">GitHub</a>
+  </div>
+  <p>Copyright &copy; 2026 ai-vps.github.io | <span data-zh="社区驱动项目，数据仅供参考" data-en="Community-driven, for reference only">社区驱动项目，数据仅供参考</span></p>
+</div>
+</div>
+
+<!-- Back to top -->
+<a href="#home" class="back-top" id="backTop" title="Top">&#9650;</a>
+
+<script>
+// Language
+let lang='zh';
+function toggleLang(){
+  lang=lang==='zh'?'en':'zh';
+  document.getElementById('langBtn').textContent=lang==='zh'?'EN':'中文';
+  document.documentElement.lang=lang==='zh'?'zh-CN':'en';
+  document.querySelectorAll('[data-zh]').forEach(el=>{
+    const t=el.getAttribute('data-'+lang);
+    if(t)el.textContent=t;
+  });
+  document.querySelectorAll('[data-placeholder]').forEach(el=>{
+    const t=el.getAttribute('data-placeholder'+(lang==='en'?'-en':''));
+    if(t)el.placeholder=t;
+  });
+  document.title=lang==='zh'?'AI-VPS网址导航 - AI算力与云资源推荐平台':'AI-VPS Navigator - AI Computing & Cloud Resource Guide';
+}
+
+// Date
+(function(){
+  const d=new Date();
+  const days={'zh':['日','一','二','三','四','五','六'],'en':['Sun','Mon','Tue','Wed','Thu','Fri','Sat']};
+  const y=d.getFullYear(),m=d.getMonth()+1,dd=d.getDate(),w=days[lang][d.getDay()];
+  document.getElementById('todayDate').textContent=y+'-'+(m<10?'0':'')+m+'-'+(dd<10?'0':'')+dd+' '+{'zh':'星期','en':''}[lang]+w;
+})();
+
+// Tabs
+function switchTab(btn,id){
+  btn.parentElement.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  btn.closest('.sec-body').querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// Back to top
+window.addEventListener('scroll',()=>{
+  document.getElementById('backTop').style.display=window.scrollY>400?'block':'none';
+});
+
+// Nav active
+const navLinks=document.querySelectorAll('.nav-list a');
+const sects=document.querySelectorAll('[id]');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  sects.forEach(s=>{if(s.id&&window.scrollY>=s.offsetTop-120)cur=s.id;});
+  navLinks.forEach(l=>{l.classList.toggle('active',l.getAttribute('href')==='#'+cur);});
+});
+</script>
+</body>
+</html>
