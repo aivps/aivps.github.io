@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-VPS | KI-Infrastruktur & Cloud-Ressourcen Navigation</title>
+<meta name="description" content="Navigation fuer KI-Infrastruktur, Cloud-Anbieter und VPS-Ressourcen.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Microsoft+YaHei:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font:12px/1.8 "Microsoft YaHei","PingFang SC","Helvetica Neue",Arial,sans-serif;
+  color:#333;background:#f5f5f5;
+}
+a{color:#1a0dab;text-decoration:none}
+a:hover{color:#d00;text-decoration:underline}
+img{border:0}
+ul{list-style:none}
+
+/* ---- Top bar ---- */
+.topbar{
+  background:#fff;border-bottom:1px solid #e0e0e0;height:30px;
+  line-height:30px;font-size:12px;color:#666;
+}
+.topbar .wrap{max-width:1180px;margin:0 auto;padding:0 10px;display:flex;justify-content:space-between}
+.topbar a{color:#666;margin-left:12px;font-size:12px}
+.topbar a:hover{color:#d00}
+
+/* ---- Header ---- */
+.header{
+  background:#fff;padding:12px 0 0;
+  border-bottom:2px solid #2b7de9;
+}
+.header .wrap{max-width:1180px;margin:0 auto;padding:0 10px;display:flex;align-items:flex-end;gap:30px;flex-wrap:wrap}
+.logo{font-size:28px;font-weight:700;color:#2b7de9;white-space:nowrap;letter-spacing:-1px}
+.logo span{color:#ff6600}
+.search-box{
+  flex:1;min-width:300px;max-width:560px;display:flex;margin-bottom:4px;
+  border:2px solid #2b7de9;border-radius:3px;height:32px;
+}
+.search-box input{
+  flex:1;border:none;outline:none;padding:0 8px;font-size:13px;
+}
+.search-box button{
+  width:60px;background:#2b7de9;color:#fff;border:none;
+  font-size:14px;cursor:pointer;font-weight:700;
+}
+.search-box button:hover{background:#1a5fb4}
+.hot-words{font-size:12px;color:#999;margin-bottom:6px}
+.hot-words a{color:#666;margin-right:10px}
+.hot-words a.hot{color:#d00}
+
+/* ---- Nav bar ---- */
+.mainnav{
+  background:#2b7de9;
+}
+.mainnav .wrap{max-width:1180px;margin:0 auto;padding:0 10px;display:flex}
+.mainnav a{
+  color:#fff;padding:0 15px;line-height:32px;font-size:13px;display:block;
+}
+.mainnav a:hover{background:#1a5fb4;text-decoration:none;color:#fff}
+.mainnav a.active{background:#ff6600;color:#fff}
+
+/* ---- Main content ---- */
+.main{max-width:1180px;margin:0 auto;padding:10px;min-height:100vh}
+
+/* ---- Tabs ---- */
+.tabs{display:flex;border-bottom:2px solid #2b7de9;margin-bottom:0}
+.tabs a{
+  padding:5px 16px;font-size:13px;color:#fff;background:#5a9bd5;
+  border-radius:3px 3px 0 0;margin-right:2px;cursor:pointer;
+}
+.tabs a:hover,.tabs a.on{background:#2b7de9;text-decoration:none;color:#fff}
+
+/* ---- Section box ---- */
+.section-box{
+  background:#fff;border:1px solid #e0e0e0;border-top:none;
+  margin-bottom:10px;
+}
+.section-box .box-hd{
+  background:#f0f7ff;border-bottom:1px solid #e0e0e0;padding:6px 12px;
+  display:flex;align-items:center;gap:8px;
+}
+.section-box .box-hd h3{
+  font-size:14px;color:#2b7de9;font-weight:700;border-left:3px solid #2b7de9;
+  padding-left:8px;
+}
+.section-box .box-hd .more{margin-left:auto;font-size:12px;color:#999}
+.section-box .box-bd{padding:10px 12px}
+
+/* ---- Link grid (hao123 style) ---- */
+.link-grid{
+  display:flex;flex-wrap:wrap;
+}
+.link-grid .link-item{
+  width:25%;padding:4px 8px 4px 0;line-height:1.8;
+  display:flex;align-items:flex-start;gap:4px;
+  font-size:12px;
+}
+.link-grid .link-item .ico{
+  width:16px;height:16px;flex-shrink:0;margin-top:3px;
+  border-radius:2px;background:#eef3fb;display:flex;
+  align-items:center;justify-content:center;font-size:9px;
+  color:#fff;font-weight:700;
+}
+.link-grid .link-item .ico.blue{background:#2b7de9}
+.link-grid .link-item .ico.orange{background:#ff6600}
+.link-grid .link-item .ico.green{background:#3cb371}
+.link-grid .link-item .ico.red{background:#d9534f}
+.link-grid .link-item .ico.purple{background:#7b68ee}
+.link-grid .link-item .ico.teal{background:#20b2aa}
+.link-grid .link-item .ico.pink{background:#e91e8f}
+.link-grid .link-item .ico.brown{background:#8b6914}
+.link-grid .link-item .lnk a{font-size:12px;font-weight:700;color:#1a0dab}
+.link-grid .link-item .lnk a:hover{color:#d00}
+.link-grid .link-item .desc{font-size:11px;color:#999;line-height:1.6}
+
+/* ---- Provider cards (compact table style) ---- */
+.prov-table{width:100%;border-collapse:collapse;font-size:12px}
+.prov-table th{
+  background:#f0f7ff;color:#333;font-weight:700;text-align:left;
+  padding:6px 8px;border:1px solid #e0e0e0;white-space:nowrap;
+}
+.prov-table td{
+  padding:6px 8px;border:1px solid #e8e8e8;vertical-align:top;
+}
+.prov-table tr:hover td{background:#fafcff}
+.prov-table .name{font-weight:700;color:#1a0dab;white-space:nowrap}
+.prov-table .price{color:#d00;font-weight:700;white-space:nowrap}
+.prov-table .tag{
+  display:inline-block;font-size:10px;padding:1px 5px;
+  border-radius:2px;margin-right:3px;white-space:nowrap;
+}
+.prov-table .tag.blue{background:#e8f0fe;color:#2b7de9}
+.prov-table .tag.orange{background:#fff4e6;color:#ff6600}
+.prov-table .tag.green{background:#e8f8f0;color:#3cb371}
+.prov-table .tag.red{background:#fde8e8;color:#d9534f}
+.prov-table .tag.purple{background:#f0ecfe;color:#7b68ee}
+
+/* ---- Compact info cards ---- */
+.info-row{
+  display:flex;flex-wrap:wrap;gap:0;
+}
+.info-card{
+  width:25%;padding:0 8px 8px 0;
+}
+.info-card-inner{
+  border:1px solid #e8e8e8;background:#fff;padding:10px;
+  height:100%;
+}
+.info-card-inner:hover{border-color:#2b7de9}
+.info-card-inner h4{
+  font-size:13px;color:#333;margin-bottom:4px;
+  border-bottom:1px dashed #e8e8e8;padding-bottom:4px;
+}
+.info-card-inner p{font-size:11px;color:#888;line-height:1.7}
+.info-card-inner .ico-tag{
+  display:inline-block;font-size:10px;padding:0 4px;
+  background:#fff4e6;color:#ff6600;border:1px solid #ffd699;
+  border-radius:2px;margin-top:4px;
+}
+
+/* ---- Two-col layout ---- */
+.two-col{display:flex;gap:10px}
+.two-col .col{flex:1}
+
+/* ---- Sidebar-like right column ---- */
+.side-box{
+  background:#fff;border:1px solid #e0e0e0;margin-bottom:10px;
+}
+.side-box .hd{
+  background:#fff4e6;border-bottom:1px solid #ffe0b2;padding:6px 10px;
+}
+.side-box .hd h4{font-size:13px;color:#ff6600;font-weight:700}
+.side-box .bd{padding:8px 10px;font-size:12px;line-height:2}
+.side-box .bd a{display:block;color:#333}
+.side-box .bd a:hover{color:#d00}
+
+/* ---- Stat strip ---- */
+.stat-strip{
+  display:flex;background:#fff;border:1px solid #e0e0e0;
+  margin-bottom:10px;
+}
+.stat-strip .stat{
+  flex:1;text-align:center;padding:10px 8px;
+  border-right:1px solid #e8e8e8;
+}
+.stat-strip .stat:last-child{border-right:none}
+.stat-strip .stat .num{font-size:22px;font-weight:700;color:#ff6600}
+.stat-strip .stat .label{font-size:11px;color:#999}
+
+/* ---- Comparison table full-width ---- */
+.full-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:10px}
+.full-table th{
+  background:#2b7de9;color:#fff;padding:6px 8px;border:1px solid #1a5fb4;
+  text-align:left;font-size:12px;white-space:nowrap;
+}
+.full-table td{padding:5px 8px;border:1px solid #e0e0e0}
+.full-table tr:nth-child(even) td{background:#fafcff}
+.full-table .hl{color:#d00;font-weight:700}
+
+/* ---- Hardware cards ---- */
+.hw-grid{display:flex;flex-wrap:wrap;gap:0}
+.hw-card{
+  width:33.333%;padding:0 8px 8px 0;
+}
+.hw-inner{
+  border:1px solid #e8e8e8;background:#fff;padding:10px;height:100%;
+}
+.hw-inner h4{font-size:13px;color:#2b7de9;margin-bottom:4px;font-weight:700}
+.hw-inner .hw-specs{font-size:11px;color:#888;line-height:1.8}
+.hw-inner .hw-price{font-size:14px;color:#d00;font-weight:700;margin-top:6px}
+
+/* ---- News ticker style ---- */
+.news-list{font-size:12px;line-height:2.2}
+.news-list li{padding-left:14px;position:relative}
+.news-list li::before{
+  content:'';position:absolute;left:2px;top:10px;
+  width:4px;height:4px;background:#2b7de9;border-radius:50%;
+}
+.news-list li a{color:#333}
+.news-list li a:hover{color:#d00}
+.news-list li .date{color:#bbb;font-size:11px;margin-left:6px}
+
+/* ---- Footer ---- */
+.footer{
+  background:#fff;border-top:1px solid #e0e0e0;
+  padding:15px 0;margin-top:10px;
+}
+.footer .wrap{
+  max-width:1180px;margin:0 auto;padding:0 10px;
+  text-align:center;font-size:12px;color:#999;line-height:2;
+}
+.footer .wrap a{color:#666;margin:0 8px}
+.footer .wrap a:hover{color:#d00}
+
+/* ---- Section divider ---- */
+.divider{
+  height:10px;background:transparent;
+}
+
+/* ---- Responsive ---- */
+@media(max-width:900px){
+  .link-grid .link-item{width:33.333%}
+  .info-card,.hw-card{width:50%}
+  .two-col{flex-direction:column}
+}
+@media(max-width:600px){
+  .link-grid .link-item{width:50%}
+  .info-card,.hw-card{width:100%}
+  .header .wrap{flex-direction:column;align-items:flex-start;gap:8px}
+  .search-box{min-width:auto;width:100%}
+  .prov-table{font-size:11px}
+  .stat-strip{flex-wrap:wrap}
+  .stat-strip .stat{width:50%;flex:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== TOPBAR ===== -->
+<div class="topbar">
+  <div class="wrap">
+    <span>Willkommen bei AI-VPS – Navigation fuer KI-Infrastruktur</span>
+    <span>
+      <a href="#cloud-intl">Cloud Intl.</a>
+      <a href="#cloud-cn">Cloud CN</a>
+      <a href="#ki-intl">KI Intl.</a>
+      <a href="#ki-cn">KI CN</a>
+      <a href="#vps">VPS</a>
+      <a href="#hw">Hardware</a>
+    </span>
+  </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+  <div class="wrap">
+    <div class="logo">AI-<span>VPS</span>.github.io</div>
+    <div class="search-box">
+      <input type="text" placeholder="Cloud-Anbieter, KI-Modelle, VPS suchen...">
+      <button type="button">Suchen</button>
+    </div>
+    <div class="hot-words">
+      Heiss: <a href="#" class="hot">DeepSeek</a>
+      <a href="#">Hetzner GPU</a>
+      <a href="#">GPT-4o</a>
+      <a href="#">Llama 3.1</a>
+      <a href="#">Alibaba Cloud</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MAIN NAV ===== -->
+<div class="mainnav">
+  <div class="wrap">
+    <a href="#home" class="active">Startseite</a>
+    <a href="#cloud-intl">Internationale Cloud</a>
+    <a href="#cloud-cn">Chinesische Cloud</a>
+    <a href="#ki-intl">Internationale KI</a>
+    <a href="#ki-cn">Chinesische KI</a>
+    <a href="#vps">VPS Empfehlungen</a>
+    <a href="#hw">Hardware Guide</a>
+    <a href="#vergleich">Vergleich</a>
+    <a href="#ueber">Ueber uns</a>
+  </div>
+</div>
+
+<!-- ===== MAIN ===== -->
+<div class="main" id="home">
+
+  <!-- Stat strip -->
+  <div class="stat-strip">
+    <div class="stat"><div class="num">680</div><div class="label">Mrd. USD Cloud-Markt 2026</div></div>
+    <div class="stat"><div class="num">340+</div><div class="label">Cloud-Anbieter weltweit</div></div>
+    <div class="stat"><div class="num">28</div><div class="label">Empfohlene Anbieter</div></div>
+    <div class="stat"><div class="num">12</div><div class="label">KI-Plattformen getestet</div></div>
+    <div class="stat"><div class="num">89%</div><div class="label">Firmen mit KI-Projekten</div></div>
+  </div>
+
+  <!-- ====== SEKTION: Schnell-Navigation ====== -->
+  <div class="tabs" id="schnell">
+    <a class="on">Schnell-Navigation</a>
+  </div>
+  <div class="section-box">
+    <div class="box-hd">
+      <h3>Beliebte KI-Dienste & Cloud-Anbieter</h3>
+      <span class="more">Letzte Aktualisierung: Juli 2026</span>
+    </div>
+    <div class="box-bd">
+      <div class="link-grid">
+        <div class="link-item">
+          <div class="ico blue">O</div>
+          <div class="lnk"><a href="https://openai.com" target="_blank">OpenAI</a><div class="desc">GPT-4o, DALL-E, Whisper</div></div>
+        </div>
+        <div class="link-item">
+          <div class="ico blue">A</div>
+          <div class="lnk"><a href="https://anthropic.com" target="_blank">Anthropic</a><div class="desc">Claude 3.5 Sonnet, Opus</div></div>
+        </div>
+        <div class="link-item">
+          <div class="ico blue">G</div>
+          <div class="lnk"><a href="https://cloud.google.com" target="_blank">Google Cloud</a><div class="desc">Gemini, Vertex AI, GKE</div></div>
+        </div>
+        <div class="link-item">
+          <div class="ico orange">D</div>
+          <div class="lnk"><a href="https://deepseek.com" target="_blank">DeepSeek</a><div class="desc">DeepSeek-V3, R1 Open Source</div></div>
+        </div>
+        <div class="link-item">
+          <div class="ico orange">Q</div>
+          <div class="lnk"><a href="https://qwen.ai" target="_blank">Qwen (Alibaba)</a><div class="desc">Qwen2.5, QwQ, Open Source</div></div>
+        </div>
+        <div class="link-item">
+          <div class="ico green">M</div>
+          <div class="lnk"><a href="https://mistral.ai" target="_blank">Mistral AI</a><div class="desc">Mistral Large, Le Chat</div></div>
+        </div>
+        <div class="link-item">
+          <div class="ico blue">M</div>
+          <div class="lnk"><a href="https://llama.meta.com" target="_blank">Meta Llama</a><div class="desc">Llama 3.1 405B Open Source</div></div>
+        </div>
+        <div class="link-item">
+          <div class="ico orange">K</div>
+          <div class="lnk"><a href="https://kimi.moonshot.cn" target="_blank">Kimi (Moonshot)</a><div class="desc">200K Kontext, Lang-Dokumente</div></div>
+        </div>
+        <div class="link-item">
+          <div class="ico blue">A</div>
+          <div class="lnk"><a href="https://aws.amazon.com" target="_blank">AWS</a><div class="desc">EC2, SageMaker, Bedrock</div></div>
+        </div>
+        <div class="link-item">
+          <div class="ico blue">A</div>
+          <div class="lnk"><a href="https://azure.microsoft.com" target="_blank">Microsoft Azure</a><div class="desc">VMs, OpenAI Service</div></div>
+        </div>
+        <div class="link-item">
+          <div class="ico orange">A</div>
+          <div class="lnk"><a href="https://www.alibabacloud.com" target="_blank">Alibaba Cloud</a><div class="desc">PAI, ECS, Model Studio</div></div>
+        </div>
+        <div class="link-item">
+          <div class="ico green">H</div>
+          <div class="lnk"><a href="https://www.hetzner.com/cloud" target="_blank">Hetzner Cloud</a><div class="desc">Preis-Leistungs-Sieger Europa</div></div>
+        </div>
+        <div class="link-item">
+          <div class="ico blue">D</div>
+          <div class="lnk"><a href="https://www.digitalocean.com" target="_blank">DigitalOcean</a><div class="desc">Droplets, App Platform</div></div>
+        </div>
+        <div class="link-item">
+          <div class="ico purple">C</div>
+          <div class="lnk"><a href="https://www.cohere.com" target="_blank">Cohere</a><div class="desc">Command R+, Enterprise RAG</div></div>
+        </div>
+        <div class="link-item">
+          <div class="ico red">H</div>
+          <div class="lnk"><a href="https://www.huaweicloud.com" target="_blank">Huawei Cloud</a><div class="desc">Ascend NPU, Pangu Modelle</div></div>
+        </div>
+        <div class="link-item">
+          <div class="ico teal">E</div>
+          <div class="lnk"><a href="https://www.exoscale.com" target="_blank">Exoscale</a><div class="desc">EU-souveraen, GDPR-konform</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== SEKTION: Internationale Cloud-Anbieter ====== -->
+  <div class="tabs" id="cloud-intl">
+    <a class="on">Internationale Cloud</a>
+    <a>IaaS</a>
+    <a>PaaS</a>
+    <a>SaaS</a>
+    <a>Hybrid</a>
+  </div>
+  <div class="section-box">
+    <div class="box-hd">
+      <h3>Globale Cloud-Provider im Detail</h3>
+      <span class="more"><a href="#vergleich">Alle vergleichen</a></span>
+    </div>
+    <div class="box-bd">
+      <table class="prov-table">
+        <thead>
+          <tr>
+            <th style="width:130px">Anbieter</th>
+            <th>Kern-Services</th>
+            <th style="width:80px">Preis</th>
+            <th style="width:90px">Staerke</th>
+            <th style="width:60px">DC</th>
+            <th style="width:50px">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">Amazon AWS</td>
+            <td>EC2, Lambda, S3, SageMaker, Bedrock, 200+ Services. Marktfuehrer mit 30+ Regionen weltweit.</td>
+            <td class="price">ab $3.50/mo</td>
+            <td><span class="tag blue">Breadth</span><span class="tag orange">KI</span></td>
+            <td>30+</td>
+            <td><a href="https://aws.amazon.com" target="_blank">Besuchen</a></td>
+          </tr>
+          <tr>
+            <td class="name">Microsoft Azure</td>
+            <td>VMs, Functions, Blob Storage, Azure AI, OpenAI Service. 95% der Fortune 500 nutzen Azure.</td>
+            <td class="price">ab $3.50/mo</td>
+            <td><span class="tag blue">Enterprise</span><span class="tag green">Hybrid</span></td>
+            <td>60+</td>
+            <td><a href="https://azure.microsoft.com" target="_blank">Besuchen</a></td>
+          </tr>
+          <tr>
+            <td class="name">Google Cloud</td>
+            <td>Compute Engine, Cloud Storage, Vertex AI, TPU, BigQuery. KI-first Architektur.</td>
+            <td class="price">ab $4.12/mo</td>
+            <td><span class="tag purple">KI/ML</span><span class="tag blue">Daten</span></td>
+            <td>37+</td>
+            <td><a href="https://cloud.google.com" target="_blank">Besuchen</a></td>
+          </tr>
+          <tr>
+            <td class="name">Hetzner Cloud</td>
+            <td>Cloud Server, Volumes, Load Balancer, Floating IPs. Bestes Preis-Leistungs-Verhaeltnis in Europa.</td>
+            <td class="price">ab €3.29/mo</td>
+            <td><span class="tag green">Preis</span><span class="tag blue">EU</span></td>
+            <td>5</td>
+            <td><a href="https://www.hetzner.com/cloud" target="_blank">Besuchen</a></td>
+          </tr>
+          <tr>
+            <td class="name">DigitalOcean</td>
+            <td>Droplets, App Platform, Managed Databases, Kubernetes. Entwicklerfreundlich.</td>
+            <td class="price">ab $4/mo</td>
+            <td><span class="tag green">Simpel</span><span class="tag blue">Dev</span></td>
+            <td>15</td>
+            <td><a href="https://www.digitalocean.com" target="_blank">Besuchen</a></td>
+          </tr>
+          <tr>
+            <td class="name">Vultr</td>
+            <td>Cloud Compute, Bare Metal, Optimized Cloud, Kubernetes. 32 Standorte.</td>
+            <td class="price">ab $2.50/mo</td>
+            <td><span class="tag green">Global</span><span class="tag orange">GPU</span></td>
+            <td>32</td>
+            <td><a href="https://www.vultr.com" target="_blank">Besuchen</a></td>
+          </tr>
+          <tr>
+            <td class="name">Linode (Akamai)</td>
+            <td>Compute, GPU, Kubernetes, Object Storage. Jetzt Teil von Akamai.</td>
+            <td class="price">ab $5/mo</td>
+            <td><span class="tag blue">CDN</span><span class="tag green">Einfach</span></td>
+            <td>25</td>
+            <td><a href="https://www.linode.com" target="_blank">Besuchen</a></td>
+          </tr>
+          <tr>
+            <td class="name">Exoscale</td>
+            <td>Compute, S3-kompatibler Speicher, Managed Kubernetes. 100% europaeisch.</td>
+            <td class="price">ab €4.80/mo</td>
+            <td><span class="tag green">Souverän</span><span class="tag blue">GDPR</span></td>
+            <td>4</td>
+            <td><a href="https://www.exoscale.com" target="_blank">Besuchen</a></td>
+          </tr>
+          <tr>
+            <td class="name">Oracle Cloud</td>
+            <td>VMs, Bare Metal, Autonomous Database, Always Free Tier. 2 kostenlose VMs.</td>
+            <td class="price">Kostenlose Tier</td>
+            <td><span class="tag purple">DB</span><span class="tag green">Free</span></td>
+            <td>49</td>
+            <td><a href="https://www.oracle.com/cloud" target="_blank">Besuchen</a></td>
+          </tr>
+          <tr>
+            <td class="name">IBM Cloud</td>
+            <td>VMs, Bare Metal, Watson AI, Red Hat OpenShift. Stark in regulierten Branchen.</td>
+            <td class="price">ab $5/mo</td>
+            <td><span class="tag blue">Enterprise</span><span class="tag orange">Watson</span></td>
+            <td>19</td>
+            <td><a href="https://www.ibm.com/cloud" target="_blank">Besuchen</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ====== SEKTION: Chinesische Cloud-Anbieter ====== -->
+  <div class="tabs" id="cloud-cn">
+    <a class="on">Chinesische Cloud</a>
+    <a>Public Cloud</a>
+    <a>AI Cloud</a>
+    <a>CDN</a>
+  </div>
+  <div class="section-box">
+    <div class="box-hd">
+      <h3>Chinas Cloud-Hyperscaler</h3>
+      <span class="more">6 Anbieter im Test</span>
+    </div>
+    <div class="box-bd">
+      <table class="prov-table">
+        <thead>
+          <tr>
+            <th style="width:130px">Anbieter</th>
+            <th>Kern-Services & Besonderheiten</th>
+            <th style="width:80px">Preis</th>
+            <th style="width:100px">Staerke</th>
+            <th style="width:60px">Intl. DC</th>
+            <th style="width:50px">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">Alibaba Cloud</td>
+            <td>ECS, PAI, Model Studio, Qwen integriert. Groesster Anbieter in Asien mit 30+ AZs. E-Commerce-Integration.</td>
+            <td class="price">ab ¥48/mo</td>
+            <td><span class="tag orange">Markt-1</span><span class="tag purple">Qwen</span></td>
+            <td>SG, DE, US</td>
+            <td><a href="https://www.alibabacloud.com" target="_blank">Besuchen</a></td>
+          </tr>
+          <tr>
+            <td class="name">Tencent Cloud</td>
+            <td>Compute, CDN, WeChat-Integration, Hunyuan KI. Fuehrend in Gaming-Cloud-Services.</td>
+            <td class="price">ab ¥52/mo</td>
+            <td><span class="tag green">WeChat</span><span class="tag blue">Gaming</span></td>
+            <td>SG, US, DE</td>
+            <td><a href="https://cloud.tencent.com" target="_blank">Besuchen</a></td>
+          </tr>
+          <tr>
+            <td class="name">Huawei Cloud</td>
+            <td>ECS, Ascend NPU, MindSpore, Pangu Modelle. Starke Regierungsprojekte. 5G + Edge.</td>
+            <td class="price">ab ¥55/mo</td>
+            <td><span class="tag red">Gov</span><span class="tag purple">NPU</span></td>
+            <td>SG, TH, SA</td>
+            <td><a href="https://www.huaweicloud.com" target="_blank">Besuchen</a></td>
+          </tr>
+          <tr>
+            <td class="name">Baidu AI Cloud</td>
+            <td>ERNIE-Modelle nativ, AI-Entwicklungsplattform, Kunlun Chips. KI-first Cloud.</td>
+            <td class="price">ab ¥50/mo</td>
+            <td><span class="tag purple">ERNIE</span><span class="tag blue">Auto</span></td>
+            <td>SG</td>
+            <td><a href="https://cloud.baidu.com" target="_blank">Besuchen</a></td>
+          </tr>
+          <tr>
+            <td class="name">Volcengine</td>
+            <td>TikTok/Douyin-Infrastruktur. Echtzeit-Video, CDN, ML-Plattform, Doubao integriert.</td>
+            <td class="price">ab ¥45/mo</td>
+            <td><span class="tag orange">Content</span><span class="tag green">CDN</span></td>
+            <td>SG</td>
+            <td><a href="https://www.volcengine.com" target="_blank">Besuchen</a></td>
+          </tr>
+          <tr>
+            <td class="name">Kingsoft Cloud</td>
+            <td>Enterprise-Cloud, WPS-Integration, Gaming-Infrastruktur, Video-Streaming.</td>
+            <td class="price">ab ¥50/mo</td>
+            <td><span class="tag blue">WPS</span><span class="tag green">Video</span></td>
+            <td>Begrenzt</td>
+            <td><a href="https://www.ksyun.com" target="_blank">Besuchen</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ====== SEKTION: Internationale KI-Anbieter ====== -->
+  <div class="tabs" id="ki-intl">
+    <a class="on">Internationale KI-Anbieter</a>
+    <a>Proprietary</a>
+    <a>Open Source</a>
+    <a>API</a>
+    <a>On-Premise</a>
+  </div>
+  <div class="section-box">
+    <div class="box-hd">
+      <h3>Globale KI-Plattformen & Modelle</h3>
+      <span class="more"><a href="#vergleich">Preise vergleichen</a></span>
+    </div>
+    <div class="box-bd">
+      <table class="prov-table">
+        <thead>
+          <tr>
+            <th style="width:120px">Anbieter</th>
+            <th>Modelle & Faehigkeiten</th>
+            <th style="width:120px">Preis (pro 1M Tokens)</th>
+            <th style="width:70px">Kontext</th>
+            <th style="width:70px">Open Source</th>
+            <th style="width:50px">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">OpenAI</td>
+            <td>GPT-4o, GPT-4 Turbo, o1, o3, DALL-E 3, Whisper, Embeddings. Pionier der modernen KI.</td>
+            <td class="price">$2-30</td>
+            <td>128K</td>
+            <td><span class="tag red">Nein</span></td>
+            <td><a href="https://openai.com" target="_blank">API</a></td>
+          </tr>
+          <tr>
+            <td class="name">Anthropic</td>
+            <td>Claude 3.5 Sonnet, Opus, Haiku. 200K Kontext. Constitutional AI. Safety-first.</td>
+            <td class="price">$0.25-75</td>
+            <td>200K</td>
+            <td><span class="tag red">Nein</span></td>
+            <td><a href="https://anthropic.com" target="_blank">API</a></td>
+          </tr>
+          <tr>
+            <td class="name">Google Gemini</td>
+            <td>Gemini Ultra, Pro, Flash. Nativ multimodal. 1M+ Kontext. Gemma Open Source.</td>
+            <td class="price">$0.075-10</td>
+            <td>1M+</td>
+            <td><span class="tag green">Gemma</span></td>
+            <td><a href="https://deepmind.google/technologies/gemini" target="_blank">API</a></td>
+          </tr>
+          <tr>
+            <td class="name">Meta Llama</td>
+            <td>Llama 3.1 8B/70B/405B. Groesstes freies Modell. Kommerzielle Nutzung erlaubt.</td>
+            <td class="price">Open Source</td>
+            <td>128K</td>
+            <td><span class="tag green">Ja</span></td>
+            <td><a href="https://llama.meta.com" target="_blank">Download</a></td>
+          </tr>
+          <tr>
+            <td class="name">Mistral AI</td>
+            <td>Mistral Large, Medium, Small. Open-Source-Modelle (7B, 8x7B MoE). Aus Paris.</td>
+            <td class="price">$0.2-8</td>
+            <td>128K</td>
+            <td><span class="tag green">Teilw.</span></td>
+            <td><a href="https://mistral.ai" target="_blank">API</a></td>
+          </tr>
+          <tr>
+            <td class="name">Cohere</td>
+            <td>Command R+, Embed, Rerank. Enterprise-RAG. On-Premise moeglich.</td>
+            <td class="price">$0.5-15</td>
+            <td>128K</td>
+            <td><span class="tag red">Nein</span></td>
+            <td><a href="https://www.cohere.com" target="_blank">API</a></td>
+          </tr>
+          <tr>
+            <td class="name">xAI (Grok)</td>
+            <td>Grok-2, Grok-1.5. Echtzeit-Zugang zu X/Twitter-Daten. Elon Musk Initiative.</td>
+            <td class="price">$2-10</td>
+            <td>128K</td>
+            <td><span class="tag green">Grok-1</span></td>
+            <td><a href="https://x.ai" target="_blank">API</a></td>
+          </tr>
+          <tr>
+            <td class="name">AI21 Labs</td>
+            <td>Jamba, Jurassic-2. Starke Textgenerierung. Enterprise-Fokus.</td>
+            <td class="price">$0.5-8</td>
+            <td>256K</td>
+            <td><span class="tag green">Jamba</span></td>
+            <td><a href="https://www.ai21.com" target="_blank">API</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ====== SEKTION: Chinesische KI-Anbieter ====== -->
+  <div class="tabs" id="ki-cn">
+    <a class="on">Chinesische KI-Anbieter</a>
+    <a>Sprachmodelle</a>
+    <a>Multimodal</a>
+    <a>Open Source</a>
+  </div>
+  <div class="section-box">
+    <div class="box-hd">
+      <h3>Chinas KI-Innovatoren</h3>
+      <span class="more">DeepSeek und Qwen zaehlen zu den meistgenutzten Modellen weltweit</span>
+    </div>
+    <div class="box-bd">
+      <table class="prov-table">
+        <thead>
+          <tr>
+            <th style="width:120px">Anbieter</th>
+            <th>Modelle & Faehigkeiten</th>
+            <th style="width:120px">Preis (pro 1M Tokens)</th>
+            <th style="width:70px">Kontext</th>
+            <th style="width:70px">Open Source</th>
+            <th style="width:50px">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">DeepSeek</td>
+            <td>DeepSeek-V3 (671B MoE), R1 Reasoning. MIT-Lizenz. Bruchteil der Kosten westlicher Modelle.</td>
+            <td class="price">$0.14-2</td>
+            <td>128K</td>
+            <td><span class="tag green">Ja</span></td>
+            <td><a href="https://deepseek.com" target="_blank">API</a></td>
+          </tr>
+          <tr>
+            <td class="name">Qwen (Alibaba)</td>
+            <td>Qwen2.5 (0.5B-72B), Qwen-VL, Qwen-Audio, QwQ Reasoning. Apache 2.0.</td>
+            <td class="price">$0.3-4</td>
+            <td>128K</td>
+            <td><span class="tag green">Ja</span></td>
+            <td><a href="https://qwen.ai" target="_blank">API</a></td>
+          </tr>
+          <tr>
+            <td class="name">ERNIE (Baidu)</td>
+            <td>ERNIE 4.5. Suchintegrierte KI. Wenxin Yiyan Chatbot. Plugin-Oekosystem.</td>
+            <td class="price">$0.5-8</td>
+            <td>128K</td>
+            <td><span class="tag red">Nein</span></td>
+            <td><a href="https://yiyan.baidu.com" target="_blank">API</a></td>
+          </tr>
+          <tr>
+            <td class="name">Kimi (Moonshot)</td>
+            <td>Moonshot-v1. 200K Token Kontext. Exzellent fuer lange Dokumente. Web-Suche.</td>
+            <td class="price">$0.4-6</td>
+            <td>200K</td>
+            <td><span class="tag red">Nein</span></td>
+            <td><a href="https://platform.moonshot.cn" target="_blank">API</a></td>
+          </tr>
+          <tr>
+            <td class="name">GLM (Zhipu AI)</td>
+            <td>GLM-4, CodeGeeX, CogView. Aus Tsinghua. Starke akademische Grundlagen.</td>
+            <td class="price">$0.3-5</td>
+            <td>128K</td>
+            <td><span class="tag green">Teilw.</span></td>
+            <td><a href="https://open.bigmodel.cn" target="_blank">API</a></td>
+          </tr>
+          <tr>
+            <td class="name">Doubao (ByteDance)</td>
+            <td>Doubao Chatbot. Volcengine API. Multimodal (Text, Bild, Video). Billige API.</td>
+            <td class="price">$0.2-3</td>
+            <td>128K</td>
+            <td><span class="tag red">Nein</span></td>
+            <td><a href="https://www.volcengine.com/product/doubao" target="_blank">API</a></td>
+          </tr>
+          <tr>
+            <td class="name">Hunyuan (Tencent)</td>
+            <td>Hunyuan Grosses Modell. WeChat-Integration. Starke Bildgenerierung.</td>
+            <td class="price">$0.3-5</td>
+            <td>128K</td>
+            <td><span class="tag green">Teilw.</span></td>
+            <td><a href="https://cloud.tencent.com/product/hunyuan" target="_blank">API</a></td>
+          </tr>
+          <tr>
+            <td class="name">Yi (01.AI)</td>
+            <td>Yi-34B, Yi-Vision. Von Kai-Fu Lee gegründet. Starkes Open-Source-Modell.</td>
+            <td class="price">$0.2-3</td>
+            <td>200K</td>
+            <td><span class="tag green">Ja</span></td>
+            <td><a href="https://www.01.ai" target="_blank">API</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ====== SEKTION: VPS-Empfehlungen ====== -->
+  <div class="tabs" id="vps">
+    <a class="on">VPS-Empfehlungen</a>
+    <a>Budget</a>
+    <a>Standard</a>
+    <a>GPU</a>
+    <a>Enterprise</a>
+  </div>
+  <div class="section-box">
+    <div class="box-hd">
+      <h3>VPS nach Anwendungsfall</h3>
+      <span class="more">Empfehlungen fuer KI-Entwicklung, Inferenz und Produktion</span>
+    </div>
+    <div class="box-bd">
+      <div class="two-col">
+        <div class="col">
+          <table class="prov-table">
+            <thead>
+              <tr>
+                <th>Anwendungsfall</th>
+                <th>Typ</th>
+                <th>Min. RAM</th>
+                <th>GPU</th>
+                <th>Budget</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="name">KI-APIs nutzen</td>
+                <td>Shared VPS</td>
+                <td>2 GB</td>
+                <td>Keine</td>
+                <td class="price">$5-15</td>
+              </tr>
+              <tr>
+                <td class="name">Lokale LLMs (7B)</td>
+                <td>Dedicated</td>
+                <td>16 GB</td>
+                <td>T4 16GB</td>
+                <td class="price">$30-60</td>
+              </tr>
+              <tr>
+                <td class="name">Lokale LLMs (30B)</td>
+                <td>GPU Server</td>
+                <td>32 GB</td>
+                <td>RTX 4090</td>
+                <td class="price">$80-200</td>
+              </tr>
+              <tr>
+                <td class="name">Lokale LLMs (70B)</td>
+                <td>High-Memory</td>
+                <td>64+ GB</td>
+                <td>A100 80GB</td>
+                <td class="price">$400-1500</td>
+              </tr>
+              <tr>
+                <td class="name">KI-Training</td>
+                <td>Multi-GPU</td>
+                <td>256+ GB</td>
+                <td>H100 x4+</td>
+                <td class="price">$2000+</td>
+              </tr>
+              <tr>
+                <td class="name">RAG-Anwendung</td>
+                <td>Dedicated</td>
+                <td>8-16 GB</td>
+                <td>Optional</td>
+                <td class="price">$20-60</td>
+              </tr>
+              <tr>
+                <td class="name">AI-Agenten</td>
+                <td>Dedicated</td>
+                <td>4-8 GB</td>
+                <td>Keine</td>
+                <td class="price">$15-40</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col">
+          <div class="side-box">
+            <div class="hd"><h4>Top VPS-Anbieter nach Kategorie</h4></div>
+            <div class="bd">
+              <strong style="color:#2b7de9">Budget (bis $10/mo):</strong><br>
+              <a href="https://www.hetzner.com/cloud" target="_blank">Hetzner CX21 – 2 vCPU, 4GB, €3.29</a>
+              <a href="https://www.vultr.com" target="_blank">Vultr Cloud Compute – 1 vCPU, 1GB, $2.50</a>
+              <a href="https://www.digitalocean.com" target="_blank">DigitalOcean Basic – 1 vCPU, 1GB, $4</a>
+              <br>
+              <strong style="color:#2b7de9">GPU-Cloud (KI-Inferenz):</strong><br>
+              <a href="https://runpod.io" target="_blank">RunPod – A100 40GB ab $0.79/h</a>
+              <a href="https://lambdalabs.com" target="_blank">Lambda Cloud – A100 80GB ab $1.10/h</a>
+              <a href="https://vast.ai" target="_blank">Vast.ai – RTX 4090 ab $0.20/h</a>
+              <a href="https://www.hetzner.com" target="_blank">Hetzner GPU AX102 – RTX 4090, €89/mo</a>
+              <br>
+              <strong style="color:#2b7de9">Produktion (Enterprise):</strong><br>
+              <a href="https://aws.amazon.com" target="_blank">AWS EC2 p4d – Multi A100</a>
+              <a href="https://azure.microsoft.com" target="_blank">Azure ND Series – H100</a>
+              <a href="https://coreweave.com" target="_blank">CoreWeave – GPU-optimierte Cloud</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== SEKTION: Hardware Guide ====== -->
+  <div class="tabs" id="hw">
+    <a class="on">Hardware-Guide</a>
+    <a>GPU</a>
+    <a>CPU</a>
+    <a>RAM</a>
+  </div>
+  <div class="section-box">
+    <div class="box-hd">
+      <h3>Lokale KI-Hardware: Empfehlungen nach Modellgroesse</h3>
+      <span class="more">Quelle: Praktische Benchmarks, Stand 2026</span>
+    </div>
+    <div class="box-bd">
+      <div class="hw-grid">
+        <div class="hw-card">
+          <div class="hw-inner">
+            <h4>RTX 5090 (32 GB)</h4>
+            <div class="hw-specs">
+              32 GB GDDR7 | 1.792 GB/s Bandbreite<br>
+              Ideal fuer: Modelle bis 30B Parameter<br>
+              Performance: 60-90 tok/s<br>
+              Spezialitaet: Inferenz-Koenig
+            </div>
+            <div class="hw-price">System ab $5.000</div>
+          </div>
+        </div>
+        <div class="hw-card">
+          <div class="hw-inner">
+            <h4>RTX 4090 (24 GB)</h4>
+            <div class="hw-specs">
+              24 GB GDDR6X | 1.008 GB/s Bandbreite<br>
+              Ideal fuer: Modelle bis 13B (Q4)<br>
+              Performance: 40-60 tok/s<br>
+              Spezialitaet: Budget-Empfehlung
+            </div>
+            <div class="hw-price">Gebraucht ab $1.400</div>
+          </div>
+        </div>
+        <div class="hw-card">
+          <div class="hw-inner">
+            <h4>RTX 3090 (24 GB)</h4>
+            <div class="hw-specs">
+              24 GB GDDR6X | 936 GB/s Bandbreite<br>
+              Ideal fuer: 7B-13B Q4 Quantisierung<br>
+              Performance: 30-45 tok/s<br>
+              Spezialitaet: Budget-Alternative
+            </div>
+            <div class="hw-price">Gebraucht ab $700</div>
+          </div>
+        </div>
+        <div class="hw-card">
+          <div class="hw-inner">
+            <h4>Mac Studio M4 Max (128 GB)</h4>
+            <div class="hw-specs">
+              128 GB unified Memory | 546 GB/s<br>
+              Ideal fuer: 70B Modelle (Q4)<br>
+              Performance: 8-15 tok/s<br>
+              Spezialitaet: Grosse Modelle, leise
+            </div>
+            <div class="hw-price">$3.499-3.699</div>
+          </div>
+        </div>
+        <div class="hw-card">
+          <div class="hw-inner">
+            <h4>4x Mac Mini M4 Pro Cluster</h4>
+            <div class="hw-specs">
+              192 GB gepoolt (via Ethernet)<br>
+              Ideal fuer: 70B Budget-Loesung<br>
+              Performance: 4-8 tok/s<br>
+              Spezialitaet: Einstieg in 70B
+            </div>
+            <div class="hw-price">$6.400-7.200</div>
+          </div>
+        </div>
+        <div class="hw-card">
+          <div class="hw-inner">
+            <h4>RTX PRO 6000 (96 GB)</h4>
+            <div class="hw-specs">
+              96 GB GDDR7 | 1.800 GB/s<br>
+              Ideal fuer: 70B+ mit CUDA<br>
+              Performance: 60-90 tok/s<br>
+              Spezialitaet: Professional Workstation
+            </div>
+            <div class="hw-price">Ab $15.000</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== SEKTION: Gesamtvergleich ====== -->
+  <div class="tabs" id="vergleich">
+    <a class="on">Gesamtvergleich</a>
+    <a>Cloud</a>
+    <a>KI</a>
+    <a>Preise</a>
+  </div>
+  <div class="section-box">
+    <div class="box-hd">
+      <h3>Alle Anbieter im Direktvergleich</h3>
+      <span class="more">Cloud & KI – Infrastruktur-Zusammenfassung</span>
+    </div>
+    <div class="box-bd">
+      <table class="full-table">
+        <thead>
+          <tr>
+            <th>Kategorie</th>
+            <th>Anbieter</th>
+            <th>Hauptprodukt</th>
+            <th>Preis</th>
+            <th>Staerke</th>
+            <th>Schwaeche</th>
+            <th>Empfehlung</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="3" style="background:#f0f7ff;font-weight:700;color:#2b7de9">Hyperscaler</td>
+            <td class="hl">AWS</td><td>EC2, SageMaker</td><td class="price">$$</td><td>Breitestes Portfolio</td><td>Komplex, teuer</td><td>Grossunternehmen</td>
+          </tr>
+          <tr>
+            <td class="hl">Azure</td><td>VMs, OpenAI</td><td class="price">$$$$$</td><td>Microsoft-Integration</td><td>Verwirrendes Pricing</td><td>Enterprise (Microsoft)</td>
+          </tr>
+          <tr>
+            <td class="hl">GCP</td><td>Compute, Vertex AI</td><td class="price">$$</td><td>KI/Datenanalyse</td><td>Kleineres Oekosystem</td><td>Daten-/KI-Projekte</td>
+          </tr>
+          <tr>
+            <td rowspan="3" style="background:#f0f7ff;font-weight:700;color:#2b7de9">EU-Anbieter</td>
+            <td class="hl">Hetzner</td><td>Cloud Server</td><td class="price"></td><td>Preis unschlagbar</td><td>Wenig KI-Services</td><td>Alle Projekte</td>
+          </tr>
+          <tr>
+            <td class="hl">Exoscale</td><td>Compute</td><td class="price">$$$$</td><td>Souverän, GDPR</td><td>Kleineres Angebot</td><td>DATEN-sensitive Projekte</td>
+          </tr>
+          <tr>
+            <td class="hl">DigitalOcean</td><td>Droplets</td><td class="price">$</td><td>Einfach, schoen</td><td>Wenig Enterprise</td><td>Startups, Devs</td>
+          </tr>
+          <tr>
+            <td rowspan="3" style="background:#fff4e6;font-weight:700;color:#ff6600">KI (Intl.)</td>
+            <td class="hl">OpenAI</td><td>GPT-4o</td><td class="price">$2-30/1M</td><td>Breiteste Faehigkeiten</td><td>Teuer, closed</td><td>Allround-KI</td>
+          </tr>
+          <tr>
+            <td class="hl">Anthropic</td><td>Claude 3.5</td><td class="price">$0.25-75/1M</td><td>200K Kontext, sicher</td><td>Closed Source</td><td>Analyse, Text</td>
+          </tr>
+          <tr>
+            <td class="hl">Mistral</td><td>Mistral Large</td><td class="price">$0.2-8/1M</td><td>EU, Open Source</td><td>Kleiner als US-Riesen</td><td>EU-konforme KI</td>
+          </tr>
+          <tr>
+            <td rowspan="3" style="background:#fff4e6;font-weight:700;color:#ff6600">KI (CN)</td>
+            <td class="hl">DeepSeek</td><td>DeepSeek-V3</td><td class="price">$0.14-2/1M</td><td>Guenstig, stark, open</td><td>Neu, CN-Server</td><td>Kostenoptimierung</td>
+          </tr>
+          <tr>
+            <td class="hl">Alibaba Qwen</td><td>Qwen2.5</td><td class="price">$0.3-4/1M</td><td>Vielseitig, open</td><td>Weniger bekannt in EU</td><td>Open Source KI</td>
+          </tr>
+          <tr>
+            <td class="hl">Baidu ERNIE</td><td>ERNIE 4.5</td><td class="price">$0.5-8/1M</td><td>Chinesisch stark</td><td>Closed, CN-fokussiert</td><td>China-Workloads</td>
+          </tr>
+          <tr>
+            <td rowspan="2" style="background:#e8f8f0;font-weight:700;color:#3cb371">GPU Cloud</td>
+            <td class="hl">RunPod</td><td>A100 GPU</td><td class="price">$0.79/h</td><td>Guenstig, flexibel</td><td>Kein Bare Metal</td><td>KI-Inferenz</td>
+          </tr>
+          <tr>
+            <td class="hl">Lambda</td><td>A100/H100</td><td class="price">$1.10/h</td><td>Multi-GPU Cluster</td><td>Wartelisten</td><td>KI-Training</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ====== SEKTION: Ueber uns ====== -->
+  <div class="tabs" id="ueber">
+    <a class="on">Ueber AI-VPS</a>
+  </div>
+  <div class="section-box">
+    <div class="box-hd">
+      <h3>Ueber dieses Projekt</h3>
+    </div>
+    <div class="box-bd">
+      <div class="two-col">
+        <div class="col">
+          <div class="info-row">
+            <div class="info-card" style="width:50%">
+              <div class="info-card-inner">
+                <h4>Unsere Mission</h4>
+                <p>AI-VPS ist eine unabhngige Informationsplattform fuer KI-Infrastruktur und Cloud-Ressourcen. Wir vergleichen Anbieter objektiv nach Leistung, Preis, Sicherheit und Eignung.</p>
+                <span class="ico-tag">Unabhaengig</span>
+              </div>
+            </div>
+            <div class="info-card" style="width:50%">
+              <div class="info-card-inner">
+                <h4>Fuer wen?</h4>
+                <p>Entwickler, Startups, Unternehmen und Forscher, die die richtige Infrastruktur fuer ihre KI-Projekte suchen. Von Prototyping bis Produktion.</p>
+                <span class="ico-tag">Alle Level</span>
+              </div>
+            </div>
+            <div class="info-card" style="width:50%">
+              <div class="info-card-inner">
+                <h4>Aktualitaet</h4>
+                <p>Regelmaessig aktualisierte Informationen zu Preisen, Modellen und neuen Anbietern. Stand: Juli 2026.</p>
+                <span class="ico-tag">Aktuell</span>
+              </div>
+            </div>
+            <div class="info-card" style="width:50%">
+              <div class="info-card-inner">
+                <h4>Kontakt</h4>
+                <p>GitHub: ai-vps.github.io<br>
+                E-Mail: kontakt@ai-vps.dev</p>
+                <span class="ico-tag">Kontakt</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="side-box">
+            <div class="hd"><h4>Haefige Fragen (FAQ)</h4></div>
+            <div class="bd">
+              <a><strong>Q: Welcher Cloud-Anbieter ist am guenstigsten?</strong></a>
+              <a>A: Hetzner bietet das beste Preis-Leistungs-Verhaeltnis in Europa, ab €3.29/mo.</a>
+              <br>
+              <a><strong>Q: Welches KI-Modell ist am besten?</strong></a>
+              <a>A: Kommt auf den Anwendungsfall an. GPT-4o fuer Allround, Claude fuer Textanalyse, DeepSeek fuer Budget.</a>
+              <br>
+              <a><strong>Q: Brauche ich eine GPU fuer KI?</strong></a>
+              <a>A: Nur fuer lokale Modelle. Fuer API-basierte Nutzung reicht ein einfacher VPS.</a>
+              <br>
+              <a><strong>Q: Ist DeepSeek wirklich so gut wie GPT-4?</strong></a>
+              <a>A: DeepSeek-R1 kommt in Reasoning-Aufgaben sehr nah heran, zu einem Bruchteil der Kosten.</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== NEUESTE NACHRICHTEN (Ticker) ====== -->
+  <div class="section-box">
+    <div class="box-hd">
+      <h3>Aktuelle Entwicklungen</h3>
+    </div>
+    <div class="box-bd">
+      <div class="two-col">
+        <div class="col">
+          <ul class="news-list">
+            <li><a href="#">DeepSeek-R1 uebertrifft GPT-4o in Mathe-Benchmarks</a><span class="date">2026-07</span></li>
+            <li><a href="#">Hetzner fuehrt GPU-Server mit RTX 4090 in Europa ein</a><span class="date">2026-07</span></li>
+            <li><a href="#">Qwen2.5-72B als Open-Source-Modell veroeffentlicht</a><span class="date">2026-06</span></li>
+            <li><a href="#">Anthropic: Claude 3.5 mit 200K Token Kontext</a><span class="date">2026-06</span></li>
+            <li><a href="#">Google Gemini 1.5 Pro erreicht 1M+ Token Fenster</a><span class="date">2026-05</span></li>
+            <li><a href="#">Alibaba Cloud expandiert mit Qwen-Modellen nach Europa</a><span class="date">2026-05</span></li>
+          </ul>
+        </div>
+        <div class="col">
+          <ul class="news-list">
+            <li><a href="#">Exoscale erweitert GPU-Angebot fuer KI-Workloads</a><span class="date">2026-06</span></li>
+            <li><a href="#">OpenAI: GPT-4o Mini senkt API-Kosten drastisch</a><span class="date">2026-05</span></li>
+            <li><a href="#">Meta: Llama 3.1 405B jetzt frei verfuegbar</a><span class="date">2026-04</span></li>
+            <li><a href="#">Huawei Cloud mit Ascend 910C NPU in Produktion</a><span class="date">2026-04</span></li>
+            <li><a href="#">RTX 5090 Benchmark: Bester KI-Inferenz-Desktop</a><span class="date">2026-03</span></li>
+            <li><a href="#">Mistral Large 2: Frankreichs Antwort auf GPT-4</a><span class="date">2026-03</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== FOOTER ===== -->
+<div class="footer">
+  <div class="wrap">
+    <div>
+      <a href="#home">Startseite</a> |
+      <a href="#cloud-intl">Cloud Intl.</a> |
+      <a href="#cloud-cn">Cloud CN</a> |
+      <a href="#ki-intl">KI Intl.</a> |
+      <a href="#ki-cn">KI CN</a> |
+      <a href="#vps">VPS</a> |
+      <a href="#hw">Hardware</a> |
+      <a href="#vergleich">Vergleich</a> |
+      <a href="#ueber">Ueber uns</a>
+    </div>
+    <div style="margin-top:6px">
+      2026 AI-VPS.github.io – Unabhngige KI-Infrastruktur-Navigation. Alle Angaben ohne Gewaehr.
+    </div>
+    <div>
+      Letzte Aktualisierung: Juli 2026 | Domain: ai-vps.github.io
+    </div>
+  </div>
+</div>
+
+<script>
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+
+// Tab switching (visual only – toggle .on class)
+document.querySelectorAll('.tabs').forEach(tabGroup => {
+  const tabs = tabGroup.querySelectorAll('a');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', e => {
+      tabs.forEach(t => t.classList.remove('on'));
+      tab.classList.add('on');
+    });
+  });
+});
+</script>
+</body>
+</html>
